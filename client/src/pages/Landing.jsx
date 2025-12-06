@@ -11,7 +11,7 @@ const Landing = () => {
                 <div className="absolute inset-0 bg-gradient-to-r from-brand-charcoal via-brand-charcoal/90 to-transparent z-10"></div>
                 {/* Abstract Shapes/Images would go here */}
 
-                <div className="container mx-auto px-4 z-20 text-center md:text-left pt-20 flex flex-col md:flex-row items-center justify-between">
+                <div className="container mx-auto px-4 z-20 text-center md:text-left pt-32 md:pt-20 flex flex-col md:flex-row items-center justify-between">
                     <div className="md:w-1/2 mb-10 md:mb-0 z-10 animate-fade-in-up">
                         <span className="text-brand-gold font-bold tracking-widest uppercase mb-4 block">COMING SOON TO DFW</span>
                         <h1 className="text-5xl md:text-7xl font-serif font-bold text-white mb-6 leading-tight">
