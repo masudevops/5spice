@@ -1,0 +1,44 @@
+[
+    {
+        "id": 101,
+        "name": "Kacchi Biriyani",
+        "category": "Bangladeshi",
+        "price": 15.99,
+        "description": "Fragrant rice cooked with marinated goat meat and potatoes.",
+        "image": "https://placehold.co/400x300?text=Kacchi",
+        "popular": true
+    },
+    {
+        "id": 102,
+        "name": "Butter Chicken",
+        "category": "Indian",
+        "price": 13.99,
+        "description": "Chicken cooked in a creamy tomato sauce.",
+        "image": "https://placehold.co/400x300?text=Butter+Chicken",
+        "popular": true
+    },
+    {
+        "id": 103,
+        "name": "Chicken Karahi",
+        "category": "Pakistani",
+        "price": 14.99,
+        "description": "Spicy chicken stew prepared in a wok.",
+        "image": "https://placehold.co/400x300?text=Karahi"
+    },
+    {
+        "id": 104,
+        "name": "Mix Grill Platter",
+        "category": "Arab",
+        "price": 19.99,
+        "description": "Assortment of grilled kebabs and chicken tikka.",
+        "image": "https://placehold.co/400x300?text=Mix+Grill"
+    },
+    {
+        "id": 105,
+        "name": "Mango Lassi",
+        "category": "Drinks",
+        "price": 4.99,
+        "description": "Yogurt-based mango drink.",
+        "image": "https://placehold.co/400x300?text=Mango+Lassi"
+    }
+]

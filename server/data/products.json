@@ -1,0 +1,44 @@
+[
+    {
+        "id": 1,
+        "name": "Shan Biryani Masala",
+        "category": "Spices",
+        "price": 2.99,
+        "image": "https://placehold.co/400x300?text=Shan+Biryani",
+        "popular": true,
+        "featured": true
+    },
+    {
+        "id": 2,
+        "name": "Basmati Rice 10lb",
+        "category": "Rice",
+        "price": 14.99,
+        "image": "https://placehold.co/400x300?text=Basmati+Rice",
+        "popular": true
+    },
+    {
+        "id": 3,
+        "name": "Halal Chicken Breast",
+        "category": "Meat",
+        "price": 5.99,
+        "unit": "lb",
+        "image": "https://placehold.co/400x300?text=Chicken+Breast",
+        "popular": true
+    },
+    {
+        "id": 4,
+        "name": "Medjool Dates",
+        "category": "Produce",
+        "price": 8.99,
+        "image": "https://placehold.co/400x300?text=Dates",
+        "popular": false
+    },
+    {
+        "id": 5,
+        "name": "Frozen Paratha",
+        "category": "Frozen",
+        "price": 4.50,
+        "image": "https://placehold.co/400x300?text=Paratha",
+        "popular": true
+    }
+]
