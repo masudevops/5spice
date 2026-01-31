@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import MenuCard from '../components/MenuCard';
 
-const Restaurant = () => {
+const Cafe = () => {
     const [menuItems, setMenuItems] = useState([]);
     const [loading, setLoading] = useState(true);
     const [activeCategory, setActiveCategory] = useState('Bangladeshi');
@@ -44,7 +44,7 @@ const Restaurant = () => {
                 <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/food.png')]"></div>
                 <div className="container mx-auto px-4 relative z-10">
                     <span className="text-brand-gold font-bold uppercase tracking-widest text-sm mb-2 block">Authentic Flavors</span>
-                    <h1 className="text-4xl md:text-5xl font-serif font-bold mb-4">The Five Spice Kitchen</h1>
+                    <h1 className="text-4xl md:text-5xl font-serif font-bold mb-4">The 5 Spice Cafe</h1>
                     <p className="text-gray-300 max-w-2xl mx-auto">From sizzling Tandoori platters to aromatic Biryanis, experience the true taste of South Asia.</p>
                 </div>
             </div>
@@ -58,7 +58,7 @@ const Restaurant = () => {
                                 key={cat}
                                 onClick={() => setActiveCategory(cat)}
                                 className={`px-6 py-2 rounded-full whitespace-nowrap transition-all text-sm font-bold ${activeCategory === cat
-                                    ? 'bg-brand-red text-white shadow-lg transform scale-105'
+                                    ? 'bg-brand-green text-white shadow-lg transform scale-105'
                                     : 'bg-white dark:bg-brand-charcoal text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 border border-gray-200 dark:border-gray-700'
                                     }`}
                             >
@@ -70,7 +70,7 @@ const Restaurant = () => {
 
                 {loading ? (
                     <div className="text-center py-20 flex flex-col items-center">
-                        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-brand-red mb-4"></div>
+                        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-brand-green mb-4"></div>
                         <p>Preparing the menu...</p>
                     </div>
                 ) : (
@@ -98,4 +98,4 @@ const Restaurant = () => {
     );
 };
 
-export default Restaurant;
+export default Cafe;

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import ProductCard from '../components/ProductCard';
 import { Search } from 'lucide-react';
 
-const Supermarket = () => {
+const Market = () => {
     const [products, setProducts] = useState([]);
     const [filteredProducts, setFilteredProducts] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -42,7 +42,7 @@ const Supermarket = () => {
             <div className="container mx-auto px-4 py-8">
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-6">
                     <div>
-                        <h1 className="text-4xl font-serif font-bold text-brand-red mb-2">Halal Supermarket</h1>
+                        <h1 className="text-4xl font-serif font-bold text-brand-green dark:text-brand-gold mb-2">Halal Market</h1>
                         <p className="text-gray-600 dark:text-gray-400">Fresh produce, premium meats, and authentic spices.</p>
                     </div>
 
@@ -92,7 +92,7 @@ const Supermarket = () => {
                             <div className="text-center py-20 bg-white dark:bg-brand-charcoal rounded-2xl border border-gray-100 dark:border-gray-800">
                                 <Search size={48} className="mx-auto text-gray-300 mb-4" />
                                 <p className="text-gray-500 font-medium">No products found matching your search.</p>
-                                <button onClick={() => { setSearchQuery(''); setActiveCategory('All'); }} className="mt-4 text-brand-red font-bold hover:underline">Clear Filters</button>
+                                <button onClick={() => { setSearchQuery(''); setActiveCategory('All'); }} className="mt-4 text-brand-green font-bold hover:underline">Clear Filters</button>
                             </div>
                         ) : (
                             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-6">
@@ -108,4 +108,4 @@ const Supermarket = () => {
     );
 };
 
-export default Supermarket;
+export default Market;

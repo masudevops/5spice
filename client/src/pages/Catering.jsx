@@ -17,7 +17,7 @@ const Catering = () => {
                     <span className="text-brand-gold font-bold uppercase tracking-widest text-sm mb-4 block">Event Catering</span>
                     <h1 className="text-5xl font-serif font-bold mb-6">Make Your Event Unforgettable</h1>
                     <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-                        From weddings to corporate lunches, let Five Spice bring authentic South Asian flavors to your guests.
+                        From weddings to corporate lunches, let 5 Spice bring authentic South Asian flavors to your guests.
                     </p>
                 </div>
             </div>
@@ -45,7 +45,7 @@ const Catering = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                     <div>
-                        <h2 className="text-3xl font-serif font-bold text-brand-charcoal dark:text-white mb-6">Why Choose Five Spice Catering?</h2>
+                        <h2 className="text-3xl font-serif font-bold text-brand-charcoal dark:text-white mb-6">Why Choose 5 Spice Catering?</h2>
                         <ul className="space-y-4">
                             {['100% Zabiha Halal Certified Meat', 'Authentic Family Recipes', 'Flexible Menu Customization', 'Competitive Pricing for Large Orders', 'Delivery & Setup Available'].map(item => (
                                 <li key={item} className="flex items-center gap-3 text-lg text-gray-700 dark:text-gray-300">

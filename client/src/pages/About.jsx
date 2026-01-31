@@ -15,17 +15,17 @@ const About = () => {
                 <div>
                     <img
                         src="https://placehold.co/600x400?text=Five+Spice+Storefront"
-                        alt="Five Spice Storefront"
+                        alt="5 Spice Storefront"
                         className="rounded-lg shadow-xl"
                     />
                 </div>
                 <div>
                     <h2 className="text-2xl font-bold text-brand-dark mb-4">A Culinary Journey</h2>
                     <p className="text-gray-700 mb-4 leading-relaxed">
-                        Five Spice SuperMarket & Restaurant was born from a desire to bring the vibrant flavors of South Asia and the Middle East to the heart of Texas. We recognized a need for a place where families could not only shop for the freshest Halal ingredients but also enjoy the comfort of home-cooked meals.
+                        5 Spice Market & Cafe was born from a desire to bring the vibrant flavors of South Asia and the Middle East to the heart of Texas. We recognized a need for a place where families could not only shop for the freshest Halal ingredients but also enjoy the comfort of home-cooked meals.
                     </p>
                     <p className="text-gray-700 leading-relaxed">
-                        Our mission is simple: <strong>Quality, Affordability, and Community.</strong> Whether you are looking for the perfect spice blend for your Biryani or craving a plate of hot Butter Chicken, Five Spice is your destination.
+                        Our mission is simple: <strong>Quality, Affordability, and Community.</strong> Whether you are looking for the perfect spice blend for your Biryani or craving a plate of hot Butter Chicken, 5 Spice is your destination.
                     </p>
                 </div>
             </div>

@@ -1,6 +1,6 @@
-# Deployment Guide for Five Spice
+# Deployment Guide for 5 Spice
 
- This guide covers deploying the "Five Spice" application to Vercel, Azure, and AWS.
+ This guide covers deploying the "5 Spice" application to Vercel, Azure, and AWS.
 
 ## 1. Vercel (Recommended for Frontend)
 

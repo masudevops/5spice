@@ -8,7 +8,7 @@ const Pickup = () => {
             <div className="bg-brand-green text-white py-16 text-center">
                 <div className="container mx-auto px-4">
                     <h1 className="text-4xl font-serif font-bold mb-4">Grocery Pickup & Delivery</h1>
-                    <p className="text-xl opacity-90">Enjoy Five Spice quality from the comfort of your home.</p>
+                    <p className="text-xl opacity-90">Enjoy 5 Spice quality from the comfort of your home.</p>
                 </div>
             </div>
 

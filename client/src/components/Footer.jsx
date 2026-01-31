@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { Facebook, Instagram, Mail, MapPin, Phone, ArrowRight } from 'lucide-react';
 
@@ -14,7 +13,7 @@ const Footer = () => {
                     </div>
                     <div className="md:flex justify-between items-center relative z-10">
                         <div className="mb-6 md:mb-0">
-                            <h2 className="text-2xl md:text-3xl font-serif font-bold mb-2">Join the Five Spice Family</h2>
+                            <h2 className="text-2xl md:text-3xl font-serif font-bold mb-2">Join the 5 Spice Family</h2>
                             <p className="text-white/80">Get weekly specials and exclusive offers delivered to your inbox.</p>
                         </div>
                         <div className="flex gap-2 w-full md:w-auto">
@@ -29,7 +28,7 @@ const Footer = () => {
                 {/* Main Footer Content */}
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12 -mt-12 md:-mt-16">
                     <div>
-                        <h3 className="text-2xl font-serif font-bold text-brand-gold mb-6">Five Spice</h3>
+                        <h3 className="text-2xl font-serif font-bold text-brand-gold mb-6">5 Spice</h3>
                         <p className="text-gray-400 mb-6 leading-relaxed">
                             Your premium destination for authentic Halal groceries and South Asian cuisine. Experience the taste of home in DFW.
                         </p>
@@ -43,8 +42,8 @@ const Footer = () => {
                         <h3 className="font-serif font-bold text-lg mb-4 text-brand-gold">Quick Links</h3>
                         <ul className="space-y-2 text-sm text-gray-400">
                             <li><Link to="/" className="hover:text-white transition">Home</Link></li>
-                            <li><Link to="/supermarket" className="hover:text-white transition">Supermarket</Link></li>
-                            <li><Link to="/restaurant" className="hover:text-white transition">Restaurant</Link></li>
+                            <li><Link to="/market" className="hover:text-white transition">Market</Link></li>
+                            <li><Link to="/cafe" className="hover:text-white transition">Cafe</Link></li>
                             <li><Link to="/sales" className="hover:text-white transition">Weekly Sales</Link></li>
                             <li><Link to="/catering" className="hover:text-white transition">Event Catering</Link></li>
                         </ul>
@@ -59,11 +58,11 @@ const Footer = () => {
                             </li>
                             <li className="flex items-center gap-3">
                                 <Phone size={20} className="text-brand-gold shrink-0" />
-                                <span>(972) 555-0123</span>
+                                <span>(123)-456-789</span>
                             </li>
                             <li className="flex items-center gap-3">
                                 <Mail size={20} className="text-brand-gold shrink-0" />
-                                <span>hello@fivespice.com</span>
+                                <span>info@5spiceMarket.com</span>
                             </li>
                         </ul>
                     </div>
@@ -83,7 +82,7 @@ const Footer = () => {
                 </div>
 
                 <div className="border-t border-gray-800 pt-8 text-center text-gray-500 text-sm">
-                    <p>&copy; {new Date().getFullYear()} Five Spice Supermarket & Restaurant. All rights reserved.</p>
+                    <p>&copy; {new Date().getFullYear()} 5 Spice Market & Cafe. All rights reserved.</p>
                 </div>
             </div>
         </footer>
