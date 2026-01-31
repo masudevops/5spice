@@ -1,4 +1,4 @@
-# Testing Guide: Five Spice Website
+# Testing Guide: 5 Spice Website
 
 This project uses [Playwright](https://playwright.dev/) for automated end-to-end (E2E) testing. The tests simulate a real user navigating the website to ensure all critical features work as expected.
 

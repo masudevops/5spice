@@ -24,7 +24,7 @@ app.get('/api/store-info', (req, res) => {
 });
 
 app.get('/', (req, res) => {
-    res.send('Five Spice Server is Running');
+    res.send('5 Spice Server is Running');
 });
 
 app.listen(PORT, () => {

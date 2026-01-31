@@ -1,12 +1,12 @@
 import { test, expect } from '@playwright/test';
 
-test.describe('Five Spice Website E2E', () => {
+test.describe('5 Spice Website E2E', () => {
 
     test('Homepage loads with correct Hero text', async ({ page }) => {
         await page.goto('/');
 
         // Verify Page Title is present (Logo)
-        await expect(page.getByRole('link', { name: 'Five Spice Supermarket &' })).toBeVisible();
+        await expect(page.getByRole('link', { name: '5 Spice Market &' })).toBeVisible();
 
         // Verify Hero Text
         await expect(page.getByText('COMING SOON TO DFW')).toBeVisible();
@@ -27,7 +27,7 @@ test.describe('Five Spice Website E2E', () => {
         await page.click('text=Restaurant');
 
         await expect(page).toHaveURL(/.*restaurant/);
-        await expect(page.getByText('The Five Spice Kitchen')).toBeVisible();
+        await expect(page.getByText('The 5 Spice Kitchen')).toBeVisible();
     });
 
     test('Pickup & Delivery CTA works', async ({ page }) => {
