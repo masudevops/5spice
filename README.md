@@ -70,6 +70,13 @@ five-spice/
    ```
    *Client runs on http://localhost:5173 (or 5174)*
 
+4. **Easy Start Script (Mac/Linux):**
+   We've included a helper script to manage the app easily.
+   ```bash
+   ./manage_app.sh
+   ```
+   *Options: Start Dev Mode, Install Dependencies, Build, Stop All.*
+
 ## ⚙️ Configuration
 **Setting the Site Mode:**
 Edit `client/.env`:
@@ -77,6 +84,13 @@ Edit `client/.env`:
 # Options: coming_soon | grand_opening | live
 VITE_APP_SITE_MODE=coming_soon
 ```
+
+## 📦 Deployment (Vercel)
+When deploying to Vercel, you must set the **Environment Variables** in your project settings:
+1.  Go to **Settings** > **Environment Variables**.
+2.  Add `VITE_APP_SITE_MODE`.
+3.  Value: `coming_soon` (to lock the site) or `live` (to launch).
+4.  Redeploy if you change this value.
 
 ## 📝 Customization
 - **Content**: Update JSON files in `server/data/` to change products or menu items.

@@ -33,17 +33,17 @@ const Landing = () => {
 
                     {/* 3. Primary Headline */}
                     <h2 className="font-serif text-5xl md:text-7xl font-bold text-white mb-8 leading-[1.1] animate-fade-in delay-200">
-                        Coming Soon to DFW
+                        Opening Soon to DFW
                     </h2>
 
                     {/* 4. Supporting Subheadline */}
                     <p className="text-lg md:text-2xl text-gray-300 mb-12 leading-relaxed font-light max-w-xl animate-fade-in delay-300">
-                        A new destination for fresh halal groceries and authentic South Asian & Middle Eastern flavors.
+                        Your new go-to destination for fresh zabiha halal groceries and an authentic café experience, inspired by South Asian and Middle Eastern cuisine.
                     </p>
 
                     {/* 5. Opening Timeframe Badge */}
                     <div className="inline-block bg-white/5 border border-white/10 backdrop-blur-md px-10 py-4 rounded-full text-brand-gold font-medium tracking-wide animate-fade-in delay-500">
-                        Opening Fall 2026
+                        Opening Fall 2026, InshaAllah
                     </div>
                 </div>
             </div>
