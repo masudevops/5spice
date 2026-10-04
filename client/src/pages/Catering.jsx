@@ -1,12 +1,19 @@
 import React from 'react';
-import { CheckCircle, Mail } from 'lucide-react';
+import { BriefcaseBusiness, CheckCircle, Gift, Mail } from 'lucide-react';
 import { CONTACT } from '../config/site';
 
 const cateringHighlights = [
     '100% zabiha halal meat options',
     'Authentic Bangladeshi and South Asian dishes',
     'Family trays and event-size portions',
-    'Manual quote confirmation by the 5 Spice team',
+    'Manual quote confirmation by the 5Spice team',
+];
+
+const officeHighlights = [
+    'Lunch-and-learn bulk meals for nearby offices',
+    'Receptionist and office manager outreach for 10+ order groups',
+    'Fast lunch bundles with sweets or spring roll add-ons',
+    'Delivery availability confirmed by distance, order size, and schedule',
 ];
 
 const Catering = () => {
@@ -40,11 +47,36 @@ const Catering = () => {
                     <div className="border border-[#B88A3D]/25 bg-[#101010] p-7">
                         <h2 className="font-serif text-3xl font-semibold text-[#D4A84B]">Request a Quote</h2>
                         <p className="mt-4 leading-7 text-white/62">
-                            Online catering checkout is not enabled yet. Send your event details and the team will confirm availability, menu options, and pricing manually.
+                            Send your event details and the 5Spice team will help plan menu options, portions, timing, and next steps.
                         </p>
-                        <a href={`mailto:${CONTACT.email}?subject=5%20Spice%20Catering%20Request`} className="mt-7 inline-flex items-center gap-3 bg-[#2D6A3F] px-6 py-4 font-bold uppercase tracking-[0.16em] text-white transition-colors hover:bg-[#245936]">
+                        <a href={`mailto:${CONTACT.email}?subject=5%20Spice%20Catering%20Request`} className="mt-7 inline-flex items-center gap-3 bg-[#1CA433] px-6 py-4 font-bold uppercase tracking-[0.16em] text-white transition-colors hover:bg-[#168C2B]">
                             <Mail size={19} /> Email Catering Request
                         </a>
+                    </div>
+                </div>
+
+                <div className="mx-auto mt-8 max-w-7xl border border-[#B88A3D]/25 bg-[#101010] p-7 md:p-10">
+                    <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+                        <div>
+                            <BriefcaseBusiness className="mb-5 text-[#D4A84B]" size={32} strokeWidth={1.35} />
+                            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#D4A84B]/80">Office Lunch Program</p>
+                            <h2 className="mt-4 font-serif text-3xl font-semibold leading-tight text-white">Fast meals for commercial teams around Plano.</h2>
+                            <p className="mt-4 leading-7 text-white/62">
+                                The 5Spice team can visit nearby office spaces, introduce lunch options, and coordinate simple group orders for reception desks, office managers, and lunch-and-learn events.
+                            </p>
+                        </div>
+                        <div className="grid gap-3 sm:grid-cols-2">
+                            {officeHighlights.map((item, index) => (
+                                <div key={item} className="border border-white/10 bg-white/[0.03] p-4">
+                                    {index === 1 ? (
+                                        <Gift className="mb-3 text-[#D4A84B]" size={21} strokeWidth={1.45} />
+                                    ) : (
+                                        <CheckCircle className="mb-3 text-[#D4A84B]" size={21} strokeWidth={1.45} />
+                                    )}
+                                    <p className="text-sm leading-6 text-white/70">{item}</p>
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 </div>
             </section>
