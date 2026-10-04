@@ -2,10 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, BriefcaseBusiness, FlameKindling, Soup, Utensils } from 'lucide-react';
 import { MENU_HIGHLIGHTS, QUICK_MEAL_ITEMS, SIGNATURE_ADD_ONS } from '../config/site';
+import { useSelectedLocation } from '../hooks/useSelectedLocation';
 
 const icons = [Soup, FlameKindling, Utensils];
 
 const Kitchen = () => {
+    const { selectedLocation } = useSelectedLocation();
+
     return (
         <div className="min-h-screen bg-[#0E0E0E] text-[#F0EAD6]">
             <section className="relative overflow-hidden px-5 py-16 sm:px-8 lg:px-12">
@@ -40,9 +43,16 @@ const Kitchen = () => {
                         <p className="mt-4 max-w-3xl leading-7 text-white/62">
                             Pickup and delivery options will be available through Toast, Uber Eats, and DoorDash as service begins.
                         </p>
-                        <Link to="/pickup" className="mt-7 inline-flex items-center gap-2 bg-[#1CA433] px-6 py-4 font-bold uppercase tracking-[0.16em] text-white transition-colors hover:bg-[#168C2B]">
-                            View Ordering Options <ArrowRight size={17} />
-                        </Link>
+                        <div className="mt-7 flex flex-wrap gap-3">
+                            {selectedLocation?.flags.hasKitchen && (
+                                <Link to={`/locations/${selectedLocation.slug}/menu`} className="inline-flex items-center gap-2 border border-[#B88A3D]/45 px-6 py-4 font-bold uppercase tracking-[0.16em] text-[#D4A84B] transition-colors hover:border-[#D4A84B] hover:text-white">
+                                    View Full Menu <ArrowRight size={17} />
+                                </Link>
+                            )}
+                            <Link to="/pickup" className="inline-flex items-center gap-2 bg-[#1CA433] px-6 py-4 font-bold uppercase tracking-[0.16em] text-white transition-colors hover:bg-[#168C2B]">
+                                View Ordering Options <ArrowRight size={17} />
+                            </Link>
+                        </div>
                     </div>
 
                     <div className="mt-8 grid gap-5 lg:grid-cols-[1.05fr_0.95fr]">

@@ -1,20 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { BadgePercent, HandHeart, Mail, Menu, Search, Utensils, X } from 'lucide-react';
+import { BadgePercent, HandHeart, Mail, MapPinned, Menu, Search, Utensils, X } from 'lucide-react';
 import clsx from 'clsx';
 import { CONTACT, isComingSoonMode, LOGOS } from '../config/site';
+import { anyVisibleLocationHasFlag } from '../data/locations';
 
-const navLinks = [
-  { name: 'Market', path: '/market' },
+const buildNavLinks = () => [
+  ...(anyVisibleLocationHasFlag('hasMarket') ? [{ name: 'Market', path: '/market' }] : []),
   { name: 'Restaurant', path: '/kitchen' },
-  { name: 'Weekly Deals', path: '/sales' },
+  { name: 'Locations', path: '/locations' },
+  ...(anyVisibleLocationHasFlag('hasWeeklyDeals') ? [{ name: 'Weekly Deals', path: '/sales' }] : []),
   { name: 'Catering', path: '/catering' },
   { name: 'About', path: '/about' },
   { name: 'Contact', path: '/contact' },
 ];
 
-const bottomLinks = [
-  { name: 'Market', path: '/market', icon: Search },
+// Kept separate from the center FAB slot below so the 2 + center + 2 mobile
+// tab bar layout stays symmetric.
+const buildBottomLinks = () => [
+  ...(anyVisibleLocationHasFlag('hasMarket') ? [{ name: 'Market', path: '/market', icon: Search }] : []),
   { name: 'Restaurant', path: '/kitchen', icon: Utensils },
   { name: 'Catering', path: '/catering', icon: HandHeart },
   { name: 'Contact', path: '/contact', icon: Mail },
@@ -34,6 +38,14 @@ const Navbar = () => {
   if (isComingSoonMode) {
     return null;
   }
+
+  const navLinks = buildNavLinks();
+  const bottomLinks = buildBottomLinks();
+  const hasWeeklyDeals = anyVisibleLocationHasFlag('hasWeeklyDeals');
+  const centerAction = hasWeeklyDeals
+    ? { to: '/sales', label: 'Weekly Deals', icon: BadgePercent }
+    : { to: '/locations', label: 'Locations', icon: MapPinned };
+  const midpoint = Math.ceil(bottomLinks.length / 2);
 
   return (
     <>
@@ -128,7 +140,7 @@ const Navbar = () => {
 
       <nav className="fixed bottom-0 left-0 right-0 z-50 border-t border-[#B88A3D]/20 bg-[#0E0E0E]/95 pb-safe shadow-[0_-18px_60px_rgba(0,0,0,0.32)] backdrop-blur-xl md:hidden" aria-label="Mobile quick navigation">
         <div className="mx-auto grid h-16 max-w-md grid-cols-5 items-center">
-          {bottomLinks.slice(0, 2).map((link) => {
+          {bottomLinks.slice(0, midpoint).map((link) => {
             const Icon = link.icon;
             const isActive = location.pathname === link.path;
             return (
@@ -138,10 +150,10 @@ const Navbar = () => {
               </Link>
             );
           })}
-          <Link to="/sales" aria-label="Weekly Deals" className="mx-auto -mt-7 flex h-14 w-14 items-center justify-center rounded-full border-4 border-[#0E0E0E] bg-[#1CA433] text-white shadow-lg">
-            <BadgePercent size={24} />
+          <Link to={centerAction.to} aria-label={centerAction.label} className="mx-auto -mt-7 flex h-14 w-14 items-center justify-center rounded-full border-4 border-[#0E0E0E] bg-[#1CA433] text-white shadow-lg">
+            <centerAction.icon size={24} />
           </Link>
-          {bottomLinks.slice(2).map((link) => {
+          {bottomLinks.slice(midpoint).map((link) => {
             const Icon = link.icon;
             const isActive = location.pathname === link.path;
             return (

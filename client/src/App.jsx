@@ -8,6 +8,10 @@ import Catering from './pages/Catering';
 import Pickup from './pages/Pickup';
 import About from './pages/About';
 import Contact from './pages/Contact';
+import Locations from './pages/Locations';
+import LocationDetail from './pages/LocationDetail';
+import LocationMenu from './pages/LocationMenu';
+import NotFound from './pages/NotFound';
 
 function App() {
   return (
@@ -23,6 +27,10 @@ function App() {
           <Route path="/pickup" element={<Pickup />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/locations" element={<Locations />} />
+          <Route path="/locations/:slug" element={<LocationDetail />} />
+          <Route path="/locations/:slug/menu" element={<LocationMenu />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Layout>
     </Router>

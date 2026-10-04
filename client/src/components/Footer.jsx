@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Facebook, Globe2, Instagram, Mail, MapPin } from 'lucide-react';
-import { CONTACT, HOURS, LOGOS, SOCIAL_LINKS } from '../config/site';
+import { LOGOS, SOCIAL_LINKS } from '../config/site';
+import { getVisibleLocations } from '../data/locations';
 
 const linkGroups = [
     {
@@ -24,6 +25,8 @@ const linkGroups = [
 ];
 
 const Footer = () => {
+    const visibleLocations = getVisibleLocations();
+
     return (
         <footer className="border-t border-[#B88A3D]/25 bg-[#0B0B0B] pb-24 pt-14 text-[#F0EAD6] md:pb-12">
             <div className="mx-auto max-w-7xl px-5 lg:px-8">
@@ -63,31 +66,27 @@ const Footer = () => {
 
                     <div>
                         <h2 className="mb-5 font-serif text-xl font-semibold text-[#D4A84B]">Visit</h2>
-                        <ul className="space-y-4 text-sm text-white/62">
-                            <li className="flex gap-3">
-                                <MapPin size={18} className="mt-0.5 shrink-0 text-[#D4A84B]" />
-                                <a href={CONTACT.mapsUrl} target="_blank" rel="noreferrer" className="transition-colors hover:text-white">{CONTACT.postalAddress}</a>
-                            </li>
+                        <ul className="space-y-5 text-sm text-white/62">
+                            {visibleLocations.map((loc) => (
+                                <li key={loc.slug}>
+                                    <Link to={`/locations/${loc.slug}`} className="font-semibold text-white/85 transition-colors hover:text-white">
+                                        {loc.displayName}
+                                    </Link>
+                                    <a href={loc.googleMapsUrl} target="_blank" rel="noreferrer" className="mt-1 flex gap-3 transition-colors hover:text-white">
+                                        <MapPin size={18} className="mt-0.5 shrink-0 text-[#D4A84B]" />
+                                        {loc.address.full}
+                                    </a>
+                                </li>
+                            ))}
                             <li className="flex gap-3">
                                 <Mail size={18} className="mt-0.5 shrink-0 text-[#D4A84B]" />
-                                <a href={`mailto:${CONTACT.email}`} className="transition-colors hover:text-white">{CONTACT.email}</a>
+                                <a href={`mailto:${SOCIAL_LINKS.email}`} className="transition-colors hover:text-white">{SOCIAL_LINKS.email}</a>
                             </li>
                             <li className="flex gap-3">
                                 <Globe2 size={18} className="mt-0.5 shrink-0 text-[#D4A84B]" />
-                                <a href="https://5spicemarket.com" target="_blank" rel="noreferrer" className="transition-colors hover:text-white">{CONTACT.website}</a>
+                                <a href="https://5spicemarket.com" target="_blank" rel="noreferrer" className="transition-colors hover:text-white">5spicemarket.com</a>
                             </li>
                         </ul>
-                        <div className="mt-6 border border-[#B88A3D]/20 p-4">
-                            <p className="mb-3 text-xs uppercase tracking-[0.24em] text-[#D4A84B]">Hours</p>
-                            <ul className="space-y-2 text-xs text-white/58">
-                                {HOURS.map((item) => (
-                                    <li key={item.days} className="flex justify-between gap-4">
-                                        <span>{item.days}</span>
-                                        <span className="text-white/78">{item.time}</span>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
                     </div>
                 </div>
 

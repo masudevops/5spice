@@ -1,24 +1,36 @@
 import React from 'react';
 import { ExternalLink, Mail, MapPin, PackageCheck, ShieldCheck, ShoppingBasket, Store, Utensils } from 'lucide-react';
 import { CONTACT, ORDER_PLATFORMS } from '../config/site';
+import { useSelectedLocation } from '../hooks/useSelectedLocation';
+import LocationSelector from '../components/LocationSelector';
 
-const orderGroups = [
-    {
-        title: 'Restaurant Pickup & Delivery',
-        text: 'Order fresh meals, quick lunches, and family favorites through restaurant partner apps as service becomes available.',
-        icon: Utensils,
-        platforms: ['Toast', 'Uber Eats', 'DoorDash'],
-    },
-    {
-        title: 'Grocery Delivery',
-        text: 'Shop grocery favorites, pantry staples, fresh items, and household essentials through grocery delivery partners.',
-        icon: ShoppingBasket,
-        platforms: ['Instacart'],
-    },
-];
+const ORDERING_KEY_TO_PLATFORM_NAME = {
+    toast: 'Toast',
+    uberEats: 'Uber Eats',
+    doorDash: 'DoorDash',
+    instacart: 'Instacart',
+};
 
 const Pickup = () => {
+    const { selectedLocation, selectedSlug, selectLocation, visibleLocations } = useSelectedLocation();
     const platformsByName = Object.fromEntries(ORDER_PLATFORMS.map((platform) => [platform.name, platform]));
+
+    const orderGroups = selectedLocation
+        ? [
+            selectedLocation.flags.hasKitchen && {
+                title: 'Restaurant Pickup & Delivery',
+                text: 'Order fresh meals, quick lunches, and family favorites through restaurant partner apps as service becomes available.',
+                icon: Utensils,
+                keys: ['toast', 'uberEats', 'doorDash'],
+            },
+            selectedLocation.flags.hasMarket && {
+                title: 'Grocery Delivery',
+                text: 'Shop grocery favorites, pantry staples, fresh items, and household essentials through grocery delivery partners.',
+                icon: ShoppingBasket,
+                keys: ['instacart'],
+            },
+        ].filter(Boolean)
+        : [];
 
     return (
         <div className="min-h-screen bg-[#0E0E0E] text-[#F0EAD6]">
@@ -33,48 +45,67 @@ const Pickup = () => {
                     <p className="mt-5 max-w-2xl text-lg leading-8 text-white/68">
                         Choose restaurant pickup, meal delivery, grocery shopping, and nearby office delivery options as each service becomes available.
                     </p>
+
+                    {visibleLocations.length > 1 && (
+                        <div className="mt-7 inline-flex flex-wrap items-center gap-3 border border-[#B88A3D]/30 bg-[#141414] px-5 py-4">
+                            <span className="text-sm font-semibold uppercase tracking-[0.14em] text-white/70">Ordering from:</span>
+                            <LocationSelector locations={visibleLocations} selectedSlug={selectedSlug} onSelect={selectLocation} />
+                        </div>
+                    )}
                 </div>
             </section>
 
             <section className="px-5 pb-20 sm:px-8 lg:px-12">
                 <div className="mx-auto max-w-7xl">
-                    <div className="grid gap-5 lg:grid-cols-2">
-                        {orderGroups.map((group) => {
-                            const Icon = group.icon;
-                            return (
-                                <section key={group.title} className="border border-[#B88A3D]/25 bg-[#141414] p-7 md:p-9">
-                                    <Icon className="mb-5 text-[#D4A84B]" size={32} strokeWidth={1.35} />
-                                    <h2 className="font-serif text-3xl font-semibold leading-tight text-white">{group.title}</h2>
-                                    <p className="mt-4 leading-7 text-white/62">{group.text}</p>
-                                    <div className="mt-7 grid gap-3 sm:grid-cols-2">
-                                        {group.platforms.map((name) => {
-                                            const platform = platformsByName[name];
-                                            const isReady = Boolean(platform.url);
-                                            const Tag = isReady ? 'a' : 'div';
-                                            return (
-                                                <Tag
-                                                    key={platform.name}
-                                                    href={isReady ? platform.url : undefined}
-                                                    target={isReady ? '_blank' : undefined}
-                                                    rel={isReady ? 'noreferrer' : undefined}
-                                                    aria-disabled={!isReady}
-                                                    className={`border border-white/10 bg-[#101010] p-5 ${isReady ? 'transition-colors hover:border-[#D4A84B]' : 'opacity-82'}`}
-                                                >
-                                                    <PackageCheck className="mb-4 text-[#D4A84B]" size={23} strokeWidth={1.35} />
-                                                    <h3 className="font-serif text-2xl font-semibold text-white">{platform.name}</h3>
-                                                    <p className="mt-3 text-sm leading-6 text-white/58">{platform.description}</p>
-                                                    <span className={`mt-5 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] ${isReady ? 'text-[#D4A84B]' : 'text-white/38'}`}>
-                                                        {isReady ? platform.label : 'Link coming soon'}
-                                                        {isReady && <ExternalLink size={15} />}
-                                                    </span>
-                                                </Tag>
-                                            );
-                                        })}
-                                    </div>
-                                </section>
-                            );
-                        })}
-                    </div>
+                    {!selectedLocation && (
+                        <div className="border border-[#B88A3D]/25 bg-[#141414] p-7 text-white/68">
+                            Ordering isn't available yet. Check back soon.
+                        </div>
+                    )}
+
+                    {selectedLocation && (
+                        <div className="grid gap-5 lg:grid-cols-2">
+                            {orderGroups.map((group) => {
+                                const Icon = group.icon;
+                                const readyPlatforms = group.keys
+                                    .filter((key) => selectedLocation.orderingLinks[key])
+                                    .map((key) => ({ key, ...platformsByName[ORDERING_KEY_TO_PLATFORM_NAME[key]] }));
+
+                                return (
+                                    <section key={group.title} className="border border-[#B88A3D]/25 bg-[#141414] p-7 md:p-9">
+                                        <Icon className="mb-5 text-[#D4A84B]" size={32} strokeWidth={1.35} />
+                                        <h2 className="font-serif text-3xl font-semibold leading-tight text-white">{group.title}</h2>
+                                        <p className="mt-4 leading-7 text-white/62">{group.text}</p>
+
+                                        {readyPlatforms.length > 0 ? (
+                                            <div className="mt-7 grid gap-3 sm:grid-cols-2">
+                                                {readyPlatforms.map((platform) => (
+                                                    <a
+                                                        key={platform.name}
+                                                        href={selectedLocation.orderingLinks[platform.key]}
+                                                        target="_blank"
+                                                        rel="noreferrer"
+                                                        className="border border-white/10 bg-[#101010] p-5 transition-colors hover:border-[#D4A84B]"
+                                                    >
+                                                        <PackageCheck className="mb-4 text-[#D4A84B]" size={23} strokeWidth={1.35} />
+                                                        <h3 className="font-serif text-2xl font-semibold text-white">{platform.name}</h3>
+                                                        <p className="mt-3 text-sm leading-6 text-white/58">{platform.description}</p>
+                                                        <span className="mt-5 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-[#D4A84B]">
+                                                            {platform.label} <ExternalLink size={15} />
+                                                        </span>
+                                                    </a>
+                                                ))}
+                                            </div>
+                                        ) : (
+                                            <p className="mt-7 text-sm font-semibold uppercase tracking-[0.14em] text-white/38">
+                                                Ordering links coming soon for {selectedLocation.shortName}.
+                                            </p>
+                                        )}
+                                    </section>
+                                );
+                            })}
+                        </div>
+                    )}
 
                     <div className="mt-8 border border-[#B88A3D]/25 bg-[#101010] p-7 md:p-10">
                         <ShieldCheck className="mb-5 text-[#D4A84B]" size={32} strokeWidth={1.35} />
