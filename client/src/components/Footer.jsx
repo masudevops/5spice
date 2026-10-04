@@ -8,7 +8,7 @@ const linkGroups = [
         links: [
             ['Home', '/'],
             ['Market', '/market'],
-            ['Kitchen', '/kitchen'],
+            ['Restaurant', '/kitchen'],
             ['Weekly Specials', '/sales'],
         ],
     },
@@ -16,7 +16,7 @@ const linkGroups = [
         title: 'Services',
         links: [
             ['Catering', '/catering'],
-            ['Pickup & Delivery', '/pickup'],
+            ['Order Online', '/pickup'],
             ['Our Story', '/about'],
             ['Contact', '/contact'],
         ],
@@ -31,17 +31,17 @@ const Footer = () => {
                     <div>
                         <img
                             src={LOGOS.wide}
-                            alt="5 Spice Market & Kitchen"
+                            alt="5Spice Market & Kitchen"
                             className="mb-6 h-16 w-auto object-contain"
                         />
                         <p className="max-w-sm text-sm leading-7 text-white/62">
-                            Five spices. One home. Premium halal groceries and authentic Bangladeshi cuisine for Plano and the Greater DFW community.
+                            Five spices. One home. Premium halal groceries, fresh restaurant meals, and community favorites for Plano and the Greater DFW area.
                         </p>
                         <div className="mt-6 flex items-center gap-3">
-                            <a href={SOCIAL_LINKS.facebook} target="_blank" rel="noreferrer" aria-label="5 Spice Market on Facebook" className="flex h-11 w-11 items-center justify-center border border-[#B88A3D]/30 text-white/75 transition-colors hover:border-[#D4A84B] hover:text-[#D4A84B]">
+                            <a href={SOCIAL_LINKS.facebook} target="_blank" rel="noreferrer" aria-label="5Spice Market on Facebook" className="flex h-11 w-11 items-center justify-center border border-[#B88A3D]/30 text-white/75 transition-colors hover:border-[#D4A84B] hover:text-[#D4A84B]">
                                 <Facebook size={19} />
                             </a>
-                            <a href={SOCIAL_LINKS.instagramUrl} target="_blank" rel="noreferrer" aria-label="5 Spice Market on Instagram" className="flex h-11 w-11 items-center justify-center border border-[#B88A3D]/30 text-white/75 transition-colors hover:border-[#D4A84B] hover:text-[#D4A84B]">
+                            <a href={SOCIAL_LINKS.instagramUrl} target="_blank" rel="noreferrer" aria-label="5Spice Market on Instagram" className="flex h-11 w-11 items-center justify-center border border-[#B88A3D]/30 text-white/75 transition-colors hover:border-[#D4A84B] hover:text-[#D4A84B]">
                                 <Instagram size={19} />
                             </a>
                             <span className="text-sm text-white/45">{SOCIAL_LINKS.instagramHandle}</span>
@@ -66,7 +66,7 @@ const Footer = () => {
                         <ul className="space-y-4 text-sm text-white/62">
                             <li className="flex gap-3">
                                 <MapPin size={18} className="mt-0.5 shrink-0 text-[#D4A84B]" />
-                                <span>{CONTACT.city}</span>
+                                <a href={CONTACT.mapsUrl} target="_blank" rel="noreferrer" className="transition-colors hover:text-white">{CONTACT.postalAddress}</a>
                             </li>
                             <li className="flex gap-3">
                                 <Mail size={18} className="mt-0.5 shrink-0 text-[#D4A84B]" />
@@ -92,7 +92,7 @@ const Footer = () => {
                 </div>
 
                 <div className="border-t border-white/10 pt-6 text-center text-xs text-white/38">
-                    <p>&copy; {new Date().getFullYear()} 5 Spice Market & Kitchen. All rights reserved.</p>
+                    <p>&copy; {new Date().getFullYear()} 5Spice Market & Kitchen. All rights reserved.</p>
                 </div>
             </div>
         </footer>

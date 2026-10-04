@@ -1,6 +1,5 @@
 import React from 'react';
 import { HandHeart, Leaf, ShieldCheck } from 'lucide-react';
-import { OFFERINGS } from '../config/site';
 
 const values = [
     { title: 'Zabiha halal care', text: 'A grocery and kitchen experience designed around trusted halal standards.', icon: ShieldCheck },
@@ -19,8 +18,15 @@ const About = () => {
                         Five spices. One home for groceries, food, and community.
                     </h1>
                     <p className="mt-6 max-w-3xl text-lg leading-8 text-white/68">
-                        5 Spice Market & Kitchen was created to bring premium halal groceries, fresh ingredients, and authentic Bangladeshi cuisine together in Plano.
+                        5Spice Market & Kitchen was created to bring premium halal groceries, fresh ingredients, and authentic Bangladeshi cuisine together in Plano.
                     </p>
+                    <div className="mt-8 max-w-3xl border border-[#B88A3D]/25 bg-[#101010]/78 p-7">
+                        <p className="font-bengali text-4xl font-semibold text-[#D4A84B]">পাঁচফোড়ন</p>
+                        <p className="mt-3 font-serif text-3xl font-semibold text-white">Five spices. One home.</p>
+                        <p className="mt-4 leading-7 text-white/64">
+                            Named after "পাঁচফোড়ন" — the traditional five-spice blend at the heart of every South Asian kitchen.
+                        </p>
+                    </div>
                 </div>
             </section>
 
@@ -36,18 +42,6 @@ const About = () => {
                             </article>
                         );
                     })}
-                </div>
-
-                <div className="mt-8 border border-[#B88A3D]/25 bg-[#101010] p-7 md:p-10">
-                    <h2 className="font-serif text-3xl font-semibold text-[#D4A84B]">What 5 Spice will bring to Plano</h2>
-                    <div className="mt-7 grid gap-5 md:grid-cols-3">
-                        {OFFERINGS.map((offering) => (
-                            <div key={offering.title}>
-                                <h3 className="font-serif text-2xl font-semibold text-white">{offering.title}</h3>
-                                <p className="mt-3 text-sm leading-7 text-white/62">{offering.text}</p>
-                            </div>
-                        ))}
-                    </div>
                 </div>
             </section>
         </div>

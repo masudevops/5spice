@@ -51,7 +51,7 @@ const ComingSoonLanding = () => {
                     <div className="flex justify-center">
                         <img
                             src={LOGOS.wide}
-                            alt="5 Spice Market & Kitchen official logo"
+                            alt="5Spice Market & Kitchen official logo"
                             className="h-auto w-[210px] object-contain sm:w-[300px] lg:w-[350px]"
                         />
                     </div>
@@ -122,7 +122,7 @@ const ComingSoonLanding = () => {
 
             <section aria-labelledby="coming-soon-offerings" className="relative z-10 px-5 pb-12 sm:px-8 lg:px-12 lg:pb-16">
                 <div className="mx-auto max-w-7xl">
-                    <h2 id="coming-soon-offerings" className="sr-only">5 Spice Market and Kitchen offerings</h2>
+                    <h2 id="coming-soon-offerings" className="sr-only">5Spice Market and Kitchen offerings</h2>
                     <div className="grid animate-fade-in-up gap-4 md:grid-cols-3 lg:gap-5">
                         {OFFERINGS.map((offering, index) => {
                             const Icon = featureIcons[index];
@@ -166,7 +166,7 @@ const ComingSoonLanding = () => {
                         Follow our journey to opening day.
                     </h2>
                     <p className="mt-4 text-base text-white/75">
-                        Stay connected as we bring 5 Spice Market & Kitchen to Plano.
+                        Stay connected as we bring 5Spice Market & Kitchen to Plano.
                     </p>
 
                     <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
@@ -174,7 +174,7 @@ const ComingSoonLanding = () => {
                             href={SOCIAL_LINKS.facebook}
                             target="_blank"
                             rel="noreferrer"
-                            aria-label="Follow 5 Spice Market on Facebook"
+                            aria-label="Follow 5Spice Market on Facebook"
                             className={`inline-flex min-h-12 items-center gap-2 border border-[#B88A3D]/45 px-5 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-white/80 transition-colors hover:border-[#D4A84B] hover:text-[#D4A84B] ${focusClass}`}
                         >
                             <Facebook size={18} aria-hidden="true" />
@@ -184,7 +184,7 @@ const ComingSoonLanding = () => {
                             href={instagramHref}
                             target="_blank"
                             rel="noreferrer"
-                            aria-label="Follow 5 Spice Market on Instagram"
+                            aria-label="Follow 5Spice Market on Instagram"
                             className={`inline-flex min-h-12 items-center gap-2 border border-[#B88A3D]/45 px-5 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-white/80 transition-colors hover:border-[#D4A84B] hover:text-[#D4A84B] ${focusClass}`}
                         >
                             <Instagram size={18} aria-hidden="true" />

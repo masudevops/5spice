@@ -1,0 +1,27 @@
+{
+  "updatedLabel": "Fresh weekly picks",
+  "note": "Check back for rotating grocery highlights, seasonal produce, and family meal offers.",
+  "deals": [
+    {
+      "id": "produce-feature",
+      "title": "Fresh Produce Favorites",
+      "category": "Produce",
+      "description": "Seasonal vegetables, herbs, and fruit selections for everyday South Asian family cooking.",
+      "badge": "Weekly Feature"
+    },
+    {
+      "id": "meat-feature",
+      "title": "Zabiha Halal Meat Picks",
+      "category": "Meat",
+      "description": "Fresh meat selections for curries, grills, family dinners, and weekend gatherings.",
+      "badge": "Fresh Pick"
+    },
+    {
+      "id": "pantry-feature",
+      "title": "Rice, Spices & Pantry Deals",
+      "category": "Pantry",
+      "description": "Basmati rice, spice blends, lentils, oils, snacks, and pantry staples for the week.",
+      "badge": "Pantry Pick"
+    }
+  ]
+}

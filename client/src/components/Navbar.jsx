@@ -1,24 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Home, Info, Menu, Search, ShoppingBag, Utensils, X } from 'lucide-react';
+import { BadgePercent, HandHeart, Mail, Menu, Search, Utensils, X } from 'lucide-react';
 import clsx from 'clsx';
 import { CONTACT, isComingSoonMode, LOGOS } from '../config/site';
 
 const navLinks = [
-  { name: 'Home', path: '/' },
   { name: 'Market', path: '/market' },
-  { name: 'Kitchen', path: '/kitchen' },
+  { name: 'Restaurant', path: '/kitchen' },
+  { name: 'Weekly Deals', path: '/sales' },
   { name: 'Catering', path: '/catering' },
-  { name: 'Pickup', path: '/pickup' },
   { name: 'About', path: '/about' },
   { name: 'Contact', path: '/contact' },
 ];
 
 const bottomLinks = [
-  { name: 'Home', path: '/', icon: Home },
   { name: 'Market', path: '/market', icon: Search },
-  { name: 'Kitchen', path: '/kitchen', icon: Utensils },
-  { name: 'Info', path: '/contact', icon: Info },
+  { name: 'Restaurant', path: '/kitchen', icon: Utensils },
+  { name: 'Catering', path: '/catering', icon: HandHeart },
+  { name: 'Contact', path: '/contact', icon: Mail },
 ];
 
 const Navbar = () => {
@@ -41,7 +40,7 @@ const Navbar = () => {
       <div className="hidden border-b border-[#B88A3D]/15 bg-[#0E0E0E] text-xs text-[#F0EAD6]/70 md:block">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-2">
           <span className="uppercase tracking-[0.28em] text-[#D4A84B]">{CONTACT.city}</span>
-          <span>Premium Halal Grocery · Fresh Fish · Authentic Bangladeshi Restaurant</span>
+          <span>Premium Halal Grocery · Fresh Fish · Fresh Restaurant</span>
         </div>
       </div>
 
@@ -54,10 +53,10 @@ const Navbar = () => {
         )}
       >
         <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-3 lg:px-8">
-          <Link to="/" className="flex items-center" aria-label="5 Spice Market & Kitchen home">
+          <Link to="/" className="flex items-center" aria-label="5Spice Market & Kitchen home">
             <img
               src={LOGOS.wide}
-              alt="5 Spice Market & Kitchen"
+              alt="5Spice Market & Kitchen"
               className="h-12 w-auto object-contain transition-opacity hover:opacity-90 md:h-14"
             />
           </Link>
@@ -88,16 +87,10 @@ const Navbar = () => {
 
           <div className="hidden items-center gap-3 md:flex">
             <Link
-              to="/market"
-              className="border border-[#B88A3D]/45 px-5 py-2.5 text-sm font-semibold uppercase tracking-[0.16em] text-[#F0EAD6] transition-colors hover:border-[#D4A84B] hover:text-[#D4A84B]"
+              to="/pickup"
+              className="bg-[#1CA433] px-5 py-2.5 text-sm font-semibold uppercase tracking-[0.16em] text-white transition-colors hover:bg-[#168C2B]"
             >
-              Explore Market
-            </Link>
-            <Link
-              to="/kitchen"
-              className="bg-[#2D6A3F] px-5 py-2.5 text-sm font-semibold uppercase tracking-[0.16em] text-white transition-colors hover:bg-[#245936]"
-            >
-              View Menu
+              Order Online
             </Link>
           </div>
 
@@ -126,8 +119,8 @@ const Navbar = () => {
                 {link.name}
               </Link>
             ))}
-            <Link to="/market" onClick={() => setMobileMenuOpen(false)} className="mt-3 bg-[#2D6A3F] px-5 py-4 font-bold uppercase tracking-[0.18em] text-white">
-              Explore Market
+            <Link to="/pickup" onClick={() => setMobileMenuOpen(false)} className="mt-3 bg-[#1CA433] px-5 py-4 font-bold uppercase tracking-[0.18em] text-white">
+              Order Online
             </Link>
           </nav>
         </div>
@@ -145,8 +138,8 @@ const Navbar = () => {
               </Link>
             );
           })}
-          <Link to="/market" aria-label="Explore Market" className="mx-auto -mt-7 flex h-14 w-14 items-center justify-center rounded-full border-4 border-[#0E0E0E] bg-[#2D6A3F] text-white shadow-lg">
-            <ShoppingBag size={24} />
+          <Link to="/sales" aria-label="Weekly Deals" className="mx-auto -mt-7 flex h-14 w-14 items-center justify-center rounded-full border-4 border-[#0E0E0E] bg-[#1CA433] text-white shadow-lg">
+            <BadgePercent size={24} />
           </Link>
           {bottomLinks.slice(2).map((link) => {
             const Icon = link.icon;

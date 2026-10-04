@@ -1,101 +1,82 @@
-import React, { useEffect, useMemo, useState } from 'react';
-import MenuCard from '../components/MenuCard';
-import { FlameKindling, Utensils } from 'lucide-react';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { ArrowRight, BriefcaseBusiness, FlameKindling, Soup, Utensils } from 'lucide-react';
+import { MENU_HIGHLIGHTS, QUICK_MEAL_ITEMS, SIGNATURE_ADD_ONS } from '../config/site';
 
-const categories = ['Bangladeshi', 'Pakistani', 'Indian', 'Arab', 'Grill', 'Drinks'];
+const icons = [Soup, FlameKindling, Utensils];
 
 const Kitchen = () => {
-    const [menuItems, setMenuItems] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [activeCategory, setActiveCategory] = useState('Bangladeshi');
-
-    useEffect(() => {
-        fetch('http://localhost:5001/api/menu')
-            .then(res => res.json())
-            .then(data => {
-                setMenuItems(data);
-                setLoading(false);
-            })
-            .catch(err => {
-                console.error('Error fetching menu:', err);
-                setLoading(false);
-            });
-    }, []);
-
-    const groupedMenu = useMemo(() => categories.reduce((acc, cat) => {
-        const items = menuItems.filter(item => item.category === cat || (cat === 'Grill' && item.category === 'Arab'));
-        if (items.length > 0) acc[cat] = items;
-        return acc;
-    }, {}), [menuItems]);
-    const filteredItems = groupedMenu[activeCategory] || [];
-
     return (
         <div className="min-h-screen bg-[#0E0E0E] text-[#F0EAD6]">
             <section className="relative overflow-hidden px-5 py-16 sm:px-8 lg:px-12">
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(212,80,10,0.14),transparent_36%),linear-gradient(135deg,#0E0E0E,#161616)]" />
                 <div className="relative mx-auto max-w-7xl">
-                    <p className="text-xs font-semibold uppercase tracking-[0.32em] text-[#D4A84B]">Authentic Bangladeshi Restaurant</p>
-                    <div className="mt-5 grid gap-8 lg:grid-cols-[1fr_0.7fr] lg:items-end">
-                        <div>
-                            <h1 className="font-serif text-5xl font-bold leading-tight text-white md:text-6xl">The 5 Spice Kitchen.</h1>
-                            <p className="mt-5 max-w-2xl text-lg leading-8 text-white/68">
-                                Traditional recipes, family flavors, biryani, grills, curries, snacks, and drinks prepared for the table your family remembers.
-                            </p>
-                        </div>
-                        <div className="border border-[#B88A3D]/30 bg-[#141414]/82 p-6">
-                            <FlameKindling className="mb-4 text-[#D4A84B]" size={28} strokeWidth={1.4} />
-                            <p className="font-serif text-2xl font-semibold text-white">Browse-first menu preview</p>
-                            <p className="mt-3 text-sm leading-7 text-white/58">Online ordering is not enabled yet. Use the menu to explore what is coming to Plano.</p>
-                        </div>
-                    </div>
+                    <p className="text-xs font-semibold uppercase tracking-[0.32em] text-[#D4A84B]">Fresh Restaurant</p>
+                    <h1 className="mt-5 max-w-4xl font-serif text-5xl font-bold leading-tight text-white md:text-6xl">Authentic meals for family dinners and quick lunches.</h1>
+                    <p className="mt-5 max-w-2xl text-lg leading-8 text-white/68">
+                        Enjoy traditional Bangladeshi favorites, family-style dishes, shawarma meals, snacks, sides, and office-friendly lunch options prepared fresh with bold flavor.
+                    </p>
                 </div>
             </section>
 
             <section className="px-5 pb-20 sm:px-8 lg:px-12">
                 <div className="mx-auto max-w-7xl">
-                    <div className="sticky top-[76px] z-30 mb-9 border-y border-[#B88A3D]/18 bg-[#0E0E0E]/92 py-4 backdrop-blur-xl">
-                        <div className="flex gap-2 overflow-x-auto">
-                            {categories.map(cat => (
-                                <button
-                                    key={cat}
-                                    onClick={() => setActiveCategory(cat)}
-                                    className={`whitespace-nowrap border px-4 py-2 text-sm font-semibold transition-colors ${activeCategory === cat
-                                        ? 'border-[#D4A84B] bg-[#D4A84B] text-[#0E0E0E]'
-                                        : 'border-[#B88A3D]/25 text-white/65 hover:border-[#D4A84B] hover:text-white'
-                                        }`}
-                                >
-                                    {cat}
-                                </button>
-                            ))}
-                        </div>
+                    <div className="grid gap-5 md:grid-cols-3">
+                        {MENU_HIGHLIGHTS.map((item, index) => {
+                            const Icon = icons[index];
+                            return (
+                                <article key={item.title} className="border border-[#B88A3D]/25 bg-[#141414] p-7">
+                                    <Icon className="mb-5 text-[#D4A84B]" size={31} strokeWidth={1.35} />
+                                    <p className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-[#D4A84B]/80">{item.category}</p>
+                                    <h2 className="font-serif text-3xl font-semibold leading-tight text-white">{item.title}</h2>
+                                    <p className="mt-4 leading-7 text-white/62">{item.text}</p>
+                                </article>
+                            );
+                        })}
                     </div>
 
-                    {loading ? (
-                        <div className="flex flex-col items-center py-20 text-center">
-                            <div className="mb-5 h-12 w-12 animate-spin rounded-full border-2 border-[#B88A3D]/20 border-t-[#D4A84B]" />
-                            <p className="text-white/62">Preparing the menu...</p>
-                        </div>
-                    ) : (
-                        <>
-                            <div className="mb-8 flex items-center gap-3">
-                                <Utensils className="text-[#D4A84B]" size={24} />
-                                <h2 className="font-serif text-3xl font-semibold text-white">{activeCategory} Specialties</h2>
-                            </div>
+                    <div className="mt-8 border border-[#B88A3D]/25 bg-[#101010] p-7 md:p-10">
+                        <h2 className="font-serif text-3xl font-semibold text-[#D4A84B]">Order restaurant favorites through partner apps.</h2>
+                        <p className="mt-4 max-w-3xl leading-7 text-white/62">
+                            Pickup and delivery options will be available through Toast, Uber Eats, and DoorDash as service begins.
+                        </p>
+                        <Link to="/pickup" className="mt-7 inline-flex items-center gap-2 bg-[#1CA433] px-6 py-4 font-bold uppercase tracking-[0.16em] text-white transition-colors hover:bg-[#168C2B]">
+                            View Ordering Options <ArrowRight size={17} />
+                        </Link>
+                    </div>
 
-                            {filteredItems.length > 0 ? (
-                                <div className="grid grid-cols-1 gap-5 lg:grid-cols-2 xl:grid-cols-3">
-                                    {filteredItems.map(item => (
-                                        <MenuCard key={item.id} item={{ ...item, spiceLevel: item.category === 'Entrees' ? 2 : 0 }} />
-                                    ))}
-                                </div>
-                            ) : (
-                                <div className="border border-[#B88A3D]/22 bg-[#141414] px-6 py-16 text-center">
-                                    <p className="font-serif text-3xl font-semibold text-white">No items listed yet.</p>
-                                    <p className="mt-3 text-white/58">Please check back as the launch menu develops.</p>
-                                </div>
-                            )}
-                        </>
-                    )}
+                    <div className="mt-8 grid gap-5 lg:grid-cols-[1.05fr_0.95fr]">
+                        <section className="border border-[#B88A3D]/25 bg-[#141414] p-7 md:p-9">
+                            <BriefcaseBusiness className="mb-5 text-[#D4A84B]" size={32} strokeWidth={1.35} />
+                            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#D4A84B]/80">Office Lunch & Fast Meals</p>
+                            <h2 className="mt-4 font-serif text-3xl font-semibold leading-tight text-white">Built for nearby offices and quick lunch breaks.</h2>
+                            <p className="mt-4 leading-7 text-white/62">
+                                A simple fast-eating menu can support commercial businesses around Plano with one-bowl meals, shawarma, sandwiches, rolls, wings, and easy sides.
+                            </p>
+                            <div className="mt-7 grid gap-3 sm:grid-cols-2">
+                                {QUICK_MEAL_ITEMS.map((item) => (
+                                    <div key={item} className="border border-white/10 px-4 py-3 text-sm font-medium text-white/72">
+                                        {item}
+                                    </div>
+                                ))}
+                            </div>
+                        </section>
+
+                        <section className="border border-[#B88A3D]/25 bg-[#101010] p-7 md:p-9">
+                            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#D4A84B]/80">5Spice Signature Add-Ons</p>
+                            <h2 className="mt-4 font-serif text-3xl font-semibold leading-tight text-white">Small bites that make orders memorable.</h2>
+                            <p className="mt-4 leading-7 text-white/62">
+                                Add sweets and spring rolls as signature extras for individual meals, office orders, and lunch-and-learn trays.
+                            </p>
+                            <div className="mt-7 space-y-3">
+                                {SIGNATURE_ADD_ONS.map((item) => (
+                                    <div key={item} className="border-l-2 border-[#D4A84B] bg-white/[0.03] px-4 py-3 text-white/72">
+                                        {item}
+                                    </div>
+                                ))}
+                            </div>
+                        </section>
+                    </div>
                 </div>
             </section>
         </div>
