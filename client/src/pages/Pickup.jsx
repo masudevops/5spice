@@ -2,7 +2,7 @@ import React from 'react';
 import { ExternalLink, Mail, MapPin, PackageCheck, ShieldCheck, ShoppingBasket, Store, Utensils } from 'lucide-react';
 import { CONTACT, ORDER_PLATFORMS } from '../config/site';
 import { useSelectedLocation } from '../hooks/useSelectedLocation';
-import LocationSelector from '../components/LocationSelector';
+import LocationSwitcher from '../components/LocationSwitcher';
 
 const ORDERING_KEY_TO_PLATFORM_NAME = {
     toast: 'Toast',
@@ -49,7 +49,7 @@ const Pickup = () => {
                     {visibleLocations.length > 1 && (
                         <div className="mt-7 inline-flex flex-wrap items-center gap-3 border border-[#B88A3D]/30 bg-[#141414] px-5 py-4">
                             <span className="text-sm font-semibold uppercase tracking-[0.14em] text-white/70">Ordering from:</span>
-                            <LocationSelector locations={visibleLocations} selectedSlug={selectedSlug} onSelect={selectLocation} />
+                            <LocationSwitcher locations={visibleLocations} selectedSlug={selectedSlug} onSelect={selectLocation} />
                         </div>
                     )}
                 </div>

@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { ShieldCheck } from 'lucide-react';
 import NotFound from './NotFound';
@@ -6,15 +5,10 @@ import { useDocumentHead } from '../hooks/useDocumentHead';
 import { getVisibleLocationBySlug } from '../data/locations';
 import { getMenuByLocationSlug } from '../data/menus';
 
-const ORIGIN_FILTERS = ['All', 'Bangladeshi', 'Indian', 'Pakistani'];
-
 const slugify = (value) => value.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
-
-const matchesOriginFilter = (item, filter) => filter === 'All' || !item.origin || item.origin === filter;
 
 const LocationMenu = () => {
     const { slug } = useParams();
-    const [originFilter, setOriginFilter] = useState('All');
 
     const location = getVisibleLocationBySlug(slug);
     const menu = location ? getMenuByLocationSlug(slug) : null;
@@ -59,29 +53,12 @@ const LocationMenu = () => {
                         </a>
                     ))}
                 </div>
-                <div className="mx-auto flex max-w-5xl flex-wrap gap-2 px-5 pb-3 sm:px-8 lg:px-12" role="group" aria-label="Filter by origin">
-                    {ORIGIN_FILTERS.map((filter) => (
-                        <button
-                            key={filter}
-                            type="button"
-                            onClick={() => setOriginFilter(filter)}
-                            aria-pressed={originFilter === filter}
-                            className={`px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.12em] transition-colors ${
-                                originFilter === filter
-                                    ? 'bg-[#D4A84B] text-[#0E0E0E]'
-                                    : 'border border-white/10 text-white/55 hover:border-[#D4A84B]/50 hover:text-white'
-                            }`}
-                        >
-                            {filter}
-                        </button>
-                    ))}
-                </div>
             </nav>
 
             <section className="px-5 py-10 sm:px-8 lg:px-12">
                 <div className="mx-auto max-w-5xl space-y-12">
                     {menu.categories.map((category) => {
-                        const items = category.items.filter((item) => matchesOriginFilter(item, originFilter));
+                        const items = category.items;
                         if (items.length === 0) return null;
 
                         return (
@@ -98,11 +75,6 @@ const LocationMenu = () => {
                                             </div>
                                             <p className="mt-2 text-sm leading-6 text-white/62">{item.description}</p>
                                             <div className="mt-3 flex flex-wrap gap-2">
-                                                {item.origin && (
-                                                    <span className="border border-[#B88A3D]/30 px-2 py-0.5 text-[0.65rem] font-semibold uppercase tracking-[0.12em] text-[#D4A84B]/80">
-                                                        {item.origin}
-                                                    </span>
-                                                )}
                                                 {item.dietary?.map((tag) => (
                                                     <span key={tag} className="border border-white/10 px-2 py-0.5 text-[0.65rem] font-semibold uppercase tracking-[0.12em] text-white/50">
                                                         {tag}
