@@ -9,7 +9,7 @@ const linkGroups = [
         links: [
             ['Home', '/'],
             ['Market', '/market'],
-            ['Restaurant', '/kitchen'],
+            ['Kitchen', '/kitchen'],
             ['Weekly Specials', '/sales'],
         ],
     },

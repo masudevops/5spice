@@ -4,13 +4,15 @@ import { BadgePercent, HandHeart, Mail, MapPinned, Menu, Search, Utensils, X } f
 import clsx from 'clsx';
 import { CONTACT, isComingSoonMode, LOGOS } from '../config/site';
 import { anyVisibleLocationHasFlag } from '../data/locations';
+import { useSelectedLocation } from '../hooks/useSelectedLocation';
+import LocationSwitcher from './LocationSwitcher';
 
 const buildNavLinks = () => [
   ...(anyVisibleLocationHasFlag('hasMarket') ? [{ name: 'Market', path: '/market' }] : []),
-  { name: 'Restaurant', path: '/kitchen' },
+  { name: 'Kitchen', path: '/kitchen' },
+  { name: 'Catering', path: '/catering' },
   { name: 'Locations', path: '/locations' },
   ...(anyVisibleLocationHasFlag('hasWeeklyDeals') ? [{ name: 'Weekly Deals', path: '/sales' }] : []),
-  { name: 'Catering', path: '/catering' },
   { name: 'About', path: '/about' },
   { name: 'Contact', path: '/contact' },
 ];
@@ -19,7 +21,7 @@ const buildNavLinks = () => [
 // tab bar layout stays symmetric.
 const buildBottomLinks = () => [
   ...(anyVisibleLocationHasFlag('hasMarket') ? [{ name: 'Market', path: '/market', icon: Search }] : []),
-  { name: 'Restaurant', path: '/kitchen', icon: Utensils },
+  { name: 'Kitchen', path: '/kitchen', icon: Utensils },
   { name: 'Catering', path: '/catering', icon: HandHeart },
   { name: 'Contact', path: '/contact', icon: Mail },
 ];
@@ -28,6 +30,7 @@ const Navbar = () => {
   const location = useLocation();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { selectedSlug, selectLocation, visibleLocations } = useSelectedLocation();
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
@@ -51,7 +54,11 @@ const Navbar = () => {
     <>
       <div className="hidden border-b border-[#B88A3D]/15 bg-[#0E0E0E] text-xs text-[#F0EAD6]/70 md:block">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-2">
-          <span className="uppercase tracking-[0.28em] text-[#D4A84B]">{CONTACT.city}</span>
+          {visibleLocations.length > 1 ? (
+            <LocationSwitcher locations={visibleLocations} selectedSlug={selectedSlug} onSelect={selectLocation} />
+          ) : (
+            <span className="uppercase tracking-[0.28em] text-[#D4A84B]">{CONTACT.city}</span>
+          )}
           <span>Premium Halal Grocery · Fresh Fish · Fresh Restaurant</span>
         </div>
       </div>
@@ -121,6 +128,16 @@ const Navbar = () => {
       {mobileMenuOpen && (
         <div className="fixed inset-0 z-30 bg-[#0E0E0E]/98 px-6 pb-24 pt-28 lg:hidden">
           <nav className="mx-auto flex max-w-sm flex-col gap-3 text-center" aria-label="Mobile navigation">
+            {visibleLocations.length > 1 && (
+              <div className="mb-2 flex justify-center">
+                <LocationSwitcher
+                  locations={visibleLocations}
+                  selectedSlug={selectedSlug}
+                  onSelect={selectLocation}
+                  panelClassName="left-1/2 -translate-x-1/2"
+                />
+              </div>
+            )}
             {navLinks.map((link) => (
               <Link
                 key={link.name}

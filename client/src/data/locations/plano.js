@@ -33,7 +33,7 @@ export const plano = {
         { day: 'Saturday', hours: '9:00 AM – 11:00 PM' },
         { day: 'Sunday', hours: '9:00 AM – 10:00 PM' },
     ],
-    googleMapsUrl: 'https://www.google.com/maps/search/?api=1&query=245%20Shiloh%20Rd%2C%20Plano%2C%20TX%2075074',
+    googleMapsUrl: 'https://maps.app.goo.gl/3gQk43jHohFboJWV9',
     // PLACEHOLDER: confirm exact coordinates for JSON-LD geo data.
     lat: null,
     lng: null,
