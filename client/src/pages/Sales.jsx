@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BadgePercent, CalendarDays, Instagram, Sparkles } from 'lucide-react';
+import { BadgePercent, CalendarDays, Facebook, Instagram, Sparkles } from 'lucide-react';
 import { SOCIAL_LINKS } from '../config/site';
 import { getLocationLabel, getVisibleLocations } from '../data/locations';
 import { useDocumentHead } from '../hooks/useDocumentHead';
@@ -86,12 +86,17 @@ const Sales = () => {
                         <div>
                             <h2 className="font-serif text-3xl font-semibold text-white">Follow for the latest specials.</h2>
                             <p className="mt-3 max-w-2xl text-sm leading-7 text-white/58">
-                                {hasDeals ? 'Deals vary by availability and while supplies last.' : 'Opening news and first deals will be shared on Instagram.'}
+                                {hasDeals ? 'Deals vary by availability and while supplies last.' : 'Opening news and first deals will be shared on Facebook and Instagram.'}
                             </p>
                         </div>
-                        <a href={SOCIAL_LINKS.instagramUrl} target="_blank" rel="noreferrer" className="mt-6 inline-flex items-center gap-3 border border-[#B88A3D]/35 px-5 py-3 text-sm font-bold uppercase tracking-[0.16em] text-[#D4A84B] transition-colors hover:border-[#D4A84B] hover:text-white md:mt-0">
-                            <Instagram size={18} aria-hidden="true" /> {SOCIAL_LINKS.instagramHandle}
-                        </a>
+                        <div className="mt-6 flex flex-wrap gap-3 md:mt-0 md:shrink-0">
+                            <a href={SOCIAL_LINKS.facebook} target="_blank" rel="noreferrer" aria-label="5Spice Market on Facebook" className="inline-flex items-center gap-3 border border-[#B88A3D]/35 px-5 py-3 text-sm font-bold uppercase tracking-[0.16em] text-[#D4A84B] transition-colors hover:border-[#D4A84B] hover:text-white">
+                                <Facebook size={18} aria-hidden="true" /> Facebook
+                            </a>
+                            <a href={SOCIAL_LINKS.instagramUrl} target="_blank" rel="noreferrer" aria-label={`${SOCIAL_LINKS.instagramHandle} on Instagram`} className="inline-flex items-center gap-3 border border-[#B88A3D]/35 px-5 py-3 text-sm font-bold uppercase tracking-[0.16em] text-[#D4A84B] transition-colors hover:border-[#D4A84B] hover:text-white">
+                                <Instagram size={18} aria-hidden="true" /> {SOCIAL_LINKS.instagramHandle}
+                            </a>
+                        </div>
                     </div>
                 </div>
             </section>
