@@ -17,74 +17,76 @@ const About = () => {
 
     return (
         <div className="min-h-screen bg-[#0E0E0E] text-[#F0EAD6]">
-            <section className="relative overflow-hidden px-5 py-[3.25rem] sm:px-8 lg:px-12">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(184,138,61,0.14),transparent_34%),linear-gradient(135deg,#0E0E0E,#161616)]" />
-                <div className="relative mx-auto max-w-7xl">
-                    <p className="text-xs font-semibold uppercase tracking-[0.32em] text-[#D4A84B]">Our Story</p>
-                    <h1 className="mt-5 max-w-4xl font-serif text-[2.6rem] font-bold leading-tight text-white sm:text-5xl md:text-6xl">
-                        {/* One sentence per line; on narrow phones a sentence may wrap within itself. */}
-                        <span className="block text-balance sm:whitespace-nowrap">More Than Food.</span>
-                        <span className="block text-balance sm:whitespace-nowrap">A Feeling of Home.</span>
-                    </h1>
-                    <p className="mt-6 max-w-3xl text-lg leading-8 text-white/68">
-                        Rooted in Bangladeshi traditions, 5Spice brings authentic flavors, premium halal groceries, and a sense of community to North Texas.
-                    </p>
-                    <p className="mt-4 max-w-3xl text-lg leading-8 text-white/68">
-                        Our Murphy kitchen is now accepting catering orders, while our Plano market and restaurant are preparing to welcome you in early 2027, In Sha Allah.
-                    </p>
-                </div>
-            </section>
-
-            <section aria-labelledby="our-story-heading" className="relative overflow-hidden border-y border-[#B88A3D]/20 bg-[#0B0B0B] px-5 py-16 sm:px-8 md:py-[5.75rem] lg:px-12">
-                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(212,168,75,0.12),transparent_55%)]" />
-                <div className="relative mx-auto max-w-2xl text-center">
-                    {/* Five dots, one for each spice in the blend. */}
-                    <div className="flex items-center justify-center gap-2.5" aria-hidden="true">
-                        {['#D4A84B', '#1CA433', '#D4A84B', '#1CA433', '#D4A84B'].map((color, index) => (
-                            <span key={index} className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: color }} />
-                        ))}
-                    </div>
-
-                    <h2 id="our-story-heading" className="mt-8">
-                        <span lang="bn" className="block font-bengali text-5xl font-semibold leading-[1.35] text-[#D4A84B] sm:text-6xl md:text-7xl">
-                            পাঁচফোড়ন
-                        </span>
-                        <span className="mt-3 block font-serif text-2xl font-semibold text-white sm:text-3xl">
-                            The Aroma of Home
-                        </span>
-                    </h2>
-
-                    <div className="mx-auto mt-10 h-px w-16 bg-[#B88A3D]/50" aria-hidden="true" />
-
-                    <div className="mt-10 space-y-6 text-pretty text-left text-lg leading-[1.9] text-white/72 sm:text-center">
-                        <p className="text-balance font-serif text-2xl italic leading-snug text-white sm:text-[1.75rem]">
-                            Some memories begin with a familiar aroma.
+            {/* Hero and story share one background so they read as a single continuous section. */}
+            <div className="relative overflow-hidden border-b border-[#B88A3D]/20 bg-[#0B0B0B]">
+                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_45%_at_50%_0%,rgba(184,138,61,0.16),transparent),radial-gradient(ellipse_60%_35%_at_50%_42%,rgba(212,168,75,0.07),transparent)]" />
+                <section className="relative px-5 pb-6 pt-[3.25rem] sm:px-8 lg:px-12">
+                    <div className="relative mx-auto max-w-3xl text-center">
+                        <p className="text-xs font-semibold uppercase tracking-[0.32em] text-[#D4A84B]">Our Story</p>
+                        <h1 className="mt-5 font-serif text-[2.6rem] font-bold leading-tight text-white sm:text-5xl md:text-6xl">
+                            {/* One sentence per line; on narrow phones a sentence may wrap within itself. */}
+                            <span className="block text-balance sm:whitespace-nowrap">More Than Food.</span>
+                            <span className="block text-balance sm:whitespace-nowrap">A Feeling of Home.</span>
+                        </h1>
+                        <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-white/68">
+                            Rooted in Bangladeshi traditions, 5Spice brings authentic flavors, premium halal groceries, and a sense of community to North Texas.
                         </p>
-                        <p>
-                            The gentle crackle of <span lang="bn" className="font-bengali text-[#D4A84B]">পাঁচফোড়ন</span> in a warm pan.
-                            The aroma of <span lang="bn" className="font-bengali text-[#D4A84B]">মায়ের রান্না</span> drifting through the house as everyone gathers around the table.
-                        </p>
-                        <p>For many of us, these little moments are what make a house feel like home.</p>
-                        <p>
-                            Inspired by <span lang="bn" className="font-bengali text-[#D4A84B]">পাঁচফোড়ন</span>, the traditional five-spice blend of Bengali cooking,
-                            5Spice was born from a simple idea: to bring the flavors, warmth, and traditions of home closer to our community.
-                        </p>
-                        <p>
-                            From the familiar ingredients that bring our favorite recipes to life to the meals prepared with care in our kitchen,
-                            5Spice is our way of keeping those traditions alive and sharing them with the next generation.
+                        <p className="mx-auto mt-4 max-w-2xl text-lg leading-8 text-white/68">
+                            Our Murphy kitchen is now accepting catering orders, while our Plano market and restaurant are preparing to welcome you in early 2027, In Sha Allah.
                         </p>
                     </div>
+                </section>
 
-                    <div className="mt-14 flex items-center justify-center gap-4" aria-hidden="true">
-                        <span className="h-px w-10 bg-[#B88A3D]/50 sm:w-16" />
-                        <span className="h-1.5 w-1.5 rounded-full bg-[#1CA433]" />
-                        <span className="h-px w-10 bg-[#B88A3D]/50 sm:w-16" />
+                <section aria-labelledby="our-story-heading" className="relative px-5 pb-16 pt-14 sm:px-8 md:pb-[5.75rem] md:pt-20 lg:px-12">
+                    <div className="relative mx-auto max-w-2xl text-center">
+                        {/* Five dots, one for each spice in the blend. */}
+                        <div className="flex items-center justify-center gap-2.5" aria-hidden="true">
+                            {['#D4A84B', '#1CA433', '#D4A84B', '#1CA433', '#D4A84B'].map((color, index) => (
+                                <span key={index} className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: color }} />
+                            ))}
+                        </div>
+
+                        <h2 id="our-story-heading" className="mt-8">
+                            <span lang="bn" className="block font-bengali text-5xl font-semibold leading-[1.35] text-[#D4A84B] sm:text-6xl md:text-7xl">
+                                পাঁচফোড়ন
+                            </span>
+                            <span className="mt-3 block font-serif text-2xl font-semibold text-white sm:text-3xl">
+                                The Aroma of Home
+                            </span>
+                        </h2>
+
+                        <div className="mx-auto mt-10 h-px w-16 bg-[#B88A3D]/50" aria-hidden="true" />
+
+                        <div className="mt-10 space-y-6 text-pretty text-left text-lg leading-[1.9] text-white/72 sm:text-center">
+                            <p className="text-balance font-serif text-2xl italic leading-snug text-white sm:text-[1.75rem]">
+                                Some memories begin with a familiar aroma.
+                            </p>
+                            <p>
+                                The gentle crackle of <span lang="bn" className="font-bengali text-[#D4A84B]">পাঁচফোড়ন</span> in a warm pan.
+                                The aroma of <span lang="bn" className="font-bengali text-[#D4A84B]">মায়ের রান্না</span> drifting through the house as everyone gathers around the table.
+                            </p>
+                            <p>For many of us, these little moments are what make a house feel like home.</p>
+                            <p>
+                                Inspired by <span lang="bn" className="font-bengali text-[#D4A84B]">পাঁচফোড়ন</span>, the traditional five-spice blend of Bengali cooking,
+                                5Spice was born from a simple idea: to bring the flavors, warmth, and traditions of home closer to our community.
+                            </p>
+                            <p>
+                                From the familiar ingredients that bring our favorite recipes to life to the meals prepared with care in our kitchen,
+                                5Spice is our way of keeping those traditions alive and sharing them with the next generation.
+                            </p>
+                        </div>
+
+                        <div className="mt-14 flex items-center justify-center gap-4" aria-hidden="true">
+                            <span className="h-px w-10 bg-[#B88A3D]/50 sm:w-16" />
+                            <span className="h-1.5 w-1.5 rounded-full bg-[#1CA433]" />
+                            <span className="h-px w-10 bg-[#B88A3D]/50 sm:w-16" />
+                        </div>
+                        <p className="mt-6 text-balance font-serif text-3xl font-semibold leading-tight text-[#D4A84B] sm:text-4xl">
+                            Five spices. Countless memories. One home.
+                        </p>
                     </div>
-                    <p className="mt-6 text-balance font-serif text-3xl font-semibold leading-tight text-[#D4A84B] sm:text-4xl">
-                        Five spices. Countless memories. One home.
-                    </p>
-                </div>
-            </section>
+                </section>
+            </div>
 
             <section className="px-5 py-20 sm:px-8 lg:px-12">
                 <div className="mx-auto grid max-w-7xl gap-5 md:grid-cols-3">
