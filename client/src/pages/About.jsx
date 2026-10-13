@@ -17,12 +17,14 @@ const About = () => {
 
     return (
         <div className="min-h-screen bg-[#0E0E0E] text-[#F0EAD6]">
-            <section className="relative overflow-hidden px-5 py-16 sm:px-8 lg:px-12">
+            <section className="relative overflow-hidden px-5 py-[3.25rem] sm:px-8 lg:px-12">
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(184,138,61,0.14),transparent_34%),linear-gradient(135deg,#0E0E0E,#161616)]" />
                 <div className="relative mx-auto max-w-7xl">
                     <p className="text-xs font-semibold uppercase tracking-[0.32em] text-[#D4A84B]">Our Story</p>
-                    <h1 className="mt-5 max-w-4xl font-serif text-5xl font-bold leading-tight text-white md:text-6xl">
-                        More Than Food. A Feeling of Home.
+                    <h1 className="mt-5 max-w-4xl font-serif text-[2.6rem] font-bold leading-tight text-white sm:text-5xl md:text-6xl">
+                        {/* One sentence per line; on narrow phones a sentence may wrap within itself. */}
+                        <span className="block text-balance sm:whitespace-nowrap">More Than Food.</span>
+                        <span className="block text-balance sm:whitespace-nowrap">A Feeling of Home.</span>
                     </h1>
                     <p className="mt-6 max-w-3xl text-lg leading-8 text-white/68">
                         5Spice brings authentic Bangladeshi cooking and premium halal groceries to North Texas. Our Murphy kitchen is taking catering orders now, with dine-in and take-out coming soon, and our Plano market and restaurant will open in early 2027, In Sha Allah.
