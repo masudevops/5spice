@@ -1,5 +1,8 @@
 # 5Spice content data
 
+> Day-to-day how-to (menu, photos, deals, locations, and Claude prompts):
+> see [`docs/MAINTAINER-GUIDE.md`](../../../docs/MAINTAINER-GUIDE.md).
+
 Everything here is plain JavaScript objects — no database, no CMS. Edit a
 file, save, and the site picks it up on the next build/dev reload.
 
