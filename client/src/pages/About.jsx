@@ -27,7 +27,10 @@ const About = () => {
                         <span className="block text-balance sm:whitespace-nowrap">A Feeling of Home.</span>
                     </h1>
                     <p className="mt-6 max-w-3xl text-lg leading-8 text-white/68">
-                        5Spice brings authentic Bangladeshi cooking and premium halal groceries to North Texas. Our Murphy kitchen is taking catering orders now, with dine-in and take-out coming soon, and our Plano market and restaurant will open in early 2027, In Sha Allah.
+                        Rooted in Bangladeshi traditions, 5Spice brings authentic flavors, premium halal groceries, and a sense of community to North Texas.
+                    </p>
+                    <p className="mt-4 max-w-3xl text-lg leading-8 text-white/68">
+                        Our Murphy kitchen is now accepting catering orders, while our Plano market and restaurant are preparing to welcome you in early 2027, In Sha Allah.
                     </p>
                 </div>
             </section>
@@ -59,8 +62,7 @@ const About = () => {
                         </p>
                         <p>
                             The gentle crackle of <span lang="bn" className="font-bengali text-[#D4A84B]">পাঁচফোড়ন</span> in a warm pan.
-                            The comforting smell coming from the kitchen. The familiar aroma of <span lang="bn" className="font-bengali text-[#D4A84B]">মায়ের রান্না</span>,
-                            filling the home as everyone gathers around the table.
+                            The aroma of <span lang="bn" className="font-bengali text-[#D4A84B]">মায়ের রান্না</span> drifting through the house as everyone gathers around the table.
                         </p>
                         <p>For many of us, these little moments are what make a house feel like home.</p>
                         <p>
