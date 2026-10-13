@@ -2,16 +2,17 @@
 //
 // Landlord written approval for the "5Spice Kitchen" name was confirmed by
 // the owners on 2026-10-13, so this location is publicly visible.
-// Catering is open now; dine-in and take-out are coming soon (see `services`).
+// Murphy is the currently operating restaurant (see `services`).
 
 export const murphy = {
     slug: 'murphy',
     displayName: '5Spice Kitchen',
     shortName: 'Murphy',
     type: 'kitchen-only',
-    status: 'coming-soon',
-    // PLACEHOLDER: confirm wording with Branding & Marketing.
-    openingText: 'Catering Available Now · Dine-in & Take-out Coming Soon',
+    status: 'open',
+    // Short badge text, and the longer line used in the location switcher.
+    statusLabel: 'Now Serving',
+    openingText: 'Now Serving',
     cuisineTagline: 'Authentic Halal Bangladeshi Cuisine & South Asian Favorites',
     cuisines: ['Bangladeshi', 'Indian', 'Pakistani'],
     halal: true,
@@ -26,16 +27,10 @@ export const murphy = {
     // Provided by the owners on 2026-10-13 as the Murphy kitchen/catering line.
     phone: '(917) 355-6995',
     email: 'info@5spicemarket.com',
-    // PLACEHOLDER: confirm real hours closer to launch.
-    hours: [
-        { day: 'Monday', hours: 'Hours coming soon' },
-        { day: 'Tuesday', hours: 'Hours coming soon' },
-        { day: 'Wednesday', hours: 'Hours coming soon' },
-        { day: 'Thursday', hours: 'Hours coming soon' },
-        { day: 'Friday', hours: 'Hours coming soon' },
-        { day: 'Saturday', hours: 'Hours coming soon' },
-        { day: 'Sunday', hours: 'Hours coming soon' },
-    ],
+    // PLACEHOLDER: add real hours, e.g. { day: 'Monday', hours: '11:00 AM – 9:00 PM' }.
+    // While empty, the site shows `hoursNote` instead of an hours table.
+    hours: [],
+    hoursNote: 'Please call for current hours.',
     googleMapsUrl: 'https://www.google.com/maps/search/?api=1&query=222%20E%20FM%20544%2C%20Suite%20200%2C%20Murphy%2C%20TX%2075094',
     // PLACEHOLDER: confirm exact coordinates for JSON-LD geo data.
     lat: null,
@@ -53,9 +48,9 @@ export const murphy = {
     // location card and location page; catering 'open' also lists this
     // location on the Catering page.
     services: {
+        dineIn: 'open',
+        takeOut: 'open',
         catering: 'open',
-        dineIn: 'coming-soon',
-        takeOut: 'coming-soon',
     },
     // PLACEHOLDER: add live storefront URLs as each partner integration goes live.
     orderingLinks: {
@@ -64,7 +59,7 @@ export const murphy = {
         doorDash: '',
         instacart: '',
     },
-    description: 'A dedicated 5Spice Kitchen bringing authentic halal Bangladeshi cuisine and South Asian favorites to Murphy, Texas.',
+    description: 'Our Murphy kitchen is now serving authentic halal Bangladeshi cuisine and South Asian favorites, with catering for weddings, family celebrations, and corporate events.',
     // PLACEHOLDER: replace with real Murphy photography once available.
     heroImage: '/brand-logo-wide.png',
 };

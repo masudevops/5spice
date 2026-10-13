@@ -3,7 +3,9 @@ import { murphy } from './murphy.js';
 
 // Add a new location by creating a file next to this one (copy plano.js or
 // murphy.js as a starting point) and adding it to this array.
-export const LOCATIONS = [plano, murphy];
+// Order matters: the first visible location is the site-wide default (location
+// switcher, Order Online, Kitchen), so the operating location goes first.
+export const LOCATIONS = [murphy, plano];
 
 export const getAllLocations = () => LOCATIONS;
 
@@ -24,6 +26,15 @@ export const anyVisibleLocationHasFlag = (flagKey) =>
 // the JSON-LD `hasMenu` field are hidden.
 export const hasPublicMenu = (location) => Boolean(location?.flags.hasKitchen && location.flags.menuPublished);
 
+// Locations currently open to customers (status 'open').
+export const getOpenLocations = () => getVisibleLocations().filter((location) => location.status === 'open');
+
+// Locations announced but not yet open (status 'coming-soon').
+export const getUpcomingLocations = () => getVisibleLocations().filter((location) => location.status === 'coming-soon');
+
 // Locations currently taking catering orders (services.catering === 'open').
 export const getCateringOpenLocations = () =>
     getVisibleLocations().filter((location) => location.services?.catering === 'open');
+
+// Customer-facing name, e.g. "5Spice Kitchen – Murphy".
+export const getLocationLabel = (location) => `${location.displayName} – ${location.shortName}`;
