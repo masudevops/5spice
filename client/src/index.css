@@ -20,6 +20,13 @@
     background-color: var(--color-background);
     color: var(--color-text-primary);
   }
+
+  /* Visible keyboard focus on every link and button, in brand gold. */
+  a:focus-visible,
+  button:focus-visible {
+    outline: 2px solid #d4a84b;
+    outline-offset: 3px;
+  }
 }
 
 @layer utilities {

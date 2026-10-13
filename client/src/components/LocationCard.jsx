@@ -1,17 +1,14 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, MapPin, Navigation } from 'lucide-react';
+import { ArrowRight, MapPin, Navigation, Phone } from 'lucide-react';
 import ServiceStatusList from './ServiceStatusList';
-import { hasPublicMenu } from '../data/locations';
+import { getLocationLabel, hasPublicMenu } from '../data/locations';
+import { toTelHref } from '../utils/phone';
 
 const TYPE_LABELS = {
     'market-and-kitchen': 'Market & Kitchen',
-    'kitchen-only': 'Kitchen Only',
+    'kitchen-only': 'Restaurant & Catering',
 };
 
-const STATUS_LABELS = {
-    'coming-soon': 'Coming Soon',
-    open: 'Open',
-};
 
 const LocationCard = ({ location }) => {
     return (
@@ -20,14 +17,14 @@ const LocationCard = ({ location }) => {
                 <span className="bg-[#1CA433]/15 px-3 py-1 text-xs font-bold uppercase tracking-[0.16em] text-[#1CA433]">
                     {TYPE_LABELS[location.type] ?? location.type}
                 </span>
-                {!location.services && (
-                    <span className="bg-[#D4A84B]/15 px-3 py-1 text-xs font-bold uppercase tracking-[0.16em] text-[#D4A84B]">
-                        {STATUS_LABELS[location.status] ?? location.status}
+                {location.statusLabel && (
+                    <span className={`px-3 py-1 text-xs font-bold uppercase tracking-[0.16em] ${location.status === 'open' ? 'bg-[#1CA433]/15 text-[#1CA433]' : 'bg-[#D4A84B]/15 text-[#D4A84B]'}`}>
+                        {location.statusLabel}
                     </span>
                 )}
             </div>
 
-            <h2 className="mt-5 font-serif text-3xl font-semibold leading-tight text-white">{location.displayName}</h2>
+            <h2 className="mt-5 font-serif text-3xl font-semibold leading-tight text-white">{getLocationLabel(location)}</h2>
             <p className="mt-2 text-sm font-semibold uppercase tracking-[0.14em] text-[#D4A84B]/80">{location.cuisineTagline}</p>
 
             {location.services ? (
@@ -51,6 +48,14 @@ const LocationCard = ({ location }) => {
                     >
                         View Menu <ArrowRight size={15} />
                     </Link>
+                )}
+                {location.status === 'open' && location.phone && (
+                    <a
+                        href={toTelHref(location.phone)}
+                        className="inline-flex items-center gap-2 bg-[#1CA433] px-5 py-3 text-sm font-bold uppercase tracking-[0.16em] text-white transition-colors hover:bg-[#168C2B]"
+                    >
+                        <Phone size={15} aria-hidden="true" /> Call
+                    </a>
                 )}
                 <a
                     href={location.googleMapsUrl}

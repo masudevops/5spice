@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { BadgePercent, HandHeart, Mail, MapPinned, Menu, Search, Utensils, X } from 'lucide-react';
+import { HandHeart, Mail, MapPinned, Menu, Search, ShoppingBag, Utensils, X } from 'lucide-react';
 import clsx from 'clsx';
 import { CONTACT, isComingSoonMode, LOGOS } from '../config/site';
-import { anyVisibleLocationHasFlag } from '../data/locations';
+import { anyVisibleLocationHasFlag, getOpenLocations } from '../data/locations';
 import { useSelectedLocation } from '../hooks/useSelectedLocation';
 import LocationSwitcher from './LocationSwitcher';
 
@@ -44,10 +44,19 @@ const Navbar = () => {
 
   const navLinks = buildNavLinks();
   const bottomLinks = buildBottomLinks();
-  const hasWeeklyDeals = anyVisibleLocationHasFlag('hasWeeklyDeals');
-  const centerAction = hasWeeklyDeals
-    ? { to: '/sales', label: 'Weekly Deals', icon: BadgePercent }
+  // "Order" always points at the operating location so visitors don't land
+  // on the ordering page for a location that hasn't opened yet.
+  const orderLocation = getOpenLocations()[0];
+  const orderLabel = orderLocation ? `Order from ${orderLocation.shortName}` : 'Order Online';
+  const selectOrderLocation = () => {
+    if (orderLocation) selectLocation(orderLocation.slug);
+  };
+  const centerAction = orderLocation
+    ? { to: '/pickup', label: orderLabel, icon: ShoppingBag, onClick: selectOrderLocation }
     : { to: '/locations', label: 'Locations', icon: MapPinned };
+  const statusLine = visibleLocations
+    .map((loc) => (loc.status === 'open' ? `Now serving in ${loc.shortName}` : `${loc.shortName} ${loc.flags.hasMarket ? 'market' : 'kitchen'}: ${loc.openingText}`))
+    .join(' · ');
   const midpoint = Math.ceil(bottomLinks.length / 2);
 
   return (
@@ -59,7 +68,7 @@ const Navbar = () => {
           ) : (
             <span className="uppercase tracking-[0.28em] text-[#D4A84B]">{CONTACT.city}</span>
           )}
-          <span>Premium Halal Grocery · Fresh Fish · Fresh Restaurant</span>
+          <span>{statusLine}</span>
         </div>
       </div>
 
@@ -72,7 +81,7 @@ const Navbar = () => {
         )}
       >
         <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-3 lg:px-8">
-          <Link to="/" className="flex items-center" aria-label="5Spice Market & Kitchen home">
+          <Link to="/" className="flex shrink-0 items-center" aria-label="5Spice Market & Kitchen home">
             <img
               src={LOGOS.wide}
               alt="5Spice Market & Kitchen"
@@ -80,7 +89,7 @@ const Navbar = () => {
             />
           </Link>
 
-          <nav className="hidden items-center gap-7 lg:flex" aria-label="Main navigation">
+          <nav className="hidden items-center gap-5 lg:flex xl:gap-7" aria-label="Main navigation">
             {navLinks.map((link) => {
               const isActive = location.pathname === link.path;
               return (
@@ -88,7 +97,7 @@ const Navbar = () => {
                   key={link.name}
                   to={link.path}
                   className={clsx(
-                    'relative py-2 text-sm font-medium tracking-[0.16em] transition-colors',
+                    'relative whitespace-nowrap py-2 text-sm font-medium tracking-[0.08em] transition-colors xl:tracking-[0.16em]',
                     isActive ? 'text-[#D4A84B]' : 'text-[#F0EAD6]/74 hover:text-white'
                   )}
                 >
@@ -107,9 +116,10 @@ const Navbar = () => {
           <div className="hidden items-center gap-3 md:flex">
             <Link
               to="/pickup"
-              className="bg-[#1CA433] px-5 py-2.5 text-sm font-semibold uppercase tracking-[0.16em] text-white transition-colors hover:bg-[#168C2B]"
+              onClick={selectOrderLocation}
+              className="whitespace-nowrap bg-[#1CA433] px-4 py-2.5 text-sm font-semibold uppercase tracking-[0.1em] text-white transition-colors hover:bg-[#168C2B] xl:px-5 xl:tracking-[0.16em]"
             >
-              Order Online
+              {orderLabel}
             </Link>
           </div>
 
@@ -148,8 +158,8 @@ const Navbar = () => {
                 {link.name}
               </Link>
             ))}
-            <Link to="/pickup" onClick={() => setMobileMenuOpen(false)} className="mt-3 bg-[#1CA433] px-5 py-4 font-bold uppercase tracking-[0.18em] text-white">
-              Order Online
+            <Link to="/pickup" onClick={() => { selectOrderLocation(); setMobileMenuOpen(false); }} className="mt-3 bg-[#1CA433] px-5 py-4 font-bold uppercase tracking-[0.18em] text-white">
+              {orderLabel}
             </Link>
           </nav>
         </div>
@@ -167,7 +177,7 @@ const Navbar = () => {
               </Link>
             );
           })}
-          <Link to={centerAction.to} aria-label={centerAction.label} className="mx-auto -mt-7 flex h-14 w-14 items-center justify-center rounded-full border-4 border-[#0E0E0E] bg-[#1CA433] text-white shadow-lg">
+          <Link to={centerAction.to} onClick={centerAction.onClick} aria-label={centerAction.label} className="mx-auto -mt-7 flex h-14 w-14 items-center justify-center rounded-full border-4 border-[#0E0E0E] bg-[#1CA433] text-white shadow-lg">
             <centerAction.icon size={24} />
           </Link>
           {bottomLinks.slice(midpoint).map((link) => {

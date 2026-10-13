@@ -1,16 +1,19 @@
 import { Link } from 'react-router-dom';
-import { Facebook, Globe2, Instagram, Mail, MapPin } from 'lucide-react';
-import { LOGOS, SOCIAL_LINKS } from '../config/site';
-import { getVisibleLocations } from '../data/locations';
+import { Facebook, HandHeart, Instagram, Mail, MapPin, Phone } from 'lucide-react';
+import { CATERING_EMAIL, LOGOS, SOCIAL_LINKS } from '../config/site';
+import { anyVisibleLocationHasFlag, getLocationLabel, getVisibleLocations } from '../data/locations';
+import { toTelHref } from '../utils/phone';
 
-const linkGroups = [
+// Labels match the main navigation so pages are named the same everywhere.
+const buildLinkGroups = () => [
     {
         title: 'Explore',
         links: [
             ['Home', '/'],
-            ['Market', '/market'],
+            ...(anyVisibleLocationHasFlag('hasMarket') ? [['Market', '/market']] : []),
             ['Kitchen', '/kitchen'],
-            ['Weekly Specials', '/sales'],
+            ['Locations', '/locations'],
+            ...(anyVisibleLocationHasFlag('hasWeeklyDeals') ? [['Weekly Deals', '/sales']] : []),
         ],
     },
     {
@@ -18,7 +21,7 @@ const linkGroups = [
         links: [
             ['Catering', '/catering'],
             ['Order Online', '/pickup'],
-            ['Our Story', '/about'],
+            ['About', '/about'],
             ['Contact', '/contact'],
         ],
     },
@@ -38,7 +41,7 @@ const Footer = () => {
                             className="mb-6 h-16 w-auto object-contain"
                         />
                         <p className="max-w-sm text-sm leading-7 text-white/62">
-                            Five spices. One home. Premium halal groceries, fresh restaurant meals, and community favorites for Plano and the Greater DFW area.
+                            Five spices. One home. Authentic halal Bangladeshi cuisine in Murphy, and a premium halal market and restaurant coming to Plano.
                         </p>
                         <div className="mt-6 flex items-center gap-3">
                             <a href={SOCIAL_LINKS.facebook} target="_blank" rel="noreferrer" aria-label="5Spice Market on Facebook" className="flex h-11 w-11 items-center justify-center border border-[#B88A3D]/30 text-white/75 transition-colors hover:border-[#D4A84B] hover:text-[#D4A84B]">
@@ -51,7 +54,7 @@ const Footer = () => {
                         </div>
                     </div>
 
-                    {linkGroups.map((group) => (
+                    {buildLinkGroups().map((group) => (
                         <div key={group.title}>
                             <h2 className="mb-5 font-serif text-xl font-semibold text-[#D4A84B]">{group.title}</h2>
                             <ul className="space-y-3 text-sm text-white/58">
@@ -70,21 +73,32 @@ const Footer = () => {
                             {visibleLocations.map((loc) => (
                                 <li key={loc.slug}>
                                     <Link to={`/locations/${loc.slug}`} className="font-semibold text-white/85 transition-colors hover:text-white">
-                                        {loc.displayName}
+                                        {getLocationLabel(loc)}
                                     </Link>
-                                    <a href={loc.googleMapsUrl} target="_blank" rel="noreferrer" className="mt-1 flex gap-3 transition-colors hover:text-white">
-                                        <MapPin size={18} className="mt-0.5 shrink-0 text-[#D4A84B]" />
+                                    {loc.statusLabel && (
+                                        <span className={`mt-1 block text-xs font-bold uppercase tracking-[0.14em] ${loc.status === 'open' ? 'text-[#1CA433]' : 'text-[#D4A84B]'}`}>
+                                            {loc.status === 'open' ? loc.statusLabel : loc.openingText}
+                                        </span>
+                                    )}
+                                    <a href={loc.googleMapsUrl} target="_blank" rel="noreferrer" className="mt-2 flex gap-3 transition-colors hover:text-white">
+                                        <MapPin size={18} className="mt-0.5 shrink-0 text-[#D4A84B]" aria-hidden="true" />
                                         {loc.address.full}
                                     </a>
+                                    {loc.phone && (
+                                        <a href={toTelHref(loc.phone)} className="mt-2 flex gap-3 transition-colors hover:text-white">
+                                            <Phone size={18} className="mt-0.5 shrink-0 text-[#D4A84B]" aria-hidden="true" />
+                                            {loc.phone}
+                                        </a>
+                                    )}
                                 </li>
                             ))}
                             <li className="flex gap-3">
-                                <Mail size={18} className="mt-0.5 shrink-0 text-[#D4A84B]" />
+                                <Mail size={18} className="mt-0.5 shrink-0 text-[#D4A84B]" aria-hidden="true" />
                                 <a href={`mailto:${SOCIAL_LINKS.email}`} className="transition-colors hover:text-white">{SOCIAL_LINKS.email}</a>
                             </li>
                             <li className="flex gap-3">
-                                <Globe2 size={18} className="mt-0.5 shrink-0 text-[#D4A84B]" />
-                                <a href="https://5spicemarket.com" target="_blank" rel="noreferrer" className="transition-colors hover:text-white">5spicemarket.com</a>
+                                <HandHeart size={18} className="mt-0.5 shrink-0 text-[#D4A84B]" aria-hidden="true" />
+                                <a href={`mailto:${CATERING_EMAIL}`} className="transition-colors hover:text-white">{CATERING_EMAIL}</a>
                             </li>
                         </ul>
                     </div>

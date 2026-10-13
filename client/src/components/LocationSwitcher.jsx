@@ -12,7 +12,7 @@ const MotionUl = motion.ul;
 const typeLabel = (location) => {
     if (location.flags.hasMarket && location.flags.hasKitchen) return 'Market & Kitchen';
     if (location.flags.hasMarket) return 'Market Only';
-    return 'Kitchen Only';
+    return 'Restaurant & Catering';
 };
 
 // Branded replacement for a native <select> — a button that opens a small
