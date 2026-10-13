@@ -1,6 +1,6 @@
 import React from 'react';
 import { Clock, Globe2, Mail, MapPin, MessageCircle } from 'lucide-react';
-import { CONTACT, HOURS, SOCIAL_LINKS } from '../config/site';
+import { CATERING_EMAIL, CONTACT, HOURS, SOCIAL_LINKS } from '../config/site';
 
 const Contact = () => {
     return (
@@ -51,6 +51,10 @@ const Contact = () => {
                             <a href={`mailto:${CONTACT.email}`} className="flex items-center gap-3 border border-[#B88A3D]/30 px-5 py-4 text-white/78 transition-colors hover:border-[#D4A84B] hover:text-white">
                                 <Mail size={19} className="text-[#D4A84B]" />
                                 {CONTACT.email}
+                            </a>
+                            <a href={`mailto:${CATERING_EMAIL}`} className="flex items-center gap-3 border border-[#B88A3D]/30 px-5 py-4 text-white/78 transition-colors hover:border-[#D4A84B] hover:text-white">
+                                <Mail size={19} className="text-[#D4A84B]" />
+                                <span>Catering: {CATERING_EMAIL}</span>
                             </a>
                             <a href="https://5spicemarket.com" target="_blank" rel="noreferrer" className="flex items-center gap-3 border border-[#B88A3D]/30 px-5 py-4 text-white/78 transition-colors hover:border-[#D4A84B] hover:text-white">
                                 <Globe2 size={19} className="text-[#D4A84B]" />

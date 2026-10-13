@@ -1,6 +1,9 @@
 import React from 'react';
-import { BriefcaseBusiness, CheckCircle, Gift, Mail } from 'lucide-react';
-import { CONTACT } from '../config/site';
+import { Link } from 'react-router-dom';
+import { BriefcaseBusiness, CheckCircle, Gift, Mail, MapPin } from 'lucide-react';
+import { CATERING_EMAIL } from '../config/site';
+import { getCateringOpenLocations } from '../data/locations';
+import { useDocumentHead } from '../hooks/useDocumentHead';
 
 const cateringHighlights = [
     '100% zabiha halal meat options',
@@ -17,6 +20,13 @@ const officeHighlights = [
 ];
 
 const Catering = () => {
+    const cateringLocations = getCateringOpenLocations();
+
+    useDocumentHead({
+        title: 'Halal Bangladeshi Catering | 5Spice Kitchen',
+        description: 'Authentic halal Bangladeshi and South Asian catering from 5Spice for weddings, office meals, community events, and family gatherings. Request a quote today.',
+    });
+
     return (
         <div className="min-h-screen bg-[#0E0E0E] text-[#F0EAD6]">
             <section className="relative overflow-hidden px-5 py-16 sm:px-8 lg:px-12">
@@ -27,6 +37,20 @@ const Catering = () => {
                     <p className="mt-5 max-w-2xl text-lg leading-8 text-white/68">
                         Weddings, office meals, community events, family gatherings, and special occasions with authentic flavor and careful planning.
                     </p>
+                    {cateringLocations.length > 0 && (
+                        <div className="mt-7 flex flex-wrap gap-3">
+                            {cateringLocations.map((location) => (
+                                <Link
+                                    key={location.slug}
+                                    to={`/locations/${location.slug}`}
+                                    className="inline-flex items-center gap-2 border border-[#1CA433]/40 bg-[#1CA433]/10 px-4 py-2 text-sm font-semibold text-white/85 transition-colors hover:border-[#1CA433] hover:text-white"
+                                >
+                                    <MapPin size={16} className="text-[#1CA433]" aria-hidden="true" />
+                                    Now booking from {location.displayName} – {location.shortName}
+                                </Link>
+                            ))}
+                        </div>
+                    )}
                 </div>
             </section>
 
@@ -49,9 +73,12 @@ const Catering = () => {
                         <p className="mt-4 leading-7 text-white/62">
                             Send your event details and the 5Spice team will help plan menu options, portions, timing, and next steps.
                         </p>
-                        <a href={`mailto:${CONTACT.email}?subject=5%20Spice%20Catering%20Request`} className="mt-7 inline-flex items-center gap-3 bg-[#1CA433] px-6 py-4 font-bold uppercase tracking-[0.16em] text-white transition-colors hover:bg-[#168C2B]">
+                        <a href={`mailto:${CATERING_EMAIL}?subject=5Spice%20Catering%20Request`} className="mt-7 inline-flex items-center gap-3 bg-[#1CA433] px-6 py-4 font-bold uppercase tracking-[0.16em] text-white transition-colors hover:bg-[#168C2B]">
                             <Mail size={19} /> Email Catering Request
                         </a>
+                        <p className="mt-4 text-sm text-white/55">
+                            Or write to <a href={`mailto:${CATERING_EMAIL}`} className="text-[#D4A84B] underline decoration-[#B88A3D]/40 underline-offset-4 hover:text-white">{CATERING_EMAIL}</a>
+                        </p>
                     </div>
                 </div>
 

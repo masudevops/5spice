@@ -1,10 +1,8 @@
 // 5Spice Kitchen — Murphy
 //
-// IMPORTANT: status is "coming-soon" right now ONLY for local review purposes.
-// Per CLAUDE.md, this location must stay "hidden" in any real/production
-// deployment until the owners confirm written landlord approval for the name
-// change. See the "Before deploying to production" checklist in
-// /src/data/README.md — do not skip it.
+// Landlord written approval for the "5Spice Kitchen" name was confirmed by
+// the owners on 2026-10-13, so this location is publicly visible.
+// Catering is open now; dine-in and take-out are coming soon (see `services`).
 
 export const murphy = {
     slug: 'murphy',
@@ -12,8 +10,8 @@ export const murphy = {
     shortName: 'Murphy',
     type: 'kitchen-only',
     status: 'coming-soon',
-    // PLACEHOLDER: confirm real opening timeframe.
-    openingText: 'Opening Soon',
+    // PLACEHOLDER: confirm wording with Branding & Marketing.
+    openingText: 'Catering Available Now · Dine-in & Take-out Coming Soon',
     cuisineTagline: 'Authentic Halal Bangladeshi Cuisine & South Asian Favorites',
     cuisines: ['Bangladeshi', 'Indian', 'Pakistani'],
     halal: true,
@@ -48,6 +46,16 @@ export const murphy = {
         hasWeeklyDeals: false,
         hasCatering: true,
         hasPickup: true,
+        // Turn on once the Murphy menu is final.
+        menuPublished: false,
+    },
+    // Per-service status: 'open' or 'coming-soon'. Shown as badges on the
+    // location card and location page; catering 'open' also lists this
+    // location on the Catering page.
+    services: {
+        catering: 'open',
+        dineIn: 'coming-soon',
+        takeOut: 'coming-soon',
     },
     // PLACEHOLDER: add live storefront URLs as each partner integration goes live.
     orderingLinks: {

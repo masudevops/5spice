@@ -32,6 +32,26 @@ file, save, and the site picks it up on the next build/dev reload.
   automatically for any item without a price.
 - `halal` is stated once per menu (the `halalStatement` field), not per item.
 
+## Publish or hide a menu
+
+Menus are hidden until they're final. To publish a location's menu, open its
+file in `locations/` and set `flags.menuPublished` to `true`. That turns on
+the "View Menu" buttons, the `/locations/<slug>/menu` page, the sitemap entry,
+and the menu link in search-engine data. Set it back to `false` to hide it.
+
+## Catering, dine-in, and take-out status
+
+A location can list each service separately in its `services` block, e.g.
+
+```js
+services: { catering: 'open', dineIn: 'coming-soon', takeOut: 'coming-soon' },
+```
+
+Use `'open'` or `'coming-soon'`. Each service shows as a badge on the
+location card and location page. Any location with `catering: 'open'` is
+listed as "Now booking" on the Catering page. Catering requests go to
+`catering@5spicemarket.com` (set in `src/config/site.js` as `CATERING_EMAIL`).
+
 ## Update weekly deals
 
 Edit `client/public/weekly-deals.json` directly — it's fetched by the
@@ -51,10 +71,8 @@ Open that location's file in `locations/` and change `status` from
 
 Run through this before any deploy that could make these locations public:
 
-1. **Confirm landlord written approval for the 5Spice Kitchen Murphy name.**
-   If it hasn't been received yet, set Murphy's `status` to `"hidden"` in
-   `locations/murphy.js`. This is a hard rule from CLAUDE.md — do not deploy
-   Murphy as visible without it.
+1. ~~Confirm landlord written approval for the 5Spice Kitchen Murphy name.~~
+   Confirmed by the owners on 2026-10-13; Murphy is now visible.
 2. Fill in real hours, phone numbers, and lat/lng coordinates for every
    visible location.
 3. Confirm live ordering platform URLs (Toast, Uber Eats, DoorDash,

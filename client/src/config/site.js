@@ -18,6 +18,9 @@ export const SOCIAL_LINKS = {
     email: 'info@5spicemarket.com',
 };
 
+// Dedicated inbox for catering requests (Catering page, location pages).
+export const CATERING_EMAIL = 'catering@5spicemarket.com';
+
 // CONTACT and HOURS describe the primary/default visible location, derived
 // from /src/data/locations so this file stays a single source of truth.
 // They keep their original shape so existing consumers (Footer, Navbar,

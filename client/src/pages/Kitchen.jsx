@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, BriefcaseBusiness, FlameKindling, Soup, Utensils } from 'lucide-react';
 import { MENU_HIGHLIGHTS, QUICK_MEAL_ITEMS, SIGNATURE_ADD_ONS } from '../config/site';
 import { useSelectedLocation } from '../hooks/useSelectedLocation';
+import { hasPublicMenu } from '../data/locations';
 
 const icons = [Soup, FlameKindling, Utensils];
 
@@ -44,7 +45,7 @@ const Kitchen = () => {
                             Pickup and delivery options will be available through Toast, Uber Eats, and DoorDash as service begins.
                         </p>
                         <div className="mt-7 flex flex-wrap gap-3">
-                            {selectedLocation?.flags.hasKitchen && (
+                            {hasPublicMenu(selectedLocation) && (
                                 <Link to={`/locations/${selectedLocation.slug}/menu`} className="inline-flex items-center gap-2 border border-[#B88A3D]/45 px-6 py-4 font-bold uppercase tracking-[0.16em] text-[#D4A84B] transition-colors hover:border-[#D4A84B] hover:text-white">
                                     View Full Menu <ArrowRight size={17} />
                                 </Link>

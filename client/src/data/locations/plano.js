@@ -43,6 +43,8 @@ export const plano = {
         hasWeeklyDeals: true,
         hasCatering: true,
         hasPickup: true,
+        // Turn on once the Plano menu is final.
+        menuPublished: false,
     },
     // PLACEHOLDER: add live storefront URLs as each partner integration goes live.
     orderingLinks: {

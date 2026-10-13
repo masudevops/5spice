@@ -113,7 +113,7 @@ const Pickup = () => {
                         <p className="mt-4 max-w-3xl leading-7 text-white/62">
                             For office meals, catering, or special requests, email the 5Spice team directly and we will help route you to the right option.
                         </p>
-                        <a href={`mailto:${CONTACT.email}?subject=5%20Spice%20Order%20Question`} className="mt-7 inline-flex items-center gap-3 bg-[#1CA433] px-6 py-4 font-bold uppercase tracking-[0.16em] text-white transition-colors hover:bg-[#168C2B]">
+                        <a href={`mailto:${CONTACT.email}?subject=5Spice%20Order%20Question`} className="mt-7 inline-flex items-center gap-3 bg-[#1CA433] px-6 py-4 font-bold uppercase tracking-[0.16em] text-white transition-colors hover:bg-[#168C2B]">
                             <Mail size={18} /> Email Us
                         </a>
                     </div>

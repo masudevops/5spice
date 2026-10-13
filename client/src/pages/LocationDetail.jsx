@@ -12,8 +12,9 @@ import {
 } from 'lucide-react';
 import NotFound from './NotFound';
 import { useDocumentHead } from '../hooks/useDocumentHead';
-import { getVisibleLocationBySlug } from '../data/locations';
-import { ORDER_PLATFORMS } from '../config/site';
+import ServiceStatusList from '../components/ServiceStatusList';
+import { getVisibleLocationBySlug, hasPublicMenu } from '../data/locations';
+import { CATERING_EMAIL, ORDER_PLATFORMS } from '../config/site';
 
 const ORDERING_KEY_TO_PLATFORM_NAME = {
     toast: 'Toast',
@@ -52,7 +53,7 @@ const buildJsonLd = (location) => {
         address,
         ...geo,
         url: `https://5spicemarket.com/locations/${location.slug}`,
-        hasMenu: `https://5spicemarket.com/locations/${location.slug}/menu`,
+        ...(hasPublicMenu(location) ? { hasMenu: `https://5spicemarket.com/locations/${location.slug}/menu` } : {}),
         ...(openingHoursSpecification.length ? { openingHoursSpecification } : {}),
     };
 
@@ -112,13 +113,17 @@ const LocationDetail = () => {
                 <div className="relative mx-auto max-w-7xl">
                     <p className="text-xs font-semibold uppercase tracking-[0.32em] text-[#D4A84B]">{location.cuisineTagline}</p>
                     <h1 className="mt-5 max-w-4xl font-serif text-5xl font-bold leading-tight text-white md:text-6xl">{location.displayName}</h1>
-                    {location.status === 'coming-soon' && location.openingText && (
-                        <p className="mt-4 text-lg font-semibold text-[#D4A84B]">{location.openingText}</p>
+                    {location.services ? (
+                        <ServiceStatusList services={location.services} className="mt-5" />
+                    ) : (
+                        location.status === 'coming-soon' && location.openingText && (
+                            <p className="mt-4 text-lg font-semibold text-[#D4A84B]">{location.openingText}</p>
+                        )
                     )}
                     <p className="mt-5 max-w-2xl text-lg leading-8 text-white/68">{location.description}</p>
 
                     <div className="mt-8 flex flex-wrap gap-3">
-                        {location.flags.hasKitchen && (
+                        {hasPublicMenu(location) && (
                             <Link to={`/locations/${location.slug}/menu`} className="inline-flex items-center gap-2 bg-[#1CA433] px-6 py-4 font-bold uppercase tracking-[0.16em] text-white transition-colors hover:bg-[#168C2B]">
                                 View Menu <ArrowRight size={17} />
                             </Link>
@@ -165,6 +170,12 @@ const LocationDetail = () => {
                                 <Mail size={18} className="text-[#D4A84B]" />
                                 {location.email}
                             </a>
+                            {location.services?.catering === 'open' && (
+                                <a href={`mailto:${CATERING_EMAIL}?subject=5Spice%20Catering%20Request`} className="flex items-center gap-3 border border-[#B88A3D]/30 px-5 py-3 text-white/78 transition-colors hover:border-[#D4A84B] hover:text-white">
+                                    <HandHeart size={18} className="text-[#D4A84B]" />
+                                    <span>Catering: {CATERING_EMAIL}</span>
+                                </a>
+                            )}
                         </div>
                     </article>
                 </div>

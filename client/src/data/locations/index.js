@@ -17,3 +17,13 @@ export const getDefaultLocation = () => getVisibleLocations()[0] ?? null;
 
 export const anyVisibleLocationHasFlag = (flagKey) =>
     getVisibleLocations().some((location) => Boolean(location.flags[flagKey]));
+
+// A location's full menu page is public only when it has a kitchen AND the
+// owners have turned on `flags.menuPublished`. While it's false, every
+// "View Menu" link, the /locations/<slug>/menu page, the sitemap entry, and
+// the JSON-LD `hasMenu` field are hidden.
+export const hasPublicMenu = (location) => Boolean(location?.flags.hasKitchen && location.flags.menuPublished);
+
+// Locations currently taking catering orders (services.catering === 'open').
+export const getCateringOpenLocations = () =>
+    getVisibleLocations().filter((location) => location.services?.catering === 'open');
