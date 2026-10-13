@@ -13,7 +13,7 @@ This is the public website for **5Spice**, live at https://5spicemarket.com.
 | Location | Type | Address | Status |
 |---|---|---|---|
 | 5Spice Market & Kitchen – Plano | Halal grocery + restaurant | 245 Shiloh Rd, Plano, TX 75074 | Pre-launch, "Opening Early 2027" |
-| 5Spice Kitchen Murphy | Restaurant only | 222 E FM 544, Suite 200, Murphy, TX 75094 | Not yet public (see rule below) |
+| 5Spice Kitchen Murphy | Restaurant only | 222 E FM 544, Suite 200, Murphy, TX 75094 | Public. Catering live; dine-in & take-out coming soon |
 
 More locations will be added over time, so the site must stay **data-driven**: adding a location means adding data, not writing new pages.
 
@@ -22,7 +22,11 @@ The site is in a **pre-launch, minimal phase**. Its job right now is to:
 - highlight the menu, products, and grocery departments
 - send visitors to third-party ordering platforms and social channels
 
-**Murphy rule:** 5Spice Kitchen Murphy must stay `hidden` (not publicly visible, not in nav, sitemap, or structured data) until the owners confirm that written landlord approval for the name change has been received. Build for it, but never flip it live on your own.
+**Murphy rule (resolved 2026-10-13):** the owners confirmed written landlord approval for the "5Spice Kitchen" name, so Murphy is publicly visible. For any future location, keep it `hidden` until the owners say it can be announced, and never flip it live on your own.
+
+**Menus:** menus are not final. Every location has `flags.menuPublished: false`, which hides all menu pages and "View Menu" links. Only turn it on when the owners say a menu is final.
+
+**Catering email:** catering requests go to catering@5spicemarket.com.
 
 ---
 
@@ -65,7 +69,7 @@ The site is in a **pre-launch, minimal phase**. Its job right now is to:
 
 ## 5. Contact & channels
 
-- Email: info@5spicemarket.com
+- Email: info@5spicemarket.com (general), catering@5spicemarket.com (catering)
 - Social: @5SpiceMarket on Facebook and Instagram
 - Google Business Profile is live for Plano.
 - Do not add personal phone numbers or personal emails to the site or repo. Use placeholders until official numbers are provided.
