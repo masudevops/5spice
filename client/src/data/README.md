@@ -59,6 +59,28 @@ Weekly Deals page at runtime, so no rebuild is required in production. Only
 locations with `flags.hasWeeklyDeals: true` show the Weekly Deals nav link
 and page.
 
+Leave `"deals": []` empty while no promotions are running. The page then
+says deals start when the market opens, rather than showing made-up deals.
+When deals are live, add entries like:
+
+```json
+{ "id": "basmati-rice", "title": "Basmati Rice", "category": "Pantry",
+  "description": "10 lb bags this week.", "badge": "This Week" }
+```
+
+## Location status, hours, and order
+
+- `status`: `"open"` (operating now), `"coming-soon"` (announced), or
+  `"hidden"`. Open locations get "Now Serving" treatment, phone/call buttons,
+  and are where "Order from …" buttons point.
+- `statusLabel`: short badge text (e.g. "Now Serving", "Coming Early 2027").
+- `openingText`: longer line, e.g. "Opening Early 2027, In Sha Allah".
+- `hours`: leave `[]` until hours are confirmed; the site shows `hoursNote`
+  instead. Never put estimated hours here — they're published to Google.
+- The **first** location in `locations/index.js` is the site-wide default
+  (location switcher, Kitchen, Order Online). Keep the operating location
+  first.
+
 ## Switch a location from hidden to live
 
 Open that location's file in `locations/` and change `status` from
