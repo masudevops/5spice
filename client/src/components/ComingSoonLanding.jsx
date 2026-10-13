@@ -5,11 +5,17 @@ import {
     Globe2,
     Instagram,
     Mail,
+    MapPin,
+    Navigation,
+    Phone,
     ShoppingBasket,
     Utensils,
     Users,
 } from 'lucide-react';
-import { LOGOS, OFFERINGS, SOCIAL_LINKS } from '../config/site';
+import { CATERING_EMAIL, LOGOS, OFFERINGS, SOCIAL_LINKS } from '../config/site';
+import { getLocationLabel, getOpenLocations } from '../data/locations';
+import ServiceStatusList from './ServiceStatusList';
+import { toTelHref } from '../utils/phone';
 
 const featureIcons = [ShoppingBasket, Utensils, Users];
 
@@ -38,11 +44,16 @@ const spiceDots = [
 
 const focusClass = 'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#D4A84B]';
 
+const cateringMailto = `mailto:${CATERING_EMAIL}?subject=${encodeURIComponent('5Spice Catering Quote Request')}`;
+
 const ComingSoonLanding = () => {
+    // Locations already operating (e.g. Murphy catering). Shown without links
+    // to other pages, since coming-soon mode hides the site navigation.
+    const openLocations = getOpenLocations();
     const instagramHref = SOCIAL_LINKS.instagramUrl || `https://instagram.com/${SOCIAL_LINKS.instagramHandle.replace('@', '')}`;
 
     return (
-        <main className="relative min-h-svh overflow-x-hidden bg-[#0E0E0E] text-[#F0EAD6]">
+        <div className="relative min-h-svh overflow-x-hidden bg-[#0E0E0E] text-[#F0EAD6]">
             <div className="pointer-events-none fixed inset-0 z-0 bg-[radial-gradient(circle_at_50%_0%,rgba(184,138,61,0.14),transparent_34%),linear-gradient(135deg,#0E0E0E_0%,#161616_56%,#0E0E0E_100%)]" />
             <div className="pointer-events-none fixed inset-0 z-0 opacity-[0.055] bg-[radial-gradient(circle_at_1px_1px,rgba(255,255,255,0.75)_1px,transparent_0)] [background-size:22px_22px]" />
 
@@ -110,7 +121,7 @@ const ComingSoonLanding = () => {
                             <div className="mt-8 inline-flex items-center gap-4 border border-[#B88A3D]/45 bg-[#1A1A1A]/70 px-5 py-4 shadow-[0_18px_60px_rgba(0,0,0,0.28)] backdrop-blur-sm">
                                 <CalendarDays className="text-[#D4A84B]" size={24} aria-hidden="true" />
                                 <div className="text-left">
-                                    <p className="text-[0.68rem] uppercase tracking-[0.28em] text-[#B88A3D]">Opening</p>
+                                    <p className="text-[0.68rem] uppercase tracking-[0.28em] text-[#B88A3D]">Plano · Opening</p>
                                     <p className="font-serif text-2xl font-semibold leading-none text-white">Early 2027</p>
                                     <p className="mt-1 text-xs italic tracking-[0.16em] text-[#D4A84B]">In Sha Allah</p>
                                 </div>
@@ -119,6 +130,57 @@ const ComingSoonLanding = () => {
                     </div>
                 </div>
             </section>
+
+            {openLocations.length > 0 && (
+                <section aria-labelledby="now-open-heading" className="relative z-10 px-5 pb-12 sm:px-8 lg:px-12 lg:pb-16">
+                    <div className="mx-auto max-w-4xl animate-fade-in-up">
+                        <h2 id="now-open-heading" className="text-center text-xs font-semibold uppercase tracking-[0.3em] text-[#D4A84B]">
+                            Already serving the community
+                        </h2>
+                        {openLocations.map((location) => (
+                            <article key={location.slug} className="mt-5 border border-[#B88A3D]/40 bg-[#101010]/86 px-6 py-8 text-center shadow-[0_26px_90px_rgba(0,0,0,0.25)] sm:px-10">
+                                <h3 className="font-serif text-3xl font-semibold text-white sm:text-4xl">{getLocationLabel(location)}</h3>
+                                {location.services && (
+                                    <div className="mt-5 flex justify-center">
+                                        <ServiceStatusList services={location.services} className="justify-center" />
+                                    </div>
+                                )}
+                                <p className="mt-5 inline-flex items-start gap-2 text-white/75">
+                                    <MapPin size={18} className="mt-1 shrink-0 text-[#D4A84B]" aria-hidden="true" />
+                                    {location.address.full}
+                                </p>
+                                <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+                                    {location.services?.catering === 'open' && (
+                                        <a href={cateringMailto} className={`inline-flex min-h-12 items-center gap-2 bg-[#1CA433] px-5 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-white transition-colors hover:bg-[#168C2B] ${focusClass}`}>
+                                            <Mail size={18} aria-hidden="true" /> Request Catering
+                                        </a>
+                                    )}
+                                    {location.phone && (
+                                        <a href={toTelHref(location.phone)} className={`inline-flex min-h-12 items-center gap-2 border border-[#B88A3D]/45 px-5 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-white/80 transition-colors hover:border-[#D4A84B] hover:text-[#D4A84B] ${focusClass}`}>
+                                            <Phone size={18} aria-hidden="true" /> {location.phone}
+                                        </a>
+                                    )}
+                                    <a href={location.googleMapsUrl} target="_blank" rel="noreferrer" className={`inline-flex min-h-12 items-center gap-2 border border-[#B88A3D]/45 px-5 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-white/80 transition-colors hover:border-[#D4A84B] hover:text-[#D4A84B] ${focusClass}`}>
+                                        <Navigation size={18} aria-hidden="true" /> Directions
+                                    </a>
+                                </div>
+                                <p className="mt-5 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-sm text-white/55">
+                                    {location.services?.catering === 'open' && (
+                                        <span>
+                                            Catering requests: <a href={`mailto:${CATERING_EMAIL}`} className={`text-[#D4A84B] underline decoration-[#B88A3D]/40 underline-offset-4 hover:text-white ${focusClass}`}>{CATERING_EMAIL}</a>
+                                        </span>
+                                    )}
+                                    {location.socialLinks?.facebook && (
+                                        <a href={location.socialLinks.facebook} target="_blank" rel="noreferrer" className={`inline-flex items-center gap-1.5 text-[#D4A84B] underline decoration-[#B88A3D]/40 underline-offset-4 hover:text-white ${focusClass}`}>
+                                            <Facebook size={15} aria-hidden="true" /> {location.shortName} on Facebook
+                                        </a>
+                                    )}
+                                </p>
+                            </article>
+                        ))}
+                    </div>
+                </section>
+            )}
 
             <section aria-labelledby="coming-soon-offerings" className="relative z-10 px-5 pb-12 sm:px-8 lg:px-12 lg:pb-16">
                 <div className="mx-auto max-w-7xl">
@@ -205,7 +267,7 @@ const ComingSoonLanding = () => {
                     </address>
                 </div>
             </section>
-        </main>
+        </div>
     );
 };
 

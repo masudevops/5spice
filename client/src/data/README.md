@@ -1,5 +1,8 @@
 # 5Spice content data
 
+> Day-to-day how-to (menu, photos, deals, locations, and Claude prompts):
+> see [`docs/MAINTAINER-GUIDE.md`](../../../docs/MAINTAINER-GUIDE.md).
+
 Everything here is plain JavaScript objects — no database, no CMS. Edit a
 file, save, and the site picks it up on the next build/dev reload.
 
@@ -32,12 +35,58 @@ file, save, and the site picks it up on the next build/dev reload.
   automatically for any item without a price.
 - `halal` is stated once per menu (the `halalStatement` field), not per item.
 
+## Publish or hide a menu
+
+Menus are hidden until they're final. To publish a location's menu, open its
+file in `locations/` and set `flags.menuPublished` to `true`. That turns on
+the "View Menu" buttons, the `/locations/<slug>/menu` page, the sitemap entry,
+and the menu link in search-engine data. Set it back to `false` to hide it.
+
+## Catering, dine-in, and take-out status
+
+A location can list each service separately in its `services` block, e.g.
+
+```js
+services: { catering: 'open', dineIn: 'coming-soon', takeOut: 'coming-soon' },
+```
+
+Use `'open'` or `'coming-soon'`. Each service shows as a badge on the
+location card and location page. Any location with `catering: 'open'` is
+listed as "Now booking" on the Catering page. Catering requests go to
+`catering@5spicemarket.com` (set in `src/config/site.js` as `CATERING_EMAIL`).
+
 ## Update weekly deals
 
 Edit `client/public/weekly-deals.json` directly — it's fetched by the
 Weekly Deals page at runtime, so no rebuild is required in production. Only
 locations with `flags.hasWeeklyDeals: true` show the Weekly Deals nav link
 and page.
+
+Leave `"deals": []` empty while no promotions are running. The page then
+says deals start when the market opens, rather than showing made-up deals.
+When deals are live, add entries like:
+
+```json
+{ "id": "basmati-rice", "title": "Basmati Rice", "category": "Pantry",
+  "description": "10 lb bags this week.", "badge": "This Week" }
+```
+
+## Location status, hours, and order
+
+- `status`: `"open"` (operating now, even if only for catering),
+  `"coming-soon"` (announced), or `"hidden"`.
+- `services`: `catering`, `dineIn`, `takeOut`, each `'open'` or
+  `'coming-soon'`. "Order from …" buttons and call-to-order prompts only
+  appear once `dineIn` or `takeOut` is `'open'`; until then the main button
+  offers catering.
+- `socialLinks`: optional location-specific pages, e.g. `facebook`.
+- `statusLabel`: short badge text (e.g. "Catering Available Now", "Coming Early 2027").
+- `openingText`: longer line, e.g. "Opening Early 2027, In Sha Allah".
+- `hours`: leave `[]` until hours are confirmed; the site shows `hoursNote`
+  instead. Never put estimated hours here — they're published to Google.
+- The **first** location in `locations/index.js` is the site-wide default
+  (location switcher, Kitchen, Order Online). Keep the operating location
+  first.
 
 ## Switch a location from hidden to live
 
@@ -51,10 +100,8 @@ Open that location's file in `locations/` and change `status` from
 
 Run through this before any deploy that could make these locations public:
 
-1. **Confirm landlord written approval for the 5Spice Kitchen Murphy name.**
-   If it hasn't been received yet, set Murphy's `status` to `"hidden"` in
-   `locations/murphy.js`. This is a hard rule from CLAUDE.md — do not deploy
-   Murphy as visible without it.
+1. ~~Confirm landlord written approval for the 5Spice Kitchen Murphy name.~~
+   Confirmed by the owners on 2026-10-13; Murphy is now visible.
 2. Fill in real hours, phone numbers, and lat/lng coordinates for every
    visible location.
 3. Confirm live ordering platform URLs (Toast, Uber Eats, DoorDash,

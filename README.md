@@ -4,6 +4,8 @@ A premium, community-focused website for **5 Spice**, a halal market and kitchen
 
 Built with **Node.js**, **React**, **Vite**, and **TailwindCSS**.
 
+> **Updating content?** (menu, menu photos, weekly deals, location details, page copy, and prompts for Claude Code) See [`docs/MAINTAINER-GUIDE.md`](docs/MAINTAINER-GUIDE.md).
+
 ## 🎨 New Brand Identity
 - **Primary Colors**: Charcoal (`#1C1C1C`), warm cream (`#F8F5EF`), gold (`#B88A3D`), green (`#2D6A3F`), and orange (`#D4500A`).
 - **Aesthetic**: Spacious, cream backgrounds, elegant serif typography, and high-quality imagery.

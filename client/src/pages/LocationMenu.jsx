@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom';
 import { ShieldCheck } from 'lucide-react';
 import NotFound from './NotFound';
 import { useDocumentHead } from '../hooks/useDocumentHead';
-import { getVisibleLocationBySlug } from '../data/locations';
+import { getVisibleLocationBySlug, hasPublicMenu } from '../data/locations';
 import { getMenuByLocationSlug } from '../data/menus';
 
 const slugify = (value) => value.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
@@ -11,7 +11,7 @@ const LocationMenu = () => {
     const { slug } = useParams();
 
     const location = getVisibleLocationBySlug(slug);
-    const menu = location ? getMenuByLocationSlug(slug) : null;
+    const menu = hasPublicMenu(location) ? getMenuByLocationSlug(slug) : null;
 
     useDocumentHead(
         location && menu

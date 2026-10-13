@@ -1,30 +1,32 @@
 import React, { useEffect, useState } from 'react';
-import { BadgePercent, Instagram, Sparkles } from 'lucide-react';
+import { BadgePercent, CalendarDays, Facebook, Instagram, Sparkles } from 'lucide-react';
 import { SOCIAL_LINKS } from '../config/site';
+import { getLocationLabel, getVisibleLocations } from '../data/locations';
+import { useDocumentHead } from '../hooks/useDocumentHead';
 
-const fallbackDeals = {
-    updatedLabel: 'Fresh weekly picks',
-    note: 'Check back for rotating grocery highlights, seasonal produce, and family meal offers.',
-    deals: [
-        {
-            id: 'market-highlights',
-            title: 'Market Favorites',
-            category: 'Market',
-            description: 'Fresh produce, halal meat, fish, pantry staples, and seasonal grocery favorites selected for the week.',
-            badge: 'Weekly Pick',
-        },
-    ],
-};
+// Never show made-up deals: if the file is missing or empty, the page shows
+// the "deals start at opening" message instead.
+const emptyDeals = { updatedLabel: '', note: '', deals: [] };
 
 const Sales = () => {
-    const [weeklyDeals, setWeeklyDeals] = useState(fallbackDeals);
+    const [weeklyDeals, setWeeklyDeals] = useState(emptyDeals);
+    const [loaded, setLoaded] = useState(false);
+    const dealLocations = getVisibleLocations().filter((location) => location.flags.hasWeeklyDeals);
+    const upcomingDealLocations = dealLocations.filter((location) => location.status !== 'open');
+    const hasDeals = weeklyDeals.deals?.length > 0;
+
+    useDocumentHead({
+        title: 'Weekly Deals | 5Spice Market & Kitchen – Plano',
+        description: 'Weekly halal grocery deals from 5Spice Market & Kitchen in Plano, TX begin when the market opens in early 2027, In Sha Allah.',
+    });
 
     useEffect(() => {
-        // Update weekly deal content in public/weekly-deals.json when current specials are ready.
+        // Edit public/weekly-deals.json to publish current specials.
         fetch('/weekly-deals.json')
-            .then((res) => res.ok ? res.json() : fallbackDeals)
-            .then((data) => setWeeklyDeals(data))
-            .catch(() => setWeeklyDeals(fallbackDeals));
+            .then((res) => (res.ok ? res.json() : emptyDeals))
+            .then((data) => setWeeklyDeals({ ...emptyDeals, ...data }))
+            .catch(() => setWeeklyDeals(emptyDeals))
+            .finally(() => setLoaded(true));
     }, []);
 
     return (
@@ -36,22 +38,36 @@ const Sales = () => {
                     <p className="text-xs font-semibold uppercase tracking-[0.32em] text-[#D4A84B]">Weekly Deals</p>
                     <h1 className="mt-5 max-w-4xl font-serif text-5xl font-bold leading-tight text-white md:text-6xl">Fresh finds and family favorites every week.</h1>
                     <p className="mt-5 max-w-2xl text-lg leading-8 text-white/68">
-                        Browse rotating grocery highlights, seasonal produce, pantry picks, and family meal features from 5Spice Market & Kitchen.
+                        Weekly grocery deals from {dealLocations.map(getLocationLabel).join(' and ') || '5Spice Market & Kitchen'}.
                     </p>
                 </div>
             </section>
 
             <section className="px-5 pb-20 sm:px-8 lg:px-12">
                 <div className="mx-auto max-w-7xl">
-                    <div className="mb-7 border border-[#B88A3D]/25 bg-[#101010] p-5">
-                        <div className="flex items-start gap-3">
-                            <Sparkles className="mt-1 shrink-0 text-[#D4A84B]" size={22} />
-                            <div>
-                                <p className="font-semibold text-white">{weeklyDeals.updatedLabel}</p>
-                                <p className="mt-1 text-sm leading-6 text-white/58">{weeklyDeals.note}</p>
+                    {loaded && !hasDeals && (
+                        <div className="border border-[#B88A3D]/25 bg-[#141414] p-7 md:p-9">
+                            <CalendarDays className="mb-5 text-[#D4A84B]" size={30} strokeWidth={1.4} aria-hidden="true" />
+                            <h2 className="font-serif text-3xl font-semibold text-white">Weekly deals start when our market opens.</h2>
+                            <p className="mt-4 max-w-3xl leading-7 text-white/62">
+                                {upcomingDealLocations.length > 0
+                                    ? `${upcomingDealLocations.map((location) => `${getLocationLabel(location)}: ${location.openingText}.`).join(' ')} Follow us for opening news and our first weekly specials.`
+                                    : 'There are no deals running right now. Follow us to hear about the next ones.'}
+                            </p>
+                        </div>
+                    )}
+
+                    {hasDeals && (weeklyDeals.updatedLabel || weeklyDeals.note) && (
+                        <div className="mb-7 border border-[#B88A3D]/25 bg-[#101010] p-5">
+                            <div className="flex items-start gap-3">
+                                <Sparkles className="mt-1 shrink-0 text-[#D4A84B]" size={22} aria-hidden="true" />
+                                <div>
+                                    {weeklyDeals.updatedLabel && <p className="font-semibold text-white">{weeklyDeals.updatedLabel}</p>}
+                                    {weeklyDeals.note && <p className="mt-1 text-sm leading-6 text-white/58">{weeklyDeals.note}</p>}
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    )}
 
                     <div className="grid gap-5 md:grid-cols-3">
                         {weeklyDeals.deals.map((deal) => (
@@ -70,12 +86,17 @@ const Sales = () => {
                         <div>
                             <h2 className="font-serif text-3xl font-semibold text-white">Follow for the latest specials.</h2>
                             <p className="mt-3 max-w-2xl text-sm leading-7 text-white/58">
-                                Weekly deals, fresh arrivals, and seasonal favorites may vary by availability and while supplies last.
+                                {hasDeals ? 'Deals vary by availability and while supplies last.' : 'Opening news and first deals will be shared on Facebook and Instagram.'}
                             </p>
                         </div>
-                        <a href={SOCIAL_LINKS.instagramUrl} target="_blank" rel="noreferrer" className="mt-6 inline-flex items-center gap-3 border border-[#B88A3D]/35 px-5 py-3 text-sm font-bold uppercase tracking-[0.16em] text-[#D4A84B] transition-colors hover:border-[#D4A84B] hover:text-white md:mt-0">
-                            <Instagram size={18} /> Instagram
-                        </a>
+                        <div className="mt-6 flex flex-wrap gap-3 md:mt-0 md:shrink-0">
+                            <a href={SOCIAL_LINKS.facebook} target="_blank" rel="noreferrer" aria-label="5Spice Market on Facebook" className="inline-flex items-center gap-3 border border-[#B88A3D]/35 px-5 py-3 text-sm font-bold uppercase tracking-[0.16em] text-[#D4A84B] transition-colors hover:border-[#D4A84B] hover:text-white">
+                                <Facebook size={18} aria-hidden="true" /> Facebook
+                            </a>
+                            <a href={SOCIAL_LINKS.instagramUrl} target="_blank" rel="noreferrer" aria-label={`${SOCIAL_LINKS.instagramHandle} on Instagram`} className="inline-flex items-center gap-3 border border-[#B88A3D]/35 px-5 py-3 text-sm font-bold uppercase tracking-[0.16em] text-[#D4A84B] transition-colors hover:border-[#D4A84B] hover:text-white">
+                                <Instagram size={18} aria-hidden="true" /> {SOCIAL_LINKS.instagramHandle}
+                            </a>
+                        </div>
                     </div>
                 </div>
             </section>

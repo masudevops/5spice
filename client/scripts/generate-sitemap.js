@@ -4,7 +4,7 @@
 import { writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
-import { getVisibleLocations, anyVisibleLocationHasFlag } from '../src/data/locations/index.js';
+import { getVisibleLocations, anyVisibleLocationHasFlag, hasPublicMenu } from '../src/data/locations/index.js';
 
 const SITE_URL = 'https://5spicemarket.com';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -24,7 +24,7 @@ const staticRoutes = [
 
 const locationRoutes = getVisibleLocations().flatMap((location) => {
     const routes = [`/locations/${location.slug}`];
-    if (location.flags.hasKitchen) routes.push(`/locations/${location.slug}/menu`);
+    if (hasPublicMenu(location)) routes.push(`/locations/${location.slug}/menu`);
     return routes;
 });
 

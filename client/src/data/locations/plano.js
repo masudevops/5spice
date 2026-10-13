@@ -8,6 +8,8 @@ export const plano = {
     shortName: 'Plano',
     type: 'market-and-kitchen',
     status: 'coming-soon',
+    // Short badge text, and the longer line used across the site.
+    statusLabel: 'Coming Early 2027',
     openingText: 'Opening Early 2027, In Sha Allah',
     cuisineTagline: 'Authentic Halal Bangladeshi Cuisine & South Asian Favorites',
     cuisines: ['Bangladeshi', 'Indian', 'Pakistani'],
@@ -23,16 +25,11 @@ export const plano = {
     // PLACEHOLDER: confirm official Plano phone number before launch.
     phone: '',
     email: 'info@5spicemarket.com',
-    // PLACEHOLDER: confirm real opening-day hours closer to launch.
-    hours: [
-        { day: 'Monday', hours: '9:00 AM – 10:00 PM' },
-        { day: 'Tuesday', hours: '9:00 AM – 10:00 PM' },
-        { day: 'Wednesday', hours: '9:00 AM – 10:00 PM' },
-        { day: 'Thursday', hours: '9:00 AM – 10:00 PM' },
-        { day: 'Friday', hours: '9:00 AM – 11:00 PM' },
-        { day: 'Saturday', hours: '9:00 AM – 11:00 PM' },
-        { day: 'Sunday', hours: '9:00 AM – 10:00 PM' },
-    ],
+    // PLACEHOLDER: add confirmed opening-day hours closer to launch, e.g.
+    // { day: 'Monday', hours: '9:00 AM – 10:00 PM' }. While empty, the site
+    // shows `hoursNote` instead of an hours table.
+    hours: [],
+    hoursNote: 'Hours will be announced closer to opening.',
     googleMapsUrl: 'https://maps.app.goo.gl/3gQk43jHohFboJWV9',
     // PLACEHOLDER: confirm exact coordinates for JSON-LD geo data.
     lat: null,
@@ -43,6 +40,8 @@ export const plano = {
         hasWeeklyDeals: true,
         hasCatering: true,
         hasPickup: true,
+        // Turn on once the Plano menu is final.
+        menuPublished: false,
     },
     // PLACEHOLDER: add live storefront URLs as each partner integration goes live.
     orderingLinks: {
@@ -51,7 +50,7 @@ export const plano = {
         doorDash: '',
         instacart: '',
     },
-    description: 'Our flagship halal grocery and restaurant, bringing premium zabiha halal meat, fresh fish, farm-fresh produce, and authentic Bangladeshi cuisine to Plano, Texas.',
+    description: 'Our upcoming flagship halal grocery and restaurant will bring Zabiha halal meat, fresh seafood, farm-fresh produce, specialty groceries, and authentic South Asian cuisine to Plano, Texas.',
     // PLACEHOLDER: replace with real Plano photography once available.
     heroImage: '/brand-logo-wide.png',
 };
