@@ -2,7 +2,8 @@
 //
 // Landlord written approval for the "5Spice Kitchen" name was confirmed by
 // the owners on 2026-10-13, so this location is publicly visible.
-// Murphy is the currently operating restaurant (see `services`).
+// Murphy is operating for catering now; dine-in and take-out are coming soon
+// (see `services`).
 
 export const murphy = {
     slug: 'murphy',
@@ -11,8 +12,8 @@ export const murphy = {
     type: 'kitchen-only',
     status: 'open',
     // Short badge text, and the longer line used in the location switcher.
-    statusLabel: 'Now Serving',
-    openingText: 'Now Serving',
+    statusLabel: 'Catering Available Now',
+    openingText: 'Catering Available Now · Dine-in & Take-out Coming Soon',
     cuisineTagline: 'Authentic Halal Bangladeshi Cuisine & South Asian Favorites',
     cuisines: ['Bangladeshi', 'Indian', 'Pakistani'],
     halal: true,
@@ -30,7 +31,7 @@ export const murphy = {
     // PLACEHOLDER: add real hours, e.g. { day: 'Monday', hours: '11:00 AM – 9:00 PM' }.
     // While empty, the site shows `hoursNote` instead of an hours table.
     hours: [],
-    hoursNote: 'Please call for current hours.',
+    hoursNote: 'Restaurant hours will be announced when dine-in opens. For catering, call or email us.',
     googleMapsUrl: 'https://www.google.com/maps/search/?api=1&query=222%20E%20FM%20544%2C%20Suite%20200%2C%20Murphy%2C%20TX%2075094',
     // PLACEHOLDER: confirm exact coordinates for JSON-LD geo data.
     lat: null,
@@ -48,9 +49,9 @@ export const murphy = {
     // location card and location page; catering 'open' also lists this
     // location on the Catering page.
     services: {
-        dineIn: 'open',
-        takeOut: 'open',
         catering: 'open',
+        dineIn: 'coming-soon',
+        takeOut: 'coming-soon',
     },
     // PLACEHOLDER: add live storefront URLs as each partner integration goes live.
     orderingLinks: {
@@ -59,7 +60,11 @@ export const murphy = {
         doorDash: '',
         instacart: '',
     },
-    description: 'Our Murphy kitchen is now serving authentic halal Bangladeshi cuisine and South Asian favorites, with catering for weddings, family celebrations, and corporate events.',
+    description: 'Our Murphy kitchen brings authentic halal Bangladeshi cuisine and South Asian favorites to Murphy, Texas. Catering is available now, with dine-in and take-out coming soon.',
+    // Location-specific social pages (the brand pages live in config/site.js).
+    socialLinks: {
+        facebook: 'https://www.facebook.com/5SpiceKitchenMurphy/',
+    },
     // PLACEHOLDER: replace with real Murphy photography once available.
     heroImage: '/brand-logo-wide.png',
 };

@@ -4,6 +4,7 @@ import {
     BadgePercent,
     Clock,
     ExternalLink,
+    Facebook,
     HandHeart,
     Mail,
     MapPin,
@@ -63,6 +64,7 @@ const buildJsonLd = (location) => {
         address,
         ...geo,
         ...contact,
+        ...(location.socialLinks ? { sameAs: Object.values(location.socialLinks) } : {}),
         url: `https://5spicemarket.com/locations/${location.slug}`,
         ...(hasPublicMenu(location) ? { hasMenu: `https://5spicemarket.com/locations/${location.slug}/menu` } : {}),
         ...(openingHoursSpecification.length ? { openingHoursSpecification } : {}),
@@ -194,6 +196,12 @@ const LocationDetail = () => {
                                 <Mail size={18} className="text-[#D4A84B]" />
                                 {location.email}
                             </a>
+                            {location.socialLinks?.facebook && (
+                                <a href={location.socialLinks.facebook} target="_blank" rel="noreferrer" className="flex items-center gap-3 border border-[#B88A3D]/30 px-5 py-3 text-white/78 transition-colors hover:border-[#D4A84B] hover:text-white">
+                                    <Facebook size={18} className="text-[#D4A84B]" aria-hidden="true" />
+                                    <span>Follow {location.shortName} on Facebook</span>
+                                </a>
+                            )}
                             {location.services?.catering === 'open' && (
                                 <a href={`mailto:${CATERING_EMAIL}?subject=5Spice%20Catering%20Request`} className="flex items-center gap-3 border border-[#B88A3D]/30 px-5 py-3 text-white/78 transition-colors hover:border-[#D4A84B] hover:text-white">
                                     <HandHeart size={18} className="text-[#D4A84B]" />

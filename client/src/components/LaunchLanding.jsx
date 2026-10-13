@@ -1,24 +1,37 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, BookOpen, CalendarDays, HandHeart, MapPin, ShoppingBasket, Truck, Utensils, Users } from 'lucide-react';
+import { ArrowRight, BookOpen, CalendarDays, HandHeart, MapPin, MapPinned, ShoppingBasket, Truck, Utensils, Users } from 'lucide-react';
 import { isGrandOpeningMode, OFFERINGS } from '../config/site';
-import { getLocationLabel, getOpenLocations, getUpcomingLocations, getVisibleLocations } from '../data/locations';
+import { getCateringOpenLocations, getLocationLabel, getOrderingLocations, getUpcomingLocations, getVisibleLocations } from '../data/locations';
 import { useDocumentHead } from '../hooks/useDocumentHead';
 
 const buildServiceCards = (orderLocation) => [
     { title: 'Catering', text: 'Weddings, family celebrations, corporate events, and community gatherings.', href: '/catering', icon: HandHeart },
-    orderLocation && { title: 'Order Online', text: `See how to order from ${getLocationLabel(orderLocation)}.`, href: '/pickup', icon: Truck },
+    orderLocation
+        ? { title: 'Order Online', text: `See how to order from ${getLocationLabel(orderLocation)}.`, href: '/pickup', icon: Truck }
+        : { title: 'Locations', text: 'Addresses, directions, and contact details for Murphy and Plano.', href: '/locations', icon: MapPinned },
     { title: 'Our Story', text: 'How পাঁচফোড়ন, the Bengali five-spice blend, inspired the 5Spice name.', href: '/about', icon: BookOpen },
 ].filter(Boolean);
 
+const SERVICE_NAMES = { catering: 'Catering', dineIn: 'Dine-in', takeOut: 'Take-out' };
+
+// e.g. "Catering now · Dine-in & Take-out coming soon", from location.services.
+const describeServices = (services) => {
+    const names = (status) => Object.entries(services).filter(([, value]) => value === status).map(([key]) => SERVICE_NAMES[key] ?? key);
+    const open = names('open');
+    const soon = names('coming-soon');
+    return [open.length && `${open.join(' & ')} now`, soon.length && `${soon.join(' & ')} coming soon`].filter(Boolean).join(' · ');
+};
+
 const LaunchLanding = () => {
-    const openLocations = getOpenLocations();
+    const orderingLocations = getOrderingLocations();
+    const cateringLocations = getCateringOpenLocations();
     const upcomingLocations = getUpcomingLocations();
     const upcomingMarket = upcomingLocations.find((location) => location.flags.hasMarket);
 
     useDocumentHead({
         title: '5Spice Market & Kitchen | Halal Grocery & Authentic Bangladeshi Cuisine in DFW',
-        description: '5Spice Kitchen in Murphy, TX is now serving authentic halal Bangladeshi and South Asian cuisine. 5Spice Market & Kitchen, a premium halal grocery and restaurant, is coming to Plano in early 2027, In Sha Allah.',
+        description: 'Authentic halal Bangladeshi catering from 5Spice Kitchen in Murphy, TX, with dine-in and take-out coming soon. 5Spice Market & Kitchen, a premium halal grocery and restaurant, is coming to Plano in early 2027, In Sha Allah.',
     });
 
     return (
@@ -57,16 +70,27 @@ const LaunchLanding = () => {
                                 Our Locations
                             </Link>
                         </div>
-                        {openLocations.map((location) => (
-                            <p key={location.slug} className="mt-6 text-sm text-white/62">
-                                <Utensils size={16} className="mr-2 inline text-[#1CA433]" aria-hidden="true" />
-                                Craving it now?{' '}
-                                <Link to={`/locations/${location.slug}`} className="font-semibold text-[#D4A84B] underline decoration-[#B88A3D]/40 underline-offset-4 hover:text-white">
-                                    {getLocationLabel(location)}
-                                </Link>{' '}
-                                is now serving.
-                            </p>
-                        ))}
+                        {orderingLocations.length > 0
+                            ? orderingLocations.map((location) => (
+                                <p key={location.slug} className="mt-6 text-sm text-white/62">
+                                    <Utensils size={16} className="mr-2 inline text-[#1CA433]" aria-hidden="true" />
+                                    Craving it now?{' '}
+                                    <Link to={`/locations/${location.slug}`} className="font-semibold text-[#D4A84B] underline decoration-[#B88A3D]/40 underline-offset-4 hover:text-white">
+                                        {getLocationLabel(location)}
+                                    </Link>{' '}
+                                    is now serving.
+                                </p>
+                            ))
+                            : cateringLocations.map((location) => (
+                                <p key={location.slug} className="mt-6 text-sm text-white/62">
+                                    <HandHeart size={16} className="mr-2 inline text-[#1CA433]" aria-hidden="true" />
+                                    Planning an event?{' '}
+                                    <Link to="/catering" className="font-semibold text-[#D4A84B] underline decoration-[#B88A3D]/40 underline-offset-4 hover:text-white">
+                                        Catering is available now
+                                    </Link>{' '}
+                                    from {getLocationLabel(location)}.
+                                </p>
+                            ))}
                     </div>
 
                     <div className="grid gap-4 animate-fade-in-up">
@@ -86,13 +110,16 @@ const LaunchLanding = () => {
                                     <h2 className="mt-6 font-serif text-3xl font-semibold text-white">{getLocationLabel(location)}</h2>
                                     <p className="mt-3 text-sm leading-7 text-white/64">
                                         {location.flags.hasMarket ? 'Halal grocery market & restaurant' : 'Restaurant & catering'}
+                                        {location.services && (
+                                            <span className="block text-white/50">{describeServices(location.services)}</span>
+                                        )}
                                     </p>
                                     <p className="mt-1 flex items-start gap-2 text-sm text-white/55">
                                         <MapPin size={16} className="mt-0.5 shrink-0 text-[#D4A84B]" aria-hidden="true" />
                                         {location.address.full}
                                     </p>
                                     <span className="mt-6 inline-flex items-center gap-2 text-sm font-bold uppercase tracking-[0.18em] text-[#D4A84B]">
-                                        {isOpen ? 'Visit Us' : 'Learn More'} <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" aria-hidden="true" />
+                                        Learn More <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" aria-hidden="true" />
                                     </span>
                                 </Link>
                             );
@@ -128,7 +155,7 @@ const LaunchLanding = () => {
             <section className="relative z-10 px-5 pb-20 pt-8 sm:px-8 lg:px-12">
                 <div className="mx-auto max-w-7xl">
                     <div className="grid gap-5 md:grid-cols-3">
-                        {buildServiceCards(openLocations[0]).map((service) => {
+                        {buildServiceCards(orderingLocations[0]).map((service) => {
                             const Icon = service.icon;
                             return (
                                 <Link key={service.title} to={service.href} className="group border border-white/10 bg-white/[0.035] p-6 transition-colors hover:border-[#D4A84B]/50">

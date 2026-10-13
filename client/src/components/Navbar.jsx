@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { HandHeart, Mail, MapPinned, Menu, Search, ShoppingBag, Utensils, X } from 'lucide-react';
 import clsx from 'clsx';
 import { CONTACT, isComingSoonMode, LOGOS } from '../config/site';
-import { anyVisibleLocationHasFlag, getOpenLocations } from '../data/locations';
+import { anyVisibleLocationHasFlag, getCateringOpenLocations, getOrderingLocations } from '../data/locations';
 import { useSelectedLocation } from '../hooks/useSelectedLocation';
 import LocationSwitcher from './LocationSwitcher';
 
@@ -44,19 +44,25 @@ const Navbar = () => {
 
   const navLinks = buildNavLinks();
   const bottomLinks = buildBottomLinks();
-  // "Order" always points at the operating location so visitors don't land
-  // on the ordering page for a location that hasn't opened yet.
-  const orderLocation = getOpenLocations()[0];
-  const orderLabel = orderLocation ? `Order from ${orderLocation.shortName}` : 'Order Online';
+  // The primary button points at the first location taking restaurant
+  // orders. Until one exists, it offers catering (if any location is
+  // booking) rather than an ordering page with nothing to order.
+  const orderLocation = getOrderingLocations()[0];
+  const cateringOpen = getCateringOpenLocations().length > 0;
+  const primaryAction = orderLocation
+    ? { to: '/pickup', label: `Order from ${orderLocation.shortName}` }
+    : cateringOpen
+      ? { to: '/catering', label: 'Request Catering' }
+      : { to: '/pickup', label: 'Order Online' };
   const selectOrderLocation = () => {
     if (orderLocation) selectLocation(orderLocation.slug);
   };
   const centerAction = orderLocation
-    ? { to: '/pickup', label: orderLabel, icon: ShoppingBag, onClick: selectOrderLocation }
+    ? { to: '/pickup', label: primaryAction.label, icon: ShoppingBag, onClick: selectOrderLocation }
     : { to: '/locations', label: 'Locations', icon: MapPinned };
   const statusLine = visibleLocations
-    .map((loc) => (loc.status === 'open' ? `Now serving in ${loc.shortName}` : `${loc.shortName} ${loc.flags.hasMarket ? 'market' : 'kitchen'}: ${loc.openingText}`))
-    .join(' · ');
+    .map((loc) => `${loc.shortName}: ${loc.openingText}`)
+    .join('  |  ');
   const midpoint = Math.ceil(bottomLinks.length / 2);
 
   return (
@@ -115,11 +121,11 @@ const Navbar = () => {
 
           <div className="hidden items-center gap-3 md:flex">
             <Link
-              to="/pickup"
+              to={primaryAction.to}
               onClick={selectOrderLocation}
               className="whitespace-nowrap bg-[#1CA433] px-4 py-2.5 text-sm font-semibold uppercase tracking-[0.1em] text-white transition-colors hover:bg-[#168C2B] xl:px-5 xl:tracking-[0.16em]"
             >
-              {orderLabel}
+              {primaryAction.label}
             </Link>
           </div>
 
@@ -158,8 +164,8 @@ const Navbar = () => {
                 {link.name}
               </Link>
             ))}
-            <Link to="/pickup" onClick={() => { selectOrderLocation(); setMobileMenuOpen(false); }} className="mt-3 bg-[#1CA433] px-5 py-4 font-bold uppercase tracking-[0.18em] text-white">
-              {orderLabel}
+            <Link to={primaryAction.to} onClick={() => { selectOrderLocation(); setMobileMenuOpen(false); }} className="mt-3 bg-[#1CA433] px-5 py-4 font-bold uppercase tracking-[0.18em] text-white">
+              {primaryAction.label}
             </Link>
           </nav>
         </div>

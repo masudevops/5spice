@@ -12,7 +12,7 @@ const values = [
 const About = () => {
     useDocumentHead({
         title: 'Our Story | 5Spice Market & Kitchen',
-        description: 'The story behind 5Spice, named after পাঁচফোড়ন (panch phoron), the Bengali five-spice blend. Authentic halal Bangladeshi cuisine in Murphy, with a halal market coming to Plano.',
+        description: 'The story behind 5Spice, named after পাঁচফোড়ন (panch phoron), the Bengali five-spice blend. Halal Bangladeshi catering in Murphy, with a halal market coming to Plano.',
     });
 
     return (
@@ -25,7 +25,7 @@ const About = () => {
                         Five spices. One home for groceries, food, and community.
                     </h1>
                     <p className="mt-6 max-w-3xl text-lg leading-8 text-white/68">
-                        5Spice brings authentic Bangladeshi cooking and premium halal groceries to North Texas. Our Murphy kitchen is now serving, and our Plano market and restaurant will open in early 2027, In Sha Allah.
+                        5Spice brings authentic Bangladeshi cooking and premium halal groceries to North Texas. Our Murphy kitchen is taking catering orders now, with dine-in and take-out coming soon, and our Plano market and restaurant will open in early 2027, In Sha Allah.
                     </p>
                     <div className="mt-8 max-w-3xl border border-[#B88A3D]/25 bg-[#101010]/78 p-7">
                         <p className="font-bengali text-4xl font-semibold text-[#D4A84B]">পাঁচফোড়ন</p>

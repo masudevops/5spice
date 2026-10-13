@@ -70,10 +70,14 @@ When deals are live, add entries like:
 
 ## Location status, hours, and order
 
-- `status`: `"open"` (operating now), `"coming-soon"` (announced), or
-  `"hidden"`. Open locations get "Now Serving" treatment, phone/call buttons,
-  and are where "Order from …" buttons point.
-- `statusLabel`: short badge text (e.g. "Now Serving", "Coming Early 2027").
+- `status`: `"open"` (operating now, even if only for catering),
+  `"coming-soon"` (announced), or `"hidden"`.
+- `services`: `catering`, `dineIn`, `takeOut`, each `'open'` or
+  `'coming-soon'`. "Order from …" buttons and call-to-order prompts only
+  appear once `dineIn` or `takeOut` is `'open'`; until then the main button
+  offers catering.
+- `socialLinks`: optional location-specific pages, e.g. `facebook`.
+- `statusLabel`: short badge text (e.g. "Catering Available Now", "Coming Early 2027").
 - `openingText`: longer line, e.g. "Opening Early 2027, In Sha Allah".
 - `hours`: leave `[]` until hours are confirmed; the site shows `hoursNote`
   instead. Never put estimated hours here — they're published to Google.

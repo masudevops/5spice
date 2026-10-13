@@ -9,7 +9,7 @@ const Locations = () => {
 
     useDocumentHead({
         title: '5Spice Locations | Halal Bangladeshi Restaurants & Market in Texas',
-        description: '5Spice Kitchen in Murphy, TX is now serving authentic halal Bangladeshi cuisine. 5Spice Market & Kitchen, a halal grocery and restaurant, opens in Plano in early 2027.',
+        description: '5Spice Kitchen in Murphy, TX offers halal Bangladeshi catering now, with dine-in and take-out coming soon. 5Spice Market & Kitchen, a halal grocery and restaurant, opens in Plano in early 2027.',
     });
 
     return (

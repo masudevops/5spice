@@ -4,7 +4,8 @@ import { ArrowRight, CalendarDays, ExternalLink, HandHeart, Mail, MapPin, Naviga
 import { CONTACT, ORDER_PLATFORMS } from '../config/site';
 import { useSelectedLocation } from '../hooks/useSelectedLocation';
 import { useDocumentHead } from '../hooks/useDocumentHead';
-import { getLocationLabel, getOpenLocations } from '../data/locations';
+import ServiceStatusList from '../components/ServiceStatusList';
+import { getCateringOpenLocations, getLocationLabel, getOrderingLocations, takesRestaurantOrders } from '../data/locations';
 import LocationSwitcher from '../components/LocationSwitcher';
 import { toTelHref } from '../utils/phone';
 
@@ -19,11 +20,14 @@ const Pickup = () => {
     const { selectedLocation, selectedSlug, selectLocation, visibleLocations } = useSelectedLocation();
     const platformsByName = Object.fromEntries(ORDER_PLATFORMS.map((platform) => [platform.name, platform]));
     const isOpen = selectedLocation?.status === 'open';
-    const openLocations = getOpenLocations();
+    const takingOrders = takesRestaurantOrders(selectedLocation);
+    const cateringNow = selectedLocation?.services?.catering === 'open';
+    const orderingLocations = getOrderingLocations();
+    const cateringLocations = getCateringOpenLocations();
 
     useDocumentHead({
-        title: 'Order Online | 5Spice Kitchen – Murphy, TX',
-        description: 'Order authentic halal Bangladeshi and South Asian food from 5Spice Kitchen in Murphy, TX. Grocery and restaurant ordering for our Plano location begins when it opens in early 2027.',
+        title: 'Order Online | 5Spice Kitchen – Murphy & 5Spice Market – Plano',
+        description: 'Ordering options for 5Spice. Catering is available now from 5Spice Kitchen in Murphy, TX, with dine-in and take-out coming soon. Plano ordering begins when it opens in early 2027.',
     });
 
     // Only platforms with a real, configured storefront link are shown.
@@ -89,6 +93,7 @@ const Pickup = () => {
                                 <MapPin size={18} className="mt-1 shrink-0 text-[#D4A84B]" aria-hidden="true" />
                                 {selectedLocation.address.full}
                             </p>
+                            <ServiceStatusList services={selectedLocation.services} className="mt-4" />
 
                             {livePlatformGroups.map((group) => {
                                 const Icon = group.icon;
@@ -120,16 +125,26 @@ const Pickup = () => {
                             })}
 
                             <div className="mt-8 border-t border-white/10 pt-7">
-                                {selectedLocation.phone && (
-                                    <p className="leading-7 text-white/68">
-                                        {livePlatformGroups.length > 0
+                                <p className="leading-7 text-white/68">
+                                    {takingOrders
+                                        ? (livePlatformGroups.length > 0
                                             ? 'Prefer to order by phone? Give us a call.'
-                                            : 'Call to place your order. Online ordering through partner apps is coming soon.'}
-                                    </p>
-                                )}
+                                            : 'Call to place your order. Online ordering through partner apps is coming soon.')
+                                        : `Dine-in and take-out are coming soon to ${selectedLocation.shortName}.${cateringNow ? ' Catering is available now for weddings, family celebrations, and corporate events.' : ''}`}
+                                </p>
                                 <div className="mt-5 flex flex-wrap gap-3">
+                                    {!takingOrders && cateringNow && (
+                                        <Link to="/catering" className="inline-flex items-center gap-2 bg-[#1CA433] px-6 py-4 font-bold uppercase tracking-[0.16em] text-white transition-colors hover:bg-[#168C2B]">
+                                            <HandHeart size={17} aria-hidden="true" /> Request Catering
+                                        </Link>
+                                    )}
                                     {selectedLocation.phone && (
-                                        <a href={toTelHref(selectedLocation.phone)} className="inline-flex items-center gap-2 bg-[#1CA433] px-6 py-4 font-bold uppercase tracking-[0.16em] text-white transition-colors hover:bg-[#168C2B]">
+                                        <a
+                                            href={toTelHref(selectedLocation.phone)}
+                                            className={takingOrders
+                                                ? 'inline-flex items-center gap-2 bg-[#1CA433] px-6 py-4 font-bold uppercase tracking-[0.16em] text-white transition-colors hover:bg-[#168C2B]'
+                                                : 'inline-flex items-center gap-2 border border-[#B88A3D]/45 px-6 py-4 font-bold uppercase tracking-[0.16em] text-[#D4A84B] transition-colors hover:border-[#D4A84B] hover:text-white'}
+                                        >
                                             <Phone size={17} aria-hidden="true" /> Call {selectedLocation.phone}
                                         </a>
                                     )}
@@ -152,9 +167,9 @@ const Pickup = () => {
                                     ? 'Restaurant and grocery ordering will begin when this location opens.'
                                     : 'Ordering will begin when this location opens.'}
                             </p>
-                            {openLocations.length > 0 && (
+                            {orderingLocations.length > 0 ? (
                                 <div className="mt-6 flex flex-wrap gap-3">
-                                    {openLocations.map((location) => (
+                                    {orderingLocations.map((location) => (
                                         <button
                                             key={location.slug}
                                             type="button"
@@ -164,6 +179,15 @@ const Pickup = () => {
                                             Order from {getLocationLabel(location)} <ArrowRight size={17} aria-hidden="true" />
                                         </button>
                                     ))}
+                                </div>
+                            ) : cateringLocations.length > 0 && (
+                                <div className="mt-6">
+                                    <p className="leading-7 text-white/62">
+                                        Planning an event? Catering is available now from {cateringLocations.map(getLocationLabel).join(' and ')}.
+                                    </p>
+                                    <Link to="/catering" className="mt-5 inline-flex items-center gap-2 bg-[#1CA433] px-6 py-4 font-bold uppercase tracking-[0.16em] text-white transition-colors hover:bg-[#168C2B]">
+                                        <HandHeart size={17} aria-hidden="true" /> Request Catering
+                                    </Link>
                                 </div>
                             )}
                         </div>

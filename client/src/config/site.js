@@ -133,7 +133,7 @@ export const OFFERINGS = [
     {
         title: 'Authentic Bangladeshi Kitchen',
         shortTitle: 'Restaurant',
-        text: 'Biryani, curries, grills, and the family favorites you grew up with, now serving at 5Spice Kitchen in Murphy.',
+        text: 'Biryani, curries, grills, and the family favorites you grew up with. Catering is available now from our Murphy kitchen.',
     },
     {
         title: 'Serving the DFW Community',

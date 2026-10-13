@@ -69,14 +69,14 @@ const Market = () => {
                     <div className="mt-8 border border-[#B88A3D]/25 bg-[#101010] p-7 md:p-10">
                         <h2 className="font-serif text-3xl font-semibold text-[#D4A84B]">Follow our journey to opening day.</h2>
                         <p className="mt-4 max-w-3xl leading-7 text-white/62">
-                            Get opening news and first looks at the market on Instagram. Hungry before then? Our Murphy kitchen is already serving.
+                            Get opening news and first looks at the market on Instagram. Planning an event before then? Our Murphy kitchen is taking catering orders now.
                         </p>
                         <div className="mt-7 flex flex-wrap gap-3">
                             <a href={SOCIAL_LINKS.instagramUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 bg-[#1CA433] px-6 py-4 font-bold uppercase tracking-[0.16em] text-white transition-colors hover:bg-[#168C2B]">
                                 <Instagram size={17} aria-hidden="true" /> {SOCIAL_LINKS.instagramHandle}
                             </a>
-                            <Link to="/kitchen" className="inline-flex items-center gap-2 border border-[#B88A3D]/45 px-6 py-4 font-bold uppercase tracking-[0.16em] text-[#D4A84B] transition-colors hover:border-[#D4A84B] hover:text-white">
-                                Visit the Kitchen <ArrowRight size={17} aria-hidden="true" />
+                            <Link to="/catering" className="inline-flex items-center gap-2 border border-[#B88A3D]/45 px-6 py-4 font-bold uppercase tracking-[0.16em] text-[#D4A84B] transition-colors hover:border-[#D4A84B] hover:text-white">
+                                Explore Catering <ArrowRight size={17} aria-hidden="true" />
                             </Link>
                         </div>
                     </div>

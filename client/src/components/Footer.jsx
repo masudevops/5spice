@@ -77,7 +77,7 @@ const Footer = () => {
                                     </Link>
                                     {loc.statusLabel && (
                                         <span className={`mt-1 block text-xs font-bold uppercase tracking-[0.14em] ${loc.status === 'open' ? 'text-[#1CA433]' : 'text-[#D4A84B]'}`}>
-                                            {loc.status === 'open' ? loc.statusLabel : loc.openingText}
+                                            {loc.openingText}
                                         </span>
                                     )}
                                     <a href={loc.googleMapsUrl} target="_blank" rel="noreferrer" className="mt-2 flex gap-3 transition-colors hover:text-white">

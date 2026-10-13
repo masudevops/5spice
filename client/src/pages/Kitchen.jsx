@@ -4,7 +4,8 @@ import { ArrowRight, CalendarDays, FlameKindling, HandHeart, MapPin, Navigation,
 import { MENU_HIGHLIGHTS } from '../config/site';
 import { useSelectedLocation } from '../hooks/useSelectedLocation';
 import { useDocumentHead } from '../hooks/useDocumentHead';
-import { getLocationLabel, getOpenLocations, hasPublicMenu } from '../data/locations';
+import ServiceStatusList from '../components/ServiceStatusList';
+import { getLocationLabel, getOpenLocations, hasPublicMenu, takesRestaurantOrders } from '../data/locations';
 import { toTelHref } from '../utils/phone';
 
 const icons = [Soup, FlameKindling, Utensils];
@@ -13,10 +14,11 @@ const Kitchen = () => {
     const { selectedLocation, selectLocation } = useSelectedLocation();
     const isOpen = selectedLocation?.status === 'open';
     const openKitchens = getOpenLocations().filter((location) => location.flags.hasKitchen);
+    const anyTakingOrders = openKitchens.some(takesRestaurantOrders);
 
     useDocumentHead({
-        title: 'Halal Bangladeshi Restaurant in Murphy, TX | 5Spice Kitchen',
-        description: 'Authentic halal Bangladeshi cuisine alongside Indian and Pakistani favorites. Now serving at 5Spice Kitchen in Murphy, with a second kitchen coming to Plano in early 2027.',
+        title: 'Halal Bangladeshi Kitchen & Catering in Murphy, TX | 5Spice Kitchen',
+        description: 'Authentic halal Bangladeshi cuisine alongside Indian and Pakistani favorites. Catering available now from 5Spice Kitchen in Murphy, TX, with dine-in and take-out coming soon.',
     });
 
     return (
@@ -45,10 +47,21 @@ const Kitchen = () => {
                                             <MapPin size={18} className="mt-1 shrink-0 text-[#D4A84B]" aria-hidden="true" />
                                             {selectedLocation.address.full}
                                         </p>
+                                        <ServiceStatusList services={selectedLocation.services} className="mt-4" />
                                     </div>
                                     <div className="flex flex-wrap gap-3">
+                                        {!takesRestaurantOrders(selectedLocation) && selectedLocation.services?.catering === 'open' && (
+                                            <Link to="/catering" className="inline-flex items-center gap-2 bg-[#1CA433] px-6 py-4 font-bold uppercase tracking-[0.16em] text-white transition-colors hover:bg-[#168C2B]">
+                                                <HandHeart size={17} aria-hidden="true" /> Request Catering
+                                            </Link>
+                                        )}
                                         {selectedLocation.phone && (
-                                            <a href={toTelHref(selectedLocation.phone)} className="inline-flex items-center gap-2 bg-[#1CA433] px-6 py-4 font-bold uppercase tracking-[0.16em] text-white transition-colors hover:bg-[#168C2B]">
+                                            <a
+                                                href={toTelHref(selectedLocation.phone)}
+                                                className={takesRestaurantOrders(selectedLocation)
+                                                    ? 'inline-flex items-center gap-2 bg-[#1CA433] px-6 py-4 font-bold uppercase tracking-[0.16em] text-white transition-colors hover:bg-[#168C2B]'
+                                                    : 'inline-flex items-center gap-2 border border-[#B88A3D]/45 px-6 py-4 font-bold uppercase tracking-[0.16em] text-[#D4A84B] transition-colors hover:border-[#D4A84B] hover:text-white'}
+                                            >
                                                 <Phone size={17} aria-hidden="true" /> {selectedLocation.phone}
                                             </a>
                                         )}
@@ -70,7 +83,9 @@ const Kitchen = () => {
                                     <h2 className="mt-3 font-serif text-3xl font-semibold text-white">{getLocationLabel(selectedLocation)}</h2>
                                     <p className="mt-3 max-w-3xl leading-7 text-white/62">
                                         Our {selectedLocation.shortName} restaurant isn't open yet.
-                                        {openKitchens.length > 0 && ' In the meantime, you can enjoy 5Spice at our operating kitchen.'}
+                                        {openKitchens.length > 0 && (anyTakingOrders
+                                            ? ' In the meantime, you can enjoy 5Spice at our operating kitchen.'
+                                            : ' In the meantime, our Murphy kitchen is taking catering orders.')}
                                     </p>
                                     {openKitchens.length > 0 && (
                                         <div className="mt-6 flex flex-wrap gap-3">
@@ -117,7 +132,7 @@ const Kitchen = () => {
                         <Link to="/pickup" className="group border border-[#B88A3D]/25 bg-[#141414] p-7 transition-colors hover:border-[#D4A84B]/50">
                             <Utensils className="mb-4 text-[#D4A84B]" size={28} strokeWidth={1.4} aria-hidden="true" />
                             <h2 className="font-serif text-2xl font-semibold text-white">Ordering</h2>
-                            <p className="mt-3 text-sm leading-7 text-white/58">See how to place an order for pickup.</p>
+                            <p className="mt-3 text-sm leading-7 text-white/58">See current ordering options by location.</p>
                             <span className="mt-5 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.18em] text-[#D4A84B]">
                                 Order Options <ArrowRight size={15} className="transition-transform group-hover:translate-x-1" aria-hidden="true" />
                             </span>

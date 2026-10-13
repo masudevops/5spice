@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Clock, HandHeart, Instagram, Mail, MapPin, MessageCircle, Phone } from 'lucide-react';
+import { Clock, Facebook, HandHeart, Instagram, Mail, MapPin, MessageCircle, Phone } from 'lucide-react';
 import { CATERING_EMAIL, SOCIAL_LINKS } from '../config/site';
 import { getLocationLabel, getVisibleLocations } from '../data/locations';
 import { useDocumentHead } from '../hooks/useDocumentHead';
@@ -35,7 +35,7 @@ const Contact = () => {
                             return (
                                 <article key={location.slug} className="border border-[#B88A3D]/25 bg-[#141414] p-7">
                                     <p className={`text-xs font-semibold uppercase tracking-[0.28em] ${isOpen ? 'text-[#1CA433]' : 'text-[#D4A84B]'}`}>
-                                        {isOpen ? location.statusLabel : location.openingText}
+                                        {location.openingText}
                                     </p>
                                     <h2 className="mt-3 font-serif text-3xl font-semibold text-white">
                                         <Link to={`/locations/${location.slug}`} className="hover:text-[#D4A84B]">{getLocationLabel(location)}</Link>
@@ -59,6 +59,11 @@ const Contact = () => {
                                         <a href={location.googleMapsUrl} target="_blank" rel="noreferrer" className="text-[#D4A84B] underline decoration-[#B88A3D]/40 underline-offset-4 hover:text-white">
                                             Open in Maps
                                         </a>
+                                        {location.socialLinks?.facebook && (
+                                            <a href={location.socialLinks.facebook} target="_blank" rel="noreferrer" aria-label={`${getLocationLabel(location)} on Facebook`} className="inline-flex items-center gap-2 text-[#D4A84B] hover:text-white">
+                                                <Facebook size={16} aria-hidden="true" /> Facebook
+                                            </a>
+                                        )}
                                     </div>
                                 </article>
                             );

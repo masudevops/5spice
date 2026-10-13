@@ -29,6 +29,15 @@ export const hasPublicMenu = (location) => Boolean(location?.flags.hasKitchen &&
 // Locations currently open to customers (status 'open').
 export const getOpenLocations = () => getVisibleLocations().filter((location) => location.status === 'open');
 
+// True when a location takes everyday restaurant orders (dine-in or
+// take-out), not just catering. Drives "Order from …" buttons and the
+// call-to-order prompts.
+export const takesRestaurantOrders = (location) =>
+    location?.status === 'open'
+    && (!location.services || location.services.dineIn === 'open' || location.services.takeOut === 'open');
+
+export const getOrderingLocations = () => getVisibleLocations().filter(takesRestaurantOrders);
+
 // Locations announced but not yet open (status 'coming-soon').
 export const getUpcomingLocations = () => getVisibleLocations().filter((location) => location.status === 'coming-soon');
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { BriefcaseBusiness, CalendarClock, CheckCircle, Clock, Mail, MapPin, Navigation, Phone, Users } from 'lucide-react';
+import { BriefcaseBusiness, CalendarClock, CheckCircle, Clock, Facebook, Mail, MapPin, Navigation, Phone, Users } from 'lucide-react';
 import { CATERING_EMAIL } from '../config/site';
 import { getCateringOpenLocations, getVisibleLocations } from '../data/locations';
 import { useDocumentHead } from '../hooks/useDocumentHead';
@@ -158,6 +158,11 @@ const Catering = () => {
                                         <a href={location.googleMapsUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 border border-[#B88A3D]/35 px-5 py-3 text-sm font-bold uppercase tracking-[0.16em] text-[#D4A84B] transition-colors hover:border-[#D4A84B] hover:text-white">
                                             <Navigation size={15} aria-hidden="true" /> Directions
                                         </a>
+                                        {location.socialLinks?.facebook && (
+                                            <a href={location.socialLinks.facebook} target="_blank" rel="noreferrer" aria-label={`${location.displayName} – ${location.shortName} on Facebook`} className="inline-flex items-center gap-2 border border-[#B88A3D]/35 px-5 py-3 text-sm font-bold uppercase tracking-[0.16em] text-[#D4A84B] transition-colors hover:border-[#D4A84B] hover:text-white">
+                                                <Facebook size={15} aria-hidden="true" /> Facebook
+                                            </a>
+                                        )}
                                     </div>
                                 </article>
                             ))}
