@@ -20,8 +20,11 @@ export default {
                 }
             },
             fontFamily: {
-                sans: ['Inter', 'sans-serif'],
-                serif: ['Playfair Display', 'serif'], // For Headings
+                // Noto Sans Bengali is the fallback so Bengali words inside
+                // English text (e.g. পাঁচফোড়ন) render in a proper Bengali face.
+                sans: ['Inter', 'Noto Sans Bengali', 'sans-serif'],
+                serif: ['Playfair Display', 'Noto Sans Bengali', 'serif'], // For Headings
+                bengali: ['Noto Sans Bengali', 'sans-serif'],
             },
             backgroundImage: {
                 'hero-pattern': "url('https://www.transparenttextures.com/patterns/arabesque.png')", // Subtle pattern placeholder
