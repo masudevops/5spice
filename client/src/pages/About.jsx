@@ -22,7 +22,7 @@ const About = () => {
                 <div className="relative mx-auto max-w-7xl">
                     <p className="text-xs font-semibold uppercase tracking-[0.32em] text-[#D4A84B]">Our Story</p>
                     <h1 className="mt-5 max-w-4xl font-serif text-5xl font-bold leading-tight text-white md:text-6xl">
-                        Five spices. One home for groceries, food, and community.
+                        More Than Food. A Feeling of Home.
                     </h1>
                     <p className="mt-6 max-w-3xl text-lg leading-8 text-white/68">
                         5Spice brings authentic Bangladeshi cooking and premium halal groceries to North Texas. Our Murphy kitchen is taking catering orders now, with dine-in and take-out coming soon, and our Plano market and restaurant will open in early 2027, In Sha Allah.
@@ -30,7 +30,7 @@ const About = () => {
                 </div>
             </section>
 
-            <section aria-labelledby="our-story-heading" className="relative overflow-hidden border-y border-[#B88A3D]/20 bg-[#0B0B0B] px-5 py-20 sm:px-8 md:py-28 lg:px-12">
+            <section aria-labelledby="our-story-heading" className="relative overflow-hidden border-y border-[#B88A3D]/20 bg-[#0B0B0B] px-5 py-16 sm:px-8 md:py-[5.75rem] lg:px-12">
                 <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(212,168,75,0.12),transparent_55%)]" />
                 <div className="relative mx-auto max-w-2xl text-center">
                     {/* Five dots, one for each spice in the blend. */}
@@ -57,8 +57,8 @@ const About = () => {
                         </p>
                         <p>
                             The gentle crackle of <span lang="bn" className="font-bengali text-[#D4A84B]">পাঁচফোড়ন</span> in a warm pan.
-                            The comforting smell coming from the kitchen. The memories of <span lang="bn" className="font-bengali text-[#D4A84B]">মা</span> cooking,
-                            and the family gathering around the table.
+                            The comforting smell coming from the kitchen. The familiar aroma of <span lang="bn" className="font-bengali text-[#D4A84B]">মায়ের রান্না</span>,
+                            filling the home as everyone gathers around the table.
                         </p>
                         <p>For many of us, these little moments are what make a house feel like home.</p>
                         <p>
@@ -66,8 +66,8 @@ const About = () => {
                             5Spice was born from a simple idea: to bring the flavors, warmth, and traditions of home closer to our community.
                         </p>
                         <p>
-                            From the ingredients on our market shelves to the meals prepared in our kitchen, we want every visit to feel a little more familiar,
-                            a little more comforting, and a little more like home.
+                            From the familiar ingredients that bring our favorite recipes to life to the meals prepared with care in our kitchen,
+                            5Spice is our way of keeping those traditions alive and sharing them with the next generation.
                         </p>
                     </div>
 
