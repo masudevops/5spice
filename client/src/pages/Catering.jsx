@@ -4,6 +4,7 @@ import { BriefcaseBusiness, CalendarClock, CheckCircle, Clock, Mail, MapPin, Nav
 import { CATERING_EMAIL } from '../config/site';
 import { getCateringOpenLocations, getVisibleLocations } from '../data/locations';
 import { useDocumentHead } from '../hooks/useDocumentHead';
+import { toTelHref } from '../utils/phone';
 
 const cateringHighlights = [
     '100% Zabiha Halal Meat',
@@ -37,8 +38,6 @@ Anything else we should know:
 Thank you!`;
 
 const quoteMailto = `mailto:${CATERING_EMAIL}?subject=${encodeURIComponent('5Spice Catering Quote Request')}&body=${encodeURIComponent(quoteEmailBody)}`;
-
-const toTelHref = (phone) => `tel:+1${phone.replace(/\D/g, '')}`;
 
 const Catering = () => {
     const cateringLocations = getCateringOpenLocations();

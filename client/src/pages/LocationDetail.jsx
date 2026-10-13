@@ -8,12 +8,15 @@ import {
     Mail,
     MapPin,
     Navigation,
+    Phone,
     ShoppingBasket,
 } from 'lucide-react';
 import NotFound from './NotFound';
 import { useDocumentHead } from '../hooks/useDocumentHead';
 import ServiceStatusList from '../components/ServiceStatusList';
-import { getVisibleLocationBySlug, hasPublicMenu } from '../data/locations';
+import { getLocationLabel, getVisibleLocationBySlug, hasPublicMenu } from '../data/locations';
+import { summarizeHours } from '../utils/hours';
+import { toTelHref } from '../utils/phone';
 import { CATERING_EMAIL, ORDER_PLATFORMS } from '../config/site';
 
 const ORDERING_KEY_TO_PLATFORM_NAME = {
@@ -38,20 +41,28 @@ const buildJsonLd = (location) => {
     const geo = location.lat != null && location.lng != null
         ? { geo: { '@type': 'GeoCoordinates', latitude: location.lat, longitude: location.lng } }
         : {};
+    // Only real, confirmed hours (entries containing a time) go into JSON-LD.
     const openingHoursSpecification = location.hours
-        .filter((entry) => entry.hours && !/coming soon/i.test(entry.hours))
+        .filter((entry) => entry.hours && /\d/.test(entry.hours))
         .map((entry) => ({
             '@type': 'OpeningHoursSpecification',
             dayOfWeek: `https://schema.org/${entry.day}`,
             description: entry.hours,
         }));
 
+    const contact = {
+        ...(location.phone ? { telephone: location.phone } : {}),
+        ...(location.email ? { email: location.email } : {}),
+    };
+
     const restaurant = {
         '@type': 'Restaurant',
-        name: location.displayName,
+        name: getLocationLabel(location),
+        description: location.status === 'open' ? location.description : `${location.description} ${location.openingText}.`,
         servesCuisine: ['Bangladeshi', 'Indian', 'Pakistani', 'Halal'],
         address,
         ...geo,
+        ...contact,
         url: `https://5spicemarket.com/locations/${location.slug}`,
         ...(hasPublicMenu(location) ? { hasMenu: `https://5spicemarket.com/locations/${location.slug}/menu` } : {}),
         ...(openingHoursSpecification.length ? { openingHoursSpecification } : {}),
@@ -67,9 +78,10 @@ const buildJsonLd = (location) => {
             restaurant,
             {
                 '@type': 'GroceryStore',
-                name: location.displayName,
+                name: getLocationLabel(location),
                 address,
                 ...geo,
+                ...contact,
                 url: `https://5spicemarket.com/locations/${location.slug}`,
             },
         ],
@@ -83,8 +95,10 @@ const LocationDetail = () => {
     useDocumentHead(
         location
             ? {
-                title: `${location.displayName} | Halal Bangladeshi Cuisine in ${location.address.city}, TX`,
-                description: `${location.cuisineTagline}. ${location.description}`,
+                title: location.flags.hasMarket
+                    ? `${getLocationLabel(location)} | Halal Grocery & Bangladeshi Restaurant in ${location.address.city}, TX`
+                    : `${getLocationLabel(location)} | Halal Bangladeshi Restaurant & Catering in ${location.address.city}, TX`,
+                description: location.status === 'open' ? location.description : `${location.description} ${location.openingText}.`,
                 jsonLd: buildJsonLd(location),
             }
             : { title: 'Location Not Found | 5Spice', noindex: true }
@@ -112,7 +126,7 @@ const LocationDetail = () => {
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(184,138,61,0.14),transparent_34%),linear-gradient(135deg,#0E0E0E,#161616)]" />
                 <div className="relative mx-auto max-w-7xl">
                     <p className="text-xs font-semibold uppercase tracking-[0.32em] text-[#D4A84B]">{location.cuisineTagline}</p>
-                    <h1 className="mt-5 max-w-4xl font-serif text-5xl font-bold leading-tight text-white md:text-6xl">{location.displayName}</h1>
+                    <h1 className="mt-5 max-w-4xl font-serif text-5xl font-bold leading-tight text-white md:text-6xl">{getLocationLabel(location)}</h1>
                     {location.services ? (
                         <ServiceStatusList services={location.services} className="mt-5" />
                     ) : (
@@ -140,14 +154,23 @@ const LocationDetail = () => {
                     <article className="border border-[#B88A3D]/25 bg-[#141414] p-7">
                         <Clock className="mb-4 text-[#D4A84B]" size={28} strokeWidth={1.4} />
                         <h2 className="font-serif text-3xl font-semibold text-white">Hours</h2>
-                        <ul className="mt-5 space-y-3 text-white/62">
-                            {location.hours.map((entry) => (
-                                <li key={entry.day} className="flex justify-between gap-4 border-b border-white/8 pb-3">
-                                    <span>{entry.day}</span>
-                                    <span className="text-white/82">{entry.hours}</span>
-                                </li>
-                            ))}
-                        </ul>
+                        {location.hours.length > 0 ? (
+                            <ul className="mt-5 space-y-3 text-white/62">
+                                {summarizeHours(location.hours).map((entry) => (
+                                    <li key={entry.days} className="flex justify-between gap-4 border-b border-white/8 pb-3">
+                                        <span>{entry.days}</span>
+                                        <span className="text-white/82">{entry.time}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                        ) : (
+                            <p className="mt-5 leading-7 text-white/62">{location.hoursNote}</p>
+                        )}
+                        {location.status === 'open' && location.phone && location.hours.length === 0 && (
+                            <a href={toTelHref(location.phone)} className="mt-5 inline-flex items-center gap-2 bg-[#1CA433] px-5 py-3 text-sm font-bold uppercase tracking-[0.16em] text-white transition-colors hover:bg-[#168C2B]">
+                                <Phone size={16} aria-hidden="true" /> Call {location.phone}
+                            </a>
+                        )}
                     </article>
 
                     <article className="border border-[#B88A3D]/25 bg-[#101010] p-7">
@@ -160,7 +183,8 @@ const LocationDetail = () => {
 
                         <div className="mt-7 grid gap-3">
                             {location.phone ? (
-                                <a href={`tel:${location.phone}`} className="flex items-center gap-3 border border-[#B88A3D]/30 px-5 py-3 text-white/78 transition-colors hover:border-[#D4A84B] hover:text-white">
+                                <a href={toTelHref(location.phone)} className="flex items-center gap-3 border border-[#B88A3D]/30 px-5 py-3 text-white/78 transition-colors hover:border-[#D4A84B] hover:text-white">
+                                    <Phone size={18} className="text-[#D4A84B]" aria-hidden="true" />
                                     {location.phone}
                                 </a>
                             ) : (
