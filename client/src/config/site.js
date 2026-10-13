@@ -1,5 +1,4 @@
 import { getDefaultLocation } from '../data/locations';
-import { summarizeHours } from '../utils/hours';
 
 export const SITE_MODE = import.meta.env.VITE_APP_SITE_MODE || 'live';
 
@@ -21,10 +20,8 @@ export const SOCIAL_LINKS = {
 // Dedicated inbox for catering requests (Catering page, location pages).
 export const CATERING_EMAIL = 'catering@5spicemarket.com';
 
-// CONTACT and HOURS describe the primary/default visible location, derived
-// from /src/data/locations so this file stays a single source of truth.
-// They keep their original shape so existing consumers (Footer, Navbar,
-// Contact, Pickup, LaunchLanding) don't need to change.
+// CONTACT describes the primary/default visible location (the first entry in
+// /src/data/locations), so this file stays a single source of truth.
 const primaryLocation = getDefaultLocation();
 
 export const CONTACT = primaryLocation
@@ -49,42 +46,31 @@ export const CONTACT = primaryLocation
         mapsUrl: '',
     };
 
-export const HOURS = primaryLocation ? summarizeHours(primaryLocation.hours) : [];
-
 export const ORDER_PLATFORMS = [
     {
         name: 'Toast',
         label: 'Order on Toast',
         url: '',
-        description: 'Order restaurant favorites for convenient pickup when our Toast storefront is available.',
+        description: 'Order restaurant favorites for pickup through our Toast storefront.',
     },
     {
         name: 'Uber Eats',
         label: 'Order on Uber Eats',
         url: '',
-        description: 'Get 5Spice Kitchen meals delivered through Uber Eats when service begins.',
+        description: 'Get 5Spice Kitchen meals delivered through Uber Eats.',
     },
     {
         name: 'DoorDash',
         label: 'Order on DoorDash',
         url: '',
-        description: 'Enjoy delivery from 5Spice Kitchen through DoorDash when service begins.',
+        description: 'Get 5Spice Kitchen meals delivered through DoorDash.',
     },
     {
         name: 'Instacart',
         label: 'Shop on Instacart',
         url: '',
-        description: 'Shop grocery favorites through Instacart when 5Spice Market delivery is available.',
+        description: 'Shop 5Spice Market groceries for delivery through Instacart.',
     },
-];
-
-export const TRUST_SIGNALS = [
-    'Zabiha Halal',
-    'Fresh Fish',
-    'Plano, Texas',
-    'Catering Available',
-    'Office Lunch Available',
-    'Grocery + Restaurant',
 ];
 
 export const MARKET_DEPARTMENTS = [
@@ -124,51 +110,34 @@ export const MENU_HIGHLIGHTS = [
     {
         category: 'Bangladeshi Favorites',
         title: 'Biryani, Curry & Comfort Dishes',
-        text: 'Traditional flavors prepared for families who want food that feels familiar and generous.',
+        text: 'Traditional flavors that taste like home, served generously.',
     },
     {
         category: 'Grill & Family Meals',
-        title: 'Fresh Grills, Kababs & Shareable Plates',
-        text: 'Prepared meals and family-style options designed for easy weeknight dinners and gatherings.',
+        title: 'Fresh Grills, Kebabs & Shareable Plates',
+        text: 'Family-style dishes made for weeknight dinners and weekend gatherings.',
     },
     {
         category: 'Snacks, Sides & Drinks',
         title: 'Everyday Restaurant Favorites',
-        text: 'Tea, drinks, snacks, sides, and familiar bites to pair with market trips or family meals.',
+        text: 'Tea, drinks, snacks, and sides to round out any meal.',
     },
-];
-
-export const QUICK_MEAL_ITEMS = [
-    'One-bowl meals',
-    'Meat shawarma over rice',
-    'Meat shawarma sandwich',
-    'Meat shawarma roll',
-    'Wings',
-    'Fries, nuggets, and salad sides',
-    'Half shawarma meals without sides',
-    'Fast lunch bundles for office teams',
-];
-
-export const SIGNATURE_ADD_ONS = [
-    '5Spice sweets',
-    'Spring rolls',
-    'Extra rice or naan',
 ];
 
 export const OFFERINGS = [
     {
         title: 'Premium Halal Market',
         shortTitle: 'Halal Market',
-        text: 'Premium zabiha halal meat, fresh fish, farm-fresh produce, and carefully sourced specialty groceries—all under one roof.',
+        text: 'Coming to Plano in early 2027: Zabiha halal meat, fresh seafood, farm-fresh produce, and specialty groceries under one roof.',
     },
     {
-        title: 'Fresh Restaurant',
+        title: 'Authentic Bangladeshi Kitchen',
         shortTitle: 'Restaurant',
-        text: 'Freshly prepared meals, family favorites, quick lunches, and the flavors your family remembers.',
+        text: 'Biryani, curries, grills, and the family favorites you grew up with, now serving at 5Spice Kitchen in Murphy.',
     },
     {
         title: 'Serving the DFW Community',
         shortTitle: 'DFW Community',
-        text: 'Proudly serving the Bangladeshi, Pakistani, Indian, Middle Eastern, and Greater DFW communities.',
+        text: 'Rooted in Bangladeshi tradition and proud to welcome Pakistani, Indian, Middle Eastern, and all DFW families.',
     },
 ];
