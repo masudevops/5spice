@@ -23,8 +23,8 @@ export const murphy = {
         zip: '75094',
         full: '222 E FM 544, Suite 200, Murphy, TX 75094',
     },
-    // PLACEHOLDER: confirm official Murphy phone number before launch.
-    phone: '',
+    // Provided by the owners on 2026-10-13 as the Murphy kitchen/catering line.
+    phone: '(917) 355-6995',
     email: 'info@5spicemarket.com',
     // PLACEHOLDER: confirm real hours closer to launch.
     hours: [
