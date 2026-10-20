@@ -1,5 +1,5 @@
 import React from 'react';
-import { getCateringStatsLocations, getLocationLabel } from '../data/locations';
+import { CATERING_STATS } from '../config/site';
 import { toMilestone } from '../utils/milestone';
 
 // Each metric shows only once its verified total reaches `minimum`.
@@ -8,25 +8,12 @@ const METRICS = [
     { key: 'eventsCompleted', label: 'Catering Events Completed', minimum: 10 },
 ];
 
-const formatAsOf = (date) => {
-    const parsed = date && new Date(`${date}T00:00:00`);
-    return parsed && !Number.isNaN(parsed.getTime())
-        ? parsed.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })
-        : null;
-};
-
 const CateringStats = () => {
-    const entries = getCateringStatsLocations()
-        .map((location) => ({
-            location,
-            asOf: formatAsOf(location.cateringStats.asOf),
-            metrics: METRICS
-                .map((metric) => ({ ...metric, value: toMilestone(location.cateringStats[metric.key], metric.minimum) }))
-                .filter((metric) => metric.value),
-        }))
-        .filter((entry) => entry.metrics.length > 0);
+    const metrics = METRICS
+        .map((metric) => ({ ...metric, value: toMilestone(CATERING_STATS[metric.key], metric.minimum) }))
+        .filter((metric) => metric.value);
 
-    if (entries.length === 0) return null;
+    if (metrics.length === 0) return null;
 
     return (
         <section className="relative z-10 px-5 py-8 sm:px-8 lg:px-12" aria-labelledby="catering-stats-heading">
@@ -37,21 +24,14 @@ const CateringStats = () => {
                         <h2 id="catering-stats-heading" className="mt-3 font-serif text-3xl font-semibold text-white md:text-4xl">Every Gathering Matters.</h2>
                         <p className="mt-3 font-serif text-lg italic text-white/60">Made with care. Shared with our community.</p>
                     </div>
-                    {entries.map(({ location, asOf, metrics }) => (
-                        <div key={location.slug}>
-                            <dl className="flex flex-wrap gap-x-12 gap-y-6">
-                                {metrics.map((metric) => (
-                                    <div key={metric.key} className="flex flex-col gap-1 border-l-2 border-[#1CA433] pl-4">
-                                        <dt className="max-w-[12rem] text-xs font-semibold uppercase leading-5 tracking-[0.18em] text-white/60">{metric.label}</dt>
-                                        <dd className="order-first font-serif text-4xl font-bold text-[#D4A84B] md:text-5xl">{metric.value}</dd>
-                                    </div>
-                                ))}
-                            </dl>
-                            <p className="mt-5 text-sm text-white/50">
-                                {getLocationLabel(location)} catering{asOf ? ` · as of ${asOf}` : ''}
-                            </p>
-                        </div>
-                    ))}
+                    <dl className="flex flex-wrap gap-x-12 gap-y-6">
+                        {metrics.map((metric) => (
+                            <div key={metric.key} className="flex flex-col gap-1 border-l-2 border-[#1CA433] pl-4">
+                                <dt className="max-w-[12rem] text-xs font-semibold uppercase leading-5 tracking-[0.18em] text-white/60">{metric.label}</dt>
+                                <dd className="order-first font-serif text-4xl font-bold text-[#D4A84B] md:text-5xl">{metric.value}</dd>
+                            </div>
+                        ))}
+                    </dl>
                 </div>
             </div>
         </section>

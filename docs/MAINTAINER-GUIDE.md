@@ -175,6 +175,23 @@ commas and quotes.
 
 ---
 
+## 5a. Catering milestones (homepage)
+
+File: `client/src/config/site.js` → `CATERING_STATS`. This is one combined
+total for all 5Spice kitchens, shown in the homepage "Every Gathering Matters"
+section in live mode only.
+
+- Set `guestsServed` and/or `eventsCompleted` to the verified running total.
+  The site rounds down to a milestone, so entering `1240` shows **1,000+**.
+- A metric stays hidden while it is `null` or below its minimum (100 guests,
+  10 events). If both are hidden, the whole section is hidden.
+- Set `asOf` to the date you checked (`'YYYY-MM-DD'`). It's for your records
+  and isn't shown on the site.
+- Count guests the same way each time, as the booked guest count per event.
+  Never enter estimates.
+
+---
+
 ## 6. Location details
 
 Files: `client/src/data/locations/murphy.js`, `client/src/data/locations/plano.js`.
@@ -190,7 +207,6 @@ Files: `client/src/data/locations/murphy.js`, `client/src/data/locations/plano.j
 | `socialLinks.facebook` | Location-specific Facebook page |
 | `orderingLinks` | `toast`, `uberEats`, `doorDash`, `instacart`. Empty = button hidden |
 | `lat`, `lng` | Map coordinates for Google data (currently placeholders) |
-| `cateringStats` | Verified catering totals for the homepage "Every Gathering Matters" section (see below) |
 
 **When Murphy opens dine-in or take-out:** set `dineIn` and/or `takeOut` to
 `'open'`, then update `statusLabel` and `openingText`. The "Order from
@@ -203,13 +219,6 @@ here, because they're published to Google.
 **Ordering links:** paste only verified, working storefront URLs for that
 exact location.
 
-**Catering milestones (homepage, live mode only):** in `cateringStats`, set
-`guestsServed` and/or `eventsCompleted` to the verified running total, and set
-`asOf` to the date you checked (`'YYYY-MM-DD'`). The site rounds down to a
-milestone, so entering `1240` shows **1,000+**. A metric stays hidden while it is
-`null` or below its minimum (100 guests, 10 events). If both are hidden, the
-whole section is hidden. Count guests the same way each time, as the booked
-guest count per event. Never enter estimates.
 
 ---
 
@@ -320,7 +329,7 @@ commit on a branch.
 ### 8.6a Catering milestones
 
 ```
-Update cateringStats in client/src/data/locations/murphy.js:
+Update CATERING_STATS in client/src/config/site.js:
 guestsServed [verified total or null], eventsCompleted [verified total or null],
 asOf [today's date]. Don't change the UI. Check the homepage section in live
 mode, run lint and build, and commit on a branch.
