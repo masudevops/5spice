@@ -47,3 +47,9 @@ export const getCateringOpenLocations = () =>
 
 // Customer-facing name, e.g. "5Spice Kitchen – Murphy".
 export const getLocationLabel = (location) => `${location.displayName} – ${location.shortName}`;
+
+// Locations with at least one verified catering milestone to show
+// (see `cateringStats` in the location file).
+export const getCateringStatsLocations = () =>
+    getVisibleLocations().filter((location) => location.cateringStats
+        && (location.cateringStats.guestsServed != null || location.cateringStats.eventsCompleted != null));

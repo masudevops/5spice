@@ -53,6 +53,16 @@ export const murphy = {
         dineIn: 'coming-soon',
         takeOut: 'coming-soon',
     },
+    // Catering milestones for the homepage "Every Gathering Matters" section.
+    // Enter verified running totals only (never estimates). The site rounds
+    // down to a milestone (e.g. 1240 → "1,000+") and hides any metric that is
+    // null or below its minimum. Update `asOf` (YYYY-MM-DD) each time.
+    cateringStats: {
+        // Owners confirmed 1,000+ guests on 2026-10-20.
+        guestsServed: 1000,
+        eventsCompleted: null,
+        asOf: '2026-10-20',
+    },
     // PLACEHOLDER: add live storefront URLs as each partner integration goes live.
     orderingLinks: {
         toast: '',

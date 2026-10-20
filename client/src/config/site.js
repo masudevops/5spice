@@ -4,6 +4,7 @@ export const SITE_MODE = import.meta.env.VITE_APP_SITE_MODE || 'live';
 
 export const isComingSoonMode = SITE_MODE === 'coming_soon';
 export const isGrandOpeningMode = SITE_MODE === 'grand_opening';
+export const isLiveMode = SITE_MODE === 'live';
 
 export const LOGOS = {
     square: '/brand-logo-square.png',

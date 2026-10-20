@@ -190,6 +190,7 @@ Files: `client/src/data/locations/murphy.js`, `client/src/data/locations/plano.j
 | `socialLinks.facebook` | Location-specific Facebook page |
 | `orderingLinks` | `toast`, `uberEats`, `doorDash`, `instacart`. Empty = button hidden |
 | `lat`, `lng` | Map coordinates for Google data (currently placeholders) |
+| `cateringStats` | Verified catering totals for the homepage "Every Gathering Matters" section (see below) |
 
 **When Murphy opens dine-in or take-out:** set `dineIn` and/or `takeOut` to
 `'open'`, then update `statusLabel` and `openingText`. The "Order from
@@ -201,6 +202,14 @@ here, because they're published to Google.
 
 **Ordering links:** paste only verified, working storefront URLs for that
 exact location.
+
+**Catering milestones (homepage, live mode only):** in `cateringStats`, set
+`guestsServed` and/or `eventsCompleted` to the verified running total, and set
+`asOf` to the date you checked (`'YYYY-MM-DD'`). The site rounds down to a
+milestone, so entering `1240` shows **1,000+**. A metric stays hidden while it is
+`null` or below its minimum (100 guests, 10 events). If both are hidden, the
+whole section is hidden. Count guests the same way each time, as the booked
+guest count per event. Never enter estimates.
 
 ---
 
@@ -306,6 +315,15 @@ Update statusLabel and openingText to match. Then check every page that
 shows location status (home, Kitchen, Order Online, Contact, footer, navbar)
 so nothing says something is open when it isn't. Run lint and build and
 commit on a branch.
+```
+
+### 8.6a Catering milestones
+
+```
+Update cateringStats in client/src/data/locations/murphy.js:
+guestsServed [verified total or null], eventsCompleted [verified total or null],
+asOf [today's date]. Don't change the UI. Check the homepage section in live
+mode, run lint and build, and commit on a branch.
 ```
 
 ### 8.7 Copy change on a page
