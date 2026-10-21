@@ -4,6 +4,8 @@ import { BriefcaseBusiness, CalendarClock, CheckCircle, Clock, Facebook, Mail, M
 import { CATERING_EMAIL } from '../config/site';
 import { getCateringOpenLocations, getVisibleLocations } from '../data/locations';
 import { useDocumentHead } from '../hooks/useDocumentHead';
+import CateringMetrics from '../components/CateringMetrics';
+import { getCateringMetrics } from '../utils/cateringStats';
 import { toTelHref } from '../utils/phone';
 
 const cateringHighlights = [
@@ -41,6 +43,7 @@ const quoteMailto = `mailto:${CATERING_EMAIL}?subject=${encodeURIComponent('5Spi
 
 const Catering = () => {
     const cateringLocations = getCateringOpenLocations();
+    const cateringMetrics = getCateringMetrics();
     const upcomingLocations = getVisibleLocations().filter(
         (location) => location.status === 'coming-soon' && location.services?.catering !== 'open'
     );
@@ -136,6 +139,7 @@ const Catering = () => {
                             <p className="mt-4 leading-7 text-white/62">
                                 We're honored to cater family gatherings, community celebrations, and events across Murphy, Plano, and North Texas.
                             </p>
+                            {cateringMetrics.length > 0 && <CateringMetrics metrics={cateringMetrics} className="mt-7" />}
                         </div>
                         <div className="grid gap-4">
                             {cateringLocations.map((location) => (

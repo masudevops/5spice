@@ -175,6 +175,23 @@ commas and quotes.
 
 ---
 
+## 5a. Catering milestones (homepage)
+
+File: `client/src/config/site.js` → `CATERING_STATS`. This is one combined
+total for all 5Spice kitchens, shown in the homepage "Every Gathering Matters"
+section in live mode and in the "Proudly Serving Our Community" section of the Catering page.
+
+- Set `guestsServed` and/or `eventsCompleted` to the verified running total.
+  The site rounds down to a milestone, so entering `1240` shows **1,000+**.
+- A metric stays hidden while it is `null` or below its minimum (100 guests,
+  10 events). If both are hidden, the whole section is hidden.
+- Set `asOf` to the date you checked (`'YYYY-MM-DD'`). It's for your records
+  and isn't shown on the site.
+- Count guests the same way each time, as the booked guest count per event.
+  Never enter estimates.
+
+---
+
 ## 6. Location details
 
 Files: `client/src/data/locations/murphy.js`, `client/src/data/locations/plano.js`.
@@ -201,6 +218,7 @@ here, because they're published to Google.
 
 **Ordering links:** paste only verified, working storefront URLs for that
 exact location.
+
 
 ---
 
@@ -306,6 +324,15 @@ Update statusLabel and openingText to match. Then check every page that
 shows location status (home, Kitchen, Order Online, Contact, footer, navbar)
 so nothing says something is open when it isn't. Run lint and build and
 commit on a branch.
+```
+
+### 8.6a Catering milestones
+
+```
+Update CATERING_STATS in client/src/config/site.js:
+guestsServed [verified total or null], eventsCompleted [verified total or null],
+asOf [today's date]. Don't change the UI. Check the homepage section in live
+mode, run lint and build, and commit on a branch.
 ```
 
 ### 8.7 Copy change on a page

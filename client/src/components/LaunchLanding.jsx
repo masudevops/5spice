@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, BookOpen, CalendarDays, HandHeart, MapPin, MapPinned, ShoppingBasket, Truck, Utensils, Users } from 'lucide-react';
-import { isGrandOpeningMode, OFFERINGS } from '../config/site';
+import { isGrandOpeningMode, isLiveMode, OFFERINGS } from '../config/site';
+import CateringStats from './CateringStats';
 import { getCateringOpenLocations, getLocationLabel, getOrderingLocations, getUpcomingLocations, getVisibleLocations } from '../data/locations';
 import { useDocumentHead } from '../hooks/useDocumentHead';
 
@@ -127,6 +128,8 @@ const LaunchLanding = () => {
                     </div>
                 </div>
             </section>
+
+            {isLiveMode && <CateringStats />}
 
             <section className="relative z-10 px-5 py-14 sm:px-8 lg:px-12">
                 <div className="mx-auto max-w-7xl">

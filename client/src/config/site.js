@@ -4,6 +4,7 @@ export const SITE_MODE = import.meta.env.VITE_APP_SITE_MODE || 'live';
 
 export const isComingSoonMode = SITE_MODE === 'coming_soon';
 export const isGrandOpeningMode = SITE_MODE === 'grand_opening';
+export const isLiveMode = SITE_MODE === 'live';
 
 export const LOGOS = {
     square: '/brand-logo-square.png',
@@ -19,6 +20,18 @@ export const SOCIAL_LINKS = {
 
 // Dedicated inbox for catering requests (Catering page, location pages).
 export const CATERING_EMAIL = 'catering@5spicemarket.com';
+
+// Brand-wide catering milestones for the homepage "Every Gathering Matters"
+// section (live mode). One total for all 5Spice kitchens combined.
+// Enter verified running totals only (never estimates). The site rounds down
+// to a milestone (e.g. 1240 → "1,000+") and hides any metric that is null or
+// below its minimum. `asOf` is for your records only; it isn't shown.
+export const CATERING_STATS = {
+    // Owners confirmed 1,000+ guests on 2026-10-20.
+    guestsServed: 1000,
+    eventsCompleted: null,
+    asOf: '2026-10-20',
+};
 
 // CONTACT describes the primary/default visible location (the first entry in
 // /src/data/locations), so this file stays a single source of truth.
