@@ -27,12 +27,12 @@ const LocationMenu = () => {
     }
 
     return (
-        <div className="min-h-screen bg-[#0E0E0E] text-[#F0EAD6]">
+        <div className="min-h-screen bg-ink-900 text-brand-cream">
             <section className="px-5 pt-14 pb-8 sm:px-8 lg:px-12">
                 <div className="mx-auto max-w-5xl">
-                    <p className="text-xs font-semibold uppercase tracking-[0.32em] text-[#D4A84B]">{location.displayName}</p>
+                    <p className="text-xs font-semibold uppercase tracking-[0.32em] text-brand-gold">{location.displayName}</p>
                     <h1 className="mt-4 font-serif text-4xl font-bold text-white md:text-5xl">Full Menu</h1>
-                    <p className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-[#1CA433]">
+                    <p className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-brand-green">
                         <ShieldCheck size={18} /> {menu.halalStatement}
                     </p>
                 </div>
@@ -40,14 +40,14 @@ const LocationMenu = () => {
 
             <nav
                 aria-label="Menu categories"
-                className="sticky top-[64px] z-30 border-y border-[#B88A3D]/20 bg-[#0E0E0E]/95 backdrop-blur-xl md:top-[104px]"
+                className="sticky top-[64px] z-30 border-y border-brand-gold-deep/20 bg-ink-900/95 backdrop-blur-xl md:top-[104px]"
             >
                 <div className="mx-auto flex max-w-5xl gap-2 overflow-x-auto px-5 py-3 sm:px-8 lg:px-12">
                     {menu.categories.map((category) => (
                         <a
                             key={category.name}
                             href={`#${slugify(category.name)}`}
-                            className="shrink-0 whitespace-nowrap border border-[#B88A3D]/25 px-4 py-2 text-xs font-bold uppercase tracking-[0.14em] text-[#F0EAD6]/78 transition-colors hover:border-[#D4A84B] hover:text-[#D4A84B]"
+                            className="shrink-0 whitespace-nowrap border border-brand-gold-deep/25 px-4 py-2 text-xs font-bold uppercase tracking-[0.14em] text-brand-cream/78 transition-colors hover:border-brand-gold hover:text-brand-gold"
                         >
                             {category.name}
                         </a>
@@ -66,10 +66,10 @@ const LocationMenu = () => {
                                 <h2 className="font-serif text-3xl font-semibold text-white">{category.name}</h2>
                                 <div className="mt-5 grid gap-4 sm:grid-cols-2">
                                     {items.map((item) => (
-                                        <article key={item.id} className="border border-[#B88A3D]/20 bg-[#141414] p-5">
+                                        <article key={item.id} className="border border-brand-gold-deep/20 bg-ink-800 p-5">
                                             <div className="flex items-start justify-between gap-3">
                                                 <h3 className="font-serif text-xl font-semibold text-white">{item.name}</h3>
-                                                <span className="shrink-0 text-sm font-semibold text-[#D4A84B]">
+                                                <span className="shrink-0 text-sm font-semibold text-brand-gold">
                                                     {item.price != null ? `$${item.price.toFixed(2)}` : 'Price TBD'}
                                                 </span>
                                             </div>

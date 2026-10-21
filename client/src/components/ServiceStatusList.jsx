@@ -21,7 +21,7 @@ const ServiceStatusList = ({ services, className = '' }) => {
                     <li
                         key={key}
                         className={`inline-flex items-center gap-1.5 px-3 py-1 text-xs font-bold uppercase tracking-[0.16em] ${
-                            isOpen ? 'bg-[#1CA433]/15 text-[#1CA433]' : 'bg-[#D4A84B]/15 text-[#D4A84B]'
+                            isOpen ? 'bg-brand-green/15 text-brand-green' : 'bg-brand-gold/15 text-brand-gold'
                         }`}
                     >
                         <Icon size={13} aria-hidden="true" />

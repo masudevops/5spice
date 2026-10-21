@@ -3,13 +3,33 @@
 @tailwind utilities;
 
 @layer base {
+  /*
+   * Brand color tokens: the single place to change a site color.
+   * Values are RGB channels so Tailwind opacity modifiers work
+   * (e.g. border-brand-gold-deep/25). Use them in Tailwind as brand-* and
+   * ink-* (see tailwind.config.js), or in CSS as rgb(var(--color-gold)).
+   */
   :root {
-    --color-background: #1c1c1c;
-    --color-text-primary: #f8f5ef;
-    --color-accent-gold: #b88a3d;
-    --color-brand-green: #2d6a3f;
-    --color-brand-orange: #d4500a;
-    --color-white: #ffffff;
+    /* Accents */
+    --color-gold: 212 168 75;        /* #D4A84B  labels, icons, links, "coming soon" */
+    --color-gold-deep: 184 138 61;   /* #B88A3D  borders, dividers */
+    --color-green: 28 164 51;        /* #1CA433  logo green: primary buttons, "available now" */
+    --color-green-dark: 22 140 43;   /* #168C2B  primary button hover */
+    --color-forest: 45 106 63;       /* #2D6A3F  deep green, coming-soon page accents */
+    --color-orange: 212 80 10;       /* #D4500A  warm accent */
+
+    /* Text */
+    --color-cream: 240 234 214;      /* #F0EAD6  page text */
+    --color-parchment: 248 245 239;  /* #F8F5EF  default body text */
+
+    /* Dark backgrounds, darkest to lightest */
+    --color-ink-950: 11 11 11;       /* #0B0B0B */
+    --color-ink-900: 14 14 14;       /* #0E0E0E  page background */
+    --color-ink-850: 16 16 16;       /* #101010 */
+    --color-ink-800: 20 20 20;       /* #141414  cards */
+    --color-ink-750: 22 22 22;       /* #161616 */
+    --color-ink-700: 26 26 26;       /* #1A1A1A */
+    --color-ink-600: 28 28 28;       /* #1C1C1C  body fallback background */
   }
 
   html {
@@ -17,14 +37,14 @@
   }
 
   body {
-    background-color: var(--color-background);
-    color: var(--color-text-primary);
+    background-color: rgb(var(--color-ink-600));
+    color: rgb(var(--color-parchment));
   }
 
   /* Visible keyboard focus on every link and button, in brand gold. */
   a:focus-visible,
   button:focus-visible {
-    outline: 2px solid #d4a84b;
+    outline: 2px solid rgb(var(--color-gold));
     outline-offset: 3px;
   }
 }

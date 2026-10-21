@@ -17,7 +17,7 @@ const typeLabel = (location) => {
 
 // Branded replacement for a native <select> — a button that opens a small
 // listbox panel styled with the same tokens used across LocationCard,
-// Catering, etc. (#141414 panel, #B88A3D/25 borders, #D4A84B gold accent),
+// Catering, etc. (ink-800 panel, brand-gold-deep/25 borders, brand-gold accent),
 // so switching locations reads as part of the site, not a browser control.
 // Renders nothing when there's nothing to choose between.
 const LocationSwitcher = ({ locations, selectedSlug, onSelect, className, panelClassName }) => {
@@ -62,9 +62,9 @@ const LocationSwitcher = ({ locations, selectedSlug, onSelect, className, panelC
                 aria-haspopup="listbox"
                 aria-expanded={open}
                 aria-controls={listboxId}
-                className="inline-flex items-center gap-2 border border-[#B88A3D]/30 bg-[#141414] px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-[#F0EAD6]/85 transition-colors hover:border-[#D4A84B] hover:text-white focus:border-[#D4A84B] focus:outline-none"
+                className="inline-flex items-center gap-2 border border-brand-gold-deep/30 bg-ink-800 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-brand-cream/85 transition-colors hover:border-brand-gold hover:text-white focus:border-brand-gold focus:outline-none"
             >
-                <MapPin size={14} className="shrink-0 text-[#D4A84B]" aria-hidden="true" />
+                <MapPin size={14} className="shrink-0 text-brand-gold" aria-hidden="true" />
                 <span>{selected.shortName}</span>
                 <MotionSpan animate={{ rotate: open ? 180 : 0 }} transition={{ duration: 0.18 }} className="flex">
                     <ChevronDown size={13} />
@@ -82,7 +82,7 @@ const LocationSwitcher = ({ locations, selectedSlug, onSelect, className, panelC
                         exit={{ opacity: 0, y: -6 }}
                         transition={{ duration: 0.16 }}
                         className={clsx(
-                            'absolute z-50 mt-2 w-72 border border-[#B88A3D]/25 bg-[#141414] p-1.5 text-left shadow-[0_18px_50px_rgba(0,0,0,0.45)]',
+                            'absolute z-50 mt-2 w-72 border border-brand-gold-deep/25 bg-ink-800 p-1.5 text-left shadow-[0_18px_50px_rgba(0,0,0,0.45)]',
                             panelClassName || 'left-0'
                         )}
                     >
@@ -96,11 +96,11 @@ const LocationSwitcher = ({ locations, selectedSlug, onSelect, className, panelC
                                         className={clsx(
                                             'flex w-full flex-col gap-0.5 border-l-2 px-3 py-2.5 text-left transition-colors',
                                             isSelected
-                                                ? 'border-[#D4A84B] bg-white/[0.04]'
-                                                : 'border-transparent hover:border-[#D4A84B]/50 hover:bg-white/[0.03]'
+                                                ? 'border-brand-gold bg-white/[0.04]'
+                                                : 'border-transparent hover:border-brand-gold/50 hover:bg-white/[0.03]'
                                         )}
                                     >
-                                        <span className={clsx('font-serif text-base font-semibold', isSelected ? 'text-[#D4A84B]' : 'text-white')}>
+                                        <span className={clsx('font-serif text-base font-semibold', isSelected ? 'text-brand-gold' : 'text-white')}>
                                             {location.shortName}
                                         </span>
                                         <span className="text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-white/40">

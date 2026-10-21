@@ -30,12 +30,12 @@ const Sales = () => {
     }, []);
 
     return (
-        <div className="min-h-screen bg-[#0E0E0E] text-[#F0EAD6]">
+        <div className="min-h-screen bg-ink-900 text-brand-cream">
             <section className="relative overflow-hidden px-5 py-16 sm:px-8 lg:px-12">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(229,57,53,0.14),transparent_34%),linear-gradient(135deg,#0E0E0E,#161616)]" />
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(229,57,53,0.14),transparent_34%),linear-gradient(135deg,rgb(var(--color-ink-900)),rgb(var(--color-ink-750)))]" />
                 <div className="relative mx-auto max-w-7xl">
-                    <BadgePercent className="mb-5 text-[#D4A84B]" size={34} strokeWidth={1.4} />
-                    <p className="text-xs font-semibold uppercase tracking-[0.32em] text-[#D4A84B]">Weekly Deals</p>
+                    <BadgePercent className="mb-5 text-brand-gold" size={34} strokeWidth={1.4} />
+                    <p className="text-xs font-semibold uppercase tracking-[0.32em] text-brand-gold">Weekly Deals</p>
                     <h1 className="mt-5 max-w-4xl font-serif text-5xl font-bold leading-tight text-white md:text-6xl">Fresh finds and family favorites every week.</h1>
                     <p className="mt-5 max-w-2xl text-lg leading-8 text-white/68">
                         Weekly grocery deals from {dealLocations.map(getLocationLabel).join(' and ') || '5Spice Market & Kitchen'}.
@@ -46,8 +46,8 @@ const Sales = () => {
             <section className="px-5 pb-20 sm:px-8 lg:px-12">
                 <div className="mx-auto max-w-7xl">
                     {loaded && !hasDeals && (
-                        <div className="border border-[#B88A3D]/25 bg-[#141414] p-7 md:p-9">
-                            <CalendarDays className="mb-5 text-[#D4A84B]" size={30} strokeWidth={1.4} aria-hidden="true" />
+                        <div className="border border-brand-gold-deep/25 bg-ink-800 p-7 md:p-9">
+                            <CalendarDays className="mb-5 text-brand-gold" size={30} strokeWidth={1.4} aria-hidden="true" />
                             <h2 className="font-serif text-3xl font-semibold text-white">Weekly deals start when our market opens.</h2>
                             <p className="mt-4 max-w-3xl leading-7 text-white/62">
                                 {upcomingDealLocations.length > 0
@@ -58,9 +58,9 @@ const Sales = () => {
                     )}
 
                     {hasDeals && (weeklyDeals.updatedLabel || weeklyDeals.note) && (
-                        <div className="mb-7 border border-[#B88A3D]/25 bg-[#101010] p-5">
+                        <div className="mb-7 border border-brand-gold-deep/25 bg-ink-850 p-5">
                             <div className="flex items-start gap-3">
-                                <Sparkles className="mt-1 shrink-0 text-[#D4A84B]" size={22} aria-hidden="true" />
+                                <Sparkles className="mt-1 shrink-0 text-brand-gold" size={22} aria-hidden="true" />
                                 <div>
                                     {weeklyDeals.updatedLabel && <p className="font-semibold text-white">{weeklyDeals.updatedLabel}</p>}
                                     {weeklyDeals.note && <p className="mt-1 text-sm leading-6 text-white/58">{weeklyDeals.note}</p>}
@@ -71,18 +71,18 @@ const Sales = () => {
 
                     <div className="grid gap-5 md:grid-cols-3">
                         {weeklyDeals.deals.map((deal) => (
-                            <article key={deal.id} className="border border-[#B88A3D]/25 bg-[#141414] p-7">
-                                <span className="inline-flex bg-[#D4A84B] px-3 py-1 text-xs font-bold uppercase tracking-[0.18em] text-[#0E0E0E]">
+                            <article key={deal.id} className="border border-brand-gold-deep/25 bg-ink-800 p-7">
+                                <span className="inline-flex bg-brand-gold px-3 py-1 text-xs font-bold uppercase tracking-[0.18em] text-ink-900">
                                     {deal.badge}
                                 </span>
-                                <p className="mt-6 text-xs font-semibold uppercase tracking-[0.24em] text-[#D4A84B]/80">{deal.category}</p>
+                                <p className="mt-6 text-xs font-semibold uppercase tracking-[0.24em] text-brand-gold/80">{deal.category}</p>
                                 <h2 className="mt-3 font-serif text-3xl font-semibold leading-tight text-white">{deal.title}</h2>
                                 <p className="mt-4 leading-7 text-white/62">{deal.description}</p>
                             </article>
                         ))}
                     </div>
 
-                    <div className="mt-8 border border-[#B88A3D]/25 bg-[#101010] p-7 md:flex md:items-center md:justify-between md:gap-8">
+                    <div className="mt-8 border border-brand-gold-deep/25 bg-ink-850 p-7 md:flex md:items-center md:justify-between md:gap-8">
                         <div>
                             <h2 className="font-serif text-3xl font-semibold text-white">Follow for the latest specials.</h2>
                             <p className="mt-3 max-w-2xl text-sm leading-7 text-white/58">
@@ -90,10 +90,10 @@ const Sales = () => {
                             </p>
                         </div>
                         <div className="mt-6 flex flex-wrap gap-3 md:mt-0 md:shrink-0">
-                            <a href={SOCIAL_LINKS.facebook} target="_blank" rel="noreferrer" aria-label="5Spice Market on Facebook" className="inline-flex items-center gap-3 border border-[#B88A3D]/35 px-5 py-3 text-sm font-bold uppercase tracking-[0.16em] text-[#D4A84B] transition-colors hover:border-[#D4A84B] hover:text-white">
+                            <a href={SOCIAL_LINKS.facebook} target="_blank" rel="noreferrer" aria-label="5Spice Market on Facebook" className="inline-flex items-center gap-3 border border-brand-gold-deep/35 px-5 py-3 text-sm font-bold uppercase tracking-[0.16em] text-brand-gold transition-colors hover:border-brand-gold hover:text-white">
                                 <Facebook size={18} aria-hidden="true" /> Facebook
                             </a>
-                            <a href={SOCIAL_LINKS.instagramUrl} target="_blank" rel="noreferrer" aria-label={`${SOCIAL_LINKS.instagramHandle} on Instagram`} className="inline-flex items-center gap-3 border border-[#B88A3D]/35 px-5 py-3 text-sm font-bold uppercase tracking-[0.16em] text-[#D4A84B] transition-colors hover:border-[#D4A84B] hover:text-white">
+                            <a href={SOCIAL_LINKS.instagramUrl} target="_blank" rel="noreferrer" aria-label={`${SOCIAL_LINKS.instagramHandle} on Instagram`} className="inline-flex items-center gap-3 border border-brand-gold-deep/35 px-5 py-3 text-sm font-bold uppercase tracking-[0.16em] text-brand-gold transition-colors hover:border-brand-gold hover:text-white">
                                 <Instagram size={18} aria-hidden="true" /> {SOCIAL_LINKS.instagramHandle}
                             </a>
                         </div>

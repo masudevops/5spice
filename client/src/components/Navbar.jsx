@@ -67,12 +67,12 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="hidden border-b border-[#B88A3D]/15 bg-[#0E0E0E] text-xs text-[#F0EAD6]/70 md:block">
+      <div className="hidden border-b border-brand-gold-deep/15 bg-ink-900 text-xs text-brand-cream/70 md:block">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-2">
           {visibleLocations.length > 1 ? (
             <LocationSwitcher locations={visibleLocations} selectedSlug={selectedSlug} onSelect={selectLocation} />
           ) : (
-            <span className="uppercase tracking-[0.28em] text-[#D4A84B]">{CONTACT.city}</span>
+            <span className="uppercase tracking-[0.28em] text-brand-gold">{CONTACT.city}</span>
           )}
           <span>{statusLine}</span>
         </div>
@@ -82,8 +82,8 @@ const Navbar = () => {
         className={clsx(
           'sticky top-0 z-40 border-b backdrop-blur-xl transition-all duration-300',
           isScrolled
-            ? 'border-[#B88A3D]/25 bg-[#0E0E0E]/92 shadow-[0_18px_60px_rgba(0,0,0,0.28)]'
-            : 'border-[#B88A3D]/12 bg-[#0E0E0E]/82'
+            ? 'border-brand-gold-deep/25 bg-ink-900/92 shadow-[0_18px_60px_rgba(0,0,0,0.28)]'
+            : 'border-brand-gold-deep/12 bg-ink-900/82'
         )}
       >
         <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-3 lg:px-8">
@@ -104,13 +104,13 @@ const Navbar = () => {
                   to={link.path}
                   className={clsx(
                     'relative whitespace-nowrap py-2 text-sm font-medium tracking-[0.08em] transition-colors xl:tracking-[0.16em]',
-                    isActive ? 'text-[#D4A84B]' : 'text-[#F0EAD6]/74 hover:text-white'
+                    isActive ? 'text-brand-gold' : 'text-brand-cream/74 hover:text-white'
                   )}
                 >
                   {link.name}
                   <span
                     className={clsx(
-                      'absolute inset-x-0 -bottom-1 h-px bg-[#D4A84B] transition-transform',
+                      'absolute inset-x-0 -bottom-1 h-px bg-brand-gold transition-transform',
                       isActive ? 'scale-x-100' : 'scale-x-0'
                     )}
                   />
@@ -123,7 +123,7 @@ const Navbar = () => {
             <Link
               to={primaryAction.to}
               onClick={selectOrderLocation}
-              className="whitespace-nowrap bg-[#1CA433] px-4 py-2.5 text-sm font-semibold uppercase tracking-[0.1em] text-white transition-colors hover:bg-[#168C2B] xl:px-5 xl:tracking-[0.16em]"
+              className="whitespace-nowrap bg-brand-green px-4 py-2.5 text-sm font-semibold uppercase tracking-[0.1em] text-white transition-colors hover:bg-brand-green-dark xl:px-5 xl:tracking-[0.16em]"
             >
               {primaryAction.label}
             </Link>
@@ -131,7 +131,7 @@ const Navbar = () => {
 
           <button
             type="button"
-            className="inline-flex h-11 w-11 items-center justify-center border border-[#B88A3D]/30 text-[#F0EAD6] transition-colors hover:border-[#D4A84B] hover:text-[#D4A84B] lg:hidden"
+            className="inline-flex h-11 w-11 items-center justify-center border border-brand-gold-deep/30 text-brand-cream transition-colors hover:border-brand-gold hover:text-brand-gold lg:hidden"
             onClick={() => setMobileMenuOpen((open) => !open)}
             aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
             aria-expanded={mobileMenuOpen}
@@ -142,7 +142,7 @@ const Navbar = () => {
       </header>
 
       {mobileMenuOpen && (
-        <div className="fixed inset-0 z-30 bg-[#0E0E0E]/98 px-6 pb-24 pt-28 lg:hidden">
+        <div className="fixed inset-0 z-30 bg-ink-900/98 px-6 pb-24 pt-28 lg:hidden">
           <nav className="mx-auto flex max-w-sm flex-col gap-3 text-center" aria-label="Mobile navigation">
             {visibleLocations.length > 1 && (
               <div className="mb-2 flex justify-center">
@@ -159,38 +159,38 @@ const Navbar = () => {
                 key={link.name}
                 to={link.path}
                 onClick={() => setMobileMenuOpen(false)}
-                className="border border-[#B88A3D]/20 px-5 py-4 font-serif text-xl font-semibold text-[#F0EAD6] transition-colors hover:border-[#D4A84B] hover:text-[#D4A84B]"
+                className="border border-brand-gold-deep/20 px-5 py-4 font-serif text-xl font-semibold text-brand-cream transition-colors hover:border-brand-gold hover:text-brand-gold"
               >
                 {link.name}
               </Link>
             ))}
-            <Link to={primaryAction.to} onClick={() => { selectOrderLocation(); setMobileMenuOpen(false); }} className="mt-3 bg-[#1CA433] px-5 py-4 font-bold uppercase tracking-[0.18em] text-white">
+            <Link to={primaryAction.to} onClick={() => { selectOrderLocation(); setMobileMenuOpen(false); }} className="mt-3 bg-brand-green px-5 py-4 font-bold uppercase tracking-[0.18em] text-white">
               {primaryAction.label}
             </Link>
           </nav>
         </div>
       )}
 
-      <nav className="fixed bottom-0 left-0 right-0 z-50 border-t border-[#B88A3D]/20 bg-[#0E0E0E]/95 pb-safe shadow-[0_-18px_60px_rgba(0,0,0,0.32)] backdrop-blur-xl md:hidden" aria-label="Mobile quick navigation">
+      <nav className="fixed bottom-0 left-0 right-0 z-50 border-t border-brand-gold-deep/20 bg-ink-900/95 pb-safe shadow-[0_-18px_60px_rgba(0,0,0,0.32)] backdrop-blur-xl md:hidden" aria-label="Mobile quick navigation">
         <div className="mx-auto grid h-16 max-w-md grid-cols-5 items-center">
           {bottomLinks.slice(0, midpoint).map((link) => {
             const Icon = link.icon;
             const isActive = location.pathname === link.path;
             return (
-              <Link key={link.path} to={link.path} className={clsx('flex flex-col items-center gap-1 text-[0.68rem] font-medium', isActive ? 'text-[#D4A84B]' : 'text-[#F0EAD6]/55')}>
+              <Link key={link.path} to={link.path} className={clsx('flex flex-col items-center gap-1 text-[0.68rem] font-medium', isActive ? 'text-brand-gold' : 'text-brand-cream/55')}>
                 <Icon size={19} />
                 {link.name}
               </Link>
             );
           })}
-          <Link to={centerAction.to} onClick={centerAction.onClick} aria-label={centerAction.label} className="mx-auto -mt-7 flex h-14 w-14 items-center justify-center rounded-full border-4 border-[#0E0E0E] bg-[#1CA433] text-white shadow-lg">
+          <Link to={centerAction.to} onClick={centerAction.onClick} aria-label={centerAction.label} className="mx-auto -mt-7 flex h-14 w-14 items-center justify-center rounded-full border-4 border-ink-900 bg-brand-green text-white shadow-lg">
             <centerAction.icon size={24} />
           </Link>
           {bottomLinks.slice(midpoint).map((link) => {
             const Icon = link.icon;
             const isActive = location.pathname === link.path;
             return (
-              <Link key={link.path} to={link.path} className={clsx('flex flex-col items-center gap-1 text-[0.68rem] font-medium', isActive ? 'text-[#D4A84B]' : 'text-[#F0EAD6]/55')}>
+              <Link key={link.path} to={link.path} className={clsx('flex flex-col items-center gap-1 text-[0.68rem] font-medium', isActive ? 'text-brand-gold' : 'text-brand-cream/55')}>
                 <Icon size={19} />
                 {link.name}
               </Link>

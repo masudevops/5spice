@@ -1,3 +1,6 @@
+// rgb(var(--color-x) / <alpha-value>) lets opacity modifiers like /25 work.
+const token = (name) => `rgb(var(--color-${name}) / <alpha-value>)`;
+
 /** @type {import('tailwindcss').Config} */
 export default {
     darkMode: 'class',
@@ -7,17 +10,25 @@ export default {
     ],
     theme: {
         extend: {
+            // Brand color tokens, defined once in src/index.css (:root).
             colors: {
                 brand: {
-                    green: 'var(--color-brand-green)',
-                    lightGreen: '#3f7f51',
-                    gold: 'var(--color-accent-gold)',
-                    cream: 'var(--color-text-primary)',
-                    charcoal: 'var(--color-background)',
-                    dark: 'var(--color-background)',
-                    orange: 'var(--color-brand-orange)',
-                    red: 'var(--color-brand-orange)',
-                }
+                    gold: { DEFAULT: token('gold'), deep: token('gold-deep') },
+                    green: { DEFAULT: token('green'), dark: token('green-dark') },
+                    forest: token('forest'),
+                    orange: token('orange'),
+                    cream: token('cream'),
+                    parchment: token('parchment'),
+                },
+                ink: {
+                    950: token('ink-950'),
+                    900: token('ink-900'),
+                    850: token('ink-850'),
+                    800: token('ink-800'),
+                    750: token('ink-750'),
+                    700: token('ink-700'),
+                    600: token('ink-600'),
+                },
             },
             fontFamily: {
                 // Noto Sans Bengali is the fallback so Bengali words inside

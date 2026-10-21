@@ -16,13 +16,13 @@ const About = () => {
     });
 
     return (
-        <div className="min-h-screen bg-[#0E0E0E] text-[#F0EAD6]">
+        <div className="min-h-screen bg-ink-900 text-brand-cream">
             {/* Hero and story share one background so they read as a single continuous section. */}
-            <div className="relative overflow-hidden border-b border-[#B88A3D]/20 bg-[#0B0B0B]">
-                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_45%_at_50%_0%,rgba(184,138,61,0.16),transparent),radial-gradient(ellipse_60%_35%_at_50%_42%,rgba(212,168,75,0.07),transparent)]" />
+            <div className="relative overflow-hidden border-b border-brand-gold-deep/20 bg-ink-950">
+                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_45%_at_50%_0%,rgb(var(--color-gold-deep)/0.16),transparent),radial-gradient(ellipse_60%_35%_at_50%_42%,rgb(var(--color-gold)/0.07),transparent)]" />
                 <section className="relative px-5 pb-6 pt-[3.25rem] sm:px-8 lg:px-12">
                     <div className="relative mx-auto max-w-3xl text-center">
-                        <p className="text-xs font-semibold uppercase tracking-[0.32em] text-[#D4A84B]">Our Story</p>
+                        <p className="text-xs font-semibold uppercase tracking-[0.32em] text-brand-gold">Our Story</p>
                         <h1 className="mt-5 font-serif text-[2.6rem] font-bold leading-tight text-white sm:text-5xl md:text-6xl">
                             {/* One sentence per line; on narrow phones a sentence may wrap within itself. */}
                             <span className="block text-balance sm:whitespace-nowrap">More Than Food.</span>
@@ -41,13 +41,13 @@ const About = () => {
                     <div className="relative mx-auto max-w-2xl text-center">
                         {/* Five dots, one for each spice in the blend. */}
                         <div className="flex items-center justify-center gap-2.5" aria-hidden="true">
-                            {['#D4A84B', '#1CA433', '#D4A84B', '#1CA433', '#D4A84B'].map((color, index) => (
-                                <span key={index} className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: color }} />
+                            {['bg-brand-gold', 'bg-brand-green', 'bg-brand-gold', 'bg-brand-green', 'bg-brand-gold'].map((color, index) => (
+                                <span key={index} className={`h-1.5 w-1.5 rounded-full ${color}`} />
                             ))}
                         </div>
 
                         <h2 id="our-story-heading" className="mt-8">
-                            <span lang="bn" className="block font-bengali text-5xl font-semibold leading-[1.35] text-[#D4A84B] sm:text-6xl md:text-7xl">
+                            <span lang="bn" className="block font-bengali text-5xl font-semibold leading-[1.35] text-brand-gold sm:text-6xl md:text-7xl">
                                 পাঁচফোড়ন
                             </span>
                             <span className="mt-3 block font-serif text-2xl font-semibold text-white sm:text-3xl">
@@ -55,19 +55,19 @@ const About = () => {
                             </span>
                         </h2>
 
-                        <div className="mx-auto mt-10 h-px w-16 bg-[#B88A3D]/50" aria-hidden="true" />
+                        <div className="mx-auto mt-10 h-px w-16 bg-brand-gold-deep/50" aria-hidden="true" />
 
                         <div className="mt-10 space-y-6 text-pretty text-left text-lg leading-[1.9] text-white/72 sm:text-center">
                             <p className="text-balance font-serif text-2xl italic leading-snug text-white sm:text-[1.75rem]">
                                 Some memories begin with a familiar aroma.
                             </p>
                             <p>
-                                The gentle crackle of <span lang="bn" className="font-bengali text-[#D4A84B]">পাঁচফোড়ন</span> in a warm pan.
-                                The aroma of <span lang="bn" className="font-bengali text-[#D4A84B]">মায়ের রান্না</span> drifting through the house as everyone gathers around the table.
+                                The gentle crackle of <span lang="bn" className="font-bengali text-brand-gold">পাঁচফোড়ন</span> in a warm pan.
+                                The aroma of <span lang="bn" className="font-bengali text-brand-gold">মায়ের রান্না</span> drifting through the house as everyone gathers around the table.
                             </p>
                             <p>For many of us, these little moments are what make a house feel like home.</p>
                             <p>
-                                Inspired by <span lang="bn" className="font-bengali text-[#D4A84B]">পাঁচফোড়ন</span>, the traditional five-spice blend of Bengali cooking,
+                                Inspired by <span lang="bn" className="font-bengali text-brand-gold">পাঁচফোড়ন</span>, the traditional five-spice blend of Bengali cooking,
                                 5Spice was born from a simple idea: to bring the flavors, warmth, and traditions of home closer to our community.
                             </p>
                             <p>
@@ -77,11 +77,11 @@ const About = () => {
                         </div>
 
                         <div className="mt-14 flex items-center justify-center gap-4" aria-hidden="true">
-                            <span className="h-px w-10 bg-[#B88A3D]/50 sm:w-16" />
-                            <span className="h-1.5 w-1.5 rounded-full bg-[#1CA433]" />
-                            <span className="h-px w-10 bg-[#B88A3D]/50 sm:w-16" />
+                            <span className="h-px w-10 bg-brand-gold-deep/50 sm:w-16" />
+                            <span className="h-1.5 w-1.5 rounded-full bg-brand-green" />
+                            <span className="h-px w-10 bg-brand-gold-deep/50 sm:w-16" />
                         </div>
-                        <p className="mt-6 text-balance font-serif text-3xl font-semibold leading-tight text-[#D4A84B] sm:text-4xl">
+                        <p className="mt-6 text-balance font-serif text-3xl font-semibold leading-tight text-brand-gold sm:text-4xl">
                             Five spices. Countless memories. One home.
                         </p>
                     </div>
@@ -93,8 +93,8 @@ const About = () => {
                     {values.map((value) => {
                         const Icon = value.icon;
                         return (
-                            <article key={value.title} className="border border-[#B88A3D]/25 bg-[#141414] p-7">
-                                <Icon className="mb-5 text-[#D4A84B]" size={30} strokeWidth={1.4} aria-hidden="true" />
+                            <article key={value.title} className="border border-brand-gold-deep/25 bg-ink-800 p-7">
+                                <Icon className="mb-5 text-brand-gold" size={30} strokeWidth={1.4} aria-hidden="true" />
                                 <h2 className="font-serif text-2xl font-semibold text-white">{value.title}</h2>
                                 <p className="mt-4 leading-7 text-white/62">{value.text}</p>
                             </article>
@@ -102,10 +102,10 @@ const About = () => {
                     })}
                 </div>
                 <div className="mx-auto mt-8 flex max-w-7xl flex-wrap gap-3">
-                    <Link to="/locations" className="inline-flex items-center gap-2 bg-[#1CA433] px-6 py-4 font-bold uppercase tracking-[0.16em] text-white transition-colors hover:bg-[#168C2B]">
+                    <Link to="/locations" className="inline-flex items-center gap-2 bg-brand-green px-6 py-4 font-bold uppercase tracking-[0.16em] text-white transition-colors hover:bg-brand-green-dark">
                         Our Locations <ArrowRight size={17} aria-hidden="true" />
                     </Link>
-                    <Link to="/contact" className="inline-flex items-center gap-2 border border-[#B88A3D]/45 px-6 py-4 font-bold uppercase tracking-[0.16em] text-[#D4A84B] transition-colors hover:border-[#D4A84B] hover:text-white">
+                    <Link to="/contact" className="inline-flex items-center gap-2 border border-brand-gold-deep/45 px-6 py-4 font-bold uppercase tracking-[0.16em] text-brand-gold transition-colors hover:border-brand-gold hover:text-white">
                         Contact Us
                     </Link>
                 </div>

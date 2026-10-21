@@ -55,12 +55,12 @@ const Pickup = () => {
     const livePlatformGroups = orderGroups.filter((group) => group.platforms.length > 0);
 
     return (
-        <div className="min-h-screen bg-[#0E0E0E] text-[#F0EAD6]">
+        <div className="min-h-screen bg-ink-900 text-brand-cream">
             <section className="relative overflow-hidden px-5 py-16 sm:px-8 lg:px-12">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(45,106,63,0.16),transparent_34%),linear-gradient(135deg,#0E0E0E,#161616)]" />
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgb(var(--color-forest)/0.16),transparent_34%),linear-gradient(135deg,rgb(var(--color-ink-900)),rgb(var(--color-ink-750)))]" />
                 <div className="relative mx-auto max-w-7xl">
-                    <Store className="mb-5 text-[#D4A84B]" size={34} strokeWidth={1.4} aria-hidden="true" />
-                    <p className="text-xs font-semibold uppercase tracking-[0.32em] text-[#D4A84B]">Order Online</p>
+                    <Store className="mb-5 text-brand-gold" size={34} strokeWidth={1.4} aria-hidden="true" />
+                    <p className="text-xs font-semibold uppercase tracking-[0.32em] text-brand-gold">Order Online</p>
                     <h1 className="mt-5 max-w-4xl font-serif text-5xl font-bold leading-tight text-white md:text-6xl">
                         Order your 5Spice favorites.
                     </h1>
@@ -69,7 +69,7 @@ const Pickup = () => {
                     </p>
 
                     {visibleLocations.length > 1 && (
-                        <div className="mt-7 inline-flex flex-wrap items-center gap-3 border border-[#B88A3D]/30 bg-[#141414] px-5 py-4">
+                        <div className="mt-7 inline-flex flex-wrap items-center gap-3 border border-brand-gold-deep/30 bg-ink-800 px-5 py-4">
                             <span className="text-sm font-semibold uppercase tracking-[0.14em] text-white/70">Ordering from:</span>
                             <LocationSwitcher locations={visibleLocations} selectedSlug={selectedSlug} onSelect={selectLocation} />
                         </div>
@@ -80,17 +80,17 @@ const Pickup = () => {
             <section className="px-5 pb-20 sm:px-8 lg:px-12">
                 <div className="mx-auto max-w-7xl">
                     {!selectedLocation && (
-                        <div className="border border-[#B88A3D]/25 bg-[#141414] p-7 text-white/68">
+                        <div className="border border-brand-gold-deep/25 bg-ink-800 p-7 text-white/68">
                             Ordering isn't available yet. Check back soon.
                         </div>
                     )}
 
                     {selectedLocation && isOpen && (
-                        <div className="border border-[#B88A3D]/25 bg-[#141414] p-7 md:p-9">
-                            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#1CA433]">{selectedLocation.statusLabel}</p>
+                        <div className="border border-brand-gold-deep/25 bg-ink-800 p-7 md:p-9">
+                            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-brand-green">{selectedLocation.statusLabel}</p>
                             <h2 className="mt-3 font-serif text-3xl font-semibold leading-tight text-white">{getLocationLabel(selectedLocation)}</h2>
                             <p className="mt-3 flex items-start gap-2 text-white/68">
-                                <MapPin size={18} className="mt-1 shrink-0 text-[#D4A84B]" aria-hidden="true" />
+                                <MapPin size={18} className="mt-1 shrink-0 text-brand-gold" aria-hidden="true" />
                                 {selectedLocation.address.full}
                             </p>
                             <ServiceStatusList services={selectedLocation.services} className="mt-4" />
@@ -100,7 +100,7 @@ const Pickup = () => {
                                 return (
                                     <div key={group.title} className="mt-8">
                                         <h3 className="flex items-center gap-2 font-serif text-2xl font-semibold text-white">
-                                            <Icon size={22} className="text-[#D4A84B]" aria-hidden="true" /> {group.title}
+                                            <Icon size={22} className="text-brand-gold" aria-hidden="true" /> {group.title}
                                         </h3>
                                         <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                                             {group.platforms.map((platform) => (
@@ -109,12 +109,12 @@ const Pickup = () => {
                                                     href={selectedLocation.orderingLinks[platform.key]}
                                                     target="_blank"
                                                     rel="noreferrer"
-                                                    className="border border-white/10 bg-[#101010] p-5 transition-colors hover:border-[#D4A84B]"
+                                                    className="border border-white/10 bg-ink-850 p-5 transition-colors hover:border-brand-gold"
                                                 >
-                                                    <PackageCheck className="mb-4 text-[#D4A84B]" size={23} strokeWidth={1.35} aria-hidden="true" />
+                                                    <PackageCheck className="mb-4 text-brand-gold" size={23} strokeWidth={1.35} aria-hidden="true" />
                                                     <h4 className="font-serif text-xl font-semibold text-white">{platform.name}</h4>
                                                     <p className="mt-2 text-sm leading-6 text-white/58">{platform.description}</p>
-                                                    <span className="mt-4 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-[#D4A84B]">
+                                                    <span className="mt-4 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-brand-gold">
                                                         {platform.label} <ExternalLink size={15} aria-hidden="true" />
                                                     </span>
                                                 </a>
@@ -134,7 +134,7 @@ const Pickup = () => {
                                 </p>
                                 <div className="mt-5 flex flex-wrap gap-3">
                                     {!takingOrders && cateringNow && (
-                                        <Link to="/catering" className="inline-flex items-center gap-2 bg-[#1CA433] px-6 py-4 font-bold uppercase tracking-[0.16em] text-white transition-colors hover:bg-[#168C2B]">
+                                        <Link to="/catering" className="inline-flex items-center gap-2 bg-brand-green px-6 py-4 font-bold uppercase tracking-[0.16em] text-white transition-colors hover:bg-brand-green-dark">
                                             <HandHeart size={17} aria-hidden="true" /> Request Catering
                                         </Link>
                                     )}
@@ -142,13 +142,13 @@ const Pickup = () => {
                                         <a
                                             href={toTelHref(selectedLocation.phone)}
                                             className={takingOrders
-                                                ? 'inline-flex items-center gap-2 bg-[#1CA433] px-6 py-4 font-bold uppercase tracking-[0.16em] text-white transition-colors hover:bg-[#168C2B]'
-                                                : 'inline-flex items-center gap-2 border border-[#B88A3D]/45 px-6 py-4 font-bold uppercase tracking-[0.16em] text-[#D4A84B] transition-colors hover:border-[#D4A84B] hover:text-white'}
+                                                ? 'inline-flex items-center gap-2 bg-brand-green px-6 py-4 font-bold uppercase tracking-[0.16em] text-white transition-colors hover:bg-brand-green-dark'
+                                                : 'inline-flex items-center gap-2 border border-brand-gold-deep/45 px-6 py-4 font-bold uppercase tracking-[0.16em] text-brand-gold transition-colors hover:border-brand-gold hover:text-white'}
                                         >
                                             <Phone size={17} aria-hidden="true" /> Call {selectedLocation.phone}
                                         </a>
                                     )}
-                                    <a href={selectedLocation.googleMapsUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 border border-[#B88A3D]/45 px-6 py-4 font-bold uppercase tracking-[0.16em] text-[#D4A84B] transition-colors hover:border-[#D4A84B] hover:text-white">
+                                    <a href={selectedLocation.googleMapsUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 border border-brand-gold-deep/45 px-6 py-4 font-bold uppercase tracking-[0.16em] text-brand-gold transition-colors hover:border-brand-gold hover:text-white">
                                         <Navigation size={17} aria-hidden="true" /> Directions
                                     </a>
                                 </div>
@@ -157,8 +157,8 @@ const Pickup = () => {
                     )}
 
                     {selectedLocation && !isOpen && (
-                        <div className="border border-[#B88A3D]/25 bg-[#141414] p-7 md:p-9">
-                            <p className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.28em] text-[#D4A84B]">
+                        <div className="border border-brand-gold-deep/25 bg-ink-800 p-7 md:p-9">
+                            <p className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.28em] text-brand-gold">
                                 <CalendarDays size={15} aria-hidden="true" /> {selectedLocation.openingText}
                             </p>
                             <h2 className="mt-3 font-serif text-3xl font-semibold leading-tight text-white">{getLocationLabel(selectedLocation)}</h2>
@@ -174,7 +174,7 @@ const Pickup = () => {
                                             key={location.slug}
                                             type="button"
                                             onClick={() => selectLocation(location.slug)}
-                                            className="inline-flex items-center gap-2 bg-[#1CA433] px-6 py-4 font-bold uppercase tracking-[0.16em] text-white transition-colors hover:bg-[#168C2B]"
+                                            className="inline-flex items-center gap-2 bg-brand-green px-6 py-4 font-bold uppercase tracking-[0.16em] text-white transition-colors hover:bg-brand-green-dark"
                                         >
                                             Order from {getLocationLabel(location)} <ArrowRight size={17} aria-hidden="true" />
                                         </button>
@@ -185,7 +185,7 @@ const Pickup = () => {
                                     <p className="leading-7 text-white/62">
                                         Planning an event? Catering is available now from {cateringLocations.map(getLocationLabel).join(' and ')}.
                                     </p>
-                                    <Link to="/catering" className="mt-5 inline-flex items-center gap-2 bg-[#1CA433] px-6 py-4 font-bold uppercase tracking-[0.16em] text-white transition-colors hover:bg-[#168C2B]">
+                                    <Link to="/catering" className="mt-5 inline-flex items-center gap-2 bg-brand-green px-6 py-4 font-bold uppercase tracking-[0.16em] text-white transition-colors hover:bg-brand-green-dark">
                                         <HandHeart size={17} aria-hidden="true" /> Request Catering
                                     </Link>
                                 </div>
@@ -194,19 +194,19 @@ const Pickup = () => {
                     )}
 
                     <div className="mt-8 grid gap-5 md:grid-cols-2">
-                        <Link to="/catering" className="group border border-[#B88A3D]/25 bg-[#101010] p-7 transition-colors hover:border-[#D4A84B]/50">
-                            <HandHeart className="mb-4 text-[#D4A84B]" size={28} strokeWidth={1.4} aria-hidden="true" />
+                        <Link to="/catering" className="group border border-brand-gold-deep/25 bg-ink-850 p-7 transition-colors hover:border-brand-gold/50">
+                            <HandHeart className="mb-4 text-brand-gold" size={28} strokeWidth={1.4} aria-hidden="true" />
                             <h2 className="font-serif text-2xl font-semibold text-white">Ordering for an event?</h2>
                             <p className="mt-3 text-sm leading-7 text-white/58">Request a personalized catering quote.</p>
-                            <span className="mt-5 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.18em] text-[#D4A84B]">
+                            <span className="mt-5 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.18em] text-brand-gold">
                                 Explore Catering <ArrowRight size={15} className="transition-transform group-hover:translate-x-1" aria-hidden="true" />
                             </span>
                         </Link>
-                        <a href={`mailto:${CONTACT.email}?subject=5Spice%20Order%20Question`} className="group border border-[#B88A3D]/25 bg-[#101010] p-7 transition-colors hover:border-[#D4A84B]/50">
-                            <Mail className="mb-4 text-[#D4A84B]" size={28} strokeWidth={1.4} aria-hidden="true" />
+                        <a href={`mailto:${CONTACT.email}?subject=5Spice%20Order%20Question`} className="group border border-brand-gold-deep/25 bg-ink-850 p-7 transition-colors hover:border-brand-gold/50">
+                            <Mail className="mb-4 text-brand-gold" size={28} strokeWidth={1.4} aria-hidden="true" />
                             <h2 className="font-serif text-2xl font-semibold text-white">Questions about an order?</h2>
                             <p className="mt-3 text-sm leading-7 text-white/58">{CONTACT.email}</p>
-                            <span className="mt-5 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.18em] text-[#D4A84B]">
+                            <span className="mt-5 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.18em] text-brand-gold">
                                 Email Us <ArrowRight size={15} className="transition-transform group-hover:translate-x-1" aria-hidden="true" />
                             </span>
                         </a>
