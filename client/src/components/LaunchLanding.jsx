@@ -41,9 +41,9 @@ const LaunchLanding = () => {
             <div className="pointer-events-none fixed inset-0 z-0 opacity-[0.045] bg-[radial-gradient(circle_at_1px_1px,rgba(255,255,255,0.75)_1px,transparent_0)] [background-size:22px_22px]" />
 
             {isGrandOpeningMode && (
-                <div className="relative z-10 border-b border-brand-gold-deep/25 bg-brand-green px-4 py-3 text-center text-sm font-semibold text-white">
+                <div className="relative z-10 border-b border-brand-gold-deep/25 bg-brand-green px-4 py-3 text-center text-sm font-semibold text-ink-900">
                     Grand Opening: welcome to 5Spice Market & Kitchen in Plano.
-                    <Link to="/locations/plano" className="ml-2 underline decoration-white/50 underline-offset-4 hover:text-brand-gold">Plan your visit</Link>
+                    <Link to="/locations/plano" className="ml-2 underline decoration-ink-900/40 underline-offset-4 hover:decoration-ink-900">Plan your visit</Link>
                 </div>
             )}
 
@@ -64,7 +64,7 @@ const LaunchLanding = () => {
                             </div>
                         )}
                         <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                            <Link to="/market" className="bg-brand-green px-7 py-4 text-center font-bold uppercase tracking-[0.16em] text-white transition-colors hover:bg-brand-green-dark">
+                            <Link to="/market" className="bg-brand-green px-7 py-4 text-center font-bold uppercase tracking-[0.16em] text-ink-900 transition-colors hover:bg-brand-green-light">
                                 Explore the Market
                             </Link>
                             <Link to="/locations" className="border border-brand-gold-deep/50 px-7 py-4 text-center font-bold uppercase tracking-[0.16em] text-brand-cream transition-colors hover:border-brand-gold hover:text-brand-gold">

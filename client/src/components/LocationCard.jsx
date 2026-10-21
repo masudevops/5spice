@@ -44,7 +44,7 @@ const LocationCard = ({ location }) => {
                 {hasPublicMenu(location) && (
                     <Link
                         to={`/locations/${location.slug}/menu`}
-                        className="inline-flex items-center gap-2 bg-brand-green px-5 py-3 text-sm font-bold uppercase tracking-[0.16em] text-white transition-colors hover:bg-brand-green-dark"
+                        className="inline-flex items-center gap-2 bg-brand-green px-5 py-3 text-sm font-bold uppercase tracking-[0.16em] text-ink-900 transition-colors hover:bg-brand-green-light"
                     >
                         View Menu <ArrowRight size={15} />
                     </Link>
@@ -52,7 +52,7 @@ const LocationCard = ({ location }) => {
                 {location.status === 'open' && location.phone && (
                     <a
                         href={toTelHref(location.phone)}
-                        className="inline-flex items-center gap-2 bg-brand-green px-5 py-3 text-sm font-bold uppercase tracking-[0.16em] text-white transition-colors hover:bg-brand-green-dark"
+                        className="inline-flex items-center gap-2 bg-brand-green px-5 py-3 text-sm font-bold uppercase tracking-[0.16em] text-ink-900 transition-colors hover:bg-brand-green-light"
                     >
                         <Phone size={15} aria-hidden="true" /> Call
                     </a>

@@ -14,7 +14,8 @@
     --color-gold: 212 168 75;        /* #D4A84B  labels, icons, links, "coming soon" */
     --color-gold-deep: 184 138 61;   /* #B88A3D  borders, dividers */
     --color-green: 28 164 51;        /* #1CA433  logo green: primary buttons, "available now" */
-    --color-green-dark: 22 140 43;   /* #168C2B  primary button hover */
+    --color-green-light: 34 181 60;  /* #22B53C  primary button hover */
+    /* Green buttons use dark text (ink-900): white on this green fails WCAG AA contrast. */
     --color-forest: 45 106 63;       /* #2D6A3F  deep green, coming-soon page accents */
     --color-orange: 212 80 10;       /* #D4500A  warm accent */
 

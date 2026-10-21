@@ -16,7 +16,7 @@ const NotFound = () => {
                 That page doesn't exist, or isn't available yet. Try our locations page or head back home.
             </p>
             <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-                <Link to="/locations" className="bg-brand-green px-6 py-3 text-sm font-bold uppercase tracking-[0.16em] text-white transition-colors hover:bg-brand-green-dark">
+                <Link to="/locations" className="bg-brand-green px-6 py-3 text-sm font-bold uppercase tracking-[0.16em] text-ink-900 transition-colors hover:bg-brand-green-light">
                     View Locations
                 </Link>
                 <Link to="/" className="border border-brand-gold-deep/35 px-6 py-3 text-sm font-bold uppercase tracking-[0.16em] text-brand-gold transition-colors hover:border-brand-gold hover:text-white">

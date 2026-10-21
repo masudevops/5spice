@@ -51,7 +51,7 @@ const Kitchen = () => {
                                     </div>
                                     <div className="flex flex-wrap gap-3">
                                         {!takesRestaurantOrders(selectedLocation) && selectedLocation.services?.catering === 'open' && (
-                                            <Link to="/catering" className="inline-flex items-center gap-2 bg-brand-green px-6 py-4 font-bold uppercase tracking-[0.16em] text-white transition-colors hover:bg-brand-green-dark">
+                                            <Link to="/catering" className="inline-flex items-center gap-2 bg-brand-green px-6 py-4 font-bold uppercase tracking-[0.16em] text-ink-900 transition-colors hover:bg-brand-green-light">
                                                 <HandHeart size={17} aria-hidden="true" /> Request Catering
                                             </Link>
                                         )}
@@ -59,7 +59,7 @@ const Kitchen = () => {
                                             <a
                                                 href={toTelHref(selectedLocation.phone)}
                                                 className={takesRestaurantOrders(selectedLocation)
-                                                    ? 'inline-flex items-center gap-2 bg-brand-green px-6 py-4 font-bold uppercase tracking-[0.16em] text-white transition-colors hover:bg-brand-green-dark'
+                                                    ? 'inline-flex items-center gap-2 bg-brand-green px-6 py-4 font-bold uppercase tracking-[0.16em] text-ink-900 transition-colors hover:bg-brand-green-light'
                                                     : 'inline-flex items-center gap-2 border border-brand-gold-deep/45 px-6 py-4 font-bold uppercase tracking-[0.16em] text-brand-gold transition-colors hover:border-brand-gold hover:text-white'}
                                             >
                                                 <Phone size={17} aria-hidden="true" /> {selectedLocation.phone}
@@ -94,7 +94,7 @@ const Kitchen = () => {
                                                     key={location.slug}
                                                     type="button"
                                                     onClick={() => selectLocation(location.slug)}
-                                                    className="inline-flex items-center gap-2 bg-brand-green px-6 py-4 font-bold uppercase tracking-[0.16em] text-white transition-colors hover:bg-brand-green-dark"
+                                                    className="inline-flex items-center gap-2 bg-brand-green px-6 py-4 font-bold uppercase tracking-[0.16em] text-ink-900 transition-colors hover:bg-brand-green-light"
                                                 >
                                                     See {getLocationLabel(location)} <ArrowRight size={17} aria-hidden="true" />
                                                 </button>

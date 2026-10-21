@@ -140,7 +140,7 @@ const LocationDetail = () => {
 
                     <div className="mt-8 flex flex-wrap gap-3">
                         {hasPublicMenu(location) && (
-                            <Link to={`/locations/${location.slug}/menu`} className="inline-flex items-center gap-2 bg-brand-green px-6 py-4 font-bold uppercase tracking-[0.16em] text-white transition-colors hover:bg-brand-green-dark">
+                            <Link to={`/locations/${location.slug}/menu`} className="inline-flex items-center gap-2 bg-brand-green px-6 py-4 font-bold uppercase tracking-[0.16em] text-ink-900 transition-colors hover:bg-brand-green-light">
                                 View Menu <ArrowRight size={17} />
                             </Link>
                         )}
@@ -169,7 +169,7 @@ const LocationDetail = () => {
                             <p className="mt-5 leading-7 text-white/62">{location.hoursNote}</p>
                         )}
                         {location.status === 'open' && location.phone && location.hours.length === 0 && (
-                            <a href={toTelHref(location.phone)} className="mt-5 inline-flex items-center gap-2 bg-brand-green px-5 py-3 text-sm font-bold uppercase tracking-[0.16em] text-white transition-colors hover:bg-brand-green-dark">
+                            <a href={toTelHref(location.phone)} className="mt-5 inline-flex items-center gap-2 bg-brand-green px-5 py-3 text-sm font-bold uppercase tracking-[0.16em] text-ink-900 transition-colors hover:bg-brand-green-light">
                                 <Phone size={16} aria-hidden="true" /> Call {location.phone}
                             </a>
                         )}

@@ -14,7 +14,7 @@ export default {
             colors: {
                 brand: {
                     gold: { DEFAULT: token('gold'), deep: token('gold-deep') },
-                    green: { DEFAULT: token('green'), dark: token('green-dark') },
+                    green: { DEFAULT: token('green'), light: token('green-light') },
                     forest: token('forest'),
                     orange: token('orange'),
                     cream: token('cream'),

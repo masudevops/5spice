@@ -134,7 +134,7 @@ const Pickup = () => {
                                 </p>
                                 <div className="mt-5 flex flex-wrap gap-3">
                                     {!takingOrders && cateringNow && (
-                                        <Link to="/catering" className="inline-flex items-center gap-2 bg-brand-green px-6 py-4 font-bold uppercase tracking-[0.16em] text-white transition-colors hover:bg-brand-green-dark">
+                                        <Link to="/catering" className="inline-flex items-center gap-2 bg-brand-green px-6 py-4 font-bold uppercase tracking-[0.16em] text-ink-900 transition-colors hover:bg-brand-green-light">
                                             <HandHeart size={17} aria-hidden="true" /> Request Catering
                                         </Link>
                                     )}
@@ -142,7 +142,7 @@ const Pickup = () => {
                                         <a
                                             href={toTelHref(selectedLocation.phone)}
                                             className={takingOrders
-                                                ? 'inline-flex items-center gap-2 bg-brand-green px-6 py-4 font-bold uppercase tracking-[0.16em] text-white transition-colors hover:bg-brand-green-dark'
+                                                ? 'inline-flex items-center gap-2 bg-brand-green px-6 py-4 font-bold uppercase tracking-[0.16em] text-ink-900 transition-colors hover:bg-brand-green-light'
                                                 : 'inline-flex items-center gap-2 border border-brand-gold-deep/45 px-6 py-4 font-bold uppercase tracking-[0.16em] text-brand-gold transition-colors hover:border-brand-gold hover:text-white'}
                                         >
                                             <Phone size={17} aria-hidden="true" /> Call {selectedLocation.phone}
@@ -174,7 +174,7 @@ const Pickup = () => {
                                             key={location.slug}
                                             type="button"
                                             onClick={() => selectLocation(location.slug)}
-                                            className="inline-flex items-center gap-2 bg-brand-green px-6 py-4 font-bold uppercase tracking-[0.16em] text-white transition-colors hover:bg-brand-green-dark"
+                                            className="inline-flex items-center gap-2 bg-brand-green px-6 py-4 font-bold uppercase tracking-[0.16em] text-ink-900 transition-colors hover:bg-brand-green-light"
                                         >
                                             Order from {getLocationLabel(location)} <ArrowRight size={17} aria-hidden="true" />
                                         </button>
@@ -185,7 +185,7 @@ const Pickup = () => {
                                     <p className="leading-7 text-white/62">
                                         Planning an event? Catering is available now from {cateringLocations.map(getLocationLabel).join(' and ')}.
                                     </p>
-                                    <Link to="/catering" className="mt-5 inline-flex items-center gap-2 bg-brand-green px-6 py-4 font-bold uppercase tracking-[0.16em] text-white transition-colors hover:bg-brand-green-dark">
+                                    <Link to="/catering" className="mt-5 inline-flex items-center gap-2 bg-brand-green px-6 py-4 font-bold uppercase tracking-[0.16em] text-ink-900 transition-colors hover:bg-brand-green-light">
                                         <HandHeart size={17} aria-hidden="true" /> Request Catering
                                     </Link>
                                 </div>

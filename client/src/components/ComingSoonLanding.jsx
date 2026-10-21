@@ -148,7 +148,7 @@ const ComingSoonLanding = () => {
                                 </p>
                                 <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
                                     {location.services?.catering === 'open' && (
-                                        <a href={cateringMailto} className={`inline-flex min-h-12 items-center gap-2 bg-brand-green px-5 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-white transition-colors hover:bg-brand-green-dark ${focusClass}`}>
+                                        <a href={cateringMailto} className={`inline-flex min-h-12 items-center gap-2 bg-brand-green px-5 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-ink-900 transition-colors hover:bg-brand-green-light ${focusClass}`}>
                                             <Mail size={18} aria-hidden="true" /> Request Catering
                                         </a>
                                     )}

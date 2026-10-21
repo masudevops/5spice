@@ -123,7 +123,7 @@ const Navbar = () => {
             <Link
               to={primaryAction.to}
               onClick={selectOrderLocation}
-              className="whitespace-nowrap bg-brand-green px-4 py-2.5 text-sm font-semibold uppercase tracking-[0.1em] text-white transition-colors hover:bg-brand-green-dark xl:px-5 xl:tracking-[0.16em]"
+              className="whitespace-nowrap bg-brand-green px-4 py-2.5 text-sm font-semibold uppercase tracking-[0.1em] text-ink-900 transition-colors hover:bg-brand-green-light xl:px-5 xl:tracking-[0.16em]"
             >
               {primaryAction.label}
             </Link>
@@ -164,7 +164,7 @@ const Navbar = () => {
                 {link.name}
               </Link>
             ))}
-            <Link to={primaryAction.to} onClick={() => { selectOrderLocation(); setMobileMenuOpen(false); }} className="mt-3 bg-brand-green px-5 py-4 font-bold uppercase tracking-[0.18em] text-white">
+            <Link to={primaryAction.to} onClick={() => { selectOrderLocation(); setMobileMenuOpen(false); }} className="mt-3 bg-brand-green px-5 py-4 font-bold uppercase tracking-[0.18em] text-ink-900">
               {primaryAction.label}
             </Link>
           </nav>
@@ -183,7 +183,7 @@ const Navbar = () => {
               </Link>
             );
           })}
-          <Link to={centerAction.to} onClick={centerAction.onClick} aria-label={centerAction.label} className="mx-auto -mt-7 flex h-14 w-14 items-center justify-center rounded-full border-4 border-ink-900 bg-brand-green text-white shadow-lg">
+          <Link to={centerAction.to} onClick={centerAction.onClick} aria-label={centerAction.label} className="mx-auto -mt-7 flex h-14 w-14 items-center justify-center rounded-full border-4 border-ink-900 bg-brand-green text-ink-900 shadow-lg">
             <centerAction.icon size={24} />
           </Link>
           {bottomLinks.slice(midpoint).map((link) => {

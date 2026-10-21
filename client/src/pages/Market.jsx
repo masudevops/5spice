@@ -72,7 +72,7 @@ const Market = () => {
                             Get opening news and first looks at the market on Instagram. Planning an event before then? Our Murphy kitchen is taking catering orders now.
                         </p>
                         <div className="mt-7 flex flex-wrap gap-3">
-                            <a href={SOCIAL_LINKS.instagramUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 bg-brand-green px-6 py-4 font-bold uppercase tracking-[0.16em] text-white transition-colors hover:bg-brand-green-dark">
+                            <a href={SOCIAL_LINKS.instagramUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 bg-brand-green px-6 py-4 font-bold uppercase tracking-[0.16em] text-ink-900 transition-colors hover:bg-brand-green-light">
                                 <Instagram size={17} aria-hidden="true" /> {SOCIAL_LINKS.instagramHandle}
                             </a>
                             <Link to="/catering" className="inline-flex items-center gap-2 border border-brand-gold-deep/45 px-6 py-4 font-bold uppercase tracking-[0.16em] text-brand-gold transition-colors hover:border-brand-gold hover:text-white">

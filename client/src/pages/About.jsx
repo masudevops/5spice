@@ -102,7 +102,7 @@ const About = () => {
                     })}
                 </div>
                 <div className="mx-auto mt-8 flex max-w-7xl flex-wrap gap-3">
-                    <Link to="/locations" className="inline-flex items-center gap-2 bg-brand-green px-6 py-4 font-bold uppercase tracking-[0.16em] text-white transition-colors hover:bg-brand-green-dark">
+                    <Link to="/locations" className="inline-flex items-center gap-2 bg-brand-green px-6 py-4 font-bold uppercase tracking-[0.16em] text-ink-900 transition-colors hover:bg-brand-green-light">
                         Our Locations <ArrowRight size={17} aria-hidden="true" />
                     </Link>
                     <Link to="/contact" className="inline-flex items-center gap-2 border border-brand-gold-deep/45 px-6 py-4 font-bold uppercase tracking-[0.16em] text-brand-gold transition-colors hover:border-brand-gold hover:text-white">

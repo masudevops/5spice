@@ -99,7 +99,7 @@ const Catering = () => {
                         <p className="mt-4 leading-7 text-white/62">
                             Share your event date, location, guest count, and preferred dishes, and we'll put together a personalized quote for you.
                         </p>
-                        <a href={quoteMailto} className="mt-7 inline-flex items-center gap-3 bg-brand-green px-6 py-4 font-bold uppercase tracking-[0.16em] text-white transition-colors hover:bg-brand-green-dark">
+                        <a href={quoteMailto} className="mt-7 inline-flex items-center gap-3 bg-brand-green px-6 py-4 font-bold uppercase tracking-[0.16em] text-ink-900 transition-colors hover:bg-brand-green-light">
                             <Mail size={19} /> Email Catering Request
                         </a>
                         <p className="mt-4 text-sm text-white/55">
