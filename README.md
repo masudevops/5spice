@@ -79,7 +79,6 @@ docs/
 ├── MAINTAINER-GUIDE.md     # How to update content
 ├── NEXT-STEPS.md           # Tracking list
 └── specs/                  # Feature specs
-server/                     # Legacy Express API: not used by the live site
 ```
 
 **Adding a location** means adding a data file in `client/src/data/locations/`,

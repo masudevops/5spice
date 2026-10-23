@@ -35,9 +35,3 @@ See `docs/specs/03-azure-static-web-apps-migration.md`. In short:
 - Replace the `vercel.json` rewrite with a `staticwebapp.config.json`
   navigation fallback to `/index.html`.
 - Decide whether to keep Vercel Analytics or swap it for another analytics tool.
-
-## Legacy server
-
-`server/` is an old Express API with sample JSON data. The live site doesn't
-use it and it isn't deployed. Whether to keep it for phase 2 or remove it is
-tracked in `docs/NEXT-STEPS.md`.

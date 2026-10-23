@@ -65,10 +65,6 @@ These block accurate content. Nothing on the site is invented in the meantime.
 
 ## 4. Housekeeping
 
-- [ ] **Legacy `server/` folder and `manage_app.sh`** (Owners/Dev). The old
-  Express API isn't used by the site, and `manage_app.sh` mainly starts it.
-  Decide whether to keep them for phase 2 or remove them. (Its `node_modules`
-  folder is no longer committed to git.)
 - [ ] **Old feature specs** (Dev). `docs/specs/02` (runtime JSON content) and
   `04` (catering inquiry form) are still open ideas. Close or refresh them
   when they come up.
@@ -109,4 +105,5 @@ These block accurate content. Nothing on the site is invented in the meantime.
   - removed unused files: `App.css`, `react.svg`, `useTheme.js`, the Vite
     template README, the empty root lockfile, and `.vade-report`
   - removed the unused `tailwind-merge` package
-  - stopped tracking `server/node_modules` in git
+  - removed the unused legacy `server/` (Express API) and `manage_app.sh`.
+    Both are in git history if phase 2 needs them.
