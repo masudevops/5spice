@@ -56,7 +56,9 @@ const Pickup = () => {
 
     return (
         <div className="min-h-screen bg-ink-900 text-brand-cream">
-            <section className="relative overflow-hidden px-5 py-16 sm:px-8 lg:px-12">
+            {/* No overflow-hidden here: it would clip the location dropdown. z-10
+                keeps the open dropdown above the section below. */}
+            <section className="relative z-10 px-5 py-16 sm:px-8 lg:px-12">
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgb(var(--color-forest)/0.16),transparent_34%),linear-gradient(135deg,rgb(var(--color-ink-900)),rgb(var(--color-ink-750)))]" />
                 <div className="relative mx-auto max-w-7xl">
                     <Store className="mb-5 text-brand-gold" size={34} strokeWidth={1.4} aria-hidden="true" />
