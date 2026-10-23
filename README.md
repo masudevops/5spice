@@ -1,103 +1,100 @@
-# 5 Spice Market & Kitchen
+# 5Spice Market & Kitchen
 
-A premium, community-focused website for **5 Spice**, a halal market and kitchen opening in Plano, Texas in early 2027, In Sha Allah.
+The public website for **5Spice**, live at [5spicemarket.com](https://5spicemarket.com).
+It covers authentic halal Bangladeshi cuisine and closely related South Asian
+dishes, plus a premium halal grocery market.
 
-Built with **Node.js**, **React**, **Vite**, and **TailwindCSS**.
+| Location | Status |
+|---|---|
+| **5Spice Kitchen – Murphy**: 222 E FM 544, Suite 200, Murphy, TX 75094 | Catering available now; dine-in and take-out coming soon |
+| **5Spice Market & Kitchen – Plano**: 245 Shiloh Rd, Plano, TX 75074 | Opening Early 2027, In Sha Allah |
 
-> **Updating content?** (menu, menu photos, weekly deals, location details, page copy, and prompts for Claude Code) See [`docs/MAINTAINER-GUIDE.md`](docs/MAINTAINER-GUIDE.md).
+> **Updating content?** For the menu, menu photos, weekly deals, location
+> details, page copy, and prompts for Claude Code, see
+> [`docs/MAINTAINER-GUIDE.md`](docs/MAINTAINER-GUIDE.md).
 >
-> **What's next?** Upcoming website work and open questions are tracked in [`docs/NEXT-STEPS.md`](docs/NEXT-STEPS.md).
+> **What's next?** Upcoming work and open questions are tracked in
+> [`docs/NEXT-STEPS.md`](docs/NEXT-STEPS.md).
+>
+> **Working with Claude Code?** Brand rules and project conventions are in
+> [`CLAUDE.md`](CLAUDE.md).
 
-## 🎨 New Brand Identity
-- **Primary Colors**: Charcoal (`#1C1C1C`), warm cream (`#F8F5EF`), gold (`#B88A3D`), green (`#2D6A3F`), and orange (`#D4500A`).
-- **Aesthetic**: Spacious, cream backgrounds, elegant serif typography, and high-quality imagery.
-- **Philosophy**: "Authentic Flavors. Quality You Trust. Community We Care About."
+## Tech stack
 
-## 🚀 Key Features
-- **SITE_MODE Configuration**: Controls the public facing state of the website via environment variables.
-  - **`coming_soon`**: A strict, locked "Stealth Mode" landing page. Hides all navigation, footer, and links. Used for pre-launch anticipation.
-  - **`live`**: The full site (the default).
-- **Dual Functionality**: Dedicated, distinct sections for **The Market** (Grocery) and **The Kitchen** (Restaurant).
-- **Mobile-First**: Fully responsive design with optimized mobile navigation.
-- **Dark Mode**: Premium dark theme using Charcoal and Gold accents.
+- **React 19 + Vite 7**: a client-side single-page app built to static files.
+- **Tailwind CSS 3.4**: brand colors are defined once as tokens in
+  `client/src/index.css` and used as `brand-*` / `ink-*` classes.
+- **React Router 7** for pages, **lucide-react** for icons,
+  **framer-motion** for the location switcher.
+- Hosted on **Vercel** (free tier). It's a static build, so it stays portable.
 
-## 🛠 Tech Stack
-- **Frontend**: React, Vite, TailwindCSS, React Router, Lucide Icons.
-- **Backend**: Node.js, Express.
-- **Data**: JSON-based storage (located in `server/data/`).
+## Getting started
 
-## 📂 Project Structure
-```
-five-spice/
-├── client/           # React Frontend
-│   ├── .env          # Environment config (SITE_MODE)
-│   ├── src/
-│   │   ├── components/  # Navbar, Footer, Heroes, etc.
-│   │   ├── pages/       # Landing, Market, Kitchen, etc.
-│   │   └── ...
-│   └── ...
-├── server/           # Express Backend
-│   ├── data/         # JSON data (products, menu, store info)
-│   └── index.js      # Server entry point
-└── DEPLOYMENT.md     # Deployment instructions
+Requires Node.js 20+ and npm.
+
+```bash
+cd client
+npm install
+npm run dev        # http://localhost:5173
 ```
 
-## 🚦 Getting Started
+| Command (run in `client/`) | What it does |
+|---|---|
+| `npm run dev` | Local dev server with hot reload |
+| `npm run lint` | ESLint |
+| `npm run build` | Regenerates `public/sitemap.xml`, then builds to `client/dist` |
+| `npm run preview` | Serves the production build locally |
 
-### Prerequisites
-- Node.js (v16+)
-- npm
+## Site mode
 
-### Installation & Run
+`VITE_APP_SITE_MODE` decides what visitors see:
 
-1. **Clone the repository:**
-   ```bash
-   git clone <repository-url>
-   cd five-spice
-   ```
+| Value | Result |
+|---|---|
+| `coming_soon` | Only the landing page (Plano opening plus the Murphy catering card). No menu bar or other pages. |
+| `live` (default) | The full site. Any other value, or no value, also means `live`. |
 
-2. **Setup and Run Backend:**
-   ```bash
-   cd server
-   npm install
-   node index.js
-   ```
-   *Server runs on http://localhost:5000*
+- **Locally:** set it in `client/.env` (copy `client/.env.example`).
+- **In production:** set it in Vercel under **Project Settings → Environment
+  Variables**, then redeploy. Vercel's value overrides the committed `.env`.
 
-3. **Setup and Run Frontend:**
-   (In a new terminal)
-   ```bash
-   cd client
-   npm install
-   npm run dev
-   ```
-   *Client runs on http://localhost:5173 (or 5174)*
+## Project structure
 
-4. **Easy Start Script (Mac/Linux):**
-   We've included a helper script to manage the app easily.
-   ```bash
-   ./manage_app.sh
-   ```
-   *Options: Start Dev Mode, Install Dependencies, Build, Stop All.*
-
-## ⚙️ Configuration
-**Setting the Site Mode:**
-Edit `client/.env`:
-```env
-# Options: coming_soon | live
-VITE_APP_SITE_MODE=coming_soon
+```
+client/
+├── public/                 # Static files: logos, favicons, sitemap.xml, weekly-deals.json
+├── scripts/                # generate-sitemap.js (runs before every build)
+├── src/
+│   ├── components/         # Navbar, Footer, landing pages, location cards, catering stats…
+│   ├── config/site.js      # Contact info, social links, page copy lists, CATERING_STATS
+│   ├── data/
+│   │   ├── locations/      # One file per location: the single source of truth
+│   │   └── menus/          # Menus by location (hidden until published)
+│   ├── hooks/              # Page titles/SEO, selected location
+│   ├── pages/              # One component per route
+│   └── utils/              # Phone links, hours, milestone rounding
+├── vercel.json             # Sends every path to index.html (so refreshes don't 404)
+└── .env.example            # Documents every environment variable
+docs/
+├── MAINTAINER-GUIDE.md     # How to update content
+├── NEXT-STEPS.md           # Tracking list
+└── specs/                  # Feature specs
+server/                     # Legacy Express API: not used by the live site
 ```
 
-## 📦 Deployment (Vercel)
-When deploying to Vercel, you must set the **Environment Variables** in your project settings:
-1.  Go to **Settings** > **Environment Variables**.
-2.  Add `VITE_APP_SITE_MODE`.
-3.  Value: `coming_soon` (to lock the site) or `live` (to launch).
-4.  Redeploy if you change this value.
+**Adding a location** means adding a data file in `client/src/data/locations/`,
+not writing new pages. See `client/src/data/README.md`.
 
-## 📝 Customization
-- **Content**: Update JSON files in `server/data/` to change products or menu items.
-- **Styling**: Modify `client/tailwind.config.js` to adjust brand colors.
+## Deployment
 
-## 📦 Deployment
-See [DEPLOYMENT.md](./DEPLOYMENT.md) for instructions on deploying to Vercel, Azure, or AWS.
+On Vercel, the project's **Root Directory** must be `client`, with the Vite
+preset. Pushing to `main` deploys to production, and other branches get preview
+URLs. See [`DEPLOYMENT.md`](DEPLOYMENT.md) for details and Azure notes.
+
+## Working agreement
+
+- Work on a feature branch and open a PR into `main`. Don't commit directly to
+  `main`.
+- Run `npm run lint` and `npm run build` before opening a PR.
+- Never commit secrets. Document every environment variable in
+  `client/.env.example`.

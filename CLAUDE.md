@@ -93,16 +93,16 @@ The site is in a **pre-launch, minimal phase**. Its job right now is to:
 
 - Framework / version: **React 19.2 + Vite 7** (client-side rendered SPA only — no SSR/SSG). `server/` is a legacy Express 5 API that the deployed client does not call; treat it as unused unless a task says otherwise.
 - Language: JavaScript (JSX). No TypeScript (no `.ts`/`.tsx` files; `@types/react` is dev-only tooling).
-- Styling approach: Tailwind CSS 3.4 (utility classes) + brand color tokens as CSS custom properties in `src/index.css` (`--color-gold`, `--color-green`, `--color-ink-900`, …), exposed in `tailwind.config.js` as `brand-*` / `ink-*`. Some hand-written CSS in `index.css`. `App.css` is unused Vite boilerplate (not imported).
-- Package manager: npm. Three independent trees with their own lockfiles: repo root, `client/`, `server/`.
+- Styling approach: Tailwind CSS 3.4 (utility classes) + brand color tokens as CSS custom properties in `src/index.css` (`--color-gold`, `--color-green`, `--color-ink-900`, …), exposed in `tailwind.config.js` as `brand-*` / `ink-*`. Some hand-written CSS in `index.css`.
+- Package manager: npm. Two independent trees with their own lockfiles: `client/` and the legacy `server/` (whose `node_modules` is not committed).
 - Dev command: `cd client && npm run dev` (Vite dev server). The Express API (`cd server && node index.js`) is not required for the client to run.
 - Build command: `cd client && npm run build` → outputs `client/dist` (static files, deployed as-is).
-- Lint / typecheck / test commands: `cd client && npm run lint` (ESLint flat config, `eslint.config.js`). No typecheck script (plain JS). `cd client && npm test` runs Playwright e2e specs in `client/e2e`.
+- Lint / typecheck / test commands: `cd client && npm run lint` (ESLint flat config, `eslint.config.js`). No typecheck script (plain JS). `cd client && npm test` is meant to run Playwright e2e specs in `client/e2e`, but it's currently broken: `@playwright/test` isn't installed and the specs are stale (see `TESTING.md`).
 - Key folders and what they contain:
-  - `client/src/pages/` — one component per route (Landing, Market, Kitchen, Sales, Catering, Pickup, About, Contact).
+  - `client/src/pages/` — one component per route (Landing, Market, Kitchen, Sales, Catering, Pickup, About, Contact, Locations, LocationDetail, LocationMenu, NotFound).
   - `client/src/components/` — Navbar, Footer, Layout, and the two landing variants (`ComingSoonLanding`, `LaunchLanding`) selected by `SITE_MODE`.
-  - `client/src/config/site.js` — hardcoded site-wide constants (contact info, hours, nav copy, order platform links, etc.) — currently single-location, see Section 8 work.
-  - `client/src/hooks/` — small hooks (e.g. `useTheme`).
+  - `client/src/config/site.js` — site-wide constants (contact info, social links, catering email, order platform labels, page copy lists, `CATERING_STATS`). Per-location facts live in `client/src/data/locations/`.
+  - `client/src/hooks/` — small hooks (`useDocumentHead` for per-page title/description/JSON-LD, `useSelectedLocation`).
   - `client/public/` — static assets served as-is, including `weekly-deals.json` (fetched client-side by the Sales page).
   - `server/data/*.json` — legacy sample data (menu, products, store info); not wired into the deployed client.
 - Routing: `react-router-dom` v7, client-side only (`BrowserRouter`), rewritten to `index.html` for all paths via `client/vercel.json`.

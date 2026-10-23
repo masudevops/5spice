@@ -1,84 +1,43 @@
-# Deployment Guide for 5 Spice
+# Deploying 5spicemarket.com
 
- This guide covers deploying the "5 Spice" application to Vercel, Azure, and AWS.
+The site is a static build (`client/dist`). It has no backend, database, or
+server-side code, so it can run on any static host.
 
-## 1. Vercel (Recommended for Frontend)
+## Vercel (current)
 
-**Frontend (Client)**
-1. Push your code to a generic Git repository (GitHub, GitLab, Bitbucket).
-2. Log in to Vercel and click "Add New... > Project".
-3. Import your repository.
-4. Configure the project:
-   - **Framework Preset**: Vite
-   - **Root Directory**: `client`
-5. Click **Deploy**.
+Project settings:
 
-**Backend (Server)**
-*Note: Vercel is primarily for frontend/serverless. For a standard Express app, `vercel.json` configuration is needed to run as a serverless function, or use a dedicated backend host like Render or Railway.*
+- **Framework preset:** Vite
+- **Root Directory:** `client`
+- **Build command:** `npm run build`. This regenerates `public/sitemap.xml`
+  first.
+- **Output directory:** `dist`
+- **Environment variable:** `VITE_APP_SITE_MODE`, set to `coming_soon` (landing
+  page only) or `live` (full site). Changing it requires a redeploy.
 
-**To deploy Express on Vercel:**
-1. Create a `vercel.json` in the `server` directory:
-   ```json
-   {
-     "version": 2,
-     "builds": [{ "src": "index.js", "use": "@vercel/node" }],
-     "routes": [{ "src": "/(.*)", "dest": "index.js" }]
-   }
-   ```
-2. Deploy the `server` directory as a separate Vercel project or part of the monorepo configuration.
+How deploys work:
 
----
+- Merging to `main` deploys to production.
+- Any other pushed branch gets a preview URL, which is useful for checking a PR
+  before merging.
+- `client/vercel.json` rewrites every path to `/index.html`. This lets direct
+  links and refreshes on pages like `/catering` work instead of returning 404.
+- Vercel Web Analytics is loaded in `client/src/main.jsx` via
+  `@vercel/analytics`. It does nothing on other hosts.
 
-## 2. Microsoft Azure
+## Azure Static Web Apps (possible future move)
 
-**Frontend (Azure Static Web Apps)**
-1. Go to Azure Portal > **Create a resource** > **Static Web App**.
-2. Select your subscription and resource group.
-3. Name: `five-spice-client`.
-4. Deployment details: GitHub.
-5. Login to GitHub and select repo.
-6. Build Details:
-   - **App location**: `/client`
-   - **Output location**: `dist`
-7. Click **Review + create**.
+See `docs/specs/03-azure-static-web-apps-migration.md`. In short:
 
-**Backend (Azure App Service)**
-1. Go to Azure Portal > **Create a resource** > **Web App**.
-2. Select Runtime stack: **Node.js 18 LTS** (or newer).
-3. Connect your GitHub repository via **Deployment Center**.
-4. Configure the build to run `npm install` and start the server in the `server` directory.
-   - You may need to set `Project` to `server` in the deployment settings or customize the startup command.
+- **App location:** `/client`. **Output location:** `dist`.
+- Set `VITE_APP_SITE_MODE` as a build-time setting. Vite reads it during the
+  build, not at runtime.
+- Replace the `vercel.json` rewrite with a `staticwebapp.config.json`
+  navigation fallback to `/index.html`.
+- Decide whether to keep Vercel Analytics or swap it for another analytics tool.
 
----
+## Legacy server
 
-## 3. AWS Amplify
-
-**For Fullstack (Gen 2) or Frontend Hosting:**
-1. Log in to AWS Console > **AWS Amplify**.
-2. Click **Create new app**.
-3. Select GitHub as the source.
-4. Select your repository.
-5. Amplify should auto-detect the settings.
-6. Edit the build settings (`amplify.yml`) to point to the `client` directory:
-   ```yaml
-   version: 1
-   applications:
-     - frontend:
-         phases:
-           preBuild:
-             commands:
-               - cd client && npm install
-           build:
-             commands:
-               - cd client && npm run build
-         artifacts:
-           baseDirectory: client/dist
-           files:
-             - '**/*'
-         cache:
-           paths:
-             - client/node_modules/**/*
-   ```
-7. Click **Save and Deploy**.
-
-*(For the backend on AWS, Elastic Beanstalk or ECS is often used for Express apps if not using Amplify's managed backend features).*
+`server/` is an old Express API with sample JSON data. The live site doesn't
+use it and it isn't deployed. Whether to keep it for phase 2 or remove it is
+tracked in `docs/NEXT-STEPS.md`.

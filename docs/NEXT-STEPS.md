@@ -65,12 +65,13 @@ These block accurate content. Nothing on the site is invented in the meantime.
 
 ## 4. Housekeeping
 
-- [ ] **Update the root `README.md`** (Dev). It's out of date: it says "5 Spice",
-  lists old colors, and describes a cream theme.
-- [ ] **Remove `client/src/App.css`** (Dev, needs approval to delete). Leftover
-  Vite boilerplate that nothing imports.
-- [ ] **Legacy `server/` folder** (Owners/Dev). The old Express API isn't used by
-  the site. Decide whether to keep it for phase 2 or remove it.
+- [ ] **Legacy `server/` folder and `manage_app.sh`** (Owners/Dev). The old
+  Express API isn't used by the site, and `manage_app.sh` mainly starts it.
+  Decide whether to keep them for phase 2 or remove them. (Its `node_modules`
+  folder is no longer committed to git.)
+- [ ] **Old feature specs** (Dev). `docs/specs/02` (runtime JSON content) and
+  `04` (catering inquiry form) are still open ideas. Close or refresh them
+  when they come up.
 
 ## 5. Later
 
@@ -103,3 +104,9 @@ These block accurate content. Nothing on the site is invented in the meantime.
 - [x] Larger header logo.
 - [x] Site modes simplified to `coming_soon` and `live`.
 - [x] Maintainer guide: `docs/MAINTAINER-GUIDE.md`.
+- [x] Housekeeping:
+  - rewrote `README.md`, `DEPLOYMENT.md`, and `TESTING.md`
+  - removed unused files: `App.css`, `react.svg`, `useTheme.js`, the Vite
+    template README, the empty root lockfile, and `.vade-report`
+  - removed the unused `tailwind-merge` package
+  - stopped tracking `server/node_modules` in git
