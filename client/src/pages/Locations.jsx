@@ -13,12 +13,12 @@ const Locations = () => {
     });
 
     return (
-        <div className="min-h-screen bg-[#0E0E0E] text-[#F0EAD6]">
+        <div className="min-h-screen bg-ink-900 text-brand-cream">
             <section className="relative overflow-hidden px-5 py-16 sm:px-8 lg:px-12">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(184,138,61,0.14),transparent_34%),linear-gradient(135deg,#0E0E0E,#161616)]" />
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgb(var(--color-gold-deep)/0.14),transparent_34%),linear-gradient(135deg,rgb(var(--color-ink-900)),rgb(var(--color-ink-750)))]" />
                 <div className="relative mx-auto max-w-7xl">
-                    <MapPinned className="mb-5 text-[#D4A84B]" size={34} strokeWidth={1.4} />
-                    <p className="text-xs font-semibold uppercase tracking-[0.32em] text-[#D4A84B]">Our Locations</p>
+                    <MapPinned className="mb-5 text-brand-gold" size={34} strokeWidth={1.4} />
+                    <p className="text-xs font-semibold uppercase tracking-[0.32em] text-brand-gold">Our Locations</p>
                     <h1 className="mt-5 max-w-4xl font-serif text-5xl font-bold leading-tight text-white md:text-6xl">
                         {hasAnyMarket
                             ? 'Halal grocery and authentic Bangladeshi cuisine, closer to you.'

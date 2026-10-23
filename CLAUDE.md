@@ -39,7 +39,7 @@ The site is in a **pre-launch, minimal phase**. Its job right now is to:
   - Pair the specific identity with welcoming language for all guests.
 - **Halal:** everything served and sold is halal. State it at the brand or location level, not as a per-item tag.
 - **Name origin:** "5Spice" comes from পাঁচফোড়ন (panch phoron), the Bengali five-spice blend. Use this for About/story content.
-- **Logo:** a bloom icon in Bangladeshi, Pakistani, and Indian flag colors. Use the provided logo assets only. Never redraw, recolor, or approximate the logo.
+- **Logo:** a shopping cart holding an orange "5", with "SPICE" in green (red dot over the i) and "MARKET & KITCHEN" in white, on charcoal. The colors echo the Bangladeshi, Pakistani, and Indian flags. Files: `client/public/brand-logo-wide.png` and `brand-logo-square.png`. Use the provided logo assets only. Never redraw, recolor, or approximate the logo.
 - **Tone:** warm, proud of heritage, welcoming, modern. Islamic phrases used in brand sign-offs (e.g. "Opening Early 2027, In Sha Allah") are intentional. Keep them exactly as written and do not "correct" them.
 
 ---
@@ -48,6 +48,8 @@ The site is in a **pre-launch, minimal phase**. Its job right now is to:
 
 - Dark theme with gold accents, clean and modern. The structural reference is Green Vine Market, executed in a more modern and polished style.
 - Reuse existing design tokens, CSS variables, and components. Do not introduce a new visual language.
+- **Color tokens:** every site color is defined once in `client/src/index.css` (`:root`, as RGB channels) and used through Tailwind `brand-*` and `ink-*` classes (e.g. `text-brand-gold`, `border-brand-gold-deep/25`, `bg-ink-800`). Never hardcode hex colors in components.
+- Solid green (`bg-brand-green`) buttons use dark text (`text-ink-900`) and `hover:bg-brand-green-light`. White text on that green fails WCAG AA contrast.
 - Mobile-first and responsive. Most visitors arrive from Instagram, Facebook, and Google Maps on phones.
 - Accessible: semantic headings, alt text, sufficient contrast for gold-on-dark, and keyboard-usable controls.
 - Do not restyle existing pages unless the task asks for it.
@@ -91,7 +93,7 @@ The site is in a **pre-launch, minimal phase**. Its job right now is to:
 
 - Framework / version: **React 19.2 + Vite 7** (client-side rendered SPA only — no SSR/SSG). `server/` is a legacy Express 5 API that the deployed client does not call; treat it as unused unless a task says otherwise.
 - Language: JavaScript (JSX). No TypeScript (no `.ts`/`.tsx` files; `@types/react` is dev-only tooling).
-- Styling approach: Tailwind CSS 3.4 (utility classes) + CSS custom properties for brand colors (`--color-brand-green`, `--color-accent-gold`, etc., consumed via `tailwind.config.js`). Some hand-written CSS in `App.css` / `index.css`.
+- Styling approach: Tailwind CSS 3.4 (utility classes) + brand color tokens as CSS custom properties in `src/index.css` (`--color-gold`, `--color-green`, `--color-ink-900`, …), exposed in `tailwind.config.js` as `brand-*` / `ink-*`. Some hand-written CSS in `index.css`. `App.css` is unused Vite boilerplate (not imported).
 - Package manager: npm. Three independent trees with their own lockfiles: repo root, `client/`, `server/`.
 - Dev command: `cd client && npm run dev` (Vite dev server). The Express API (`cd server && node index.js`) is not required for the client to run.
 - Build command: `cd client && npm run build` → outputs `client/dist` (static files, deployed as-is).

@@ -31,7 +31,7 @@ const Footer = () => {
     const visibleLocations = getVisibleLocations();
 
     return (
-        <footer className="border-t border-[#B88A3D]/25 bg-[#0B0B0B] pb-24 pt-14 text-[#F0EAD6] md:pb-12">
+        <footer className="border-t border-brand-gold-deep/25 bg-ink-950 pb-24 pt-14 text-brand-cream md:pb-12">
             <div className="mx-auto max-w-7xl px-5 lg:px-8">
                 <div className="mb-12 grid gap-10 lg:grid-cols-[1.2fr_1fr_1fr_1.1fr]">
                     <div>
@@ -44,10 +44,10 @@ const Footer = () => {
                             Five spices. One home. Authentic halal Bangladeshi cuisine in Murphy, and a premium halal market and restaurant coming to Plano.
                         </p>
                         <div className="mt-6 flex items-center gap-3">
-                            <a href={SOCIAL_LINKS.facebook} target="_blank" rel="noreferrer" aria-label="5Spice Market on Facebook" className="flex h-11 w-11 items-center justify-center border border-[#B88A3D]/30 text-white/75 transition-colors hover:border-[#D4A84B] hover:text-[#D4A84B]">
+                            <a href={SOCIAL_LINKS.facebook} target="_blank" rel="noreferrer" aria-label="5Spice Market on Facebook" className="flex h-11 w-11 items-center justify-center border border-brand-gold-deep/30 text-white/75 transition-colors hover:border-brand-gold hover:text-brand-gold">
                                 <Facebook size={19} />
                             </a>
-                            <a href={SOCIAL_LINKS.instagramUrl} target="_blank" rel="noreferrer" aria-label="5Spice Market on Instagram" className="flex h-11 w-11 items-center justify-center border border-[#B88A3D]/30 text-white/75 transition-colors hover:border-[#D4A84B] hover:text-[#D4A84B]">
+                            <a href={SOCIAL_LINKS.instagramUrl} target="_blank" rel="noreferrer" aria-label="5Spice Market on Instagram" className="flex h-11 w-11 items-center justify-center border border-brand-gold-deep/30 text-white/75 transition-colors hover:border-brand-gold hover:text-brand-gold">
                                 <Instagram size={19} />
                             </a>
                             <span className="text-sm text-white/45">{SOCIAL_LINKS.instagramHandle}</span>
@@ -56,7 +56,7 @@ const Footer = () => {
 
                     {buildLinkGroups().map((group) => (
                         <div key={group.title}>
-                            <h2 className="mb-5 font-serif text-xl font-semibold text-[#D4A84B]">{group.title}</h2>
+                            <h2 className="mb-5 font-serif text-xl font-semibold text-brand-gold">{group.title}</h2>
                             <ul className="space-y-3 text-sm text-white/58">
                                 {group.links.map(([label, href]) => (
                                     <li key={href}>
@@ -68,7 +68,7 @@ const Footer = () => {
                     ))}
 
                     <div>
-                        <h2 className="mb-5 font-serif text-xl font-semibold text-[#D4A84B]">Visit</h2>
+                        <h2 className="mb-5 font-serif text-xl font-semibold text-brand-gold">Visit</h2>
                         <ul className="space-y-5 text-sm text-white/62">
                             {visibleLocations.map((loc) => (
                                 <li key={loc.slug}>
@@ -76,28 +76,28 @@ const Footer = () => {
                                         {getLocationLabel(loc)}
                                     </Link>
                                     {loc.statusLabel && (
-                                        <span className={`mt-1 block text-xs font-bold uppercase tracking-[0.14em] ${loc.status === 'open' ? 'text-[#1CA433]' : 'text-[#D4A84B]'}`}>
+                                        <span className={`mt-1 block text-xs font-bold uppercase tracking-[0.14em] ${loc.status === 'open' ? 'text-brand-green' : 'text-brand-gold'}`}>
                                             {loc.openingText}
                                         </span>
                                     )}
                                     <a href={loc.googleMapsUrl} target="_blank" rel="noreferrer" className="mt-2 flex gap-3 transition-colors hover:text-white">
-                                        <MapPin size={18} className="mt-0.5 shrink-0 text-[#D4A84B]" aria-hidden="true" />
+                                        <MapPin size={18} className="mt-0.5 shrink-0 text-brand-gold" aria-hidden="true" />
                                         {loc.address.full}
                                     </a>
                                     {loc.phone && (
                                         <a href={toTelHref(loc.phone)} className="mt-2 flex gap-3 transition-colors hover:text-white">
-                                            <Phone size={18} className="mt-0.5 shrink-0 text-[#D4A84B]" aria-hidden="true" />
+                                            <Phone size={18} className="mt-0.5 shrink-0 text-brand-gold" aria-hidden="true" />
                                             {loc.phone}
                                         </a>
                                     )}
                                 </li>
                             ))}
                             <li className="flex gap-3">
-                                <Mail size={18} className="mt-0.5 shrink-0 text-[#D4A84B]" aria-hidden="true" />
+                                <Mail size={18} className="mt-0.5 shrink-0 text-brand-gold" aria-hidden="true" />
                                 <a href={`mailto:${SOCIAL_LINKS.email}`} className="transition-colors hover:text-white">{SOCIAL_LINKS.email}</a>
                             </li>
                             <li className="flex gap-3">
-                                <HandHeart size={18} className="mt-0.5 shrink-0 text-[#D4A84B]" aria-hidden="true" />
+                                <HandHeart size={18} className="mt-0.5 shrink-0 text-brand-gold" aria-hidden="true" />
                                 <a href={`mailto:${CATERING_EMAIL}`} className="transition-colors hover:text-white">{CATERING_EMAIL}</a>
                             </li>
                         </ul>

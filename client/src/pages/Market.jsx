@@ -18,22 +18,22 @@ const Market = () => {
     });
 
     return (
-        <div className="min-h-screen bg-[#0E0E0E] text-[#F0EAD6]">
+        <div className="min-h-screen bg-ink-900 text-brand-cream">
             <section className="relative overflow-hidden px-5 py-16 sm:px-8 lg:px-12">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(45,106,63,0.18),transparent_34%),linear-gradient(135deg,#0E0E0E,#161616)]" />
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgb(var(--color-forest)/0.18),transparent_34%),linear-gradient(135deg,rgb(var(--color-ink-900)),rgb(var(--color-ink-750)))]" />
                 <div className="relative mx-auto max-w-7xl">
-                    <p className="text-xs font-semibold uppercase tracking-[0.32em] text-[#D4A84B]">Premium Halal Market</p>
+                    <p className="text-xs font-semibold uppercase tracking-[0.32em] text-brand-gold">Premium Halal Market</p>
                     <h1 className="mt-5 max-w-4xl font-serif text-5xl font-bold leading-tight text-white md:text-6xl">Everything your family kitchen needs, coming to Plano.</h1>
                     <p className="mt-5 max-w-2xl text-lg leading-8 text-white/68">
                         Zabiha halal meat, fresh seafood, farm-fresh produce, and specialty groceries, all under one roof.
                     </p>
                     {upcomingMarkets.map((location) => (
                         <div key={location.slug} className="mt-7 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm">
-                            <span className="inline-flex items-center gap-2 border border-[#B88A3D]/35 bg-[#1A1A1A]/70 px-4 py-2 font-semibold text-[#D4A84B]">
+                            <span className="inline-flex items-center gap-2 border border-brand-gold-deep/35 bg-ink-700/70 px-4 py-2 font-semibold text-brand-gold">
                                 <CalendarDays size={17} aria-hidden="true" /> {location.openingText}
                             </span>
-                            <Link to={`/locations/${location.slug}`} className="inline-flex items-center gap-2 text-white/68 underline decoration-[#B88A3D]/40 underline-offset-4 hover:text-white">
-                                <MapPin size={16} className="text-[#D4A84B]" aria-hidden="true" /> {getLocationLabel(location)}, {location.address.full}
+                            <Link to={`/locations/${location.slug}`} className="inline-flex items-center gap-2 text-white/68 underline decoration-brand-gold-deep/40 underline-offset-4 hover:text-white">
+                                <MapPin size={16} className="text-brand-gold" aria-hidden="true" /> {getLocationLabel(location)}, {location.address.full}
                             </Link>
                         </div>
                     ))}
@@ -46,16 +46,16 @@ const Market = () => {
                         {MARKET_DEPARTMENTS.map((department, index) => {
                             const Icon = icons[index];
                             return (
-                                <article key={department.title} className="border border-[#B88A3D]/25 bg-[#141414] p-7">
-                                    <Icon className="mb-5 text-[#D4A84B]" size={31} strokeWidth={1.35} />
+                                <article key={department.title} className="border border-brand-gold-deep/25 bg-ink-800 p-7">
+                                    <Icon className="mb-5 text-brand-gold" size={31} strokeWidth={1.35} />
                                     <h2 className="font-serif text-3xl font-semibold leading-tight text-white">{department.title}</h2>
                                     <p className="mt-4 leading-7 text-white/62">{department.text}</p>
                                     <div className="mt-6 border-t border-white/10 pt-5">
-                                        <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#D4A84B]/75">What we'll carry</p>
+                                        <p className="text-xs font-semibold uppercase tracking-[0.22em] text-brand-gold/75">What we'll carry</p>
                                         <ul className="mt-3 space-y-2 text-sm text-white/60">
                                             {department.items.map((item) => (
                                                 <li key={item} className="flex gap-2">
-                                                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#1CA433]" />
+                                                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-green" />
                                                     <span>{item}</span>
                                                 </li>
                                             ))}
@@ -66,16 +66,16 @@ const Market = () => {
                         })}
                     </div>
 
-                    <div className="mt-8 border border-[#B88A3D]/25 bg-[#101010] p-7 md:p-10">
-                        <h2 className="font-serif text-3xl font-semibold text-[#D4A84B]">Follow our journey to opening day.</h2>
+                    <div className="mt-8 border border-brand-gold-deep/25 bg-ink-850 p-7 md:p-10">
+                        <h2 className="font-serif text-3xl font-semibold text-brand-gold">Follow our journey to opening day.</h2>
                         <p className="mt-4 max-w-3xl leading-7 text-white/62">
                             Get opening news and first looks at the market on Instagram. Planning an event before then? Our Murphy kitchen is taking catering orders now.
                         </p>
                         <div className="mt-7 flex flex-wrap gap-3">
-                            <a href={SOCIAL_LINKS.instagramUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 bg-[#1CA433] px-6 py-4 font-bold uppercase tracking-[0.16em] text-white transition-colors hover:bg-[#168C2B]">
+                            <a href={SOCIAL_LINKS.instagramUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 bg-brand-green px-6 py-4 font-bold uppercase tracking-[0.16em] text-ink-900 transition-colors hover:bg-brand-green-light">
                                 <Instagram size={17} aria-hidden="true" /> {SOCIAL_LINKS.instagramHandle}
                             </a>
-                            <Link to="/catering" className="inline-flex items-center gap-2 border border-[#B88A3D]/45 px-6 py-4 font-bold uppercase tracking-[0.16em] text-[#D4A84B] transition-colors hover:border-[#D4A84B] hover:text-white">
+                            <Link to="/catering" className="inline-flex items-center gap-2 border border-brand-gold-deep/45 px-6 py-4 font-bold uppercase tracking-[0.16em] text-brand-gold transition-colors hover:border-brand-gold hover:text-white">
                                 Explore Catering <ArrowRight size={17} aria-hidden="true" />
                             </Link>
                         </div>

@@ -123,28 +123,28 @@ const LocationDetail = () => {
     const hasAnyOrderingLink = kitchenPlatforms.length > 0 || marketPlatforms.length > 0;
 
     return (
-        <div className="min-h-screen bg-[#0E0E0E] text-[#F0EAD6]">
+        <div className="min-h-screen bg-ink-900 text-brand-cream">
             <section className="relative overflow-hidden px-5 py-16 sm:px-8 lg:px-12">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(184,138,61,0.14),transparent_34%),linear-gradient(135deg,#0E0E0E,#161616)]" />
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgb(var(--color-gold-deep)/0.14),transparent_34%),linear-gradient(135deg,rgb(var(--color-ink-900)),rgb(var(--color-ink-750)))]" />
                 <div className="relative mx-auto max-w-7xl">
-                    <p className="text-xs font-semibold uppercase tracking-[0.32em] text-[#D4A84B]">{location.cuisineTagline}</p>
+                    <p className="text-xs font-semibold uppercase tracking-[0.32em] text-brand-gold">{location.cuisineTagline}</p>
                     <h1 className="mt-5 max-w-4xl font-serif text-5xl font-bold leading-tight text-white md:text-6xl">{getLocationLabel(location)}</h1>
                     {location.services ? (
                         <ServiceStatusList services={location.services} className="mt-5" />
                     ) : (
                         location.status === 'coming-soon' && location.openingText && (
-                            <p className="mt-4 text-lg font-semibold text-[#D4A84B]">{location.openingText}</p>
+                            <p className="mt-4 text-lg font-semibold text-brand-gold">{location.openingText}</p>
                         )
                     )}
                     <p className="mt-5 max-w-2xl text-lg leading-8 text-white/68">{location.description}</p>
 
                     <div className="mt-8 flex flex-wrap gap-3">
                         {hasPublicMenu(location) && (
-                            <Link to={`/locations/${location.slug}/menu`} className="inline-flex items-center gap-2 bg-[#1CA433] px-6 py-4 font-bold uppercase tracking-[0.16em] text-white transition-colors hover:bg-[#168C2B]">
+                            <Link to={`/locations/${location.slug}/menu`} className="inline-flex items-center gap-2 bg-brand-green px-6 py-4 font-bold uppercase tracking-[0.16em] text-ink-900 transition-colors hover:bg-brand-green-light">
                                 View Menu <ArrowRight size={17} />
                             </Link>
                         )}
-                        <a href={location.googleMapsUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 border border-[#B88A3D]/45 px-6 py-4 font-bold uppercase tracking-[0.16em] text-[#D4A84B] transition-colors hover:border-[#D4A84B] hover:text-white">
+                        <a href={location.googleMapsUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 border border-brand-gold-deep/45 px-6 py-4 font-bold uppercase tracking-[0.16em] text-brand-gold transition-colors hover:border-brand-gold hover:text-white">
                             <Navigation size={17} /> Directions
                         </a>
                     </div>
@@ -153,8 +153,8 @@ const LocationDetail = () => {
 
             <section className="px-5 pb-20 sm:px-8 lg:px-12">
                 <div className="mx-auto grid max-w-7xl gap-5 lg:grid-cols-[1fr_1fr]">
-                    <article className="border border-[#B88A3D]/25 bg-[#141414] p-7">
-                        <Clock className="mb-4 text-[#D4A84B]" size={28} strokeWidth={1.4} />
+                    <article className="border border-brand-gold-deep/25 bg-ink-800 p-7">
+                        <Clock className="mb-4 text-brand-gold" size={28} strokeWidth={1.4} />
                         <h2 className="font-serif text-3xl font-semibold text-white">Hours</h2>
                         {location.hours.length > 0 ? (
                             <ul className="mt-5 space-y-3 text-white/62">
@@ -169,42 +169,42 @@ const LocationDetail = () => {
                             <p className="mt-5 leading-7 text-white/62">{location.hoursNote}</p>
                         )}
                         {location.status === 'open' && location.phone && location.hours.length === 0 && (
-                            <a href={toTelHref(location.phone)} className="mt-5 inline-flex items-center gap-2 bg-[#1CA433] px-5 py-3 text-sm font-bold uppercase tracking-[0.16em] text-white transition-colors hover:bg-[#168C2B]">
+                            <a href={toTelHref(location.phone)} className="mt-5 inline-flex items-center gap-2 bg-brand-green px-5 py-3 text-sm font-bold uppercase tracking-[0.16em] text-ink-900 transition-colors hover:bg-brand-green-light">
                                 <Phone size={16} aria-hidden="true" /> Call {location.phone}
                             </a>
                         )}
                     </article>
 
-                    <article className="border border-[#B88A3D]/25 bg-[#101010] p-7">
-                        <MapPin className="mb-4 text-[#D4A84B]" size={28} strokeWidth={1.4} />
-                        <h2 className="font-serif text-3xl font-semibold text-[#D4A84B]">Visit</h2>
+                    <article className="border border-brand-gold-deep/25 bg-ink-850 p-7">
+                        <MapPin className="mb-4 text-brand-gold" size={28} strokeWidth={1.4} />
+                        <h2 className="font-serif text-3xl font-semibold text-brand-gold">Visit</h2>
                         <p className="mt-4 text-white/72">{location.address.full}</p>
-                        <a href={location.googleMapsUrl} target="_blank" rel="noreferrer" className="mt-5 inline-flex text-sm font-bold uppercase tracking-[0.16em] text-[#D4A84B] underline decoration-[#B88A3D]/40 underline-offset-4 hover:text-white">
+                        <a href={location.googleMapsUrl} target="_blank" rel="noreferrer" className="mt-5 inline-flex text-sm font-bold uppercase tracking-[0.16em] text-brand-gold underline decoration-brand-gold-deep/40 underline-offset-4 hover:text-white">
                             Open in Maps
                         </a>
 
                         <div className="mt-7 grid gap-3">
                             {location.phone ? (
-                                <a href={toTelHref(location.phone)} className="flex items-center gap-3 border border-[#B88A3D]/30 px-5 py-3 text-white/78 transition-colors hover:border-[#D4A84B] hover:text-white">
-                                    <Phone size={18} className="text-[#D4A84B]" aria-hidden="true" />
+                                <a href={toTelHref(location.phone)} className="flex items-center gap-3 border border-brand-gold-deep/30 px-5 py-3 text-white/78 transition-colors hover:border-brand-gold hover:text-white">
+                                    <Phone size={18} className="text-brand-gold" aria-hidden="true" />
                                     {location.phone}
                                 </a>
                             ) : (
                                 <p className="text-sm text-white/45">Phone coming soon</p>
                             )}
-                            <a href={`mailto:${location.email}`} className="flex items-center gap-3 border border-[#B88A3D]/30 px-5 py-3 text-white/78 transition-colors hover:border-[#D4A84B] hover:text-white">
-                                <Mail size={18} className="text-[#D4A84B]" />
+                            <a href={`mailto:${location.email}`} className="flex items-center gap-3 border border-brand-gold-deep/30 px-5 py-3 text-white/78 transition-colors hover:border-brand-gold hover:text-white">
+                                <Mail size={18} className="text-brand-gold" />
                                 {location.email}
                             </a>
                             {location.socialLinks?.facebook && (
-                                <a href={location.socialLinks.facebook} target="_blank" rel="noreferrer" className="flex items-center gap-3 border border-[#B88A3D]/30 px-5 py-3 text-white/78 transition-colors hover:border-[#D4A84B] hover:text-white">
-                                    <Facebook size={18} className="text-[#D4A84B]" aria-hidden="true" />
+                                <a href={location.socialLinks.facebook} target="_blank" rel="noreferrer" className="flex items-center gap-3 border border-brand-gold-deep/30 px-5 py-3 text-white/78 transition-colors hover:border-brand-gold hover:text-white">
+                                    <Facebook size={18} className="text-brand-gold" aria-hidden="true" />
                                     <span>Follow {location.shortName} on Facebook</span>
                                 </a>
                             )}
                             {location.services?.catering === 'open' && (
-                                <a href={`mailto:${CATERING_EMAIL}?subject=5Spice%20Catering%20Request`} className="flex items-center gap-3 border border-[#B88A3D]/30 px-5 py-3 text-white/78 transition-colors hover:border-[#D4A84B] hover:text-white">
-                                    <HandHeart size={18} className="text-[#D4A84B]" />
+                                <a href={`mailto:${CATERING_EMAIL}?subject=5Spice%20Catering%20Request`} className="flex items-center gap-3 border border-brand-gold-deep/30 px-5 py-3 text-white/78 transition-colors hover:border-brand-gold hover:text-white">
+                                    <HandHeart size={18} className="text-brand-gold" />
                                     <span>Catering: {CATERING_EMAIL}</span>
                                 </a>
                             )}
@@ -213,7 +213,7 @@ const LocationDetail = () => {
                 </div>
 
                 {hasAnyOrderingLink && (
-                    <div className="mx-auto mt-5 max-w-7xl border border-[#B88A3D]/25 bg-[#141414] p-7 md:p-10">
+                    <div className="mx-auto mt-5 max-w-7xl border border-brand-gold-deep/25 bg-ink-800 p-7 md:p-10">
                         <h2 className="font-serif text-3xl font-semibold text-white">Order Online</h2>
                         <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
                             {[...kitchenPlatforms, ...marketPlatforms].map((platform) => (
@@ -222,7 +222,7 @@ const LocationDetail = () => {
                                     href={location.orderingLinks[platform.key]}
                                     target="_blank"
                                     rel="noreferrer"
-                                    className="inline-flex items-center justify-between gap-2 border border-[#B88A3D]/30 px-5 py-4 text-sm font-bold uppercase tracking-[0.16em] text-[#D4A84B] transition-colors hover:border-[#D4A84B] hover:text-white"
+                                    className="inline-flex items-center justify-between gap-2 border border-brand-gold-deep/30 px-5 py-4 text-sm font-bold uppercase tracking-[0.16em] text-brand-gold transition-colors hover:border-brand-gold hover:text-white"
                                 >
                                     {platform.label} <ExternalLink size={15} />
                                 </a>
@@ -233,22 +233,22 @@ const LocationDetail = () => {
 
                 <div className="mx-auto mt-5 max-w-7xl grid gap-5 md:grid-cols-3">
                     {location.flags.hasMarket && (
-                        <Link to="/market" className="border border-[#B88A3D]/25 bg-[#101010] p-6 transition-colors hover:border-[#D4A84B]/50">
-                            <ShoppingBasket className="mb-4 text-[#D4A84B]" size={26} strokeWidth={1.4} />
+                        <Link to="/market" className="border border-brand-gold-deep/25 bg-ink-850 p-6 transition-colors hover:border-brand-gold/50">
+                            <ShoppingBasket className="mb-4 text-brand-gold" size={26} strokeWidth={1.4} />
                             <h3 className="font-serif text-2xl font-semibold text-white">Market</h3>
                             <p className="mt-2 text-sm leading-6 text-white/58">Premium halal grocery departments.</p>
                         </Link>
                     )}
                     {location.flags.hasWeeklyDeals && (
-                        <Link to="/sales" className="border border-[#B88A3D]/25 bg-[#101010] p-6 transition-colors hover:border-[#D4A84B]/50">
-                            <BadgePercent className="mb-4 text-[#D4A84B]" size={26} strokeWidth={1.4} />
+                        <Link to="/sales" className="border border-brand-gold-deep/25 bg-ink-850 p-6 transition-colors hover:border-brand-gold/50">
+                            <BadgePercent className="mb-4 text-brand-gold" size={26} strokeWidth={1.4} />
                             <h3 className="font-serif text-2xl font-semibold text-white">Weekly Deals</h3>
                             <p className="mt-2 text-sm leading-6 text-white/58">Rotating grocery highlights and features.</p>
                         </Link>
                     )}
                     {location.flags.hasCatering && (
-                        <Link to="/catering" className="border border-[#B88A3D]/25 bg-[#101010] p-6 transition-colors hover:border-[#D4A84B]/50">
-                            <HandHeart className="mb-4 text-[#D4A84B]" size={26} strokeWidth={1.4} />
+                        <Link to="/catering" className="border border-brand-gold-deep/25 bg-ink-850 p-6 transition-colors hover:border-brand-gold/50">
+                            <HandHeart className="mb-4 text-brand-gold" size={26} strokeWidth={1.4} />
                             <h3 className="font-serif text-2xl font-semibold text-white">Catering</h3>
                             <p className="mt-2 text-sm leading-6 text-white/58">Plan events, office meals, and gatherings.</p>
                         </Link>
