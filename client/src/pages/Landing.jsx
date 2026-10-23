@@ -3,7 +3,7 @@ import LaunchLanding from '../components/LaunchLanding';
 import { isComingSoonMode } from '../config/site';
 
 const Landing = () => {
-    // Switch VITE_APP_SITE_MODE from "coming_soon" to "live" or "grand_opening" to restore the full launch homepage.
+    // Switch VITE_APP_SITE_MODE from "coming_soon" to "live" to show the full site.
     return isComingSoonMode ? <ComingSoonLanding /> : <LaunchLanding />;
 };
 

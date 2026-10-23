@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, BookOpen, CalendarDays, HandHeart, MapPin, MapPinned, ShoppingBasket, Truck, Utensils, Users } from 'lucide-react';
-import { isGrandOpeningMode, isLiveMode, OFFERINGS } from '../config/site';
+import { OFFERINGS } from '../config/site';
 import CateringStats from './CateringStats';
 import { getCateringOpenLocations, getLocationLabel, getOrderingLocations, getUpcomingLocations, getVisibleLocations } from '../data/locations';
 import { useDocumentHead } from '../hooks/useDocumentHead';
@@ -40,12 +40,6 @@ const LaunchLanding = () => {
             <div className="pointer-events-none fixed inset-0 z-0 bg-[radial-gradient(circle_at_50%_0%,rgb(var(--color-gold-deep)/0.12),transparent_34%),linear-gradient(135deg,rgb(var(--color-ink-900))_0%,rgb(var(--color-ink-750))_56%,rgb(var(--color-ink-900))_100%)]" />
             <div className="pointer-events-none fixed inset-0 z-0 opacity-[0.045] bg-[radial-gradient(circle_at_1px_1px,rgba(255,255,255,0.75)_1px,transparent_0)] [background-size:22px_22px]" />
 
-            {isGrandOpeningMode && (
-                <div className="relative z-10 border-b border-brand-gold-deep/25 bg-brand-green px-4 py-3 text-center text-sm font-semibold text-ink-900">
-                    Grand Opening: welcome to 5Spice Market & Kitchen in Plano.
-                    <Link to="/locations/plano" className="ml-2 underline decoration-ink-900/40 underline-offset-4 hover:decoration-ink-900">Plan your visit</Link>
-                </div>
-            )}
 
             <section className="relative z-10 px-5 py-16 sm:px-8 md:py-20 lg:px-12">
                 <div className="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[1fr_0.82fr]">
@@ -129,7 +123,7 @@ const LaunchLanding = () => {
                 </div>
             </section>
 
-            {isLiveMode && <CateringStats />}
+            <CateringStats />
 
             <section className="relative z-10 px-5 py-14 sm:px-8 lg:px-12">
                 <div className="mx-auto max-w-7xl">
