@@ -3,7 +3,6 @@ const token = (name) => `rgb(var(--color-${name}) / <alpha-value>)`;
 
 /** @type {import('tailwindcss').Config} */
 export default {
-    darkMode: 'class',
     content: [
         "./index.html",
         "./src/**/*.{js,ts,jsx,tsx}",
@@ -36,9 +35,6 @@ export default {
                 sans: ['Inter', 'Noto Sans Bengali', 'sans-serif'],
                 serif: ['Playfair Display', 'Noto Sans Bengali', 'serif'], // For Headings
                 bengali: ['Noto Sans Bengali', 'sans-serif'],
-            },
-            backgroundImage: {
-                'hero-pattern': "url('https://www.transparenttextures.com/patterns/arabesque.png')", // Subtle pattern placeholder
             }
         },
     },

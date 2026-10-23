@@ -1,38 +1,40 @@
-# Testing Guide: 5 Spice Website
+# Testing 5spicemarket.com
 
-This project uses [Playwright](https://playwright.dev/) for automated end-to-end (E2E) testing. The tests simulate a real user navigating the website to ensure all critical features work as expected.
+## Before every PR
 
-## Prerequisites
-Ensure all dependencies are installed:
+Run these in `client/`:
+
+```bash
+npm run lint
+npm run build
+npm run preview   # then click through the pages you changed, on desktop and phone widths
+```
+
+## Automated end-to-end tests: currently not working
+
+The project is set up for [Playwright](https://playwright.dev/) tests
+(`client/playwright.config.js` and `client/e2e/navigation.spec.js`). They
+can't run yet, for two reasons:
+
+- `@playwright/test` isn't installed, so `npm test` fails.
+- `e2e/navigation.spec.js` was written for an earlier version of the site. It
+  expects the old "5 Spice" titles and pages that have changed.
+
+Fixing this is tracked in `docs/NEXT-STEPS.md` under "Working automated tests".
+The plan is to add `@playwright/test` as a dev dependency and rewrite a small
+set of tests covering:
+
+- each route
+- location status (Murphy and Plano)
+- links
+- both site modes
+
+After that, the commands will be:
+
 ```bash
 cd client
 npm install
-npx playwright install
+npx playwright install   # one-time browser download
+npm run build            # tests run against the production build
+npm test                 # serves it on :4173 and runs the tests
 ```
-
-## Running Tests
-To run the full test suite in headless mode (no browser UI):
-```bash
-npm test
-```
-*Note: This will automatically start the dev server, run the tests, and then shut down.*
-
-### Visual Mode
-To verify tests visually (opens the browser):
-```bash
-npx playwright test --ui
-```
-
-### Viewing Reports
-If tests fail, a report is generated. Viewing it:
-```bash
-npx playwright show-report
-```
-
-## What is Tested?
-The `e2e/navigation.spec.js` suite covers:
-1.  **Homepage**: Verifies "COMING SOON TO DFW" hero text.
-2.  **Supermarket**: Checks navigation and search bar visibility.
-3.  **Restaurant**: Checks navigation and menu headers.
-4.  **Pickup & Delivery**: Verifies the "Order Online" button redirects correctly.
-5.  **New Pages**: Verifies Sales and Catering pages load.
