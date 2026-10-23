@@ -106,7 +106,7 @@ The site is in a **pre-launch, minimal phase**. Its job right now is to:
   - `client/public/` — static assets served as-is, including `weekly-deals.json` (fetched client-side by the Sales page).
   - `server/data/*.json` — legacy sample data (menu, products, store info); not wired into the deployed client.
 - Routing: `react-router-dom` v7, client-side only (`BrowserRouter`), rewritten to `index.html` for all paths via `client/vercel.json`.
-- Site mode switch: `VITE_APP_SITE_MODE` (`coming_soon` | `grand_opening` | `live`) in `client/.env` controls whether Nav/Footer/full site render at all (`coming_soon` shows only the stealth landing page).
+- Site mode switch: `VITE_APP_SITE_MODE` (`coming_soon` | `live`; anything else, or unset, means `live`) in `client/.env` controls whether Nav/Footer/full site render at all (`coming_soon` shows only the stealth landing page).
 
 ---
 

@@ -5,6 +5,8 @@ A premium, community-focused website for **5 Spice**, a halal market and kitchen
 Built with **Node.js**, **React**, **Vite**, and **TailwindCSS**.
 
 > **Updating content?** (menu, menu photos, weekly deals, location details, page copy, and prompts for Claude Code) See [`docs/MAINTAINER-GUIDE.md`](docs/MAINTAINER-GUIDE.md).
+>
+> **What's next?** Upcoming website work and open questions are tracked in [`docs/NEXT-STEPS.md`](docs/NEXT-STEPS.md).
 
 ## 🎨 New Brand Identity
 - **Primary Colors**: Charcoal (`#1C1C1C`), warm cream (`#F8F5EF`), gold (`#B88A3D`), green (`#2D6A3F`), and orange (`#D4500A`).
@@ -14,8 +16,7 @@ Built with **Node.js**, **React**, **Vite**, and **TailwindCSS**.
 ## 🚀 Key Features
 - **SITE_MODE Configuration**: Controls the public facing state of the website via environment variables.
   - **`coming_soon`**: A strict, locked "Stealth Mode" landing page. Hides all navigation, footer, and links. Used for pre-launch anticipation.
-  - **`grand_opening`**: Full site access with a celebratory banner.
-  - **`live`**: Standard operating mode.
+  - **`live`**: The full site (the default).
 - **Dual Functionality**: Dedicated, distinct sections for **The Market** (Grocery) and **The Kitchen** (Restaurant).
 - **Mobile-First**: Fully responsive design with optimized mobile navigation.
 - **Dark Mode**: Premium dark theme using Charcoal and Gold accents.
@@ -83,7 +84,7 @@ five-spice/
 **Setting the Site Mode:**
 Edit `client/.env`:
 ```env
-# Options: coming_soon | grand_opening | live
+# Options: coming_soon | live
 VITE_APP_SITE_MODE=coming_soon
 ```
 

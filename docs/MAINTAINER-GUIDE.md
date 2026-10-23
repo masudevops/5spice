@@ -179,7 +179,7 @@ commas and quotes.
 
 File: `client/src/config/site.js` → `CATERING_STATS`. This is one combined
 total for all 5Spice kitchens, shown in the homepage "Every Gathering Matters"
-section in live mode and in the "Proudly Serving Our Community" section of the Catering page.
+section and in the "Proudly Serving Our Community" section of the Catering page.
 
 - Set `guestsServed` and/or `eventsCompleted` to the verified running total.
   The site rounds down to a milestone, so entering `1240` shows **1,000+**.
