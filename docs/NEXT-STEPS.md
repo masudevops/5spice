@@ -1,7 +1,7 @@
 # 5Spice website: next steps
 
 Tracking list for upcoming website work. Tick items off as they ship, and add
-new ones at the bottom of the right section. Most recent update: 2026-10-23.
+new ones at the bottom of the right section. Most recent update: 2026-10-24.
 
 **Who:** *Owners* = business decision or information needed. *Marketing* =
 Branding & Marketing team. *Dev* = code change (can be done with Claude Code).
@@ -27,11 +27,6 @@ These block accurate content. Nothing on the site is invented in the meantime.
   File: `client/src/config/site.js` (`CATERING_STATS`). Add
   `eventsCompleted` when there's a verified count.
 
-- [ ] **Azure subscription** (Owners). Create an Azure subscription and share
-  the subscription ID, so the move to Azure Static Web Apps (Free) can start.
-  The code side is ready (see §3).
-- [ ] **DNS access** (Owners). Say where 5spicemarket.com's DNS is managed
-  (registrar or Cloudflare) and give access for the domain switch.
 
 ## 2. Content review
 
@@ -50,14 +45,16 @@ These block accurate content. Nothing on the site is invented in the meantime.
   still lists them, so Google can index pages that aren't ready. Plan: redirect
   every route to the landing page in that mode, and generate a sitemap with the
   homepage only.
-- [ ] **Move hosting to Azure Static Web Apps (Free)** (Owners, then Dev).
-  Vercel's free plan doesn't allow commercial use. Everything is prepared in
-  `infra/` (see `infra/README.md`):
-  1. Run `./infra/setup-azure.sh --subscription <id> --site-mode <live|coming_soon>`.
-  2. Run the first deploy from GitHub Actions.
-  3. Test on the temporary `*.azurestaticapps.net` address.
-  4. Connect the domain with `./infra/add-custom-domain.sh`.
-  5. Keep Vercel for about a week as a fallback, then remove it.
+- [ ] **Go live** (Owners decide, then Dev). Production is in `coming_soon`
+  mode. Set the GitHub repo variable `VITE_APP_SITE_MODE` to `live` and re-run
+  the latest deploy (see `DEPLOYMENT.md`).
+- [ ] **Remove Vercel** (Dev, around 2026-10-31). Azure has been serving the
+  site since 2026-10-24; Vercel is the fallback until then. Remove the domain
+  and disconnect Git in the Vercel project, later delete it, then remove
+  `client/vercel.json` and the `@vercel/analytics` code (see `DEPLOYMENT.md`).
+- [ ] **One main address** (Dev, optional). Both `5spicemarket.com` and
+  `www.5spicemarket.com` serve the site. Consider redirecting `www` to the root
+  domain, which the sitemap already uses.
 - [ ] **Analytics after the move** (Owners/Dev). Vercel Web Analytics turns off
   on Azure. Decide on a replacement (e.g. Azure Application Insights free
   tier, or a privacy-friendly tool) or go without.
@@ -103,6 +100,9 @@ These block accurate content. Nothing on the site is invented in the meantime.
 
 ## Done
 
+- [x] Hosting moved to Azure Static Web Apps (Free) on 2026-10-24:
+  `swa-5spice-web` in `5Spice-Production`, deployed by GitHub Actions, DNS on
+  Cloudflare, SSL for both `5spicemarket.com` and `www`.
 - [x] Murphy published: catering available now; dine-in and take-out coming soon.
 - [x] Plano shown as "Opening Early 2027, In Sha Allah".
 - [x] Menus hidden until final.
