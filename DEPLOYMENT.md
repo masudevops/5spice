@@ -22,16 +22,29 @@ How deploys work:
   before merging.
 - `client/vercel.json` rewrites every path to `/index.html`. This lets direct
   links and refreshes on pages like `/catering` work instead of returning 404.
-- Vercel Web Analytics is loaded in `client/src/main.jsx` via
-  `@vercel/analytics`. It does nothing on other hosts.
+- Vercel Web Analytics loads only on Vercel builds (Vercel sets `VERCEL=1`,
+  which `client/vite.config.js` turns into `VITE_ON_VERCEL`). Other hosts
+  skip it.
 
-## Azure Static Web Apps (possible future move)
+## Azure Static Web Apps, Free plan (prepared, not live yet)
 
-See `docs/specs/03-azure-static-web-apps-migration.md`. In short:
+Everything for the move is ready. Follow [`infra/README.md`](infra/README.md).
 
-- **App location:** `/client`. **Output location:** `dist`.
-- Set `VITE_APP_SITE_MODE` as a build-time setting. Vite reads it during the
-  build, not at runtime.
-- Replace the `vercel.json` rewrite with a `staticwebapp.config.json`
-  navigation fallback to `/index.html`.
-- Decide whether to keep Vercel Analytics or swap it for another analytics tool.
+- **Set up:** `./infra/setup-azure.sh --subscription <id> --site-mode live`
+  creates the Static Web App and connects GitHub.
+- **Deploys:** `.github/workflows/azure-static-web-apps.yml` builds `client/`
+  (lint, then build) and uploads `client/dist`. Pushes to `main` go to
+  production, and PRs get preview URLs. It stays off until the repo variable
+  `AZURE_SWA_ENABLED` is `true`.
+- **Routing:** `client/public/staticwebapp.config.json` sends unknown paths to
+  `index.html` (the Azure version of `vercel.json`) and adds caching and
+  security headers.
+- **Site mode:** the GitHub repo variable `VITE_APP_SITE_MODE`, read at build
+  time.
+- **Domain:** `./infra/add-custom-domain.sh www.5spicemarket.com`, then the
+  root domain.
+- **Plan:** Free costs $0/month. To upgrade, re-run setup with
+  `--sku Standard`.
+
+Until DNS points to Azure, Vercel keeps serving 5spicemarket.com, and both can
+run side by side.

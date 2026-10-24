@@ -1,0 +1,80 @@
+# Builds client/ and deploys it to Azure Static Web Apps.
+#   push to main      -> production site
+#   pull request      -> temporary preview URL (posted as a PR comment)
+#   PR closed/merged  -> preview removed
+#
+# Stays switched off until infra/setup-azure.sh has run. That script sets:
+#   repo variable  AZURE_SWA_ENABLED = true
+#   repo variable  VITE_APP_SITE_MODE = coming_soon | live
+#   repo secret    AZURE_STATIC_WEB_APPS_API_TOKEN
+# See infra/README.md.
+
+name: Azure Static Web Apps
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+    branches: [main]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+concurrency:
+  group: azure-swa-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build_and_deploy:
+    name: Build and deploy
+    if: >-
+      vars.AZURE_SWA_ENABLED == 'true' &&
+      (github.event_name == 'push' || github.event.action != 'closed')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: client/package-lock.json
+
+      - name: Install
+        working-directory: client
+        run: npm ci
+
+      - name: Lint
+        working-directory: client
+        run: npm run lint
+
+      - name: Build
+        working-directory: client
+        env:
+          # Read at build time. Unset or anything else means the full site.
+          VITE_APP_SITE_MODE: ${{ vars.VITE_APP_SITE_MODE }}
+        run: npm run build
+
+      - name: Deploy
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          action: upload
+          # Already built above, so upload client/dist as-is.
+          app_location: client/dist
+          skip_app_build: true
+          api_location: ''
+
+  close_preview:
+    name: Remove PR preview
+    if: vars.AZURE_SWA_ENABLED == 'true' && github.event_name == 'pull_request' && github.event.action == 'closed'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
+          action: close
+          app_location: ''

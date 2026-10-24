@@ -35,7 +35,7 @@ Status as of 2026-10-23.
 | 1 | [Location switcher UI](./05-location-switcher-ui.md) | **Done** | Shipped. Murphy is the default location. |
 | 2 | [Murphy go-live safety checklist](./01-murphy-go-live-safety.md) | **Done** | Owners confirmed landlord approval on 2026-10-13, and Murphy is public. |
 | 3 | [Content ops: runtime JSON for menus & locations](./02-content-ops-runtime-json.md) | **Later** | Not started. Menus are hidden until final, so there's less pressure now. |
-| 4 | [Azure Static Web Apps migration](./03-azure-static-web-apps-migration.md) | **Later** | Planned, not scheduled. See `DEPLOYMENT.md`. |
+| 4 | [Azure Static Web Apps migration](./03-azure-static-web-apps-migration.md) | **Now** | Prepared on 2026-10-23 (`infra/`, workflow, routing config). Waiting on an Azure subscription, then DNS cutover. |
 | 5 | [Catering inquiry form + notifications](./04-catering-inquiry-form.md) | **Deferred** | The Catering page uses a prefilled quote email instead. Owners chose no form for now. |
 
 ## Open content questions
