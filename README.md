@@ -26,7 +26,8 @@ dishes, plus a premium halal grocery market.
   `client/src/index.css` and used as `brand-*` / `ink-*` classes.
 - **React Router 7** for pages, **lucide-react** for icons,
   **framer-motion** for the location switcher.
-- Hosted on **Vercel** (free tier). It's a static build, so it stays portable.
+- Hosted on **Vercel** (free tier) for now. A move to **Azure Static Web Apps
+  (Free)** is prepared in `infra/`. It's a static build, so it stays portable.
 
 ## Getting started
 
@@ -75,6 +76,8 @@ client/
 │   └── utils/              # Phone links, hours, milestone rounding
 ├── vercel.json             # Sends every path to index.html (so refreshes don't 404)
 └── .env.example            # Documents every environment variable
+infra/                      # Azure Static Web Apps setup scripts (see infra/README.md)
+.github/workflows/          # Azure deploy workflow (off until Azure is set up)
 docs/
 ├── MAINTAINER-GUIDE.md     # How to update content
 ├── NEXT-STEPS.md           # Tracking list

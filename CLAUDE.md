@@ -80,7 +80,8 @@ The site is in a **pre-launch, minimal phase**. Its job right now is to:
 
 ## 6. Hosting & deployment
 
-- Currently deployed on **Vercel (free tier)**. A move to **Azure App Service (low-cost tier)** is being considered.
+- Currently deployed on **Vercel (free tier)**. A move to **Azure Static Web Apps (Free plan, Standard later)** is prepared but not yet live: see `infra/README.md`. Static Web Apps fits a static build better than App Service. Vercel's Hobby plan also doesn't allow commercial use.
+- Azure files: `infra/` (setup scripts and config), `.github/workflows/azure-static-web-apps.yml` (deploys; off until the `AZURE_SWA_ENABLED` repo variable is `true`), and `client/public/staticwebapp.config.json` (routing fallback and headers).
 - Keep the app **portable**: avoid Vercel-only services (Vercel KV, Edge Config, Vercel-specific middleware features) unless they are wrapped behind an abstraction and documented.
 - No secrets in the repo. Document every environment variable in `.env.example`.
 - Prefer static generation where possible: it's cheaper, faster, and portable.

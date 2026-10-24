@@ -27,6 +27,12 @@ These block accurate content. Nothing on the site is invented in the meantime.
   File: `client/src/config/site.js` (`CATERING_STATS`). Add
   `eventsCompleted` when there's a verified count.
 
+- [ ] **Azure subscription** (Owners). Create an Azure subscription and share
+  the subscription ID, so the move to Azure Static Web Apps (Free) can start.
+  The code side is ready (see §3).
+- [ ] **DNS access** (Owners). Say where 5spicemarket.com's DNS is managed
+  (registrar or Cloudflare) and give access for the domain switch.
+
 ## 2. Content review
 
 - [ ] **Copy review** (Marketing). Review the copy written during launch prep:
@@ -44,6 +50,17 @@ These block accurate content. Nothing on the site is invented in the meantime.
   still lists them, so Google can index pages that aren't ready. Plan: redirect
   every route to the landing page in that mode, and generate a sitemap with the
   homepage only.
+- [ ] **Move hosting to Azure Static Web Apps (Free)** (Owners, then Dev).
+  Vercel's free plan doesn't allow commercial use. Everything is prepared in
+  `infra/` (see `infra/README.md`):
+  1. Run `./infra/setup-azure.sh --subscription <id> --site-mode <live|coming_soon>`.
+  2. Run the first deploy from GitHub Actions.
+  3. Test on the temporary `*.azurestaticapps.net` address.
+  4. Connect the domain with `./infra/add-custom-domain.sh`.
+  5. Keep Vercel for about a week as a fallback, then remove it.
+- [ ] **Analytics after the move** (Owners/Dev). Vercel Web Analytics turns off
+  on Azure. Decide on a replacement (e.g. Azure Application Insights free
+  tier, or a privacy-friendly tool) or go without.
 - [ ] **Food photos** (Owners provide photos, then Dev). Real photos only, never
   stock or AI.
   - Kitchen page: turn the three highlight cards into 3–6 signature dish photos
@@ -78,9 +95,6 @@ These block accurate content. Nothing on the site is invented in the meantime.
 - [ ] **Plano launch** (Dev, near opening). Switch Plano to `status: 'open'`
   and add hours, ordering links, and the Instacart link, then start weekly deals
   in `client/public/weekly-deals.json`.
-- [ ] **Hosting move** (Owners/Dev). Possible move from Vercel to Azure App
-  Service. The site is a static build, so it's portable. The `/(.*)` →
-  `/index.html` rewrite in `client/vercel.json` needs an Azure equivalent.
 - [ ] **Phase 2: in-house ordering** (Owners/Dev). Pickup and nearby delivery
   with a minimum order. Ordering links are kept in one place, so they can be
   swapped later.
