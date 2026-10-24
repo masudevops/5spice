@@ -80,8 +80,9 @@ The site is in a **pre-launch, minimal phase**. Its job right now is to:
 
 ## 6. Hosting & deployment
 
-- Currently deployed on **Vercel (free tier)**. A move to **Azure Static Web Apps (Free plan, Standard later)** is prepared but not yet live: see `infra/README.md`. Static Web Apps fits a static build better than App Service. Vercel's Hobby plan also doesn't allow commercial use.
-- Azure files: `infra/` (setup scripts and config), `.github/workflows/azure-static-web-apps.yml` (deploys; off until the `AZURE_SWA_ENABLED` repo variable is `true`), and `client/public/staticwebapp.config.json` (routing fallback and headers).
+- Deployed on **Azure Static Web Apps (Free plan, Standard later)** since 2026-10-24: resource `swa-5spice-web` in resource group `rg-5spice-web`, subscription `5Spice-Production`. DNS is on Cloudflare (`@` and `www` CNAMEs to the Azure address, DNS only). See `DEPLOYMENT.md` and `infra/README.md`.
+- Deploys: `.github/workflows/azure-static-web-apps.yml` (merging to `main` deploys; PRs get preview URLs). Production site mode is the GitHub repo variable `VITE_APP_SITE_MODE`. Routing fallback and headers: `client/public/staticwebapp.config.json`.
+- Vercel (the old host) is kept as a fallback until about 2026-10-31, then removed. Its Hobby plan doesn't allow commercial use.
 - Keep the app **portable**: avoid Vercel-only services (Vercel KV, Edge Config, Vercel-specific middleware features) unless they are wrapped behind an abstraction and documented.
 - No secrets in the repo. Document every environment variable in `.env.example`.
 - Prefer static generation where possible: it's cheaper, faster, and portable.
@@ -105,7 +106,7 @@ The site is in a **pre-launch, minimal phase**. Its job right now is to:
   - `client/src/config/site.js` — site-wide constants (contact info, social links, catering email, order platform labels, page copy lists, `CATERING_STATS`). Per-location facts live in `client/src/data/locations/`.
   - `client/src/hooks/` — small hooks (`useDocumentHead` for per-page title/description/JSON-LD, `useSelectedLocation`).
   - `client/public/` — static assets served as-is, including `weekly-deals.json` (fetched client-side by the Sales page).
-- Routing: `react-router-dom` v7, client-side only (`BrowserRouter`), rewritten to `index.html` for all paths via `client/vercel.json`.
+- Routing: `react-router-dom` v7, client-side only (`BrowserRouter`), rewritten to `index.html` for all paths via `client/public/staticwebapp.config.json` (Azure; `client/vercel.json` does the same on Vercel until it's removed).
 - Site mode switch: `VITE_APP_SITE_MODE` (`coming_soon` | `live`; anything else, or unset, means `live`) in `client/.env` controls whether Nav/Footer/full site render at all (`coming_soon` shows only the stealth landing page).
 
 ---
