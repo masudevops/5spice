@@ -2,6 +2,52 @@
 @tailwind components;
 @tailwind utilities;
 
+/*
+ * Metric-matched fallbacks: system fonts resized to take the same space as
+ * Inter and Playfair Display, shown while the web fonts load, so headings
+ * and buttons don't shift when the real fonts swap in. Values were measured
+ * in Chrome against the Google Fonts files (per weight range).
+ */
+@font-face {
+  font-family: 'Inter Fallback';
+  src: local('Arial'), local('ArialMT');
+  font-weight: 100 500;
+  size-adjust: 106.27%;
+  ascent-override: 91.28%;
+  descent-override: 22.58%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'Inter Fallback';
+  src: local('Arial Bold'), local('Arial-BoldMT');
+  font-weight: 600 900;
+  size-adjust: 101.61%;
+  ascent-override: 95.47%;
+  descent-override: 23.62%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'Playfair Fallback';
+  src: local('Times New Roman'), local('TimesNewRomanPSMT');
+  font-weight: 100 500;
+  size-adjust: 110.22%;
+  ascent-override: 97.99%;
+  descent-override: 22.68%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'Playfair Fallback';
+  src: local('Times New Roman Bold'), local('TimesNewRomanPS-BoldMT');
+  font-weight: 600 900;
+  size-adjust: 107.31%;
+  ascent-override: 100.65%;
+  descent-override: 23.30%;
+  line-gap-override: 0%;
+}
+
 @layer base {
   /*
    * Brand color tokens: the single place to change a site color.
@@ -35,11 +81,30 @@
 
   html {
     scroll-behavior: smooth;
+    /* Keep focused or anchored content clear of the sticky header. */
+    scroll-padding-top: 7rem;
+  }
+
+  /* Phones: also keep it clear of the fixed bottom bar (Navbar, md:hidden). */
+  @media (max-width: 767px) {
+    html {
+      scroll-padding-bottom: 6rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
   }
 
   body {
     background-color: rgb(var(--color-ink-600));
     color: rgb(var(--color-parchment));
+    /* A word too long for its line (e.g. "@5SpiceMarket" with large phone
+       text settings) wraps instead of making the page scroll sideways.
+       Normal text still wraps between words as usual. */
+    overflow-wrap: anywhere;
   }
 
   /* Visible keyboard focus on every link and button, in brand gold. */
@@ -48,9 +113,26 @@
     outline: 2px solid rgb(var(--color-gold));
     outline-offset: 3px;
   }
+
 }
 
 @layer utilities {
+  /* Bottom padding for the iPhone home indicator (0 elsewhere). */
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  /* Enlarges a small control's tap area without changing how it looks. */
+  .tap-area {
+    position: relative;
+  }
+
+  .tap-area::after {
+    content: '';
+    position: absolute;
+    inset: -0.5rem 0;
+  }
+
   .animate-fade-in-up {
     animation: fadeInUp 0.8s ease-out forwards;
     opacity: 0;

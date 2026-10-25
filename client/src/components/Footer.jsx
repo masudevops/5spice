@@ -37,6 +37,9 @@ const Footer = () => {
                     <div>
                         <img
                             src={LOGOS.wide}
+                            width={LOGOS.wideWidth}
+                            height={LOGOS.wideHeight}
+                            loading="lazy"
                             alt="5Spice Market & Kitchen"
                             className="mb-6 h-16 w-auto object-contain"
                         />
@@ -57,10 +60,10 @@ const Footer = () => {
                     {buildLinkGroups().map((group) => (
                         <div key={group.title}>
                             <h2 className="mb-5 font-serif text-xl font-semibold text-brand-gold">{group.title}</h2>
-                            <ul className="space-y-3 text-sm text-white/58">
+                            <ul className="space-y-1 text-sm text-white/58">
                                 {group.links.map(([label, href]) => (
                                     <li key={href}>
-                                        <Link to={href} className="transition-colors hover:text-white">{label}</Link>
+                                        <Link to={href} className="inline-block py-2 transition-colors hover:text-white">{label}</Link>
                                     </li>
                                 ))}
                             </ul>
@@ -69,36 +72,36 @@ const Footer = () => {
 
                     <div>
                         <h2 className="mb-5 font-serif text-xl font-semibold text-brand-gold">Visit</h2>
-                        <ul className="space-y-5 text-sm text-white/62">
+                        <ul className="space-y-4 text-sm text-white/62">
                             {visibleLocations.map((loc) => (
                                 <li key={loc.slug}>
-                                    <Link to={`/locations/${loc.slug}`} className="font-semibold text-white/85 transition-colors hover:text-white">
+                                    <Link to={`/locations/${loc.slug}`} className="inline-block py-1.5 font-semibold text-white/85 transition-colors hover:text-white">
                                         {getLocationLabel(loc)}
                                     </Link>
                                     {loc.statusLabel && (
-                                        <span className={`mt-1 block text-xs font-bold uppercase tracking-[0.14em] ${loc.status === 'open' ? 'text-brand-green' : 'text-brand-gold'}`}>
+                                        <span className={`block text-xs font-bold uppercase tracking-[0.14em] ${loc.status === 'open' ? 'text-brand-green' : 'text-brand-gold'}`}>
                                             {loc.openingText}
                                         </span>
                                     )}
-                                    <a href={loc.googleMapsUrl} target="_blank" rel="noreferrer" className="mt-2 flex gap-3 transition-colors hover:text-white">
+                                    <a href={loc.googleMapsUrl} target="_blank" rel="noreferrer" className="mt-1 flex gap-3 py-1.5 transition-colors hover:text-white">
                                         <MapPin size={18} className="mt-0.5 shrink-0 text-brand-gold" aria-hidden="true" />
                                         {loc.address.full}
                                     </a>
                                     {loc.phone && (
-                                        <a href={toTelHref(loc.phone)} className="mt-2 flex gap-3 transition-colors hover:text-white">
+                                        <a href={toTelHref(loc.phone)} className="flex gap-3 py-1.5 transition-colors hover:text-white">
                                             <Phone size={18} className="mt-0.5 shrink-0 text-brand-gold" aria-hidden="true" />
                                             {loc.phone}
                                         </a>
                                     )}
                                 </li>
                             ))}
-                            <li className="flex gap-3">
-                                <Mail size={18} className="mt-0.5 shrink-0 text-brand-gold" aria-hidden="true" />
-                                <a href={`mailto:${SOCIAL_LINKS.email}`} className="transition-colors hover:text-white">{SOCIAL_LINKS.email}</a>
+                            <li className="flex items-center gap-3">
+                                <Mail size={18} className="shrink-0 text-brand-gold" aria-hidden="true" />
+                                <a href={`mailto:${SOCIAL_LINKS.email}`} className="py-1.5 transition-colors hover:text-white">{SOCIAL_LINKS.email}</a>
                             </li>
-                            <li className="flex gap-3">
-                                <HandHeart size={18} className="mt-0.5 shrink-0 text-brand-gold" aria-hidden="true" />
-                                <a href={`mailto:${CATERING_EMAIL}`} className="transition-colors hover:text-white">{CATERING_EMAIL}</a>
+                            <li className="flex items-center gap-3">
+                                <HandHeart size={18} className="shrink-0 text-brand-gold" aria-hidden="true" />
+                                <a href={`mailto:${CATERING_EMAIL}`} className="py-1.5 transition-colors hover:text-white">{CATERING_EMAIL}</a>
                             </li>
                         </ul>
                     </div>

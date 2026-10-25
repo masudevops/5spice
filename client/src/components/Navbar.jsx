@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { HandHeart, Mail, MapPinned, Menu, Search, ShoppingBag, Utensils, X } from 'lucide-react';
 import clsx from 'clsx';
@@ -31,12 +31,89 @@ const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { selectedSlug, selectLocation, visibleLocations } = useSelectedLocation();
+  const menuButtonRef = useRef(null);
+  const menuRef = useRef(null);
+  const headerRef = useRef(null);
+  const bottomBarRef = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Keyboard focus never ends up hidden behind the sticky header or the
+  // phone bottom bar: if it lands under either, scroll it into the clear.
+  useEffect(() => {
+    const keepClear = (target) => {
+      const header = headerRef.current;
+      const bar = bottomBarRef.current;
+      const rect = target.getBoundingClientRect();
+      // Large regions (e.g. <main> after "Skip to content") position themselves.
+      if (rect.height > window.innerHeight / 2) return;
+      const gap = 12;
+      if (bar && getComputedStyle(bar).display !== 'none') {
+        const overlap = rect.bottom + gap - bar.getBoundingClientRect().top;
+        if (overlap > 0) {
+          window.scrollBy({ top: overlap });
+          return;
+        }
+      }
+      if (header) {
+        const overlap = header.getBoundingClientRect().bottom + gap - rect.top;
+        if (overlap > 0) window.scrollBy({ top: -overlap });
+      }
+    };
+    const handleFocusIn = (event) => {
+      const target = event.target;
+      if (!(target instanceof Element) || target.closest('header, [data-fixed-bar], #mobile-menu, [data-skip-link]')) return;
+      // The browser scrolls a newly focused element into view itself (smoothly,
+      // with scroll-behavior: smooth), so check after the next frame and again
+      // once that scroll has settled.
+      const check = () => {
+        if (document.activeElement === target) keepClear(target);
+      };
+      requestAnimationFrame(check);
+      setTimeout(check, 400);
+    };
+    document.addEventListener('focusin', handleFocusIn);
+    return () => document.removeEventListener('focusin', handleFocusIn);
+  }, []);
+
+  // Keyboard support for the full-screen mobile menu: focus moves into it,
+  // Tab stays inside it (plus the close button), and Escape closes it.
+  useEffect(() => {
+    if (!mobileMenuOpen) return undefined;
+    const menu = menuRef.current;
+    const focusable = () => [menuButtonRef.current, ...menu.querySelectorAll('a[href], button')].filter(Boolean);
+    menu.querySelector('a[href], button')?.focus();
+
+    const handleKeyDown = (event) => {
+      // An open location dropdown inside the menu handles Escape itself.
+      if (event.defaultPrevented) return;
+      if (event.key === 'Escape') {
+        setMobileMenuOpen(false);
+        menuButtonRef.current?.focus();
+        return;
+      }
+      if (event.key !== 'Tab') return;
+      const items = focusable();
+      const first = items[0];
+      const last = items[items.length - 1];
+      if (!items.includes(document.activeElement)) {
+        event.preventDefault();
+        first.focus();
+      } else if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [mobileMenuOpen]);
 
   if (isComingSoonMode) {
     return null;
@@ -79,6 +156,7 @@ const Navbar = () => {
       </div>
 
       <header
+        ref={headerRef}
         className={clsx(
           'sticky top-0 z-40 border-b backdrop-blur-xl transition-all duration-300',
           isScrolled
@@ -90,6 +168,8 @@ const Navbar = () => {
           <Link to="/" className="flex shrink-0 items-center" aria-label="5Spice Market & Kitchen home">
             <img
               src={LOGOS.wide}
+              width={LOGOS.wideWidth}
+              height={LOGOS.wideHeight}
               alt="5Spice Market & Kitchen"
               className="h-14 w-auto object-contain transition-opacity hover:opacity-90 xl:h-[4.75rem]"
             />
@@ -102,6 +182,7 @@ const Navbar = () => {
                 <Link
                   key={link.name}
                   to={link.path}
+                  aria-current={isActive ? 'page' : undefined}
                   className={clsx(
                     'relative whitespace-nowrap py-2 text-sm font-medium tracking-[0.08em] transition-colors xl:tracking-[0.16em]',
                     isActive ? 'text-brand-gold' : 'text-brand-cream/74 hover:text-white'
@@ -130,11 +211,13 @@ const Navbar = () => {
           </div>
 
           <button
+            ref={menuButtonRef}
             type="button"
             className="inline-flex h-11 w-11 items-center justify-center border border-brand-gold-deep/30 text-brand-cream transition-colors hover:border-brand-gold hover:text-brand-gold lg:hidden"
             onClick={() => setMobileMenuOpen((open) => !open)}
             aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
             aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-menu"
           >
             {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
@@ -142,7 +225,7 @@ const Navbar = () => {
       </header>
 
       {mobileMenuOpen && (
-        <div className="fixed inset-0 z-30 bg-ink-900/98 px-6 pb-24 pt-28 lg:hidden">
+        <div id="mobile-menu" ref={menuRef} className="fixed inset-0 z-30 overflow-y-auto bg-ink-900/98 px-6 pb-24 pt-28 lg:hidden">
           <nav className="mx-auto flex max-w-sm flex-col gap-3 text-center" aria-label="Mobile navigation">
             {visibleLocations.length > 1 && (
               <div className="mb-2 flex justify-center">
@@ -171,26 +254,26 @@ const Navbar = () => {
         </div>
       )}
 
-      <nav className="fixed bottom-0 left-0 right-0 z-50 border-t border-brand-gold-deep/20 bg-ink-900/95 pb-safe shadow-[0_-18px_60px_rgba(0,0,0,0.32)] backdrop-blur-xl md:hidden" aria-label="Mobile quick navigation">
-        <div className="mx-auto grid h-16 max-w-md grid-cols-5 items-center">
+      <nav ref={bottomBarRef} data-fixed-bar className="fixed bottom-0 left-0 right-0 z-50 border-t border-brand-gold-deep/20 bg-ink-900/95 pb-safe shadow-[0_-18px_60px_rgba(0,0,0,0.32)] backdrop-blur-xl md:hidden" aria-label="Mobile quick navigation">
+        <div className="mx-auto grid h-16 max-w-md grid-cols-5 items-stretch">
           {bottomLinks.slice(0, midpoint).map((link) => {
             const Icon = link.icon;
             const isActive = location.pathname === link.path;
             return (
-              <Link key={link.path} to={link.path} className={clsx('flex flex-col items-center gap-1 text-[0.68rem] font-medium', isActive ? 'text-brand-gold' : 'text-brand-cream/55')}>
+              <Link key={link.path} to={link.path} aria-current={isActive ? 'page' : undefined} className={clsx('flex h-full flex-col items-center justify-center gap-1 text-xs font-medium', isActive ? 'text-brand-gold' : 'text-brand-cream/55')}>
                 <Icon size={19} />
                 {link.name}
               </Link>
             );
           })}
-          <Link to={centerAction.to} onClick={centerAction.onClick} aria-label={centerAction.label} className="mx-auto -mt-7 flex h-14 w-14 items-center justify-center rounded-full border-4 border-ink-900 bg-brand-green text-ink-900 shadow-lg">
+          <Link to={centerAction.to} onClick={centerAction.onClick} aria-label={centerAction.label} className="mx-auto -mt-7 flex h-14 w-14 self-center items-center justify-center rounded-full border-4 border-ink-900 bg-brand-green text-ink-900 shadow-lg">
             <centerAction.icon size={24} />
           </Link>
           {bottomLinks.slice(midpoint).map((link) => {
             const Icon = link.icon;
             const isActive = location.pathname === link.path;
             return (
-              <Link key={link.path} to={link.path} className={clsx('flex flex-col items-center gap-1 text-[0.68rem] font-medium', isActive ? 'text-brand-gold' : 'text-brand-cream/55')}>
+              <Link key={link.path} to={link.path} aria-current={isActive ? 'page' : undefined} className={clsx('flex h-full flex-col items-center justify-center gap-1 text-xs font-medium', isActive ? 'text-brand-gold' : 'text-brand-cream/55')}>
                 <Icon size={19} />
                 {link.name}
               </Link>
