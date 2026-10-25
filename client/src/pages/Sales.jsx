@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { BadgePercent, CalendarDays, Facebook, Instagram, Sparkles } from 'lucide-react';
+import clsx from 'clsx';
 import { SOCIAL_LINKS } from '../config/site';
 import { getLocationLabel, getVisibleLocations } from '../data/locations';
 import { useDocumentHead } from '../hooks/useDocumentHead';
@@ -45,8 +46,10 @@ const Sales = () => {
 
             <section className="px-5 pb-20 sm:px-8 lg:px-12">
                 <div className="mx-auto max-w-7xl">
-                    {loaded && !hasDeals && (
-                        <div className="border border-brand-gold-deep/25 bg-ink-800 p-7 md:p-9">
+                    {/* Until the deals file loads, an invisible copy of the "no deals" card
+                        holds its space so the page below doesn't jump. */}
+                    {!hasDeals && (
+                        <div aria-hidden={!loaded} className={clsx('border border-brand-gold-deep/25 bg-ink-800 p-7 md:p-9', !loaded && 'invisible')}>
                             <CalendarDays className="mb-5 text-brand-gold" size={30} strokeWidth={1.4} aria-hidden="true" />
                             <h2 className="font-serif text-3xl font-semibold text-white">Weekly deals start when our market opens.</h2>
                             <p className="mt-4 max-w-3xl leading-7 text-white/62">

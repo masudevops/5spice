@@ -38,7 +38,7 @@ const Contact = () => {
                                         {location.openingText}
                                     </p>
                                     <h2 className="mt-3 font-serif text-3xl font-semibold text-white">
-                                        <Link to={`/locations/${location.slug}`} className="hover:text-brand-gold">{getLocationLabel(location)}</Link>
+                                        <Link to={`/locations/${location.slug}`} className="tap-area hover:text-brand-gold">{getLocationLabel(location)}</Link>
                                     </h2>
                                     <p className="mt-4 flex items-start gap-2 text-white/68">
                                         <MapPin size={18} className="mt-1 shrink-0 text-brand-gold" aria-hidden="true" />
@@ -50,17 +50,17 @@ const Contact = () => {
                                             {location.hoursNote}
                                         </p>
                                     )}
-                                    <div className="mt-5 flex flex-wrap gap-x-6 gap-y-3 text-sm font-bold uppercase tracking-[0.16em]">
+                                    <div className="mt-3 flex flex-wrap gap-x-6 text-sm font-bold uppercase tracking-[0.16em]">
                                         {location.phone && (
-                                            <a href={toTelHref(location.phone)} className="inline-flex items-center gap-2 text-brand-gold hover:text-white">
+                                            <a href={toTelHref(location.phone)} className="inline-flex min-h-11 items-center gap-2 text-brand-gold hover:text-white">
                                                 <Phone size={16} aria-hidden="true" /> {location.phone}
                                             </a>
                                         )}
-                                        <a href={location.googleMapsUrl} target="_blank" rel="noreferrer" className="text-brand-gold underline decoration-brand-gold-deep/40 underline-offset-4 hover:text-white">
+                                        <a href={location.googleMapsUrl} target="_blank" rel="noreferrer" className="inline-flex min-h-11 items-center text-brand-gold underline decoration-brand-gold-deep/40 underline-offset-4 hover:text-white">
                                             Open in Maps
                                         </a>
                                         {location.socialLinks?.facebook && (
-                                            <a href={location.socialLinks.facebook} target="_blank" rel="noreferrer" aria-label={`${getLocationLabel(location)} on Facebook`} className="inline-flex items-center gap-2 text-brand-gold hover:text-white">
+                                            <a href={location.socialLinks.facebook} target="_blank" rel="noreferrer" aria-label={`${getLocationLabel(location)} on Facebook`} className="inline-flex min-h-11 items-center gap-2 text-brand-gold hover:text-white">
                                                 <Facebook size={16} aria-hidden="true" /> Facebook
                                             </a>
                                         )}

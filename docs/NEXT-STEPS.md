@@ -1,7 +1,7 @@
 # 5Spice website: next steps
 
 Tracking list for upcoming website work. Tick items off as they ship, and add
-new ones at the bottom of the right section. Most recent update: 2026-10-24.
+new ones at the bottom of the right section. Most recent update: 2026-10-25.
 
 **Who:** *Owners* = business decision or information needed. *Marketing* =
 Branding & Marketing team. *Dev* = code change (can be done with Claude Code).
@@ -100,6 +100,11 @@ These block accurate content. Nothing on the site is invented in the meantime.
 - [x] Hosting moved to Azure Static Web Apps (Free) on 2026-10-24:
   `swa-5spice-web` in `5Spice-Production`, deployed by GitHub Actions, DNS on
   Cloudflare, SSL for both `5spicemarket.com` and `www`.
+- [x] UX and accessibility review fixes (2026-10-25):
+  - keyboard: skip link, mobile menu focus and Escape, location dropdown arrow keys, focus kept clear of the header and bottom bar
+  - phones: 44px bottom bar with 12px labels, larger footer and contact tap areas, no sideways scroll at 320px or with large text
+  - speed: logo 354 KB → 43 KB (WebP copy), Bengali font ~105 KB → ~7 KB, pages load on demand, size-matched fallback fonts, Weekly Deals no longer jumps
+  - reduced motion respected
 - [x] Cloudflare Web Analytics replaces Vercel Web Analytics (2026-10-25).
 - [x] Murphy published: catering available now; dine-in and take-out coming soon.
 - [x] Plano shown as "Opening Early 2027, In Sha Allah".

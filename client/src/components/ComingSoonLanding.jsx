@@ -59,6 +59,8 @@ const ComingSoonLanding = () => {
                     <div className="flex justify-center">
                         <img
                             src={LOGOS.wide}
+                            width={LOGOS.wideWidth}
+                            height={LOGOS.wideHeight}
                             alt="5Spice Market & Kitchen official logo"
                             className="h-auto w-[210px] object-contain sm:w-[300px] lg:w-[350px]"
                         />

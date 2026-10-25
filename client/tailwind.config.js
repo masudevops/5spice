@@ -32,8 +32,10 @@ export default {
             fontFamily: {
                 // Noto Sans Bengali is the fallback so Bengali words inside
                 // English text (e.g. পাঁচফোড়ন) render in a proper Bengali face.
-                sans: ['Inter', 'Noto Sans Bengali', 'sans-serif'],
-                serif: ['Playfair Display', 'Noto Sans Bengali', 'serif'], // For Headings
+                // The "Fallback" faces (src/index.css) are system fonts sized to
+                // match, so text doesn't jump when the web fonts finish loading.
+                sans: ['Inter', 'Inter Fallback', 'Noto Sans Bengali', 'sans-serif'],
+                serif: ['Playfair Display', 'Playfair Fallback', 'Noto Sans Bengali', 'serif'], // For Headings
                 bengali: ['Noto Sans Bengali', 'sans-serif'],
             }
         },

@@ -179,7 +179,7 @@ const LocationDetail = () => {
                         <MapPin className="mb-4 text-brand-gold" size={28} strokeWidth={1.4} />
                         <h2 className="font-serif text-3xl font-semibold text-brand-gold">Visit</h2>
                         <p className="mt-4 text-white/72">{location.address.full}</p>
-                        <a href={location.googleMapsUrl} target="_blank" rel="noreferrer" className="mt-5 inline-flex text-sm font-bold uppercase tracking-[0.16em] text-brand-gold underline decoration-brand-gold-deep/40 underline-offset-4 hover:text-white">
+                        <a href={location.googleMapsUrl} target="_blank" rel="noreferrer" className="mt-3 inline-flex min-h-11 items-center text-sm font-bold uppercase tracking-[0.16em] text-brand-gold underline decoration-brand-gold-deep/40 underline-offset-4 hover:text-white">
                             Open in Maps
                         </a>
 
