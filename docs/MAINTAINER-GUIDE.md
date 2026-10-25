@@ -30,7 +30,7 @@ do it for you.
 | Market departments, homepage offering cards, Kitchen highlight cards | `client/src/config/site.js` (`MARKET_DEPARTMENTS`, `OFFERINGS`, `MENU_HIGHLIGHTS`) |
 | Wording on a specific page | `client/src/pages/<Page>.jsx` (see §7) |
 | Logo, favicons, social preview image | `client/public/` (use the provided brand assets only) |
-| Site mode (coming soon / live) | `VITE_APP_SITE_MODE`: `client/.env` locally, **Vercel project settings** in production |
+| Site mode (coming soon / live) | `VITE_APP_SITE_MODE`: `client/.env` locally, **GitHub repo variable** in production (see `DEPLOYMENT.md`) |
 
 The technical reference for the data files is `client/src/data/README.md`.
 
@@ -45,7 +45,7 @@ The technical reference for the data files is `client/src/data/README.md`.
 3. **Check before you push:** `cd client && npm run lint && npm run build`.
    Both must pass. The build also regenerates `client/public/sitemap.xml`.
 4. Push the branch and open a pull request. The live site updates after the
-   PR is merged and Vercel redeploys. This includes `weekly-deals.json`:
+   PR is merged and GitHub Actions redeploys to Azure (a few minutes). This includes `weekly-deals.json`:
    no rebuild is needed, but the file still has to be deployed.
 
 ---
@@ -352,4 +352,4 @@ desktop and commit on a branch.
 - [ ] Plano isn't described as open; Murphy's services match reality
 - [ ] `client/public/sitemap.xml` lists only pages you intend to publish
 - [ ] Checked on a phone-width screen
-- [ ] Production `VITE_APP_SITE_MODE` is set correctly in Vercel
+- [ ] Production `VITE_APP_SITE_MODE` (GitHub repo variable) is set correctly

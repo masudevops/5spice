@@ -26,8 +26,8 @@ dishes, plus a premium halal grocery market.
   `client/src/index.css` and used as `brand-*` / `ink-*` classes.
 - **React Router 7** for pages, **lucide-react** for icons,
   **framer-motion** for the location switcher.
-- Hosted on **Vercel** (free tier) for now. A move to **Azure Static Web Apps
-  (Free)** is prepared in `infra/`. It's a static build, so it stays portable.
+- Hosted on **Azure Static Web Apps** (Free plan), deployed by GitHub Actions.
+  It's a static build, so it stays portable.
 
 ## Getting started
 
@@ -56,8 +56,9 @@ npm run dev        # http://localhost:5173
 | `live` (default) | The full site. Any other value, or no value, also means `live`. |
 
 - **Locally:** set it in `client/.env` (copy `client/.env.example`).
-- **In production:** set it in Vercel under **Project Settings → Environment
-  Variables**, then redeploy. Vercel's value overrides the committed `.env`.
+- **In production:** it's the GitHub repo variable `VITE_APP_SITE_MODE`
+  (**Settings → Secrets and variables → Actions**). Change it, then re-run the
+  latest deploy. See [`DEPLOYMENT.md`](DEPLOYMENT.md).
 
 ## Project structure
 
@@ -74,10 +75,10 @@ client/
 │   ├── hooks/              # Page titles/SEO, selected location
 │   ├── pages/              # One component per route
 │   └── utils/              # Phone links, hours, milestone rounding
-├── vercel.json             # Sends every path to index.html (so refreshes don't 404)
+├── vercel.json             # Old Vercel routing; remove with the Vercel project
 └── .env.example            # Documents every environment variable
 infra/                      # Azure Static Web Apps setup scripts (see infra/README.md)
-.github/workflows/          # Azure deploy workflow (off until Azure is set up)
+.github/workflows/          # Azure deploy workflow (runs on every push to main and on PRs)
 docs/
 ├── MAINTAINER-GUIDE.md     # How to update content
 ├── NEXT-STEPS.md           # Tracking list
@@ -89,9 +90,9 @@ not writing new pages. See `client/src/data/README.md`.
 
 ## Deployment
 
-On Vercel, the project's **Root Directory** must be `client`, with the Vite
-preset. Pushing to `main` deploys to production, and other branches get preview
-URLs. See [`DEPLOYMENT.md`](DEPLOYMENT.md) for details and Azure notes.
+Merging to `main` deploys to Azure through GitHub Actions, and pull requests
+get preview URLs. See [`DEPLOYMENT.md`](DEPLOYMENT.md) for the Azure resources,
+DNS, and the Vercel fallback.
 
 ## Working agreement
 

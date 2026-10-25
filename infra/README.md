@@ -1,8 +1,12 @@
 # Moving 5spicemarket.com to Azure Static Web Apps (Free)
 
+> **Done on 2026-10-24.** The site is live on Azure; current resources and
+> settings are in [`DEPLOYMENT.md`](../DEPLOYMENT.md). This walkthrough is kept
+> for rebuilding the setup or moving to a new subscription.
+
 These scripts set up Azure hosting for the site. Nothing here affects the live
-Vercel site until you change DNS (step 4), so you can set up and test Azure
-first, then switch, keeping Vercel as a fallback for a few days.
+site until you change DNS (step 4), so you can set up and test Azure first,
+then switch, keeping the old host as a fallback for a few days.
 
 | File | What it does |
 |---|---|
@@ -38,8 +42,8 @@ From the repo root:
 ```
 
 Use `--site-mode coming_soon` if the site should show only the landing page.
-This is the same setting as `VITE_APP_SITE_MODE` on Vercel today, so use
-whatever Vercel has now.
+It becomes the GitHub repo variable `VITE_APP_SITE_MODE`, which you can change
+later without re-running setup.
 
 The script signs you in to Azure if needed and creates:
 
@@ -57,9 +61,9 @@ At the end it prints a temporary address like
 
 ## 2. First deploy
 
-Deploys run from GitHub Actions. Either push anything to `main`, or go to
-GitHub → **Actions** → **Azure Static Web Apps** → **Run workflow** /
-**Re-run jobs** on the latest run.
+Deploys run from GitHub Actions. Either merge anything to `main`, or go to
+GitHub → **Actions** → **Azure Static Web Apps**, open the latest `main` run,
+and click **Re-run all jobs** (runs skipped before setup deploy on re-run).
 
 ## 3. Test on the temporary address
 
@@ -88,6 +92,12 @@ The script prints each DNS record to create and waits while you add it.
   (or flattened `CNAME`) record pointing to the Azure address. If your DNS
   provider doesn't support those, redirect `5spicemarket.com` →
   `www.5spicemarket.com` at the provider instead.
+
+**Cloudflare:** set both records to **DNS only** (grey cloud), not Proxied, or
+Azure can't validate the domain or issue SSL. Cloudflare can't keep a CNAME next
+to an `A` record for `@`, so delete the old `A @` record and add the `CNAME @`
+right after. Keep the `_dnsauth` TXT record afterwards; Azure uses it to renew
+the certificate. Don't touch the email records (`MX`, SPF/`MS=` TXT).
 
 Azure issues SSL certificates automatically. Allow up to an hour.
 
