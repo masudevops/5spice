@@ -36,6 +36,7 @@ GitHub settings (repo → **Settings → Secrets and variables → Actions**):
 |---|---|---|
 | `VITE_APP_SITE_MODE` | variable | `coming_soon` or `live`, read at build time |
 | `AZURE_SWA_ENABLED` | variable | `true` turns the workflow on |
+| `VITE_CF_ANALYTICS_TOKEN` | variable | Cloudflare Web Analytics token (public). Empty turns analytics off |
 | `AZURE_STATIC_WEB_APPS_API_TOKEN` | secret | Deployment token. Set by `infra/setup-azure.sh`; never commit it |
 
 **Change the site mode:**
@@ -49,6 +50,20 @@ Then re-run the latest `main` deploy (see above).
 **Plan:** Free costs $0/month. To upgrade, run
 `./infra/setup-azure.sh --subscription <id> --sku Standard`.
 
+## Analytics: Cloudflare Web Analytics
+
+Visitor numbers (visits, page views, top pages, referrers, countries, devices,
+page speed) are in Cloudflare → **Analytics & Logs → Web analytics** →
+`5spicemarket.com`. It's free and uses no cookies.
+
+- The site is set to **Enable with JS Snippet installation**. Automatic
+  injection doesn't work because our DNS records are "DNS only", not proxied.
+- `client/src/main.jsx` adds the script when `VITE_CF_ANALYTICS_TOKEN` is set,
+  and only on `5spicemarket.com` / `www`, so local dev and PR previews aren't
+  counted.
+- Azure's own metrics (portal → Static Web App → Metrics) count requests, not
+  visitors.
+
 ## Vercel (old host, fallback until about 2026-10-31)
 
 Vercel served the site until 2026-10-24 and is kept for a week as a fallback.
@@ -59,8 +74,6 @@ It still builds every push to `main`, but no domain points to it.
 - **Remove after the fallback week:**
   1. Vercel → Project → **Settings → Domains**: remove `5spicemarket.com`.
   2. **Settings → Git**: disconnect the repo, so `main` deploys only to Azure.
-  3. Later, delete the project. Then `client/vercel.json` and the
-     `@vercel/analytics` code in `client/src/main.jsx` can be removed too.
-- Vercel Web Analytics loads only on Vercel builds (Vercel sets `VERCEL=1`,
-  which `client/vite.config.js` turns into `VITE_ON_VERCEL`), so it doesn't run
-  on Azure.
+  3. Later, delete the project, then remove `client/vercel.json`.
+- Past Vercel Web Analytics numbers stay in the Vercel project until it's
+  deleted. Visitor counts since 2026-10-25 are in Cloudflare (see above).

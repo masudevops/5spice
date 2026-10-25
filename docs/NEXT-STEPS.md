@@ -51,13 +51,10 @@ These block accurate content. Nothing on the site is invented in the meantime.
 - [ ] **Remove Vercel** (Dev, around 2026-10-31). Azure has been serving the
   site since 2026-10-24; Vercel is the fallback until then. Remove the domain
   and disconnect Git in the Vercel project, later delete it, then remove
-  `client/vercel.json` and the `@vercel/analytics` code (see `DEPLOYMENT.md`).
+  `client/vercel.json` (see `DEPLOYMENT.md`).
 - [ ] **One main address** (Dev, optional). Both `5spicemarket.com` and
   `www.5spicemarket.com` serve the site. Consider redirecting `www` to the root
   domain, which the sitemap already uses.
-- [ ] **Analytics after the move** (Owners/Dev). Vercel Web Analytics turns off
-  on Azure. Decide on a replacement (e.g. Azure Application Insights free
-  tier, or a privacy-friendly tool) or go without.
 - [ ] **Food photos** (Owners provide photos, then Dev). Real photos only, never
   stock or AI.
   - Kitchen page: turn the three highlight cards into 3–6 signature dish photos
@@ -103,6 +100,7 @@ These block accurate content. Nothing on the site is invented in the meantime.
 - [x] Hosting moved to Azure Static Web Apps (Free) on 2026-10-24:
   `swa-5spice-web` in `5Spice-Production`, deployed by GitHub Actions, DNS on
   Cloudflare, SSL for both `5spicemarket.com` and `www`.
+- [x] Cloudflare Web Analytics replaces Vercel Web Analytics (2026-10-25).
 - [x] Murphy published: catering available now; dine-in and take-out coming soon.
 - [x] Plano shown as "Opening Early 2027, In Sha Allah".
 - [x] Menus hidden until final.
