@@ -52,6 +52,10 @@ The site is in a **pre-launch, minimal phase**. Its job right now is to:
 - Solid green (`bg-brand-green`) buttons use dark text (`text-ink-900`) and `hover:bg-brand-green-light`. White text on that green fails WCAG AA contrast.
 - Mobile-first and responsive. Most visitors arrive from Instagram, Facebook, and Google Maps on phones.
 - Accessible: semantic headings, alt text, sufficient contrast for gold-on-dark, and keyboard-usable controls.
+  - Tap targets on phones: at least 44px tall for buttons and nav; small text links get padding or the `.tap-area` utility (bigger hit area, same look).
+  - Keep the gold focus ring. Don't remove the "Skip to content" link, the mobile menu's keyboard handling (focus inside, Escape closes), or the scroll fix that keeps focus clear of the sticky header and bottom bar (`Navbar.jsx`).
+  - Respect `prefers-reduced-motion` for new animations (CSS media query, or framer-motion's `MotionConfig reducedMotion="user"`).
+- Performance: pages other than the homepage load on demand (`React.lazy` in `App.jsx`). The header, footer, and landing logo use `brand-logo-wide.webp`, a resized copy of the official PNG; regenerate it if the logo changes. The Bengali font is trimmed to the letters used in `src/` automatically at build time (`vite.config.js`).
 - Do not restyle existing pages unless the task asks for it.
 
 ---

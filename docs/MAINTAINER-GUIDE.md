@@ -29,7 +29,7 @@ do it for you.
 | General email, catering email, brand Facebook/Instagram | `client/src/config/site.js` (`SOCIAL_LINKS`, `CATERING_EMAIL`) |
 | Market departments, homepage offering cards, Kitchen highlight cards | `client/src/config/site.js` (`MARKET_DEPARTMENTS`, `OFFERINGS`, `MENU_HIGHLIGHTS`) |
 | Wording on a specific page | `client/src/pages/<Page>.jsx` (see §7) |
-| Logo, favicons, social preview image | `client/public/` (use the provided brand assets only) |
+| Logo, favicons, social preview image | `client/public/` (use the provided brand assets only). The site displays `brand-logo-wide.webp`, a smaller copy of `brand-logo-wide.png`: if the logo changes, replace both (ask a developer to regenerate the WebP) |
 | Site mode (coming soon / live) | `VITE_APP_SITE_MODE`: `client/.env` locally, **GitHub repo variable** in production (see `DEPLOYMENT.md`) |
 
 The technical reference for the data files is `client/src/data/README.md`.
