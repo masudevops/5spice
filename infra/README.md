@@ -106,8 +106,7 @@ Azure issues SSL certificates automatically. Allow up to an hour.
 - Keep the Vercel project for about a week as a fallback. Pointing DNS back to
   Vercel undoes the move.
 - Then disconnect or delete the Vercel project so `main` deploys only to Azure.
-- **Analytics:** Vercel Web Analytics only runs on Vercel builds, so it turns
-  off automatically on Azure. A replacement is tracked in `docs/NEXT-STEPS.md`.
+- **Analytics:** Cloudflare Web Analytics (see `DEPLOYMENT.md`).
 - Update Google Search Console if the main address changes (e.g. to `www`).
 
 ## Undo / remove

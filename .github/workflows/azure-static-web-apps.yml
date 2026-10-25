@@ -55,6 +55,8 @@ jobs:
         env:
           # Read at build time. Unset or anything else means the full site.
           VITE_APP_SITE_MODE: ${{ vars.VITE_APP_SITE_MODE }}
+          # Cloudflare Web Analytics token (public). Empty means no analytics.
+          VITE_CF_ANALYTICS_TOKEN: ${{ vars.VITE_CF_ANALYTICS_TOKEN }}
         run: npm run build
 
       - name: Deploy
