@@ -50,7 +50,7 @@ export const plano = {
         doorDash: '',
         instacart: '',
     },
-    description: 'Our upcoming flagship halal grocery and restaurant will bring Zabiha halal meat, fresh seafood, farm-fresh produce, specialty groceries, and authentic South Asian cuisine to Plano, Texas.',
+    description: 'Our upcoming flagship halal grocery and restaurant will bring Zabiha halal meat, fresh seafood, farm-fresh produce, specialty groceries, and authentic Bangladeshi cuisine with South Asian favorites to Plano, Texas.',
     // PLACEHOLDER: replace with real Plano photography once available.
     heroImage: '/brand-logo-wide.png',
 };

@@ -48,7 +48,7 @@ const LaunchLanding = () => {
                             Your Neighborhood Destination for Halal Groceries &amp; Authentic Flavors.
                         </h1>
                         <p className="mt-7 max-w-2xl text-lg leading-8 text-white/70">
-                            Bringing premium halal meats, fresh seafood, everyday groceries, and authentic South Asian cuisine together under one roof.
+                            Bringing premium halal meats, fresh seafood, everyday groceries, and authentic Bangladeshi cuisine with South Asian favorites together under one roof.
                         </p>
                         {upcomingMarket && (
                             <div className="mt-7 inline-flex flex-wrap items-center gap-x-3 gap-y-1 border border-brand-gold-deep/35 bg-ink-700/70 px-5 py-3 text-brand-gold">
