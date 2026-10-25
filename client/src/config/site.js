@@ -8,7 +8,12 @@ export const isComingSoonMode = SITE_MODE === 'coming_soon';
 
 export const LOGOS = {
     square: '/brand-logo-square.png',
-    wide: '/brand-logo-wide.png',
+    // Display copy of brand-logo-wide.png: same artwork, resized to 800px wide
+    // and saved as WebP (about 8x smaller) for the header, footer, and
+    // landing page. Regenerate it from the PNG if the logo ever changes.
+    wide: '/brand-logo-wide.webp',
+    wideWidth: 800,
+    wideHeight: 288,
 };
 
 export const SOCIAL_LINKS = {
