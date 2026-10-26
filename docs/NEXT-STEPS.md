@@ -35,8 +35,13 @@ These block accurate content. Nothing on the site is invented in the meantime.
   coming-soon landing page.
 - [ ] **About story wording** (Marketing). "Aroma" appears more than once in
   the পাঁচফোড়ন story. Optional tweak.
-- [ ] **Menu** (Owners/Marketing). When a menu is final, follow
-  `docs/MAINTAINER-GUIDE.md` §3 and set `flags.menuPublished: true`.
+- [ ] **Menu** (Owners/Marketing). A draft built from the owners' list of
+  dishes is in place (still hidden). Send the final menu with descriptions,
+  prices, and confirmed tags (5Spice Specials, vegetarian, spicy). Then
+  follow `docs/MAINTAINER-GUIDE.md` §3 and set `flags.menuPublished: true`.
+- [ ] **Catering menu** (Owners, later). Decide whether catering offers the
+  full menu or a set list of trays. If it's a set list, mark those dishes
+  in the same menu data rather than keeping a second menu.
 
 ## 3. Website improvements
 
@@ -105,6 +110,11 @@ These block accurate content. Nothing on the site is invented in the meantime.
   - phones: 44px bottom bar with 12px labels, larger footer and contact tap areas, no sideways scroll at 320px or with large text
   - speed: logo 354 KB → 43 KB (WebP copy), Bengali font ~105 KB → ~7 KB, pages load on demand, size-matched fallback fonts, Weekly Deals no longer jumps
   - reduced motion respected
+- [x] Menu page upgrade (2026-10-25): search that handles different
+  spellings, filter buttons (5Spice Specials, Vegetarian, Spicy), a category
+  bar that highlights where you are, a compact list on phones, and an
+  "Order from …" button once ordering is open. Draft dishes from the owners'
+  list; no Bangladeshi/Indian/Pakistani labels.
 - [x] Cloudflare Web Analytics replaces Vercel Web Analytics (2026-10-25).
 - [x] Murphy published: catering available now; dine-in and take-out coming soon.
 - [x] Plano shown as "Opening Early 2027, In Sha Allah".
