@@ -65,6 +65,9 @@ const LocationMenu = () => {
         [menu]
     );
 
+    // Until any dish has a price, say so once instead of "Price TBD" on every line.
+    const anyPrice = useMemo(() => Boolean(menu?.categories.some((category) => category.items.some((item) => item.price != null))), [menu]);
+
     const isFiltering = query.trim() !== '' || activeFilters.length > 0;
 
     const visibleCategories = useMemo(() => {
@@ -199,6 +202,7 @@ const LocationMenu = () => {
                     <p className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-brand-green">
                         <ShieldCheck size={18} aria-hidden="true" /> {menu.halalStatement}
                     </p>
+                    {!anyPrice && <p className="mt-2 text-sm text-brand-cream/55">Prices coming soon.</p>}
                     {canOrder && (
                         <div className="mt-6">
                             <Link
@@ -311,7 +315,7 @@ const LocationMenu = () => {
             )}
 
             <section className="px-5 py-10 sm:px-8 lg:px-12">
-                <div className="mx-auto max-w-5xl space-y-12">
+                <div className="mx-auto max-w-5xl space-y-14 md:space-y-16">
                     {visibleCategories.length === 0 && (
                         <div className="border border-brand-gold-deep/20 bg-ink-800 p-8 text-center">
                             <p className="font-serif text-2xl font-semibold text-white">No dishes match</p>
@@ -328,19 +332,27 @@ const LocationMenu = () => {
 
                     {visibleCategories.map((category) => (
                         <section key={category.id} id={category.id} aria-labelledby={`${category.id}-heading`}>
-                            <h2 id={`${category.id}-heading`} tabIndex={-1} className="font-serif text-3xl font-semibold text-white focus:outline-none">
+                            <h2 id={`${category.id}-heading`} tabIndex={-1} className="font-serif text-3xl font-semibold text-white focus:outline-none md:text-4xl">
                                 {category.name}
                             </h2>
-                            {category.groups.map((group) => {
+                            <div aria-hidden="true" className="mt-3 flex items-center gap-2">
+                                <span className="h-px w-10 bg-brand-gold/70" />
+                                <span className="h-1.5 w-1.5 rotate-45 bg-brand-gold" />
+                                <span className="h-px w-10 bg-brand-gold/70" />
+                            </div>
+                            {category.groups.map((group, index) => {
                                 // Dish names sit one heading level below the group name, if there is one.
                                 const DishHeading = group.name ? 'h4' : 'h3';
                                 return (
-                                    <div key={group.name ?? 'all'} className={group.name ? 'mt-8 first-of-type:mt-5' : undefined}>
+                                    <div key={group.name ?? 'all'} className={index === 0 ? 'mt-6' : 'mt-10'}>
                                         {group.name && (
-                                            <h3 className="text-xs font-bold uppercase tracking-[0.24em] text-brand-gold">{group.name}</h3>
+                                            <h3 className="flex items-center gap-4 text-xs font-bold uppercase tracking-[0.24em] text-brand-gold">
+                                                {group.name}
+                                                <span aria-hidden="true" className="h-px flex-1 bg-brand-gold-deep/30" />
+                                            </h3>
                                         )}
-                                        {/* Phones: a compact list. Larger screens: two columns of cards. */}
-                                        <div className="mt-4 divide-y divide-brand-gold-deep/15 border-y border-brand-gold-deep/15 sm:mt-5 sm:grid sm:grid-cols-2 sm:gap-4 sm:divide-y-0 sm:border-0">
+                                        {/* Printed-menu style: name, dotted line, price. Two columns on larger screens. */}
+                                        <div className="mt-1 grid sm:grid-cols-2 sm:gap-x-12">
                                             {group.items.map((item) => {
                                                 const tags = [
                                                     ...(item.special ? [{ key: 'special', label: '5Spice Special', highlight: true }] : []),
@@ -348,18 +360,23 @@ const LocationMenu = () => {
                                                     ...(item.available === false ? [{ key: 'unavailable', label: 'Unavailable' }] : []),
                                                 ];
                                                 return (
-                                                    <article key={item.id} className="py-4 sm:border sm:border-brand-gold-deep/20 sm:bg-ink-800 sm:p-5">
-                                                        <div className="flex items-baseline justify-between gap-3">
+                                                    <article key={item.id} className="border-b border-brand-gold-deep/15 py-4">
+                                                        <div className="flex items-baseline gap-3">
                                                             <DishHeading className="font-serif text-lg font-semibold text-white sm:text-xl">{item.name}</DishHeading>
-                                                            <span className="shrink-0 text-sm font-semibold text-brand-gold">
-                                                                {item.price != null ? `$${item.price.toFixed(2)}` : 'Price TBD'}
-                                                            </span>
+                                                            {item.price != null ? (
+                                                                <>
+                                                                    <span aria-hidden="true" className="min-w-6 flex-1 translate-y-[-0.3em] border-b border-dotted border-brand-gold/45" />
+                                                                    <span className="shrink-0 font-semibold text-brand-gold">${item.price.toFixed(2)}</span>
+                                                                </>
+                                                            ) : (
+                                                                anyPrice && <span className="ml-auto shrink-0 text-sm text-brand-cream/45">Price TBD</span>
+                                                            )}
                                                         </div>
                                                         {item.description && (
-                                                            <p className="mt-1 text-sm leading-6 text-white/62 sm:mt-2">{item.description}</p>
+                                                            <p className="mt-1 text-sm leading-6 text-white/62">{item.description}</p>
                                                         )}
                                                         {tags.length > 0 && (
-                                                            <ul className="mt-2 flex flex-wrap gap-2 sm:mt-3" aria-label="Tags">
+                                                            <ul className="mt-2 flex flex-wrap gap-2" aria-label="Tags">
                                                                 {tags.map((tag) => (
                                                                     <li
                                                                         key={tag.key}
