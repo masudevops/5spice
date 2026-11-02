@@ -27,16 +27,6 @@ export const SHARED_ITEMS = {
         available: true,
         image: null,
     },
-    'chicken-tehari': {
-        id: 'chicken-tehari',
-        name: 'Chicken Tehari',
-        description: '',
-        price: null,
-        dietary: [],
-        aliases: ['tehri'],
-        available: true,
-        image: null,
-    },
     'morog-polao': {
         id: 'morog-polao',
         name: 'Morog Polao',

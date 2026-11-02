@@ -35,7 +35,7 @@ These block accurate content. Nothing on the site is invented in the meantime.
   coming-soon landing page.
 - [ ] **About story wording** (Marketing). "Aroma" appears more than once in
   the পাঁচফোড়ন story. Optional tweak.
-- [ ] **Menu** (Owners/Marketing). The owners' menu (2026-11-02, 37 dishes
+- [ ] **Menu** (Owners/Marketing). The owners' menu (2026-11-02, 36 dishes
   plus 5Spice Special Chai) is in place, still hidden. More dishes are coming.
   Still needed: prices, short descriptions, and any tags to show (5Spice
   Specials, vegetarian, spicy). Then

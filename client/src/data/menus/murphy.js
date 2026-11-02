@@ -10,7 +10,7 @@ export const murphyMenu = {
         {
             name: 'Biryani & Rice Dishes',
             groups: [
-                { name: 'Chicken', itemIds: ['chicken-biryani', 'chicken-tehari', 'morog-polao', 'shahi-chicken-biryani'] },
+                { name: 'Chicken', itemIds: ['chicken-biryani', 'morog-polao', 'shahi-chicken-biryani'] },
                 { name: 'Beef', itemIds: ['beef-tehari', 'beef-biryani', 'shahi-beef-biryani', 'beef-kachchi', 'beef-haji-biryani'] },
                 { name: 'Mutton', itemIds: ['mutton-kachchi', 'mutton-biryani', 'mutton-haji-biryani', 'shahi-mutton-biryani'] },
                 { name: 'Other Rice Dishes', itemIds: ['plain-polao', 'bhuna-khichuri', 'basmati-rice'] },
