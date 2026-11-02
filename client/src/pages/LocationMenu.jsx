@@ -70,18 +70,19 @@ const LocationMenu = () => {
     const visibleCategories = useMemo(() => {
         if (!menu) return [];
         const filters = FILTERS.filter((filter) => activeFilters.includes(filter.key));
+        const matches = (item) => filters.every((filter) => filter.test(item)) && matchesSearch(searchIndex.get(item.id), query);
         return menu.categories
-            .map((category) => ({
-                ...category,
-                id: slugify(category.name),
-                items: category.items.filter(
-                    (item) => filters.every((filter) => filter.test(item)) && matchesSearch(searchIndex.get(item.id), query)
-                ),
-            }))
+            .map((category) => {
+                const groups = category.groups
+                    .map((group) => ({ ...group, items: group.items.filter(matches) }))
+                    .filter((group) => group.items.length > 0);
+                return { ...category, id: slugify(category.name), groups, items: groups.flatMap((group) => group.items) };
+            })
             .filter((category) => category.items.length > 0);
     }, [menu, activeFilters, query, searchIndex]);
 
-    const resultCount = visibleCategories.reduce((total, category) => total + category.items.length, 0);
+    // A dish listed in two categories (e.g. Mixed Vegetables) counts once.
+    const resultCount = new Set(visibleCategories.flatMap((category) => category.items.map((item) => item.id))).size;
 
     // The site header changes height (it shrinks on scroll on desktop), so
     // the category bar sticks to its measured bottom edge.
@@ -220,7 +221,7 @@ const LocationMenu = () => {
                                 type="search"
                                 value={query}
                                 onChange={(event) => setQuery(event.target.value)}
-                                placeholder="Search dishes, e.g. biriyani"
+                                placeholder="Search dishes, e.g. biryani"
                                 autoComplete="off"
                                 enterKeyHint="search"
                                 className="min-h-11 w-full border border-brand-gold-deep/30 bg-ink-800 py-2 pl-10 pr-10 text-base text-white placeholder:text-brand-cream/40 focus:border-brand-gold [&::-webkit-search-cancel-button]:hidden"
@@ -330,44 +331,55 @@ const LocationMenu = () => {
                             <h2 id={`${category.id}-heading`} tabIndex={-1} className="font-serif text-3xl font-semibold text-white focus:outline-none">
                                 {category.name}
                             </h2>
-                            {/* Phones: a compact list. Larger screens: two columns of cards. */}
-                            <div className="mt-4 divide-y divide-brand-gold-deep/15 border-y border-brand-gold-deep/15 sm:mt-5 sm:grid sm:grid-cols-2 sm:gap-4 sm:divide-y-0 sm:border-0">
-                                {category.items.map((item) => {
-                                    const tags = [
-                                        ...(item.special ? [{ key: 'special', label: '5Spice Special', highlight: true }] : []),
-                                        ...(item.dietary ?? []).map((tag) => ({ key: tag, label: TAG_LABELS[tag] ?? tag })),
-                                        ...(item.available === false ? [{ key: 'unavailable', label: 'Unavailable' }] : []),
-                                    ];
-                                    return (
-                                        <article key={item.id} className="py-4 sm:border sm:border-brand-gold-deep/20 sm:bg-ink-800 sm:p-5">
-                                            <div className="flex items-baseline justify-between gap-3">
-                                                <h3 className="font-serif text-lg font-semibold text-white sm:text-xl">{item.name}</h3>
-                                                <span className="shrink-0 text-sm font-semibold text-brand-gold">
-                                                    {item.price != null ? `$${item.price.toFixed(2)}` : 'Price TBD'}
-                                                </span>
-                                            </div>
-                                            {item.description && (
-                                                <p className="mt-1 text-sm leading-6 text-white/62 sm:mt-2">{item.description}</p>
-                                            )}
-                                            {tags.length > 0 && (
-                                                <ul className="mt-2 flex flex-wrap gap-2 sm:mt-3" aria-label="Tags">
-                                                    {tags.map((tag) => (
-                                                        <li
-                                                            key={tag.key}
-                                                            className={clsx(
-                                                                'border px-2 py-0.5 text-[0.65rem] font-semibold uppercase tracking-[0.12em]',
-                                                                tag.highlight ? 'border-brand-gold/50 text-brand-gold' : 'border-white/10 text-white/50'
-                                                            )}
-                                                        >
-                                                            {tag.label}
-                                                        </li>
-                                                    ))}
-                                                </ul>
-                                            )}
-                                        </article>
-                                    );
-                                })}
-                            </div>
+                            {category.groups.map((group) => {
+                                // Dish names sit one heading level below the group name, if there is one.
+                                const DishHeading = group.name ? 'h4' : 'h3';
+                                return (
+                                    <div key={group.name ?? 'all'} className={group.name ? 'mt-8 first-of-type:mt-5' : undefined}>
+                                        {group.name && (
+                                            <h3 className="text-xs font-bold uppercase tracking-[0.24em] text-brand-gold">{group.name}</h3>
+                                        )}
+                                        {/* Phones: a compact list. Larger screens: two columns of cards. */}
+                                        <div className="mt-4 divide-y divide-brand-gold-deep/15 border-y border-brand-gold-deep/15 sm:mt-5 sm:grid sm:grid-cols-2 sm:gap-4 sm:divide-y-0 sm:border-0">
+                                            {group.items.map((item) => {
+                                                const tags = [
+                                                    ...(item.special ? [{ key: 'special', label: '5Spice Special', highlight: true }] : []),
+                                                    ...(item.dietary ?? []).map((tag) => ({ key: tag, label: TAG_LABELS[tag] ?? tag })),
+                                                    ...(item.available === false ? [{ key: 'unavailable', label: 'Unavailable' }] : []),
+                                                ];
+                                                return (
+                                                    <article key={item.id} className="py-4 sm:border sm:border-brand-gold-deep/20 sm:bg-ink-800 sm:p-5">
+                                                        <div className="flex items-baseline justify-between gap-3">
+                                                            <DishHeading className="font-serif text-lg font-semibold text-white sm:text-xl">{item.name}</DishHeading>
+                                                            <span className="shrink-0 text-sm font-semibold text-brand-gold">
+                                                                {item.price != null ? `$${item.price.toFixed(2)}` : 'Price TBD'}
+                                                            </span>
+                                                        </div>
+                                                        {item.description && (
+                                                            <p className="mt-1 text-sm leading-6 text-white/62 sm:mt-2">{item.description}</p>
+                                                        )}
+                                                        {tags.length > 0 && (
+                                                            <ul className="mt-2 flex flex-wrap gap-2 sm:mt-3" aria-label="Tags">
+                                                                {tags.map((tag) => (
+                                                                    <li
+                                                                        key={tag.key}
+                                                                        className={clsx(
+                                                                            'border px-2 py-0.5 text-[0.65rem] font-semibold uppercase tracking-[0.12em]',
+                                                                            tag.highlight ? 'border-brand-gold/50 text-brand-gold' : 'border-white/10 text-white/50'
+                                                                        )}
+                                                                    >
+                                                                        {tag.label}
+                                                                    </li>
+                                                                ))}
+                                                            </ul>
+                                                        )}
+                                                    </article>
+                                                );
+                                            })}
+                                        </div>
+                                    </div>
+                                );
+                            })}
                         </section>
                     ))}
                 </div>
