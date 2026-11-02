@@ -12,7 +12,7 @@ import {
     Utensils,
     Users,
 } from 'lucide-react';
-import { CATERING_EMAIL, LOGOS, OFFERINGS, SOCIAL_LINKS } from '../config/site';
+import { CATERING_EMAIL, LOGOS, OFFERINGS, PHONE_TO_BE_UPDATED, SOCIAL_LINKS } from '../config/site';
 import { getLocationLabel, getOpenLocations } from '../data/locations';
 import ServiceStatusList from './ServiceStatusList';
 import { toTelHref } from '../utils/phone';
@@ -164,6 +164,7 @@ const ComingSoonLanding = () => {
                                     </a>
                                 </div>
                                 <p className="mt-5 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-sm text-white/55">
+                                    {!location.phone && <span>{PHONE_TO_BE_UPDATED}</span>}
                                     {location.services?.catering === 'open' && (
                                         <span>
                                             Catering requests: <a href={`mailto:${CATERING_EMAIL}`} className={`text-brand-gold underline decoration-brand-gold-deep/40 underline-offset-4 hover:text-white ${focusClass}`}>{CATERING_EMAIL}</a>

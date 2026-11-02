@@ -25,13 +25,15 @@ export const murphy = {
         zip: '75094',
         full: '222 E FM 544, Suite 200, Murphy, TX 75094',
     },
-    // Provided by the owners on 2026-10-13 as the Murphy kitchen/catering line.
-    phone: '(917) 355-6995',
+    // To be updated: the owners will share the official number. While empty,
+    // the site shows "Phone: to be updated" and points people to email and
+    // Facebook instead, and every call button stays hidden.
+    phone: '',
     email: 'info@5spicemarket.com',
     // PLACEHOLDER: add real hours, e.g. { day: 'Monday', hours: '11:00 AM – 9:00 PM' }.
     // While empty, the site shows `hoursNote` instead of an hours table.
     hours: [],
-    hoursNote: 'Restaurant hours will be announced when dine-in opens. For catering, call or email us.',
+    hoursNote: 'Restaurant hours will be announced when dine-in opens. For catering, email us or message us on Facebook.',
     googleMapsUrl: 'https://www.google.com/maps/search/?api=1&query=222%20E%20FM%20544%2C%20Suite%20200%2C%20Murphy%2C%20TX%2075094',
     // PLACEHOLDER: confirm exact coordinates for JSON-LD geo data.
     lat: null,

@@ -18,7 +18,7 @@ import ServiceStatusList from '../components/ServiceStatusList';
 import { getLocationLabel, getVisibleLocationBySlug, hasPublicMenu } from '../data/locations';
 import { summarizeHours } from '../utils/hours';
 import { toTelHref } from '../utils/phone';
-import { CATERING_EMAIL, ORDER_PLATFORMS } from '../config/site';
+import { CATERING_EMAIL, ORDER_PLATFORMS, PHONE_TO_BE_UPDATED } from '../config/site';
 
 const ORDERING_KEY_TO_PLATFORM_NAME = {
     toast: 'Toast',
@@ -190,7 +190,10 @@ const LocationDetail = () => {
                                     {location.phone}
                                 </a>
                             ) : (
-                                <p className="text-sm text-white/45">Phone coming soon</p>
+                                <p className="flex items-start gap-3 px-5 py-1 text-sm text-white/55">
+                                    <Phone size={18} className="mt-0.5 shrink-0 text-brand-gold" aria-hidden="true" />
+                                    {PHONE_TO_BE_UPDATED}. Email us{location.socialLinks?.facebook ? ' or message us on Facebook' : ''} below.
+                                </p>
                             )}
                             <a href={`mailto:${location.email}`} className="flex items-center gap-3 border border-brand-gold-deep/30 px-5 py-3 text-white/78 transition-colors hover:border-brand-gold hover:text-white">
                                 <Mail size={18} className="text-brand-gold" />

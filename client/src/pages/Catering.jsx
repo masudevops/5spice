@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { BriefcaseBusiness, CalendarClock, CheckCircle, Clock, Facebook, Mail, MapPin, Navigation, Phone, Users } from 'lucide-react';
-import { CATERING_EMAIL } from '../config/site';
+import { CATERING_EMAIL, PHONE_TO_BE_UPDATED } from '../config/site';
 import { getCateringOpenLocations, getVisibleLocations } from '../data/locations';
 import { useDocumentHead } from '../hooks/useDocumentHead';
 import CateringMetrics from '../components/CateringMetrics';
@@ -168,6 +168,12 @@ const Catering = () => {
                                             </a>
                                         )}
                                     </div>
+                                    {!location.phone && (
+                                        <p className="mt-4 flex items-start gap-2 text-sm text-white/55">
+                                            <Phone size={15} className="mt-0.5 shrink-0 text-brand-gold" aria-hidden="true" />
+                                            {PHONE_TO_BE_UPDATED}. Email us{location.socialLinks?.facebook ? ' or message us on Facebook' : ''} in the meantime.
+                                        </p>
+                                    )}
                                 </article>
                             ))}
                             {upcomingLocations.map((location) => (
