@@ -378,4 +378,14 @@ export const SHARED_ITEMS = {
         available: true,
         image: null,
     },
+    'mango-lassi': {
+        id: 'mango-lassi',
+        name: 'Mango Lassi',
+        description: '',
+        price: null,
+        dietary: [],
+        aliases: ['lassi', 'mango'],
+        available: true,
+        image: null,
+    },
 };
