@@ -35,9 +35,10 @@ These block accurate content. Nothing on the site is invented in the meantime.
   coming-soon landing page.
 - [ ] **About story wording** (Marketing). "Aroma" appears more than once in
   the পাঁচফোড়ন story. Optional tweak.
-- [ ] **Menu** (Owners/Marketing). A draft built from the owners' list of
-  dishes is in place (still hidden). Send the final menu with descriptions,
-  prices, and confirmed tags (5Spice Specials, vegetarian, spicy). Then
+- [ ] **Menu** (Owners/Marketing). The owners' menu (2026-11-02, 37 dishes
+  plus 5Spice Special Chai) is in place, still hidden. More dishes are coming.
+  Still needed: prices, short descriptions, and any tags to show (5Spice
+  Specials, vegetarian, spicy). Then
   follow `docs/MAINTAINER-GUIDE.md` §3 and set `flags.menuPublished: true`.
 - [ ] **Catering menu** (Owners, later). Decide whether catering offers the
   full menu or a set list of trays. If it's a set list, mark those dishes
@@ -113,8 +114,8 @@ These block accurate content. Nothing on the site is invented in the meantime.
 - [x] Menu page upgrade (2026-10-25): search that handles different
   spellings, filter buttons (5Spice Specials, Vegetarian, Spicy), a category
   bar that highlights where you are, a compact list on phones, and an
-  "Order from …" button once ordering is open. Draft dishes from the owners'
-  list; no Bangladeshi/Indian/Pakistani labels.
+  "Order from …" button once ordering is open. Headed groups within a
+  category (Chicken / Beef / Mutton). No Bangladeshi/Indian/Pakistani labels.
 - [x] Cloudflare Web Analytics replaces Vercel Web Analytics (2026-10-25).
 - [x] Murphy published: catering available now; dine-in and take-out coming soon.
 - [x] Plano shown as "Opening Early 2027, In Sha Allah".

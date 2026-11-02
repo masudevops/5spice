@@ -64,9 +64,19 @@ hidden.
   `'kacchi-biryani'`.
 - **`murphy.js` / `plano.js`** (in `client/src/data/menus/`) list
   **categories** in display order, and which dish ids go in each.
-- Categories are organized **by course**, not by cuisine: Snacks, Rice &
-  Biriyani, Curries & Roasts, Tandoor & Rotisserie, Breads & Sides, Desserts,
-  Drinks.
+- Categories are organized **by course**, not by cuisine: Biryani & Rice
+  Dishes, Chicken / Beef / Mutton Curries & Specialties, Vegetables & Sides,
+  Kebabs, Desserts, Breakfast, Drinks.
+- A category can be split into smaller headed groups. Use `groups` instead of
+  `itemIds`:
+  ```js
+  { name: 'Biryani & Rice Dishes', groups: [
+      { name: 'Chicken', itemIds: ['chicken-biryani', 'chicken-tehari'] },
+      { name: 'Beef', itemIds: ['beef-tehari', 'beef-kachchi'] },
+  ] },
+  ```
+- A dish can appear in two categories (e.g. Mixed Vegetables in Vegetables &
+  Sides and Breakfast): list its id in both.
 - The menu page has a search box, filter buttons, and a category bar that
   stays at the top and highlights where you are. They all work from the dish
   data below; nothing else needs updating.
@@ -74,14 +84,14 @@ hidden.
 ### 3.2 Dish fields
 
 ```js
-'special-kachchi-biriyani': {
-    id: 'special-kachchi-biriyani', // must match the key; lowercase-with-dashes
-    name: 'Special Kachchi Biriyani',
+'beef-kachchi': {
+    id: 'beef-kachchi',            // must match the key; lowercase-with-dashes
+    name: 'Beef Kachchi',
     description: '',               // short, approved wording, or '' for none
     price: null,                   // a number like 14.99, or null → shows "Price TBD"
-    special: true,                 // optional: "5Spice Special" badge and filter
+    special: false,                // optional: true → "5Spice Special" badge and filter
     dietary: [],                   // optional: 'vegetarian', 'spicy' (each adds a filter)
-    aliases: ['kacchi', 'biryani'], // optional: other spellings people search for
+    aliases: ['kacchi'],           // optional: other spellings people search for
     available: true,               // false → shows an "Unavailable" tag
     image: null,                   // see §4
 },
