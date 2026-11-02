@@ -33,7 +33,7 @@ export const murphy = {
     // PLACEHOLDER: add real hours, e.g. { day: 'Monday', hours: '11:00 AM – 9:00 PM' }.
     // While empty, the site shows `hoursNote` instead of an hours table.
     hours: [],
-    hoursNote: 'Restaurant hours will be announced when dine-in opens. For catering, call or email us.',
+    hoursNote: 'Restaurant hours will be announced when dine-in opens. For catering, email us or message us on Facebook.',
     googleMapsUrl: 'https://www.google.com/maps/search/?api=1&query=222%20E%20FM%20544%2C%20Suite%20200%2C%20Murphy%2C%20TX%2075094',
     // PLACEHOLDER: confirm exact coordinates for JSON-LD geo data.
     lat: null,
