@@ -130,8 +130,10 @@ const Pickup = () => {
                                 <p className="leading-7 text-white/68">
                                     {takingOrders
                                         ? (livePlatformGroups.length > 0
-                                            ? 'Prefer to order by phone? Give us a call.'
-                                            : 'Call to place your order. Online ordering through partner apps is coming soon.')
+                                            ? (selectedLocation.phone ? 'Prefer to order by phone? Give us a call.' : '')
+                                            : (selectedLocation.phone
+                                                ? 'Call to place your order. Online ordering through partner apps is coming soon.'
+                                                : `Online ordering through partner apps is coming soon. Email ${CONTACT.email} with questions in the meantime.`))
                                         : `Dine-in and take-out are coming soon to ${selectedLocation.shortName}.${cateringNow ? ' Catering is available now for weddings, family celebrations, and corporate events.' : ''}`}
                                 </p>
                                 <div className="mt-5 flex flex-wrap gap-3">

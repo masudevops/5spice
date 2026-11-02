@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Facebook, HandHeart, Instagram, Mail, MapPin, Phone } from 'lucide-react';
-import { CATERING_EMAIL, LOGOS, SOCIAL_LINKS } from '../config/site';
+import { CATERING_EMAIL, LOGOS, PHONE_TO_BE_UPDATED, SOCIAL_LINKS } from '../config/site';
 import { anyVisibleLocationHasFlag, getLocationLabel, getVisibleLocations } from '../data/locations';
 import { toTelHref } from '../utils/phone';
 
@@ -87,11 +87,16 @@ const Footer = () => {
                                         <MapPin size={18} className="mt-0.5 shrink-0 text-brand-gold" aria-hidden="true" />
                                         {loc.address.full}
                                     </a>
-                                    {loc.phone && (
+                                    {loc.phone ? (
                                         <a href={toTelHref(loc.phone)} className="flex gap-3 py-1.5 transition-colors hover:text-white">
                                             <Phone size={18} className="mt-0.5 shrink-0 text-brand-gold" aria-hidden="true" />
                                             {loc.phone}
                                         </a>
+                                    ) : (
+                                        <p className="flex gap-3 py-1.5 text-white/55">
+                                            <Phone size={18} className="mt-0.5 shrink-0 text-brand-gold" aria-hidden="true" />
+                                            {PHONE_TO_BE_UPDATED}
+                                        </p>
                                     )}
                                 </li>
                             ))}

@@ -12,9 +12,10 @@ Branding & Marketing team. *Dev* = code change (can be done with Claude Code).
 
 These block accurate content. Nothing on the site is invented in the meantime.
 
-- [ ] **Official phone line** (Owners). Confirm (917) 355-6995 is the official
-  business number. It appears on every page and in the information Google reads.
-  File: `client/src/data/locations/murphy.js` (`phone`).
+- [ ] **Official phone line** (Owners). Murphy shows "Phone: to be updated"
+  for now (since 2026-11-02), and visitors are pointed to email and Facebook.
+  Send the official number and it goes in `client/src/data/locations/murphy.js`
+  (`phone`); call buttons and Google's listing data come back automatically.
 - [ ] **Murphy map coordinates** (Owners/Dev). Exact `lat` / `lng` so Google
   Maps and Search place the address correctly. Same file (`lat`, `lng`).
 - [ ] **Murphy hours** (Owners). Add them when dine-in and take-out open.
