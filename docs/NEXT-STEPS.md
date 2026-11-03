@@ -37,10 +37,11 @@ These block accurate content. Nothing on the site is invented in the meantime.
 - [ ] **About story wording** (Marketing). "Aroma" appears more than once in
   the পাঁচফোড়ন story. Optional tweak.
 - [ ] **Menu details** (Owners/Marketing). The Murphy menu is public since
-  2026-11-02 (36 dishes, plus 5Spice Special Chai and Mango Lassi) and says
-  "Prices coming soon". More dishes are coming. Still needed: prices, short
-  descriptions, and any tags to show (5Spice Specials, vegetarian, spicy).
-  See `docs/MAINTAINER-GUIDE.md` §3.
+  2026-11-02 and says "Prices coming soon". More dishes are coming. Every
+  dish has a short description (2026-11-03): two written by the owners, the
+  rest general descriptions of each dish that Marketing may want to refine.
+  Still needed: prices, and any tags to show (5Spice Specials, vegetarian,
+  spicy). See `docs/MAINTAINER-GUIDE.md` §3.
 - [ ] **Catering menu** (Owners, later). Decide whether catering offers the
   full menu or a set list of trays. If it's a set list, mark those dishes
   in the same menu data rather than keeping a second menu.

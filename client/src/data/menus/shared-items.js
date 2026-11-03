@@ -4,8 +4,10 @@
 // later. Per CLAUDE.md:
 // - never invent prices: leave `price: null` ("Price TBD" on the page) until
 //   the kitchen confirms them
-// - don't make up descriptions; leave `description: ''` until there's
-//   approved wording
+// - descriptions: the owners wrote Royal Bengal Chicken Roast and Authentic
+//   Nawabi Beef Tehari; the rest are general descriptions of each dish the
+//   owners asked for (2026-11-03). Keep them factual: no awards, secret
+//   recipes, or claims about ingredients the kitchen hasn't confirmed
 // - don't label dishes as Bangladeshi, Indian, or Pakistani
 //
 // Fields (all optional except id and name):
@@ -20,17 +22,16 @@ export const SHARED_ITEMS = {
     'chicken-biryani': {
         id: 'chicken-biryani',
         name: 'Chicken Biryani',
-        description: '',
+        description: 'Fragrant basmati rice and chicken cooked together with warm spices.',
         price: null,
         dietary: [],
-        aliases: ['biriyani'],
         available: true,
         image: null,
     },
     'morog-polao': {
         id: 'morog-polao',
         name: 'Morog Polao',
-        description: '',
+        description: 'Chicken cooked into fragrant polao rice, a Bangladeshi wedding favorite.',
         price: null,
         dietary: [],
         aliases: ['murg', 'murgh', 'chicken pulao'],
@@ -40,7 +41,7 @@ export const SHARED_ITEMS = {
     'shahi-chicken-biryani': {
         id: 'shahi-chicken-biryani',
         name: 'Shahi Chicken Biryani',
-        description: '',
+        description: 'A richer, royal-style chicken biryani for special occasions.',
         price: null,
         dietary: [],
         available: true,
@@ -59,7 +60,7 @@ export const SHARED_ITEMS = {
     'beef-biryani': {
         id: 'beef-biryani',
         name: 'Beef Biryani',
-        description: '',
+        description: 'Fragrant basmati rice and tender beef cooked together with warm spices.',
         price: null,
         dietary: [],
         available: true,
@@ -68,7 +69,7 @@ export const SHARED_ITEMS = {
     'shahi-beef-biryani': {
         id: 'shahi-beef-biryani',
         name: 'Shahi Beef Biryani',
-        description: '',
+        description: 'A richer, royal-style beef biryani for special occasions.',
         price: null,
         dietary: [],
         available: true,
@@ -76,18 +77,18 @@ export const SHARED_ITEMS = {
     },
     'beef-kachchi': {
         id: 'beef-kachchi',
-        name: 'Beef Kachchi',
-        description: '',
+        name: 'Kacchi Biryani with Mutton or Beef',
+        description: 'Marinated meat and fragrant rice layered and slow-cooked together, the classic Bangladeshi kacchi.',
         price: null,
         dietary: [],
-        aliases: ['kacchi', 'kachchi biryani'],
+        aliases: ['kachchi', 'kachchi biryani', 'goat'],
         available: true,
         image: null,
     },
     'beef-haji-biryani': {
         id: 'beef-haji-biryani',
         name: 'Beef Haji Biryani',
-        description: '',
+        description: 'Old Dhaka-style biryani with tender beef and fragrant rice.',
         price: null,
         dietary: [],
         aliases: ['haji'],
@@ -97,7 +98,7 @@ export const SHARED_ITEMS = {
     'mutton-kachchi': {
         id: 'mutton-kachchi',
         name: 'Mutton Kachchi',
-        description: '',
+        description: 'Marinated mutton and fragrant rice layered and slow-cooked together.',
         price: null,
         dietary: [],
         aliases: ['kacchi', 'kachchi biryani', 'goat'],
@@ -107,7 +108,7 @@ export const SHARED_ITEMS = {
     'mutton-biryani': {
         id: 'mutton-biryani',
         name: 'Mutton Biryani',
-        description: '',
+        description: 'Fragrant basmati rice and tender mutton cooked together with warm spices.',
         price: null,
         dietary: [],
         aliases: ['goat'],
@@ -117,7 +118,7 @@ export const SHARED_ITEMS = {
     'mutton-haji-biryani': {
         id: 'mutton-haji-biryani',
         name: 'Mutton Haji Biryani',
-        description: '',
+        description: 'Old Dhaka-style biryani with tender mutton and fragrant rice.',
         price: null,
         dietary: [],
         aliases: ['haji', 'goat'],
@@ -127,7 +128,7 @@ export const SHARED_ITEMS = {
     'shahi-mutton-biryani': {
         id: 'shahi-mutton-biryani',
         name: 'Shahi Mutton Biryani',
-        description: '',
+        description: 'A richer, royal-style mutton biryani for special occasions.',
         price: null,
         dietary: [],
         aliases: ['goat'],
@@ -137,7 +138,7 @@ export const SHARED_ITEMS = {
     'plain-polao': {
         id: 'plain-polao',
         name: 'Plain Polao',
-        description: '',
+        description: 'Fragrant, lightly spiced polao rice.',
         price: null,
         dietary: [],
         aliases: ['pulao', 'pilaf'],
@@ -147,7 +148,7 @@ export const SHARED_ITEMS = {
     'bhuna-khichuri': {
         id: 'bhuna-khichuri',
         name: 'Bhuna Khichuri',
-        description: '',
+        description: 'Rice and lentils cooked together with spices, a Bangladeshi comfort classic.',
         price: null,
         dietary: [],
         aliases: ['khichdi', 'khichri'],
@@ -157,7 +158,7 @@ export const SHARED_ITEMS = {
     'basmati-rice': {
         id: 'basmati-rice',
         name: 'Basmati Rice',
-        description: '',
+        description: 'Steamed basmati rice.',
         price: null,
         dietary: [],
         aliases: ['plain rice', 'white rice'],
@@ -167,7 +168,7 @@ export const SHARED_ITEMS = {
     'chicken-curry': {
         id: 'chicken-curry',
         name: 'Chicken Curry',
-        description: '',
+        description: 'Home-style chicken curry in a spiced gravy.',
         price: null,
         dietary: [],
         available: true,
@@ -176,7 +177,7 @@ export const SHARED_ITEMS = {
     'chicken-bhuna': {
         id: 'chicken-bhuna',
         name: 'Chicken Bhuna',
-        description: '',
+        description: 'Chicken slow-cooked with spices until the sauce is thick and rich.',
         price: null,
         dietary: [],
         available: true,
@@ -194,7 +195,7 @@ export const SHARED_ITEMS = {
     'karahi-chicken': {
         id: 'karahi-chicken',
         name: 'Karahi Chicken',
-        description: '',
+        description: 'Chicken cooked karahi-style with bold spices.',
         price: null,
         dietary: [],
         aliases: ['kadai', 'karai', 'chicken karahi'],
@@ -204,7 +205,7 @@ export const SHARED_ITEMS = {
     'chicken-korma': {
         id: 'chicken-korma',
         name: 'Chicken Korma',
-        description: '',
+        description: 'Chicken in a mild, creamy korma sauce.',
         price: null,
         dietary: [],
         aliases: ['qorma'],
@@ -214,7 +215,7 @@ export const SHARED_ITEMS = {
     'beef-curry': {
         id: 'beef-curry',
         name: 'Beef Curry',
-        description: '',
+        description: 'Tender beef in a home-style spiced curry.',
         price: null,
         dietary: [],
         available: true,
@@ -223,7 +224,7 @@ export const SHARED_ITEMS = {
     'beef-bhuna': {
         id: 'beef-bhuna',
         name: 'Beef Bhuna',
-        description: '',
+        description: 'Beef slow-cooked with spices until the sauce is thick and rich.',
         price: null,
         dietary: [],
         available: true,
@@ -232,7 +233,7 @@ export const SHARED_ITEMS = {
     'beef-kala-bhuna': {
         id: 'beef-kala-bhuna',
         name: 'Beef Kala Bhuna',
-        description: '',
+        description: 'Chittagong-style beef, slow-cooked until dark, dry, and deeply spiced.',
         price: null,
         dietary: [],
         available: true,
@@ -241,7 +242,7 @@ export const SHARED_ITEMS = {
     'mutton-curry': {
         id: 'mutton-curry',
         name: 'Mutton Curry',
-        description: '',
+        description: 'Tender mutton in a home-style spiced curry.',
         price: null,
         dietary: [],
         aliases: ['goat'],
@@ -251,7 +252,7 @@ export const SHARED_ITEMS = {
     'mutton-bhuna': {
         id: 'mutton-bhuna',
         name: 'Mutton Bhuna',
-        description: '',
+        description: 'Mutton slow-cooked with spices until the sauce is thick and rich.',
         price: null,
         dietary: [],
         aliases: ['goat'],
@@ -261,7 +262,7 @@ export const SHARED_ITEMS = {
     'mixed-vegetables': {
         id: 'mixed-vegetables',
         name: 'Mixed Vegetables',
-        description: '',
+        description: 'Mixed vegetables cooked with light spices.',
         price: null,
         dietary: [],
         aliases: ['vegetable', 'sabji', 'sabzi'],
@@ -271,7 +272,7 @@ export const SHARED_ITEMS = {
     'chinese-vegetables-with-shrimp': {
         id: 'chinese-vegetables-with-shrimp',
         name: 'Chinese Vegetables with Shrimp',
-        description: '',
+        description: 'Stir-fried vegetables with shrimp, Bangladeshi-Chinese style.',
         price: null,
         dietary: [],
         aliases: ['prawn', 'chingri'],
@@ -281,7 +282,7 @@ export const SHARED_ITEMS = {
     'dal': {
         id: 'dal',
         name: 'Dal',
-        description: '',
+        description: 'Comforting spiced lentils.',
         price: null,
         dietary: [],
         aliases: ['daal', 'dahl', 'lentil'],
@@ -291,7 +292,7 @@ export const SHARED_ITEMS = {
     'beef-tikka-kebab': {
         id: 'beef-tikka-kebab',
         name: 'Beef Tikka Kebab',
-        description: '',
+        description: 'Spice-marinated beef, grilled.',
         price: null,
         dietary: [],
         aliases: ['kabab'],
@@ -301,7 +302,7 @@ export const SHARED_ITEMS = {
     'firni': {
         id: 'firni',
         name: 'Firni',
-        description: '',
+        description: 'Creamy ground-rice and milk pudding.',
         price: null,
         dietary: [],
         aliases: ['phirni'],
@@ -311,7 +312,7 @@ export const SHARED_ITEMS = {
     'jarda': {
         id: 'jarda',
         name: 'Jarda',
-        description: '',
+        description: 'Sweet, fragrant rice, a traditional celebration dessert.',
         price: null,
         dietary: [],
         aliases: ['zarda'],
@@ -321,7 +322,7 @@ export const SHARED_ITEMS = {
     'paratha-roti': {
         id: 'paratha-roti',
         name: 'Paratha / Roti',
-        description: '',
+        description: 'Flaky paratha or soft roti.',
         price: null,
         dietary: [],
         aliases: ['porota', 'parotta', 'ruti', 'bread'],
@@ -331,7 +332,7 @@ export const SHARED_ITEMS = {
     'dim-bhaji': {
         id: 'dim-bhaji',
         name: 'Dim Bhaji',
-        description: '',
+        description: 'Egg omelette, a Bangladeshi breakfast staple.',
         price: null,
         dietary: [],
         aliases: ['egg', 'omelette'],
@@ -341,7 +342,7 @@ export const SHARED_ITEMS = {
     'aloo-bhaji': {
         id: 'aloo-bhaji',
         name: 'Aloo Bhaji',
-        description: '',
+        description: 'Lightly spiced fried potatoes, a breakfast classic.',
         price: null,
         dietary: [],
         aliases: ['alu', 'potato'],
@@ -351,7 +352,7 @@ export const SHARED_ITEMS = {
     'dal-gosht': {
         id: 'dal-gosht',
         name: 'Dal Gosht',
-        description: '',
+        description: 'Lentils cooked with tender meat.',
         price: null,
         dietary: [],
         aliases: ['daal gosht', 'lentil'],
@@ -361,7 +362,7 @@ export const SHARED_ITEMS = {
     'halwa': {
         id: 'halwa',
         name: 'Halwa',
-        description: '',
+        description: 'Sweet halwa, a breakfast favorite with paratha.',
         price: null,
         dietary: [],
         aliases: ['halua', 'halva', 'suji'],
@@ -371,7 +372,7 @@ export const SHARED_ITEMS = {
     'special-chai': {
         id: 'special-chai',
         name: '5Spice Special Chai',
-        description: '',
+        description: 'Strong, milky desi-style tea.',
         price: null,
         dietary: [],
         aliases: ['tea', 'chai'],
@@ -381,10 +382,20 @@ export const SHARED_ITEMS = {
     'mango-lassi': {
         id: 'mango-lassi',
         name: 'Mango Lassi',
-        description: '',
+        description: 'Chilled yogurt drink blended with mango.',
         price: null,
         dietary: [],
         aliases: ['lassi', 'mango'],
+        available: true,
+        image: null,
+    },
+    borhani: {
+        id: 'borhani',
+        name: 'Borhani',
+        description: 'Spiced yogurt drink, a Bangladeshi feast favorite.',
+        price: null,
+        dietary: [],
+        aliases: ['burhani'],
         available: true,
         image: null,
     },
