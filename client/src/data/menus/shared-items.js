@@ -48,8 +48,8 @@ export const SHARED_ITEMS = {
     },
     'beef-tehari': {
         id: 'beef-tehari',
-        name: 'Beef Tehari',
-        description: '',
+        name: 'Authentic Nawabi Beef Tehari',
+        description: 'Slow-cooked the Old Dhaka way.',
         price: null,
         dietary: [],
         aliases: ['tehri'],
