@@ -129,19 +129,19 @@ export const MARKET_DEPARTMENTS = [
 
 export const MENU_HIGHLIGHTS = [
     {
-        category: 'Bangladeshi Favorites',
-        title: 'Biryani, Curry & Comfort Dishes',
-        text: 'Traditional flavors that taste like home, served generously.',
+        category: 'Biryani & Rice',
+        title: 'Kacchi, Tehari & Polao',
+        text: 'Slow-cooked biryani, kacchi, tehari, and polao with chicken, beef, or mutton.',
     },
     {
-        category: 'Grill & Family Meals',
-        title: 'Fresh Grills, Kebabs & Shareable Plates',
-        text: 'Family-style dishes made for weeknight dinners and weekend gatherings.',
+        category: 'Curries & Specialties',
+        title: 'Bhuna, Korma & Chicken Roast',
+        text: 'Home-style chicken, beef, and mutton curries, from kala bhuna to Royal Bengal Chicken Roast.',
     },
     {
-        category: 'Snacks, Sides & Drinks',
-        title: 'Everyday Restaurant Favorites',
-        text: 'Tea, drinks, snacks, and sides to round out any meal.',
+        category: 'Snacks, Breakfast & Drinks',
+        title: 'Street Snacks & Teatime Favorites',
+        text: 'Fuchka, piaju, puri, and samusa, paratha breakfasts, and chai, borhani, or lassi.',
     },
 ];
 
@@ -154,7 +154,7 @@ export const OFFERINGS = [
     {
         title: 'Authentic Bangladeshi Kitchen',
         shortTitle: 'Restaurant',
-        text: 'Biryani, curries, grills, and the family favorites you grew up with. Catering is available now from our Murphy kitchen.',
+        text: 'Biryani, kacchi, curries, and the family favorites you grew up with. Catering is available now from our Murphy kitchen.',
     },
     {
         title: 'Serving the DFW Community',

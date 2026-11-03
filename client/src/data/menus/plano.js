@@ -21,6 +21,7 @@ export const planoMenu = {
         { name: 'Mutton Curries & Specialties', itemIds: ['mutton-curry', 'mutton-bhuna'] },
         { name: 'Vegetables & Sides', itemIds: ['mixed-vegetables', 'chinese-vegetables-with-shrimp', 'dal'] },
         { name: 'Kebabs', itemIds: ['beef-tikka-kebab'] },
+        { name: 'Snacks', itemIds: ['fuchka', 'piaju', 'puri', 'samusa'] },
         { name: 'Desserts', itemIds: ['firni', 'jarda'] },
         { name: 'Breakfast', itemIds: ['paratha-roti', 'dim-bhaji', 'aloo-bhaji', 'mixed-vegetables', 'dal-gosht', 'halwa'] },
         { name: 'Drinks', itemIds: ['special-chai', 'mango-lassi', 'borhani'] },
