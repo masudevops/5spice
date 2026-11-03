@@ -36,25 +36,23 @@ These block accurate content. Nothing on the site is invented in the meantime.
   coming-soon landing page.
 - [ ] **About story wording** (Marketing). "Aroma" appears more than once in
   the পাঁচফোড়ন story. Optional tweak.
-- [ ] **Menu** (Owners/Marketing). The owners' menu (2026-11-02, 36 dishes,
-  plus 5Spice Special Chai and Mango Lassi) is in place, still hidden. More dishes are coming.
-  Still needed: prices, short descriptions, and any tags to show (5Spice
-  Specials, vegetarian, spicy). Then
-  follow `docs/MAINTAINER-GUIDE.md` §3 and set `flags.menuPublished: true`.
+- [ ] **Menu details** (Owners/Marketing). The Murphy menu is public since
+  2026-11-02 (36 dishes, plus 5Spice Special Chai and Mango Lassi) and says
+  "Prices coming soon". More dishes are coming. Still needed: prices, short
+  descriptions, and any tags to show (5Spice Specials, vegetarian, spicy).
+  See `docs/MAINTAINER-GUIDE.md` §3.
 - [ ] **Catering menu** (Owners, later). Decide whether catering offers the
   full menu or a set list of trays. If it's a set list, mark those dishes
   in the same menu data rather than keeping a second menu.
 
 ## 3. Website improvements
 
-- [ ] **Make coming-soon mode fully private** (Dev, small). In `coming_soon`
+- [ ] **Make coming-soon mode fully private** (Dev, small; only matters if the
+  site ever goes back to coming-soon mode). In `coming_soon`
   mode every page is still reachable by typing its address, and the sitemap
   still lists them, so Google can index pages that aren't ready. Plan: redirect
   every route to the landing page in that mode, and generate a sitemap with the
   homepage only.
-- [ ] **Go live** (Owners decide, then Dev). Production is in `coming_soon`
-  mode. Set the GitHub repo variable `VITE_APP_SITE_MODE` to `live` and re-run
-  the latest deploy (see `DEPLOYMENT.md`).
 - [ ] **Remove Vercel** (Dev, around 2026-10-31). Azure has been serving the
   site since 2026-10-24; Vercel is the fallback until then. Remove the domain
   and disconnect Git in the Vercel project, later delete it, then remove
@@ -112,6 +110,9 @@ These block accurate content. Nothing on the site is invented in the meantime.
   - phones: 44px bottom bar with 12px labels, larger footer and contact tap areas, no sideways scroll at 320px or with large text
   - speed: logo 354 KB → 43 KB (WebP copy), Bengali font ~105 KB → ~7 KB, pages load on demand, size-matched fallback fonts, Weekly Deals no longer jumps
   - reduced motion respected
+- [x] Full site live (2026-11-02): GitHub variable `VITE_APP_SITE_MODE` set to
+  `live`, Murphy menu published, Murphy phone shown as "Phone: to be updated"
+  until the official number arrives.
 - [x] Menu page upgrade (2026-10-25): search that handles different
   spellings, filter buttons (5Spice Specials, Vegetarian, Spicy), a category
   bar that highlights where you are, a compact list on phones, and an

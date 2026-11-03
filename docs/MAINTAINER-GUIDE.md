@@ -52,8 +52,8 @@ The technical reference for the data files is `client/src/data/README.md`.
 
 ## 3. Updating the menu
 
-Menus are **hidden right now** (`flags.menuPublished: false` on every
-location) because the menu isn't final. While hidden, the menu pages return
+The **Murphy menu is public** (since 2026-11-02); Plano's is hidden
+(`flags.menuPublished: false`) until it's ready. While a menu is hidden, the menu pages return
 "Page not found", and every "View Menu" button, sitemap entry, and Google
 menu link is turned off. You can still edit the menu safely while it's
 hidden.

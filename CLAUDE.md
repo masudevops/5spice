@@ -24,7 +24,7 @@ The site is in a **pre-launch, minimal phase**. Its job right now is to:
 
 **Murphy rule (resolved 2026-10-13):** the owners confirmed written landlord approval for the "5Spice Kitchen" name, so Murphy is publicly visible. For any future location, keep it `hidden` until the owners say it can be announced, and never flip it live on your own.
 
-**Menus:** menus are not final. Every location has `flags.menuPublished: false`, which hides all menu pages and "View Menu" links. Only turn it on when the owners say a menu is final.
+**Menus:** the Murphy menu is public since 2026-11-02 (`flags.menuPublished: true`), with prices still to come. Plano's stays hidden (`menuPublished: false` hides the menu page and "View Menu" links). Only turn a menu on when the owners say so.
 
 **Catering email:** catering requests go to catering@5spicemarket.com.
 
