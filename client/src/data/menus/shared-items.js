@@ -4,8 +4,8 @@
 // later. Per CLAUDE.md:
 // - never invent prices: leave `price: null` ("Price TBD" on the page) until
 //   the kitchen confirms them
-// - descriptions: the owners wrote Royal Bengal Chicken Roast and Authentic
-//   Nawabi Beef Tehari; the rest are general descriptions of each dish the
+// - descriptions: the owners wrote Royal Bengal Chicken Roast and 5Spice
+//   Special Nawabi Beef Tehari; the rest are general descriptions of each dish the
 //   owners asked for (2026-11-03). Keep them factual: no awards, secret
 //   recipes, or claims about ingredients the kitchen hasn't confirmed
 // - don't label dishes as Bangladeshi, Indian, or Pakistani
@@ -49,8 +49,8 @@ export const SHARED_ITEMS = {
     },
     'beef-tehari': {
         id: 'beef-tehari',
-        name: 'Authentic Nawabi Beef Tehari',
-        description: 'Slow-cooked the Old Dhaka way.',
+        name: '5Spice Special Nawabi Beef Tehari',
+        description: 'Authentic, slow-cooked the Old Dhaka way.',
         price: null,
         dietary: [],
         aliases: ['tehri'],
@@ -301,7 +301,7 @@ export const SHARED_ITEMS = {
     },
     'firni': {
         id: 'firni',
-        name: 'Firni',
+        name: 'Shahi Firni',
         description: 'Creamy ground-rice and milk pudding.',
         price: null,
         dietary: [],
@@ -311,7 +311,7 @@ export const SHARED_ITEMS = {
     },
     'jarda': {
         id: 'jarda',
-        name: 'Jarda',
+        name: 'Shahi Jarda',
         description: 'Sweet, fragrant rice, a traditional celebration dessert.',
         price: null,
         dietary: [],
