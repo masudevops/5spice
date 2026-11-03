@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { BriefcaseBusiness, CalendarClock, CheckCircle, Clock, Facebook, Mail, MapPin, Navigation, Phone, Users } from 'lucide-react';
+import { BookOpen, BriefcaseBusiness, CalendarClock, CheckCircle, Clock, Facebook, Mail, MapPin, Navigation, Phone, Users } from 'lucide-react';
 import { CATERING_EMAIL, PHONE_TO_BE_UPDATED } from '../config/site';
-import { getCateringOpenLocations, getVisibleLocations } from '../data/locations';
+import { getCateringOpenLocations, getVisibleLocations, hasPublicMenu } from '../data/locations';
 import { useDocumentHead } from '../hooks/useDocumentHead';
 import CateringMetrics from '../components/CateringMetrics';
 import { getCateringMetrics } from '../utils/cateringStats';
@@ -43,6 +43,8 @@ const quoteMailto = `mailto:${CATERING_EMAIL}?subject=${encodeURIComponent('5Spi
 
 const Catering = () => {
     const cateringLocations = getCateringOpenLocations();
+    // Menu to browse while planning: the first catering location with a public menu.
+    const menuLocation = cateringLocations.find(hasPublicMenu);
     const cateringMetrics = getCateringMetrics();
     const upcomingLocations = getVisibleLocations().filter(
         (location) => location.status === 'coming-soon' && location.services?.catering !== 'open'
@@ -99,9 +101,19 @@ const Catering = () => {
                         <p className="mt-4 leading-7 text-white/62">
                             Share your event date, location, guest count, and preferred dishes, and we'll put together a personalized quote for you.
                         </p>
-                        <a href={quoteMailto} className="mt-7 inline-flex items-center gap-3 bg-brand-green px-6 py-4 font-bold uppercase tracking-[0.16em] text-ink-900 transition-colors hover:bg-brand-green-light">
-                            <Mail size={19} /> Email Catering Request
-                        </a>
+                        <div className="mt-7 flex flex-wrap gap-3">
+                            <a href={quoteMailto} className="inline-flex items-center gap-3 bg-brand-green px-6 py-4 font-bold uppercase tracking-[0.16em] text-ink-900 transition-colors hover:bg-brand-green-light">
+                                <Mail size={19} aria-hidden="true" /> Email Catering Request
+                            </a>
+                            {menuLocation && (
+                                <Link to={`/locations/${menuLocation.slug}/menu`} className="inline-flex items-center gap-3 border border-brand-gold-deep/45 px-6 py-4 font-bold uppercase tracking-[0.16em] text-brand-gold transition-colors hover:border-brand-gold hover:text-white">
+                                    <BookOpen size={19} aria-hidden="true" /> View Full Menu
+                                </Link>
+                            )}
+                        </div>
+                        {menuLocation && (
+                            <p className="mt-4 text-sm text-white/55">Browse the menu to pick the dishes you'd like in your quote.</p>
+                        )}
                         <p className="mt-4 text-sm text-white/55">
                             Or write to <a href={`mailto:${CATERING_EMAIL}`} className="text-brand-gold underline decoration-brand-gold-deep/40 underline-offset-4 hover:text-white">{CATERING_EMAIL}</a>
                         </p>
@@ -158,6 +170,11 @@ const Catering = () => {
                                             <a href={toTelHref(location.phone)} className="inline-flex items-center gap-2 border border-brand-gold-deep/35 px-5 py-3 text-sm font-bold uppercase tracking-[0.16em] text-brand-gold transition-colors hover:border-brand-gold hover:text-white">
                                                 <Phone size={15} aria-hidden="true" /> {location.phone}
                                             </a>
+                                        )}
+                                        {hasPublicMenu(location) && (
+                                            <Link to={`/locations/${location.slug}/menu`} className="inline-flex items-center gap-2 border border-brand-gold-deep/35 px-5 py-3 text-sm font-bold uppercase tracking-[0.16em] text-brand-gold transition-colors hover:border-brand-gold hover:text-white">
+                                                <BookOpen size={15} aria-hidden="true" /> Menu
+                                            </Link>
                                         )}
                                         <a href={location.googleMapsUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 border border-brand-gold-deep/35 px-5 py-3 text-sm font-bold uppercase tracking-[0.16em] text-brand-gold transition-colors hover:border-brand-gold hover:text-white">
                                             <Navigation size={15} aria-hidden="true" /> Directions
