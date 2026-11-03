@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, CalendarDays, FlameKindling, HandHeart, MapPin, Navigation, Phone, Soup, Utensils } from 'lucide-react';
+import { ArrowRight, CalendarDays, Coffee, CookingPot, HandHeart, MapPin, Navigation, Phone, Soup, Utensils } from 'lucide-react';
 import { MENU_HIGHLIGHTS } from '../config/site';
 import { useSelectedLocation } from '../hooks/useSelectedLocation';
 import { useDocumentHead } from '../hooks/useDocumentHead';
@@ -8,7 +8,7 @@ import ServiceStatusList from '../components/ServiceStatusList';
 import { getLocationLabel, getOpenLocations, hasPublicMenu, takesRestaurantOrders } from '../data/locations';
 import { toTelHref } from '../utils/phone';
 
-const icons = [Soup, FlameKindling, Utensils];
+const icons = [CookingPot, Soup, Coffee];
 
 const Kitchen = () => {
     const { selectedLocation, selectLocation } = useSelectedLocation();
@@ -29,7 +29,7 @@ const Kitchen = () => {
                     <p className="text-xs font-semibold uppercase tracking-[0.32em] text-brand-gold">Authentic Halal Bangladeshi Cuisine</p>
                     <h1 className="mt-5 max-w-4xl font-serif text-5xl font-bold leading-tight text-white md:text-6xl">Authentic meals for family dinners and quick lunches.</h1>
                     <p className="mt-5 max-w-2xl text-lg leading-8 text-white/68">
-                        Traditional Bangladeshi favorites alongside Indian and Pakistani classics, all halal and made with care for every guest at your table.
+                        Traditional Bangladeshi favorites and South Asian classics, from kacchi and tehari to rich curries and street snacks, all halal and made with care for every guest at your table.
                     </p>
                 </div>
             </section>
