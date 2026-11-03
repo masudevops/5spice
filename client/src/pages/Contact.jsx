@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Clock, Facebook, HandHeart, Instagram, Mail, MapPin, MessageCircle, Phone } from 'lucide-react';
-import { CATERING_EMAIL, SOCIAL_LINKS } from '../config/site';
+import { CATERING_EMAIL, PHONE_TO_BE_UPDATED, SOCIAL_LINKS } from '../config/site';
 import { getLocationLabel, getVisibleLocations } from '../data/locations';
 import { useDocumentHead } from '../hooks/useDocumentHead';
 import { toTelHref } from '../utils/phone';
@@ -51,10 +51,14 @@ const Contact = () => {
                                         </p>
                                     )}
                                     <div className="mt-3 flex flex-wrap gap-x-6 text-sm font-bold uppercase tracking-[0.16em]">
-                                        {location.phone && (
+                                        {location.phone ? (
                                             <a href={toTelHref(location.phone)} className="inline-flex min-h-11 items-center gap-2 text-brand-gold hover:text-white">
                                                 <Phone size={16} aria-hidden="true" /> {location.phone}
                                             </a>
+                                        ) : (
+                                            <span className="inline-flex min-h-11 items-center gap-2 text-white/55">
+                                                <Phone size={16} aria-hidden="true" /> {PHONE_TO_BE_UPDATED}
+                                            </span>
                                         )}
                                         <a href={location.googleMapsUrl} target="_blank" rel="noreferrer" className="inline-flex min-h-11 items-center text-brand-gold underline decoration-brand-gold-deep/40 underline-offset-4 hover:text-white">
                                             Open in Maps

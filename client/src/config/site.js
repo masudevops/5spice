@@ -38,6 +38,9 @@ export const CATERING_STATS = {
     asOf: '2026-10-20',
 };
 
+// Shown wherever a location's phone number would appear while it has none.
+export const PHONE_TO_BE_UPDATED = 'Phone: to be updated';
+
 // CONTACT describes the primary/default visible location (the first entry in
 // /src/data/locations), so this file stays a single source of truth.
 const primaryLocation = getDefaultLocation();
@@ -50,7 +53,7 @@ export const CONTACT = primaryLocation
         postalAddress: primaryLocation.address.full,
         website: '5spicemarket.com',
         email: primaryLocation.email || SOCIAL_LINKS.email,
-        phoneLabel: primaryLocation.phone || 'Phone coming soon',
+        phoneLabel: primaryLocation.phone || PHONE_TO_BE_UPDATED,
         mapsUrl: primaryLocation.googleMapsUrl,
     }
     : {
@@ -60,7 +63,7 @@ export const CONTACT = primaryLocation
         postalAddress: '',
         website: '5spicemarket.com',
         email: SOCIAL_LINKS.email,
-        phoneLabel: 'Phone coming soon',
+        phoneLabel: PHONE_TO_BE_UPDATED,
         mapsUrl: '',
     };
 
