@@ -7,7 +7,7 @@ import { useDocumentHead } from '../hooks/useDocumentHead';
 import { useSelectedLocation } from '../hooks/useSelectedLocation';
 import { getVisibleLocationBySlug, hasPublicMenu, takesRestaurantOrders } from '../data/locations';
 import { getMenuByLocationSlug } from '../data/menus';
-import { buildSearchIndex, matchesSearch } from '../utils/menuSearch';
+import { buildSearchIndex, createSearchMatcher } from '../utils/menuSearch';
 
 const slugify = (value) => value.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
 
@@ -73,7 +73,8 @@ const LocationMenu = () => {
     const visibleCategories = useMemo(() => {
         if (!menu) return [];
         const filters = FILTERS.filter((filter) => activeFilters.includes(filter.key));
-        const matches = (item) => filters.every((filter) => filter.test(item)) && matchesSearch(searchIndex.get(item.id), query);
+        const matchesQuery = createSearchMatcher([...searchIndex.values()], query);
+        const matches = (item) => filters.every((filter) => filter.test(item)) && matchesQuery(searchIndex.get(item.id));
         return menu.categories
             .map((category) => {
                 const groups = category.groups
