@@ -186,7 +186,7 @@ export const SHARED_ITEMS = {
     'chicken-roast': {
         id: 'chicken-roast',
         name: 'Royal Bengal Chicken Roast',
-        description: 'Rich, aromatic, wedding-feast style.',
+        description: 'Rich, aromatic, Bangladeshi wedding-feast style.',
         price: null,
         dietary: [],
         available: true,
