@@ -34,7 +34,7 @@ GitHub settings (repo → **Settings → Secrets and variables → Actions**):
 
 | Name | Kind | Purpose |
 |---|---|---|
-| `VITE_APP_SITE_MODE` | variable | `coming_soon` or `live`, read at build time |
+| `VITE_APP_SITE_MODE` | variable | `coming_soon` or `live`, read at build time. `live` since 2026-11-02 |
 | `AZURE_SWA_ENABLED` | variable | `true` turns the workflow on |
 | `VITE_CF_ANALYTICS_TOKEN` | variable | Cloudflare Web Analytics token (public). Empty turns analytics off |
 | `AZURE_STATIC_WEB_APPS_API_TOKEN` | secret | Deployment token. Set by `infra/setup-azure.sh`; never commit it |

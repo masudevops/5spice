@@ -17,7 +17,7 @@ do it for you.
 
 | I want to change… | Edit this file / folder |
 |---|---|
-| A dish (name, description, price, vegetarian tag, origin) | `client/src/data/menus/shared-items.js` |
+| A dish (name, description, price, tags, other spellings) | `client/src/data/menus/shared-items.js` |
 | Which dishes a location serves, and in what category | `client/src/data/menus/murphy.js`, `client/src/data/menus/plano.js` |
 | A dish served at only one location | That location's menu file (`items: [...]`, see §3.4) |
 | Show or hide a location's whole menu page | `flags.menuPublished` in `client/src/data/locations/<slug>.js` |
@@ -52,8 +52,8 @@ The technical reference for the data files is `client/src/data/README.md`.
 
 ## 3. Updating the menu
 
-Menus are **hidden right now** (`flags.menuPublished: false` on every
-location) because the menu isn't final. While hidden, the menu pages return
+The **Murphy menu is public** (since 2026-11-02); Plano's is hidden
+(`flags.menuPublished: false`) until it's ready. While a menu is hidden, the menu pages return
 "Page not found", and every "View Menu" button, sitemap entry, and Google
 menu link is turned off. You can still edit the menu safely while it's
 hidden.
@@ -64,19 +64,34 @@ hidden.
   `'kacchi-biryani'`.
 - **`murphy.js` / `plano.js`** (in `client/src/data/menus/`) list
   **categories** in display order, and which dish ids go in each.
-- Categories are organized **by course**, not by cuisine: Starters, Biryani
-  & Rice, Curries, Kebabs & Grill, Breads, Desserts, Drinks.
+- Categories are organized **by course**, not by cuisine: Biryani & Rice
+  Dishes, Chicken / Beef / Mutton Curries & Specialties, Vegetables & Sides,
+  Kebabs, Desserts, Breakfast, Drinks.
+- A category can be split into smaller headed groups. Use `groups` instead of
+  `itemIds`:
+  ```js
+  { name: 'Biryani & Rice Dishes', groups: [
+      { name: 'Chicken', itemIds: ['chicken-biryani', 'chicken-tehari'] },
+      { name: 'Beef', itemIds: ['beef-tehari', 'beef-kachchi'] },
+  ] },
+  ```
+- A dish can appear in two categories (e.g. Mixed Vegetables in Vegetables &
+  Sides and Breakfast): list its id in both.
+- The menu page has a search box, filter buttons, and a category bar that
+  stays at the top and highlights where you are. They all work from the dish
+  data below; nothing else needs updating.
 
 ### 3.2 Dish fields
 
 ```js
-'kacchi-biryani': {
-    id: 'kacchi-biryani',          // must match the key; lowercase-with-dashes
-    name: 'Kacchi Biryani',
-    description: 'Short, accurate description.',
+'beef-kachchi': {
+    id: 'beef-kachchi',            // must match the key; lowercase-with-dashes
+    name: 'Beef Kachchi',
+    description: '',               // short, approved wording, or '' for none
     price: null,                   // a number like 14.99, or null → shows "Price TBD"
-    dietary: [],                   // e.g. ['vegetarian']
-    origin: 'Bangladeshi',         // optional: 'Bangladeshi' | 'Indian' | 'Pakistani'
+    special: false,                // optional: true → "5Spice Special" badge and filter
+    dietary: [],                   // optional: 'vegetarian', 'spicy' (each adds a filter)
+    aliases: ['kacchi'],           // optional: other spellings people search for
     available: true,               // false → shows an "Unavailable" tag
     image: null,                   // see §4
 },
@@ -118,8 +133,9 @@ the build and confirm `/locations/<slug>/menu` appears in
   confirms the real price.
 - **Halal is stated once per menu** (`halalStatement`), not as a per-dish
   tag. Everything 5Spice serves is halal.
-- Bangladeshi dishes lead. Indian and Pakistani dishes are part of the same
-  regional family. Use `origin` tags; don't group the menu by cuisine.
+- Don't label dishes as Bangladeshi, Indian, or Pakistani, and don't group
+  the menu by cuisine.
+- Only add `special`, `vegetarian`, or `spicy` tags the owners confirm.
 - Don't make up dish details (ingredients, "award-winning", spice claims).
 
 ---
@@ -261,7 +277,7 @@ Open Claude Code in the repo folder and paste one of these. Fill in the
 Update the 5Spice menu for [Murphy / Plano / both]. Work on a new branch.
 
 Changes:
-- Add: [dish name] in [category]: "[description]", price [$X or "leave null"], [vegetarian?], origin [Bangladeshi/Indian/Pakistani]
+- Add: [dish name] in [category]: "[description]", price [$X or "leave null"], [5Spice Special? vegetarian? spicy?]
 - Change: [dish name] price to [$X] / description to "[...]"
 - Remove from [location]: [dish name]
 - Mark unavailable: [dish name]

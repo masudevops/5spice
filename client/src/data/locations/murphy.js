@@ -44,8 +44,8 @@ export const murphy = {
         hasWeeklyDeals: false,
         hasCatering: true,
         hasPickup: true,
-        // Turn on once the Murphy menu is final.
-        menuPublished: false,
+        // Published 2026-11-02 (prices still to come; see docs/NEXT-STEPS.md).
+        menuPublished: true,
     },
     // Per-service status: 'open' or 'coming-soon'. Shown as badges on the
     // location card and location page; catering 'open' also lists this

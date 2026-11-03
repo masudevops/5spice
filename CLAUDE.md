@@ -24,7 +24,7 @@ The site is in a **pre-launch, minimal phase**. Its job right now is to:
 
 **Murphy rule (resolved 2026-10-13):** the owners confirmed written landlord approval for the "5Spice Kitchen" name, so Murphy is publicly visible. For any future location, keep it `hidden` until the owners say it can be announced, and never flip it live on your own.
 
-**Menus:** menus are not final. Every location has `flags.menuPublished: false`, which hides all menu pages and "View Menu" links. Only turn it on when the owners say a menu is final.
+**Menus:** the Murphy menu is public since 2026-11-02 (`flags.menuPublished: true`), with prices still to come. Plano's stays hidden (`menuPublished: false` hides the menu page and "View Menu" links). Only turn a menu on when the owners say so.
 
 **Catering email:** catering requests go to catering@5spicemarket.com.
 
@@ -121,7 +121,8 @@ The site is in a **pre-launch, minimal phase**. Its job right now is to:
 - Menus: `/data/menus/<location-slug>.json`, with shared items in a shared file
 - Weekly deals: keep in a simple, non-developer-editable data file
 - `/data/README.md` explains in plain language how to add a location, edit a menu, update deals, and switch a location from hidden to live.
-- Menus are organized by course (Starters, Biryani & Rice, Curries, Kebabs & Grill, Breads, Desserts, Drinks…), not by cuisine. Items may carry an optional `origin` tag: Bangladeshi, Indian, or Pakistani.
+- Menus are organized by course (Biryani & Rice Dishes, Chicken / Beef / Mutton Curries & Specialties, Vegetables & Sides, Kebabs, Desserts, Breakfast…), not by cuisine. A category can be split into headed groups (`groups`, e.g. Chicken, Beef, Mutton). Don't label individual dishes as Bangladeshi, Indian, or Pakistani (owners' decision, 2026-10-25).
+- Dish tags drive the menu page filters: `special: true` ("5Spice Special") and `dietary` (`vegetarian`, `spicy`). A filter only appears once some dish has its tag. Only add tags the owners confirm. `aliases` lists other spellings for search (e.g. `paratha` for Porota).
 
 ---
 
