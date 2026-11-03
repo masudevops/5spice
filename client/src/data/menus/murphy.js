@@ -23,6 +23,6 @@ export const murphyMenu = {
         { name: 'Kebabs', itemIds: ['beef-tikka-kebab'] },
         { name: 'Desserts', itemIds: ['firni', 'jarda'] },
         { name: 'Breakfast', itemIds: ['paratha-roti', 'dim-bhaji', 'aloo-bhaji', 'mixed-vegetables', 'dal-gosht', 'halwa'] },
-        { name: 'Drinks', itemIds: ['special-chai', 'mango-lassi'] },
+        { name: 'Drinks', itemIds: ['special-chai', 'mango-lassi', 'borhani'] },
     ],
 };
