@@ -225,7 +225,7 @@ const Navbar = () => {
       </header>
 
       {mobileMenuOpen && (
-        <div id="mobile-menu" ref={menuRef} className="fixed inset-0 z-30 overflow-y-auto bg-ink-900/98 px-6 pb-24 pt-28 lg:hidden">
+        <div id="mobile-menu" ref={menuRef} className="fixed inset-0 z-30 overflow-y-auto bg-ink-900 px-6 pb-24 pt-28 lg:hidden">
           <nav className="mx-auto flex max-w-sm flex-col gap-3 text-center" aria-label="Mobile navigation">
             {visibleLocations.length > 1 && (
               <div className="mb-2 flex justify-center">
