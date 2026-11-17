@@ -39,29 +39,31 @@ const LaunchLanding = () => {
             <div className="pointer-events-none fixed inset-0 z-0 opacity-[0.045] bg-[radial-gradient(circle_at_1px_1px,rgba(255,255,255,0.75)_1px,transparent_0)] [background-size:22px_22px]" />
 
 
-            <section className="relative z-10 px-5 py-16 sm:px-8 md:py-20 lg:px-12">
+            <section className="relative z-10 px-5 py-12 sm:px-8 md:py-16 lg:px-12">
                 {/* Centered while there's no imagery. A food & grocery photo slideshow
                     can go here later (e.g. behind or below the text). */}
                 <div className="mx-auto max-w-7xl">
-                    <div className="mx-auto max-w-4xl animate-fade-in-up text-center">
+                    <div className="animate-fade-in-up text-center">
                         <SpiceDots />
                         <p className="mt-6 text-xs font-semibold uppercase tracking-[0.3em] text-brand-gold">
                             Authentic Halal Bangladeshi Cuisine · Halal Grocery
                         </p>
-                        <h1 className="mt-5 text-balance font-serif text-5xl font-bold leading-[0.98] text-white sm:text-6xl xl:text-7xl">
-                            Your Neighborhood Destination for Halal Groceries &amp; Authentic Flavors.
+                        <h1 className="mx-auto mt-5 max-w-[68rem] text-balance font-serif text-[2.125rem] font-bold leading-[1.02] text-white sm:text-6xl xl:text-7xl">
+                            {/* Phrases kept together so lines don't break inside them. */}
+                            Your Neighborhood Destination for <span className="whitespace-nowrap">Halal Groceries &amp;</span>{' '}
+                            <span className="whitespace-nowrap">Authentic Flavors.</span>
                         </h1>
-                        <p className="mx-auto mt-7 max-w-2xl text-pretty text-lg leading-8 text-white/70">
+                        <p className="mx-auto mt-6 max-w-2xl text-pretty text-lg leading-8 text-white/70">
                             Bringing premium halal meats, fresh seafood, everyday groceries, and authentic Bangladeshi cuisine with South Asian favorites together under one roof.
                         </p>
                         {upcomingMarket && (
-                            <div className="mt-7 inline-flex flex-wrap items-center justify-center gap-x-3 gap-y-1 border border-brand-gold-deep/35 bg-ink-700/70 px-5 py-3 text-brand-gold">
+                            <div className="mt-6 inline-flex flex-wrap items-center justify-center gap-x-3 gap-y-1 border border-brand-gold-deep/35 bg-ink-700/70 px-5 py-3 text-brand-gold">
                                 <CalendarDays size={20} aria-hidden="true" />
                                 <span className="font-semibold tracking-wide">{upcomingMarket.openingText}</span>
                                 <span className="text-sm text-white/55">{upcomingMarket.address.city}, {upcomingMarket.address.state}</span>
                             </div>
                         )}
-                        <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center">
+                        <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:justify-center">
                             <Link to="/market" className="bg-brand-green px-7 py-4 text-center font-bold uppercase tracking-[0.16em] text-ink-900 transition-colors hover:bg-brand-green-light">
                                 Explore the Market
                             </Link>
@@ -85,9 +87,9 @@ const LaunchLanding = () => {
 
             <CateringStats />
 
-            <section className="relative z-10 px-5 py-16 sm:px-8 lg:px-12" aria-labelledby="offerings-heading">
+            <section className="relative z-10 px-5 py-12 sm:px-8 lg:px-12" aria-labelledby="offerings-heading">
                 <div className="mx-auto max-w-7xl">
-                    <div className="mx-auto mb-10 max-w-3xl text-center">
+                    <div className="mx-auto mb-8 max-w-3xl text-center">
                         <p className="text-xs font-semibold uppercase tracking-[0.3em] text-brand-gold">Five spices. One home.</p>
                         <h2 id="offerings-heading" className="mt-4 text-balance font-serif text-4xl font-semibold leading-tight text-white md:text-5xl">
                             Built for grocery runs, family meals, and community gatherings.
@@ -111,8 +113,8 @@ const LaunchLanding = () => {
                 </div>
             </section>
 
-            <section className="relative z-10 px-5 pb-20 pt-8 sm:px-8 lg:px-12" aria-labelledby="story-heading">
-                <div className="mx-auto max-w-7xl border-y border-brand-gold-deep/25 bg-ink-850/80 px-6 py-14 text-center md:px-10 md:py-16">
+            <section className="relative z-10 px-5 pb-16 pt-4 sm:px-8 lg:px-12" aria-labelledby="story-heading">
+                <div className="mx-auto max-w-7xl border-y border-brand-gold-deep/25 bg-ink-850/80 px-6 py-12 text-center md:px-10 md:py-14">
                     <div className="mx-auto max-w-2xl">
                         <p className="text-xs font-semibold uppercase tracking-[0.3em] text-brand-gold">Our Story</p>
                         <h2 id="story-heading" className="mt-5">
