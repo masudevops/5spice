@@ -144,7 +144,7 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="hidden border-b border-brand-gold-deep/15 bg-ink-900 text-xs text-brand-cream/70 md:block">
+      <div className="relative z-10 hidden border-b border-brand-gold-deep/15 bg-ink-900 text-xs text-brand-cream/70 md:block">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-2">
           {visibleLocations.length > 1 ? (
             <LocationSwitcher locations={visibleLocations} selectedSlug={selectedSlug} onSelect={selectLocation} />

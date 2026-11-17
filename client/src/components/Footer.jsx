@@ -31,7 +31,7 @@ const Footer = () => {
     const visibleLocations = getVisibleLocations();
 
     return (
-        <footer className="border-t border-brand-gold-deep/25 bg-ink-950 pb-24 pt-14 text-brand-cream md:pb-12">
+        <footer className="relative z-10 border-t border-brand-gold-deep/25 bg-ink-950 pb-24 pt-14 text-brand-cream md:pb-12">
             <div className="mx-auto max-w-7xl px-5 lg:px-8">
                 <div className="mb-12 grid gap-10 lg:grid-cols-[1.2fr_1fr_1fr_1.1fr]">
                     <div>
