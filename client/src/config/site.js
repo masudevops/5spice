@@ -18,6 +18,7 @@ export const LOGOS = {
 
 export const SOCIAL_LINKS = {
     facebook: 'https://facebook.com/5SpiceMarket',
+    facebookHandle: '@5SpiceMarket',
     instagramUrl: 'https://instagram.com/5SpiceMarket',
     instagramHandle: '@5SpiceMarket',
     email: 'info@5spicemarket.com',
