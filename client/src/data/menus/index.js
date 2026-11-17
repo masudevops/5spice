@@ -1,6 +1,7 @@
-import { SHARED_ITEMS } from './shared-items';
-import { planoMenu } from './plano';
-import { murphyMenu } from './murphy';
+import { SHARED_ITEMS } from './shared-items.js';
+import { planoMenu } from './plano.js';
+import { murphyMenu } from './murphy.js';
+import { cateringMenu } from './catering.js';
 
 const MENUS_BY_SLUG = {
     plano: planoMenu,
@@ -12,27 +13,34 @@ const resolveItems = ({ itemIds = [], items = [] }) => [
     ...items,
 ];
 
-// Resolves a location's menu into fully-populated categories (itemIds ->
-// item objects), merging in any location-only `items` defined inline.
-// Every category comes back with `groups` (one unnamed group when the
-// category isn't split into Chicken / Beef / … groups) and `items`, all of
-// its dishes in order.
+// Resolves a menu into fully-populated categories (itemIds -> item objects),
+// merging in any menu-only `items` defined inline. Every category comes back
+// with `groups` (one unnamed group when the category isn't split into
+// Chicken / Beef / … groups) and `items`, all of its dishes in order.
+const resolveMenu = (menu) => ({
+    halalStatement: menu.halalStatement,
+    categories: menu.categories.map((category) => {
+        const groups = category.groups
+            ? category.groups.map((group) => ({ name: group.name, items: resolveItems(group) }))
+            : [{ name: null, items: resolveItems(category) }];
+        return {
+            name: category.name,
+            groups,
+            items: groups.flatMap((group) => group.items),
+        };
+    }),
+});
+
+// A location's day-to-day restaurant menu.
 export const getMenuByLocationSlug = (slug) => {
     const menu = MENUS_BY_SLUG[slug];
     if (!menu) return null;
-
-    return {
-        locationSlug: menu.locationSlug,
-        halalStatement: menu.halalStatement,
-        categories: menu.categories.map((category) => {
-            const groups = category.groups
-                ? category.groups.map((group) => ({ name: group.name, items: resolveItems(group) }))
-                : [{ name: null, items: resolveItems(category) }];
-            return {
-                name: category.name,
-                groups,
-                items: groups.flatMap((group) => group.items),
-            };
-        }),
-    };
+    return { locationSlug: menu.locationSlug, ...resolveMenu(menu) };
 };
+
+// The catering menu is public when it's published (see catering.js).
+export const hasPublicCateringMenu = () => Boolean(cateringMenu.published);
+
+// The catering menu (separate from the restaurant menus), or null when it's
+// not published.
+export const getCateringMenu = () => (hasPublicCateringMenu() ? resolveMenu(cateringMenu) : null);

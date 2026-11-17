@@ -35,6 +35,15 @@ file, save, and the site picks it up on the next build/dev reload.
   automatically for any item without a price.
 - `halal` is stated once per menu (the `halalStatement` field), not per item.
 
+## Edit the catering menu
+
+The catering menu (`/catering/menu`) is separate from the restaurant menus, so
+catering and day-to-day dishes can differ. Edit `menus/catering.js`: it works
+the same way as a location menu (categories of dish ids from
+`menus/shared-items.js`, plus optional catering-only `items`). It's linked
+from the Catering page only, and never from the restaurant menus (and vice
+versa). Set `published: false` in that file to hide it.
+
 ## Publish or hide a menu
 
 Menus are hidden until they're final. To publish a location's menu, open its

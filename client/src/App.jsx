@@ -37,6 +37,7 @@ const Contact = lazyPage(() => import('./pages/Contact'));
 const Locations = lazyPage(() => import('./pages/Locations'));
 const LocationDetail = lazyPage(() => import('./pages/LocationDetail'));
 const LocationMenu = lazyPage(() => import('./pages/LocationMenu'));
+const CateringMenu = lazyPage(() => import('./pages/CateringMenu'));
 const NotFound = lazyPage(() => import('./pages/NotFound'));
 
 function App() {
@@ -53,6 +54,7 @@ function App() {
               <Route path="/cafe" element={<Navigate to="/kitchen" replace />} />
               <Route path="/sales" element={<Sales />} />
               <Route path="/catering" element={<Catering />} />
+              <Route path="/catering/menu" element={<CateringMenu />} />
               <Route path="/pickup" element={<Pickup />} />
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
