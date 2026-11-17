@@ -1,24 +1,21 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, CalendarDays, Coffee, CookingPot, HandHeart, MapPin, Navigation, Phone, Soup, Utensils } from 'lucide-react';
+import { ArrowRight, BookOpen, Coffee, CookingPot, HandHeart, Soup, Utensils } from 'lucide-react';
 import { MENU_HIGHLIGHTS } from '../config/site';
 import { useSelectedLocation } from '../hooks/useSelectedLocation';
 import { useDocumentHead } from '../hooks/useDocumentHead';
-import ServiceStatusList from '../components/ServiceStatusList';
-import { getLocationLabel, getOpenLocations, hasPublicMenu, takesRestaurantOrders } from '../data/locations';
-import { toTelHref } from '../utils/phone';
+import { getVisibleLocations, hasPublicMenu } from '../data/locations';
 
 const icons = [CookingPot, Soup, Coffee];
 
 const Kitchen = () => {
-    const { selectedLocation, selectLocation } = useSelectedLocation();
-    const isOpen = selectedLocation?.status === 'open';
-    const openKitchens = getOpenLocations().filter((location) => location.flags.hasKitchen);
-    const anyTakingOrders = openKitchens.some(takesRestaurantOrders);
+    const { selectedLocation } = useSelectedLocation();
+    // The selected location's restaurant menu, or the first one that's public.
+    const menuLocation = hasPublicMenu(selectedLocation) ? selectedLocation : getVisibleLocations().find(hasPublicMenu);
 
     useDocumentHead({
         title: 'Halal Bangladeshi Kitchen & Catering in Murphy, TX | 5Spice Kitchen',
-        description: 'Authentic halal Bangladeshi cuisine alongside Indian and Pakistani favorites. Catering available now from 5Spice Kitchen in Murphy, TX, with dine-in and take-out coming soon.',
+        description: 'Authentic halal Bangladeshi cuisine alongside Indian and Pakistani favorites from 5Spice Kitchen, opening soon in Murphy, TX. Catering available for your events.',
     });
 
     return (
@@ -31,81 +28,16 @@ const Kitchen = () => {
                     <p className="mt-5 max-w-2xl text-lg leading-8 text-white/68">
                         Traditional Bangladeshi favorites and South Asian classics, from kacchi and tehari to rich curries and street snacks, all halal and made with care for every guest at your table.
                     </p>
+                    {menuLocation && (
+                        <Link to={`/locations/${menuLocation.slug}/menu`} className="mt-8 inline-flex min-h-11 items-center gap-2 bg-brand-green px-6 py-4 font-bold uppercase tracking-[0.16em] text-ink-900 transition-colors hover:bg-brand-green-light">
+                            <BookOpen size={18} aria-hidden="true" /> View Menu
+                        </Link>
+                    )}
                 </div>
             </section>
 
             <section className="px-5 pb-20 sm:px-8 lg:px-12">
                 <div className="mx-auto max-w-7xl">
-                    {selectedLocation && (
-                        <div className="mb-8 border border-brand-gold-deep/25 bg-ink-850 p-7 md:p-9">
-                            {isOpen ? (
-                                <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
-                                    <div>
-                                        <p className="text-xs font-semibold uppercase tracking-[0.28em] text-brand-green">{selectedLocation.statusLabel}</p>
-                                        <h2 className="mt-3 font-serif text-3xl font-semibold text-white">{getLocationLabel(selectedLocation)}</h2>
-                                        <p className="mt-3 flex items-start gap-2 text-white/68">
-                                            <MapPin size={18} className="mt-1 shrink-0 text-brand-gold" aria-hidden="true" />
-                                            {selectedLocation.address.full}
-                                        </p>
-                                        <ServiceStatusList services={selectedLocation.services} className="mt-4" />
-                                    </div>
-                                    <div className="flex flex-wrap gap-3">
-                                        {!takesRestaurantOrders(selectedLocation) && selectedLocation.services?.catering === 'open' && (
-                                            <Link to="/catering" className="inline-flex items-center gap-2 bg-brand-green px-6 py-4 font-bold uppercase tracking-[0.16em] text-ink-900 transition-colors hover:bg-brand-green-light">
-                                                <HandHeart size={17} aria-hidden="true" /> Request Catering
-                                            </Link>
-                                        )}
-                                        {selectedLocation.phone && (
-                                            <a
-                                                href={toTelHref(selectedLocation.phone)}
-                                                className={takesRestaurantOrders(selectedLocation)
-                                                    ? 'inline-flex items-center gap-2 bg-brand-green px-6 py-4 font-bold uppercase tracking-[0.16em] text-ink-900 transition-colors hover:bg-brand-green-light'
-                                                    : 'inline-flex items-center gap-2 border border-brand-gold-deep/45 px-6 py-4 font-bold uppercase tracking-[0.16em] text-brand-gold transition-colors hover:border-brand-gold hover:text-white'}
-                                            >
-                                                <Phone size={17} aria-hidden="true" /> {selectedLocation.phone}
-                                            </a>
-                                        )}
-                                        <a href={selectedLocation.googleMapsUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 border border-brand-gold-deep/45 px-6 py-4 font-bold uppercase tracking-[0.16em] text-brand-gold transition-colors hover:border-brand-gold hover:text-white">
-                                            <Navigation size={17} aria-hidden="true" /> Directions
-                                        </a>
-                                        {hasPublicMenu(selectedLocation) && (
-                                            <Link to={`/locations/${selectedLocation.slug}/menu`} className="inline-flex items-center gap-2 border border-brand-gold-deep/45 px-6 py-4 font-bold uppercase tracking-[0.16em] text-brand-gold transition-colors hover:border-brand-gold hover:text-white">
-                                                View Full Menu <ArrowRight size={17} aria-hidden="true" />
-                                            </Link>
-                                        )}
-                                    </div>
-                                </div>
-                            ) : (
-                                <div>
-                                    <p className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.28em] text-brand-gold">
-                                        <CalendarDays size={15} aria-hidden="true" /> {selectedLocation.openingText}
-                                    </p>
-                                    <h2 className="mt-3 font-serif text-3xl font-semibold text-white">{getLocationLabel(selectedLocation)}</h2>
-                                    <p className="mt-3 max-w-3xl leading-7 text-white/62">
-                                        Our {selectedLocation.shortName} restaurant isn't open yet.
-                                        {openKitchens.length > 0 && (anyTakingOrders
-                                            ? ' In the meantime, you can enjoy 5Spice at our operating kitchen.'
-                                            : ' In the meantime, our Murphy kitchen is taking catering orders.')}
-                                    </p>
-                                    {openKitchens.length > 0 && (
-                                        <div className="mt-6 flex flex-wrap gap-3">
-                                            {openKitchens.map((location) => (
-                                                <button
-                                                    key={location.slug}
-                                                    type="button"
-                                                    onClick={() => selectLocation(location.slug)}
-                                                    className="inline-flex items-center gap-2 bg-brand-green px-6 py-4 font-bold uppercase tracking-[0.16em] text-ink-900 transition-colors hover:bg-brand-green-light"
-                                                >
-                                                    See {getLocationLabel(location)} <ArrowRight size={17} aria-hidden="true" />
-                                                </button>
-                                            ))}
-                                        </div>
-                                    )}
-                                </div>
-                            )}
-                        </div>
-                    )}
-
                     <div className="grid gap-5 md:grid-cols-3">
                         {MENU_HIGHLIGHTS.map((item, index) => {
                             const Icon = icons[index];
