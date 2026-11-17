@@ -31,22 +31,24 @@ const LaunchLanding = () => {
 
 
             <section className="relative z-10 px-5 py-16 sm:px-8 md:py-20 lg:px-12">
+                {/* Centered while there's no imagery. A food & grocery photo slideshow
+                    can go here later (e.g. behind or below the text). */}
                 <div className="mx-auto max-w-7xl">
-                    <div className="animate-fade-in-up">
-                        <h1 className="max-w-4xl font-serif text-5xl font-bold leading-[0.98] text-white sm:text-6xl xl:text-7xl">
+                    <div className="mx-auto max-w-4xl animate-fade-in-up text-center">
+                        <h1 className="text-balance font-serif text-5xl font-bold leading-[0.98] text-white sm:text-6xl xl:text-7xl">
                             Your Neighborhood Destination for Halal Groceries &amp; Authentic Flavors.
                         </h1>
-                        <p className="mt-7 max-w-2xl text-lg leading-8 text-white/70">
+                        <p className="mx-auto mt-7 max-w-2xl text-pretty text-lg leading-8 text-white/70">
                             Bringing premium halal meats, fresh seafood, everyday groceries, and authentic Bangladeshi cuisine with South Asian favorites together under one roof.
                         </p>
                         {upcomingMarket && (
-                            <div className="mt-7 inline-flex flex-wrap items-center gap-x-3 gap-y-1 border border-brand-gold-deep/35 bg-ink-700/70 px-5 py-3 text-brand-gold">
+                            <div className="mt-7 inline-flex flex-wrap items-center justify-center gap-x-3 gap-y-1 border border-brand-gold-deep/35 bg-ink-700/70 px-5 py-3 text-brand-gold">
                                 <CalendarDays size={20} aria-hidden="true" />
                                 <span className="font-semibold tracking-wide">{upcomingMarket.openingText}</span>
                                 <span className="text-sm text-white/55">{upcomingMarket.address.city}, {upcomingMarket.address.state}</span>
                             </div>
                         )}
-                        <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                        <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center">
                             <Link to="/market" className="bg-brand-green px-7 py-4 text-center font-bold uppercase tracking-[0.16em] text-ink-900 transition-colors hover:bg-brand-green-light">
                                 Explore the Market
                             </Link>
