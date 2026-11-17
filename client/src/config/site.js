@@ -154,7 +154,7 @@ export const OFFERINGS = [
     {
         title: 'Authentic Bangladeshi Kitchen',
         shortTitle: 'Restaurant',
-        text: 'Biryani, kacchi, curries, and the family favorites you grew up with. Catering is available now from our Murphy kitchen.',
+        text: 'Biryani, kacchi, curries, and the family favorites you grew up with. Catering is available for your events.',
     },
     {
         title: 'Serving the DFW Community',

@@ -2,18 +2,18 @@
 //
 // Landlord written approval for the "5Spice Kitchen" name was confirmed by
 // the owners on 2026-10-13, so this location is publicly visible.
-// Murphy is operating for catering now; dine-in and take-out are coming soon
-// (see `services`).
+// Murphy is opening soon (owners, 2026-11-17). Catering stays on behind the
+// scenes (see `services`) so the Catering page keeps listing this location.
 
 export const murphy = {
     slug: 'murphy',
     displayName: '5Spice Kitchen',
     shortName: 'Murphy',
     type: 'kitchen-only',
-    status: 'open',
+    status: 'coming-soon',
     // Short badge text, and the longer line used in the location switcher.
-    statusLabel: 'Catering Available Now',
-    openingText: 'Catering Available Now · Dine-in & Take-out Coming Soon',
+    statusLabel: 'Opening Soon',
+    openingText: 'Opening Soon',
     cuisineTagline: 'Authentic Halal Bangladeshi Cuisine & South Asian Favorites',
     cuisines: ['Bangladeshi', 'Indian', 'Pakistani'],
     halal: true,
@@ -33,7 +33,7 @@ export const murphy = {
     // PLACEHOLDER: add real hours, e.g. { day: 'Monday', hours: '11:00 AM – 9:00 PM' }.
     // While empty, the site shows `hoursNote` instead of an hours table.
     hours: [],
-    hoursNote: 'Restaurant hours will be announced when dine-in opens. For catering, email us or message us on Facebook.',
+    hoursNote: 'Hours will be announced closer to opening. For catering, email us or message us on Facebook.',
     googleMapsUrl: 'https://www.google.com/maps/search/?api=1&query=222%20E%20FM%20544%2C%20Suite%20200%2C%20Murphy%2C%20TX%2075094',
     // PLACEHOLDER: confirm exact coordinates for JSON-LD geo data.
     lat: null,
@@ -47,9 +47,9 @@ export const murphy = {
         // Published 2026-11-02 (prices still to come; see docs/NEXT-STEPS.md).
         menuPublished: true,
     },
-    // Per-service status: 'open' or 'coming-soon'. Shown as badges on the
-    // location card and location page; catering 'open' also lists this
-    // location on the Catering page.
+    // Per-service status: 'open' or 'coming-soon'. Catering 'open' lists this
+    // location on the Catering page and turns on its catering contact links;
+    // dine-in or take-out 'open' (with status 'open') turns on ordering.
     services: {
         catering: 'open',
         dineIn: 'coming-soon',
@@ -62,7 +62,7 @@ export const murphy = {
         doorDash: '',
         instacart: '',
     },
-    description: 'Our Murphy kitchen brings authentic halal Bangladeshi cuisine and South Asian favorites to Murphy, Texas. Catering is available now, with dine-in and take-out coming soon.',
+    description: 'Our Murphy kitchen brings authentic halal Bangladeshi cuisine and South Asian favorites to Murphy, Texas.',
     // Location-specific social pages (the brand pages live in config/site.js).
     socialLinks: {
         facebook: 'https://www.facebook.com/5SpiceKitchenMurphy/',

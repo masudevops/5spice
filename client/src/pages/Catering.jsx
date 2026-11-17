@@ -75,7 +75,7 @@ const Catering = () => {
                                     className="inline-flex items-center gap-2 border border-brand-green/40 bg-brand-green/10 px-4 py-2 text-sm font-semibold text-white/85 transition-colors hover:border-brand-green hover:text-white"
                                 >
                                     <MapPin size={16} className="shrink-0 text-brand-green" aria-hidden="true" />
-                                    Now accepting catering orders from {location.displayName} – {location.shortName}.
+                                    Catering by {location.displayName} – {location.shortName}
                                 </a>
                             ))}
                         </div>
