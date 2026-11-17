@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, CalendarDays, ExternalLink, HandHeart, Mail, MapPin, Navigation, PackageCheck, Phone, ShoppingBasket, Store, Utensils } from 'lucide-react';
+import { ArrowRight, ExternalLink, HandHeart, Mail, MapPin, Navigation, PackageCheck, Phone, ShoppingBasket, Store, Utensils } from 'lucide-react';
 import { CONTACT, ORDER_PLATFORMS } from '../config/site';
 import { useSelectedLocation } from '../hooks/useSelectedLocation';
 import { useDocumentHead } from '../hooks/useDocumentHead';
-import { getCateringOpenLocations, getLocationLabel, getOrderingLocations, takesRestaurantOrders } from '../data/locations';
+import { getLocationLabel, takesRestaurantOrders } from '../data/locations';
 import LocationSwitcher from '../components/LocationSwitcher';
 import { toTelHref } from '../utils/phone';
 
@@ -21,8 +21,6 @@ const Pickup = () => {
     const isOpen = selectedLocation?.status === 'open';
     const takingOrders = takesRestaurantOrders(selectedLocation);
     const cateringNow = selectedLocation?.services?.catering === 'open';
-    const orderingLocations = getOrderingLocations();
-    const cateringLocations = getCateringOpenLocations();
 
     useDocumentHead({
         title: 'Order Online | 5Spice Kitchen – Murphy & 5Spice Market – Plano',
@@ -155,43 +153,6 @@ const Pickup = () => {
                                     </a>
                                 </div>
                             </div>
-                        </div>
-                    )}
-
-                    {selectedLocation && !isOpen && (
-                        <div className="border border-brand-gold-deep/25 bg-ink-800 p-7 md:p-9">
-                            <p className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.28em] text-brand-gold">
-                                <CalendarDays size={15} aria-hidden="true" /> {selectedLocation.openingText}
-                            </p>
-                            <h2 className="mt-3 font-serif text-3xl font-semibold leading-tight text-white">{getLocationLabel(selectedLocation)}</h2>
-                            <p className="mt-3 max-w-3xl leading-7 text-white/62">
-                                {selectedLocation.flags.hasMarket
-                                    ? 'Restaurant and grocery ordering will begin when this location opens.'
-                                    : 'Ordering will begin when this location opens.'}
-                            </p>
-                            {orderingLocations.length > 0 ? (
-                                <div className="mt-6 flex flex-wrap gap-3">
-                                    {orderingLocations.map((location) => (
-                                        <button
-                                            key={location.slug}
-                                            type="button"
-                                            onClick={() => selectLocation(location.slug)}
-                                            className="inline-flex items-center gap-2 bg-brand-green px-6 py-4 font-bold uppercase tracking-[0.16em] text-ink-900 transition-colors hover:bg-brand-green-light"
-                                        >
-                                            Order from {getLocationLabel(location)} <ArrowRight size={17} aria-hidden="true" />
-                                        </button>
-                                    ))}
-                                </div>
-                            ) : cateringLocations.length > 0 && (
-                                <div className="mt-6">
-                                    <p className="leading-7 text-white/62">
-                                        Planning an event? Request a catering quote for weddings, family celebrations, and corporate events.
-                                    </p>
-                                    <Link to="/catering" className="mt-5 inline-flex items-center gap-2 bg-brand-green px-6 py-4 font-bold uppercase tracking-[0.16em] text-ink-900 transition-colors hover:bg-brand-green-light">
-                                        <HandHeart size={17} aria-hidden="true" /> Request Catering
-                                    </Link>
-                                </div>
-                            )}
                         </div>
                     )}
 
