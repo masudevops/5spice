@@ -126,7 +126,7 @@ These block accurate content. Nothing on the site is invented in the meantime.
 - [x] Catering page refresh with a prefilled quote email.
 - [x] About page story section (পাঁচফোড়ন — The Aroma of Home).
 - [x] Coming-soon landing page shows Murphy catering.
-- [x] Catering milestone (1,000+ guests) on the homepage and Catering page.
+- [x] Catering milestone (1,600+ guests as of 2026-11-17) on the homepage and Catering page.
 - [x] Brand colors centralized as tokens; green buttons meet WCAG AA contrast.
 - [x] Larger header logo.
 - [x] Site modes simplified to `coming_soon` and `live`.

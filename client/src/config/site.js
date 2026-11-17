@@ -30,13 +30,13 @@ export const CATERING_EMAIL = 'catering@5spicemarket.com';
 // Brand-wide catering milestones for the homepage "Every Gathering Matters"
 // section. One total for all 5Spice kitchens combined.
 // Enter verified running totals only (never estimates). The site rounds down
-// to a milestone (e.g. 1240 → "1,000+") and hides any metric that is null or
+// to a milestone (e.g. 1640 → "1,600+") and hides any metric that is null or
 // below its minimum. `asOf` is for your records only; it isn't shown.
 export const CATERING_STATS = {
-    // Owners confirmed 1,000+ guests on 2026-10-20.
-    guestsServed: 1000,
+    // Owners confirmed 1,600+ guests on 2026-11-17.
+    guestsServed: 1600,
     eventsCompleted: null,
-    asOf: '2026-10-20',
+    asOf: '2026-11-17',
 };
 
 // Shown wherever a location's phone number would appear while it has none.
