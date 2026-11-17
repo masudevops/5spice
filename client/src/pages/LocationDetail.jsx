@@ -14,7 +14,6 @@ import {
 } from 'lucide-react';
 import NotFound from './NotFound';
 import { useDocumentHead } from '../hooks/useDocumentHead';
-import ServiceStatusList from '../components/ServiceStatusList';
 import { getLocationLabel, getVisibleLocationBySlug, hasPublicMenu } from '../data/locations';
 import { summarizeHours } from '../utils/hours';
 import { toTelHref } from '../utils/phone';
@@ -129,12 +128,8 @@ const LocationDetail = () => {
                 <div className="relative mx-auto max-w-7xl">
                     <p className="text-xs font-semibold uppercase tracking-[0.32em] text-brand-gold">{location.cuisineTagline}</p>
                     <h1 className="mt-5 max-w-4xl font-serif text-5xl font-bold leading-tight text-white md:text-6xl">{getLocationLabel(location)}</h1>
-                    {location.services ? (
-                        <ServiceStatusList services={location.services} className="mt-5" />
-                    ) : (
-                        location.status === 'coming-soon' && location.openingText && (
-                            <p className="mt-4 text-lg font-semibold text-brand-gold">{location.openingText}</p>
-                        )
+                    {location.status === 'coming-soon' && location.openingText && (
+                        <p className="mt-4 text-lg font-semibold text-brand-gold">{location.openingText}</p>
                     )}
                     <p className="mt-5 max-w-2xl text-lg leading-8 text-white/68">{location.description}</p>
 

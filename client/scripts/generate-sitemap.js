@@ -5,6 +5,7 @@ import { writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 import { getVisibleLocations, anyVisibleLocationHasFlag, hasPublicMenu } from '../src/data/locations/index.js';
+import { hasPublicCateringMenu } from '../src/data/menus/index.js';
 
 const SITE_URL = 'https://5spicemarket.com';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -15,6 +16,7 @@ const staticRoutes = [
     '/locations',
     '/kitchen',
     '/catering',
+    ...(hasPublicCateringMenu() ? ['/catering/menu'] : []),
     '/pickup',
     '/about',
     '/contact',

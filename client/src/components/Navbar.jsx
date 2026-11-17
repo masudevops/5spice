@@ -144,16 +144,21 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="hidden border-b border-brand-gold-deep/15 bg-ink-900 text-xs text-brand-cream/70 md:block">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-2">
-          {visibleLocations.length > 1 ? (
-            <LocationSwitcher locations={visibleLocations} selectedSlug={selectedSlug} onSelect={selectLocation} />
-          ) : (
-            <span className="uppercase tracking-[0.28em] text-brand-gold">{CONTACT.city}</span>
-          )}
-          <span>{statusLine}</span>
+      {/* Location switcher + status line. Hidden on the homepage, which doesn't
+          use the selected location. z-50 so the switcher's dropdown opens
+          above the sticky header (z-40). */}
+      {location.pathname !== '/' && (
+        <div className="relative z-50 hidden border-b border-brand-gold-deep/15 bg-ink-900 text-xs text-brand-cream/70 md:block">
+          <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-2">
+            {visibleLocations.length > 1 ? (
+              <LocationSwitcher locations={visibleLocations} selectedSlug={selectedSlug} onSelect={selectLocation} />
+            ) : (
+              <span className="uppercase tracking-[0.28em] text-brand-gold">{CONTACT.city}</span>
+            )}
+            <span>{statusLine}</span>
+          </div>
         </div>
-      </div>
+      )}
 
       <header
         ref={headerRef}
@@ -225,7 +230,7 @@ const Navbar = () => {
       </header>
 
       {mobileMenuOpen && (
-        <div id="mobile-menu" ref={menuRef} className="fixed inset-0 z-30 overflow-y-auto bg-ink-900/98 px-6 pb-24 pt-28 lg:hidden">
+        <div id="mobile-menu" ref={menuRef} className="fixed inset-0 z-30 overflow-y-auto bg-ink-900 px-6 pb-24 pt-28 lg:hidden">
           <nav className="mx-auto flex max-w-sm flex-col gap-3 text-center" aria-label="Mobile navigation">
             {visibleLocations.length > 1 && (
               <div className="mb-2 flex justify-center">

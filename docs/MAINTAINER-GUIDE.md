@@ -198,7 +198,8 @@ total for all 5Spice kitchens, shown in the homepage "Every Gathering Matters"
 section and in the "Proudly Serving Our Community" section of the Catering page.
 
 - Set `guestsServed` and/or `eventsCompleted` to the verified running total.
-  The site rounds down to a milestone, so entering `1240` shows **1,000+**.
+  The site rounds down to a milestone: from 1,000 up it rounds to the nearest
+  hundred (`1640` shows **1,600+**); below that to 750, 500, 250, 100 or 50.
 - A metric stays hidden while it is `null` or below its minimum (100 guests,
   10 events). If both are hidden, the whole section is hidden.
 - Set `asOf` to the date you checked (`'YYYY-MM-DD'`). It's for your records

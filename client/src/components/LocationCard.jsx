@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight, MapPin, Navigation, Phone } from 'lucide-react';
-import ServiceStatusList from './ServiceStatusList';
 import { getLocationLabel, hasPublicMenu } from '../data/locations';
 import { toTelHref } from '../utils/phone';
 
@@ -27,12 +26,9 @@ const LocationCard = ({ location }) => {
             <h2 className="mt-5 font-serif text-3xl font-semibold leading-tight text-white">{getLocationLabel(location)}</h2>
             <p className="mt-2 text-sm font-semibold uppercase tracking-[0.14em] text-brand-gold/80">{location.cuisineTagline}</p>
 
-            {location.services ? (
-                <ServiceStatusList services={location.services} className="mt-4" />
-            ) : (
-                location.status === 'coming-soon' && location.openingText && (
-                    <p className="mt-3 text-sm font-semibold text-brand-gold">{location.openingText}</p>
-                )
+            {/* Skipped when it would just repeat the badge (e.g. "Opening Soon"). */}
+            {location.status === 'coming-soon' && location.openingText && location.openingText !== location.statusLabel && (
+                <p className="mt-3 text-sm font-semibold text-brand-gold">{location.openingText}</p>
             )}
 
             <p className="mt-4 flex items-start gap-2 text-sm leading-6 text-white/62">

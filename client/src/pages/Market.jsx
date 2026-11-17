@@ -69,7 +69,7 @@ const Market = () => {
                     <div className="mt-8 border border-brand-gold-deep/25 bg-ink-850 p-7 md:p-10">
                         <h2 className="font-serif text-3xl font-semibold text-brand-gold">Follow our journey to opening day.</h2>
                         <p className="mt-4 max-w-3xl leading-7 text-white/62">
-                            Get opening news and first looks at the market on Instagram. Planning an event before then? Our Murphy kitchen is taking catering orders now.
+                            Get opening news and first looks at the market on Instagram. Planning an event before then? Our catering team is here to help.
                         </p>
                         <div className="mt-7 flex flex-wrap gap-3">
                             <a href={SOCIAL_LINKS.instagramUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 bg-brand-green px-6 py-4 font-bold uppercase tracking-[0.16em] text-ink-900 transition-colors hover:bg-brand-green-light">

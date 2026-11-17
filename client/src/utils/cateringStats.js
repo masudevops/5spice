@@ -7,7 +7,7 @@ const METRICS = [
     { key: 'eventsCompleted', label: 'Catering Events Completed', minimum: 10 },
 ];
 
-// Catering milestones ready to display, e.g. [{ key, label, value: '1,000+' }].
+// Catering milestones ready to display, e.g. [{ key, label, value: '1,600+' }].
 // Empty when no metric has a verified total, so callers can hide themselves.
 export const getCateringMetrics = () => METRICS
     .map((metric) => ({ ...metric, value: toMilestone(CATERING_STATS[metric.key], metric.minimum) }))

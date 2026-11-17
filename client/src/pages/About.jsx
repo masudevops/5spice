@@ -32,7 +32,7 @@ const About = () => {
                             Rooted in Bangladeshi traditions, 5Spice brings authentic flavors, premium halal groceries, and a sense of community to North Texas.
                         </p>
                         <p className="mx-auto mt-4 max-w-2xl text-lg leading-8 text-white/68">
-                            Our Murphy kitchen is now accepting catering orders, while our Plano market and restaurant are preparing to welcome you in early 2027, In Sha Allah.
+                            Our Murphy kitchen is opening soon, and our Plano market and restaurant are preparing to welcome you in early 2027, In Sha Allah.
                         </p>
                     </div>
                 </section>

@@ -29,6 +29,11 @@ export default {
                     600: token('ink-600'),
                 },
             },
+            // Extra opacity steps used across the site (e.g. text-white/62,
+            // bg-ink-900/92). Tailwind only ships steps of 5, and a modifier
+            // outside the scale silently generates no CSS, so add any new
+            // value here before using it.
+            opacity: { 8: '0.08', 12: '0.12', 38: '0.38', 58: '0.58', 62: '0.62', 68: '0.68', 72: '0.72', 74: '0.74', 78: '0.78', 82: '0.82', 86: '0.86', 92: '0.92' },
             fontFamily: {
                 // Noto Sans Bengali is the fallback so Bengali words inside
                 // English text (e.g. পাঁচফোড়ন) render in a proper Bengali face.

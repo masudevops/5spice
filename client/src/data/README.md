@@ -35,6 +35,15 @@ file, save, and the site picks it up on the next build/dev reload.
   automatically for any item without a price.
 - `halal` is stated once per menu (the `halalStatement` field), not per item.
 
+## Edit the catering menu
+
+The catering menu (`/catering/menu`) is separate from the restaurant menus, so
+catering and day-to-day dishes can differ. Edit `menus/catering.js`: it works
+the same way as a location menu (categories of dish ids from
+`menus/shared-items.js`, plus optional catering-only `items`). It's linked
+from the Catering page only, and never from the restaurant menus (and vice
+versa). Set `published: false` in that file to hide it.
+
 ## Publish or hide a menu
 
 Menus are hidden until they're final. To publish a location's menu, open its
@@ -50,9 +59,9 @@ A location can list each service separately in its `services` block, e.g.
 services: { catering: 'open', dineIn: 'coming-soon', takeOut: 'coming-soon' },
 ```
 
-Use `'open'` or `'coming-soon'`. Each service shows as a badge on the
-location card and location page. Any location with `catering: 'open'` is
-listed as "Now booking" on the Catering page. Catering requests go to
+Use `'open'` or `'coming-soon'`. These aren't shown as badges; the location
+card and page show `statusLabel` / `openingText` instead. Any location with
+`catering: 'open'` is listed on the Catering page. Catering requests go to
 `catering@5spicemarket.com` (set in `src/config/site.js` as `CATERING_EMAIL`).
 
 ## Update weekly deals
@@ -80,7 +89,7 @@ When deals are live, add entries like:
   appear once `dineIn` or `takeOut` is `'open'`; until then the main button
   offers catering.
 - `socialLinks`: optional location-specific pages, e.g. `facebook`.
-- `statusLabel`: short badge text (e.g. "Catering Available Now", "Coming Early 2027").
+- `statusLabel`: short badge text (e.g. "Opening Soon", "Coming Early 2027").
 - `openingText`: longer line, e.g. "Opening Early 2027, In Sha Allah".
 - `hours`: leave `[]` until hours are confirmed; the site shows `hoursNote`
   instead. Never put estimated hours here — they're published to Google.
