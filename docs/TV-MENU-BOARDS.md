@@ -31,8 +31,16 @@ TV size and on Fire TV browsers that report 960×540.
 
 - Each column has one featured dish (with media) and up to 4 more dishes. If
   you list more than fit, the extras are left out whole, never cut in half.
-- Prices stay hidden until a dish has one, so boards can go up before prices
-  are final.
+- Featured dishes always show their description. Listed dishes show one only
+  if they're in `murphyDescribedDishes` (same file): dishes whose name alone
+  may not tell guests what they are. The rest stay name-only so the text can
+  be big enough to read from across the room.
+- Prices sit right after each dish name, and stay hidden until a dish has
+  one, so boards can go up before prices are final.
+- **Previewing with sample prices:** add `?samplePrices=1` to a TV address
+  (e.g. `/tv/murphy/1?samplePrices=1`) to fill in made-up prices from
+  `client/src/data/tv/sample-prices.js`. They never show on the normal TV
+  addresses or the website. Delete that file once real prices are in.
 - Merging to `main` deploys. TVs notice the new version within about 5
   minutes and reload by themselves (they also reload daily at 4 AM).
 
@@ -73,10 +81,19 @@ ffmpeg -i raw.mov -t 5 -an -vf "scale=1280:-2,fps=30" -c:v libx264 -profile:v hi
 ffmpeg -ss 1 -i kacchi.mp4 -frames:v 1 -q:v 3 kacchi.jpg
 ```
 
+## Readability
+
+Sized for a 55" TV read from about 8–12 ft away: dish names and prices are
+34–36 px (about 0.6 in tall on screen), descriptions 23 px. Text is white,
+gold, or cream at 86%, all at least 8:1 contrast on the dark background.
+Keep the background dark: it cuts glare and makes food media stand out.
+
 ## Fire TV setup
 
 1. **TV settings:** turn off sleep timers, auto power-off, and eco/power-saving
-   mode; picture size 16:9 / Normal.
+   mode; picture size 16:9 / Normal. **Turn overscan off** (often "Size:
+   Normal", "Just Scan", or "Full Pixel"): many TVs crop the screen edges
+   otherwise. Picture mode Standard or Calibrated, not Vivid.
 2. **Fire TV settings:** screensaver off (or "Never"), and sleep "Never" if
    offered.
 3. **Browser:** a kiosk browser such as Fully Kiosk Browser, set to:
@@ -93,7 +110,8 @@ ffmpeg -ss 1 -i kacchi.mp4 -frames:v 1 -q:v 3 kacchi.jpg
 
 - [ ] The right board shows for that TV, filling the screen with no bars,
       address bar, or mouse pointer.
-- [ ] Text is readable from the farthest customer spot.
+- [ ] From where guests order, you can read a dish description, not just
+      the names.
 - [ ] Videos play smoothly, loop, and stay silent; photos show where set.
 - [ ] Unplug the TV and Fire TV stick, plug back in: the board returns on its
       own within a couple of minutes.

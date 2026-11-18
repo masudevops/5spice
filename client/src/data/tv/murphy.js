@@ -6,11 +6,20 @@
 //   title      heading shown above the column
 //   featured   dish id shown large, with its photo or video (see media.js)
 //   mediaId    optional: use this media entry instead of the dish's own
-//   itemIds    dishes listed below it (4 fit with descriptions)
+//   itemIds    dishes listed below it (4 fit)
 //
 // Dish ids, names, descriptions, and prices come from menus/shared-items.js.
 // Prices stay hidden until a dish has one.
 // The dish groupings below are a starting point for the owners to adjust.
+// Featured dishes always show their description. Listed dishes show one only
+// if they're here: dishes whose name alone may not tell guests what they are.
+// Keeping the rest name-only leaves room for large, readable text.
+export const murphyDescribedDishes = [
+    'beef-tehari', 'morog-polao', 'mutton-haji-biryani', 'bhuna-khichuri', 'plain-polao',
+    'beef-kala-bhuna', 'dal', 'fuchka', 'piaju', 'puri',
+    'dim-bhaji', 'aloo-bhaji', 'dal-gosht', 'jarda', 'borhani', 'special-chai',
+];
+
 export const murphyTvScreens = {
     1: {
         title: 'Biriyani, Curries & Snacks',

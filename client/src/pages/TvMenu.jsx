@@ -1,7 +1,7 @@
 import { useLayoutEffect, useRef } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
 import TvMedia from '../components/tv/TvMedia';
-import { CATERING_EMAIL, LOGOS, SOCIAL_LINKS } from '../config/site';
+import { LOGOS, SOCIAL_LINKS } from '../config/site';
 import { getTvScreen } from '../data/tv';
 import { useDocumentHead } from '../hooks/useDocumentHead';
 import { TV_HEIGHT, TV_WIDTH, useTvAutoUpdate, useTvScale, useWakeLock } from '../hooks/useTvDisplay';
@@ -10,6 +10,10 @@ import { TV_HEIGHT, TV_WIDTH, useTvAutoUpdate, useTvScale, useWakeLock } from '.
 const VIDEO_STAGGER_MS = 1500;
 
 const formatPrice = (price) => (price != null ? `$${price.toFixed(2)}` : null);
+
+// Price set right after the dish name (no dotted leader line, which draws the
+// eye to comparing prices). Kept on one line with the name's last word.
+const Price = ({ price, className }) => (price ? <span className={`ml-4 whitespace-nowrap font-sans font-bold text-brand-gold ${className}`}>{price}</span> : null);
 
 // The dish list under a featured dish. Dishes that don't fit are left out
 // whole (never cut in half), so adding one too many to a column is harmless.
@@ -26,8 +30,12 @@ const ItemList = ({ items }) => {
             }
         };
         fit();
-        // Text sizes change once the web fonts arrive.
+        // Refit when the space changes (e.g. the featured cards above are
+        // evened out) and once the web fonts arrive.
+        const observer = new ResizeObserver(fit);
+        observer.observe(listRef.current);
         document.fonts?.ready.then(fit);
+        return () => observer.disconnect();
     }, [items]);
 
     return (
@@ -35,17 +43,12 @@ const ItemList = ({ items }) => {
             {items.map((item) => {
                 const price = formatPrice(item.price);
                 return (
-                    <li key={item.id} className="border-b border-white/[0.07] py-[11px]">
-                        <div className="flex items-baseline gap-3">
-                            <span className="text-[28px] font-semibold leading-tight text-white">{item.name}</span>
-                            {price && (
-                                <>
-                                    <span className="min-w-6 flex-1 -translate-y-1.5 border-b-2 border-dotted border-brand-gold-deep/45" aria-hidden="true" />
-                                    <span className="whitespace-nowrap text-[30px] font-bold text-brand-gold">{price}</span>
-                                </>
-                            )}
-                        </div>
-                        {item.description && <p className="mt-0.5 text-[19px] leading-snug text-brand-cream/62">{item.description}</p>}
+                    <li key={item.id} className="border-b border-white/[0.07] py-[9px]">
+                        <p className="text-[34px] font-semibold leading-tight text-white">
+                            {item.name}
+                            <Price price={price} className="text-[34px]" />
+                        </p>
+                        {item.showDescription && item.description && <p className="mt-0.5 text-[23px] leading-snug text-brand-cream/86">{item.description}</p>}
                     </li>
                 );
             })}
@@ -65,13 +68,12 @@ const FeaturedDish = ({ item, media, logo, startDelay }) => {
                     </span>
                 )}
             </div>
-            {/* Tall enough for a two-line name, so the three cards line up. */}
-            <div className="min-h-[144px] px-6 pb-4 pt-4">
-                <div className="flex items-start justify-between gap-5">
-                    <p className="font-serif text-[34px] font-bold leading-[1.15] text-white">{item.name}</p>
-                    {price && <p className="whitespace-nowrap text-[36px] font-bold leading-[1.15] text-brand-gold">{price}</p>}
-                </div>
-                {item.description && <p className="mt-1.5 text-[21px] leading-snug text-brand-cream/72">{item.description}</p>}
+            <div data-feature-info className="px-6 pb-4 pt-4">
+                <p className="font-serif text-[36px] font-bold leading-[1.12] text-white">
+                    {item.name}
+                    <Price price={price} className="text-[36px]" />
+                </p>
+                {item.description && <p className="mt-1.5 text-[23px] leading-snug text-brand-cream/86">{item.description}</p>}
             </div>
         </div>
     );
@@ -82,12 +84,29 @@ const FeaturedDish = ({ item, media, logo, startDelay }) => {
 // screens are set up in src/data/tv/.
 const TvMenu = () => {
     const { slug, screen: screenNumber } = useParams();
-    const screen = getTvScreen(slug, screenNumber);
+    // ?samplePrices=1 fills missing prices with sample ones (layout previews).
+    const [searchParams] = useSearchParams();
+    const screen = getTvScreen(slug, screenNumber, { samplePrices: searchParams.get('samplePrices') === '1' });
     const scale = useTvScale();
     useTvAutoUpdate();
     useWakeLock();
 
     useDocumentHead({ title: screen ? `${screen.title} | 5Spice TV Menu` : '5Spice TV Menu', noindex: true });
+
+    // Give the three featured cards the same height (the tallest one's), so
+    // the columns line up whatever the dish name and description lengths.
+    const mainRef = useRef(null);
+    const samplePrices = searchParams.get('samplePrices') === '1';
+    useLayoutEffect(() => {
+        const equalize = () => {
+            const infos = [...(mainRef.current?.querySelectorAll('[data-feature-info]') ?? [])];
+            for (const info of infos) info.style.minHeight = '';
+            const tallest = Math.max(0, ...infos.map((info) => info.offsetHeight));
+            for (const info of infos) info.style.minHeight = `${tallest}px`;
+        };
+        equalize();
+        document.fonts?.ready.then(equalize);
+    }, [slug, screenNumber, samplePrices]);
 
     // The location's own logo (e.g. 5Spice Kitchen for Murphy), else the brand logo.
     const logo = screen?.location.logo ?? { src: LOGOS.wide, width: LOGOS.wideWidth, height: LOGOS.wideHeight, alt: '5Spice Market & Kitchen' };
@@ -98,18 +117,11 @@ const TvMenu = () => {
                 className="flex shrink-0 flex-col bg-ink-900 font-sans text-brand-cream bg-[radial-gradient(circle_at_50%_0%,rgb(var(--color-gold-deep)/0.12),transparent_40%),linear-gradient(135deg,rgb(var(--color-ink-900))_0%,rgb(var(--color-ink-750))_56%,rgb(var(--color-ink-900))_100%)]"
                 style={{ width: TV_WIDTH, height: TV_HEIGHT, transform: `scale(${scale})` }}
             >
-                <header className="grid h-[108px] shrink-0 grid-cols-[1fr_auto_1fr] items-center border-b border-brand-gold-deep/30 px-14">
-                    <img src={logo.src} alt={logo.alt} width={logo.width} height={logo.height} className="h-[84px] w-auto" />
-                    {screen && (
-                        <div className="text-center">
-                            <p className="text-[18px] font-semibold uppercase tracking-[0.3em] text-brand-gold">
-                                {screen.location.displayName} · {screen.location.shortName}
-                            </p>
-                            <h1 className="mt-1 font-serif text-[46px] font-bold leading-tight text-white">{screen.title}</h1>
-                        </div>
-                    )}
+                <header className="grid h-[96px] shrink-0 grid-cols-[1fr_auto_1fr] items-center border-b border-brand-gold-deep/30 px-14">
+                    <img src={logo.src} alt={logo.alt} width={logo.width} height={logo.height} className="h-[76px] w-auto" />
+                    {screen && <h1 className="text-center font-serif text-[50px] font-bold leading-tight text-white">{screen.title}</h1>}
                     {screen?.location.halal && (
-                        <p className="flex items-center justify-self-end gap-3 text-[21px] font-semibold text-brand-cream/86">
+                        <p className="flex items-center justify-self-end gap-3 text-[24px] font-semibold text-brand-cream/92">
                             <span className="h-3 w-3 rounded-full bg-brand-green" aria-hidden="true" />
                             100% Zabiha Halal
                         </p>
@@ -117,7 +129,7 @@ const TvMenu = () => {
                 </header>
 
                 {screen && (
-                    <main className="grid min-h-0 flex-1 grid-cols-3 gap-10 px-14 pb-4 pt-6">
+                    <main ref={mainRef} className="grid min-h-0 flex-1 grid-cols-3 gap-10 px-14 pb-4 pt-6">
                         {screen.columns.map((column, index) => (
                             <section key={column.title} className="flex min-h-0 flex-col">
                                 <h2 className="flex items-center gap-4 font-serif text-[36px] font-semibold leading-tight text-brand-gold after:h-px after:flex-1 after:bg-brand-gold-deep/40">
@@ -130,9 +142,10 @@ const TvMenu = () => {
                     </main>
                 )}
 
-                <footer className="mt-auto flex h-16 shrink-0 items-center justify-between border-t border-brand-gold-deep/30 px-14 text-[21px] text-brand-cream/72">
-                    <p>Order at the counter · Catering: <span className="font-semibold text-brand-gold">{CATERING_EMAIL}</span></p>
-                    <p><span className="font-semibold text-brand-gold">{SOCIAL_LINKS.instagramHandle}</span> · 5spicemarket.com</p>
+                {/* Short enough to read from across the room. */}
+                <footer className="mt-auto flex h-[60px] shrink-0 items-center justify-between border-t border-brand-gold-deep/30 px-14 text-[24px] text-brand-cream/86">
+                    <p>Order at the counter · <span className="font-semibold text-brand-gold">Catering available</span>, ask our team</p>
+                    <p className="font-semibold text-brand-gold">{SOCIAL_LINKS.instagramHandle}</p>
                 </footer>
             </div>
         </div>
