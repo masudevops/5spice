@@ -10,7 +10,7 @@ export const plano = {
     status: 'coming-soon',
     // Short badge text, and the longer line used across the site.
     statusLabel: 'Coming Early 2027',
-    openingText: 'Opening Early 2027, In Sha Allah',
+    openingText: 'Opening Early 2027',
     cuisineTagline: 'Authentic Halal Bangladeshi Cuisine & South Asian Favorites',
     cuisines: ['Bangladeshi', 'Indian', 'Pakistani'],
     halal: true,

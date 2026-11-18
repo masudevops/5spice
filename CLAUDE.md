@@ -40,7 +40,7 @@ The site is in a **pre-launch, minimal phase**. Its job right now is to:
 - **Halal:** everything served and sold is halal. State it at the brand or location level, not as a per-item tag.
 - **Name origin:** "5Spice" comes from পাঁচফোড়ন (panch phoron), the Bengali five-spice blend. Use this for About/story content.
 - **Logo:** a shopping cart holding an orange "5", with "SPICE" in green (red dot over the i) and "MARKET & KITCHEN" in white, on charcoal. The colors echo the Bangladeshi, Pakistani, and Indian flags. Files: `client/public/brand-logo-wide.png` and `brand-logo-square.png`. Use the provided logo assets only. Never redraw, recolor, or approximate the logo.
-- **Tone:** warm, proud of heritage, welcoming, modern. Islamic phrases used in brand sign-offs (e.g. "Opening Early 2027, In Sha Allah") are intentional. Keep them exactly as written and do not "correct" them.
+- **Tone:** warm, proud of heritage, welcoming, modern. Don't put "In Sha Allah" (or similar phrases) in site copy: the owners decided on 2026-11-17 that it doesn't need to be on the website (e.g. write "Opening Early 2027").
 
 ---
 

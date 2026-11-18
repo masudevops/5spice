@@ -121,7 +121,7 @@ These block accurate content. Nothing on the site is invented in the meantime.
   category (Chicken / Beef / Mutton). No Bangladeshi/Indian/Pakistani labels.
 - [x] Cloudflare Web Analytics replaces Vercel Web Analytics (2026-10-25).
 - [x] Murphy published: catering available now; dine-in and take-out coming soon.
-- [x] Plano shown as "Opening Early 2027, In Sha Allah".
+- [x] Plano shown as "Opening Early 2027" ("In Sha Allah" removed from site copy 2026-11-17).
 - [x] Menus hidden until final.
 - [x] Catering page refresh with a prefilled quote email.
 - [x] About page story section (পাঁচফোড়ন — The Aroma of Home).

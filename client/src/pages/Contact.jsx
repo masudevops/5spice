@@ -19,7 +19,7 @@ const Contact = () => {
 
     useDocumentHead({
         title: 'Contact 5Spice | Murphy & Plano, TX',
-        description: 'Contact 5Spice Kitchen in Murphy, TX, ask about catering, or get updates on 5Spice Market & Kitchen, opening in Plano in early 2027, In Sha Allah.',
+        description: 'Contact 5Spice Kitchen in Murphy, TX, ask about catering, or get updates on 5Spice Market & Kitchen, opening in Plano in early 2027.',
     });
 
     return (

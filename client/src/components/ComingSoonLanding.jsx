@@ -122,7 +122,6 @@ const ComingSoonLanding = () => {
                                 <div className="text-left">
                                     <p className="text-[0.68rem] uppercase tracking-[0.28em] text-brand-gold-deep">Plano · Opening</p>
                                     <p className="font-serif text-2xl font-semibold leading-none text-white">Early 2027</p>
-                                    <p className="mt-1 text-xs italic tracking-[0.16em] text-brand-gold">In Sha Allah</p>
                                 </div>
                             </div>
                         </div>
