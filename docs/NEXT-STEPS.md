@@ -176,6 +176,8 @@ How it works, media rules, Fire TV setup, and the test checklist:
   auto-reload after deploys and daily.
 - [x] "Biriyani" spelling site-wide; "Nawabi Beef Tehari" and "Royal Bengal
   Chai" renamed (2026-11-17).
+- [x] "Chinese Vegetables with Shrimp" removed from every menu and TV 3;
+  Basmati Rice added to TV 3's Rice & Sides (2026-11-17).
 - [x] Catering menu separate from the restaurant menu (`/catering/menu`);
   location cards only on location pages; Contact page is contact channels
   only; homepage centered and tightened; mobile menu readable (2026-11-17).
