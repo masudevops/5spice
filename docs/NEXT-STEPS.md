@@ -1,7 +1,7 @@
 # 5Spice website: next steps
 
 Tracking list for upcoming website work. Tick items off as they ship, and add
-new ones at the bottom of the right section. Most recent update: 2026-10-25.
+new ones at the bottom of the right section. Most recent update: 2026-11-17.
 
 **Who:** *Owners* = business decision or information needed. *Marketing* =
 Branding & Marketing team. *Dev* = code change (can be done with Claude Code).
@@ -80,6 +80,45 @@ These block accurate content. Nothing on the site is invented in the meantime.
   titles and descriptions look right when links are shared on Facebook and
   WhatsApp.
 
+## 3a. In-store TV menu boards (Murphy)
+
+Live since 2026-11-17 at `/tv/murphy/1`, `/2`, `/3` (unlisted, `noindex`).
+How it works, media rules, Fire TV setup, and the test checklist:
+`docs/TV-MENU-BOARDS.md`. Screens: `client/src/data/tv/murphy.js`; media:
+`client/src/data/tv/media.js`; dishes and prices come from the website menu.
+
+- [ ] **Test on the real TVs** (Dev/Owners). Fire TV stick + kiosk browser
+  (launch on boot, kiosk mode, keep screen on), TV overscan off, picture mode
+  Standard. Run the checklist in `docs/TV-MENU-BOARDS.md` (power cut, Wi-Fi
+  drop, overnight run, update within 5 minutes).
+- [ ] **Viewing distance** (Owners). Measure from where guests order to the
+  TVs. Text is sized for about 8–12 ft; farther means larger text and fewer
+  dishes per screen.
+- [ ] **Real dish media** (Owners). GIF or, better, MP4 (3–5 s, 720p, about
+  1–2 MB; MP4 is 3–5× smaller than GIF). Files go in
+  `client/public/tv-media/`, one line each in `media.js`. New file name for
+  every replacement. Delete the `placeholder-*.gif` files once unused. If the
+  library grows a lot, move media to Azure Blob Storage (full URLs in
+  `media.js`, no other changes).
+- [ ] **Prices** (Owners). Real prices go in
+  `client/src/data/menus/shared-items.js` (shows on the website and TVs).
+  Until then the live TVs hide prices; previews (local, PR links) show sample
+  prices from `client/src/data/tv/sample-prices.js`. Delete that file once
+  real prices are in.
+- [ ] **Confirm what each TV shows** (Owners). TVs 2–3 groupings, featured
+  dishes, and which listed dishes keep a description (`murphyDescribedDishes`)
+  were a starting point.
+- [ ] **5Spice Special badge** (Owners). "5Spice Special" was taken out of the
+  Tehari and Chai names (2026-11-17). If they should still be highlighted, add
+  `special: true` to both dishes (badge + menu filter).
+- [ ] **Biriyani and search** (Owners/Marketing, optional). Site copy uses
+  "Biriyani" (owners, 2026-11-17). Optionally keep "biryani" in hidden page
+  descriptions for Google.
+- [ ] **Later:** QR code to the Catering page in the TV footer; Toast POS sync
+  for names and prices through `getMenuItem()` in
+  `client/src/data/menus/index.js` (server-side job, keys never in the
+  browser), media stays team-managed.
+
 ## 4. Housekeeping
 
 - [ ] **Old feature specs** (Dev). `docs/specs/02` (runtime JSON content) and
@@ -131,6 +170,15 @@ These block accurate content. Nothing on the site is invented in the meantime.
 - [x] Larger header logo.
 - [x] Site modes simplified to `coming_soon` and `live`.
 - [x] Maintainer guide: `docs/MAINTAINER-GUIDE.md`.
+- [x] In-store TV menu boards for Murphy, TVs 1–3 (2026-11-17): 5Spice
+  Kitchen logo, three columns with a featured dish (video, GIF, or photo with
+  fallbacks), large text for reading at a distance, prices hidden until set,
+  auto-reload after deploys and daily.
+- [x] "Biriyani" spelling site-wide; "Nawabi Beef Tehari" and "Royal Bengal
+  Chai" renamed (2026-11-17).
+- [x] Catering menu separate from the restaurant menu (`/catering/menu`);
+  location cards only on location pages; Contact page is contact channels
+  only; homepage centered and tightened; mobile menu readable (2026-11-17).
 - [x] Housekeeping:
   - rewrote `README.md`, `DEPLOYMENT.md`, and `TESTING.md`
   - removed unused files: `App.css`, `react.svg`, `useTheme.js`, the Vite
