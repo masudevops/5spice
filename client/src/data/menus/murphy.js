@@ -19,7 +19,7 @@ export const murphyMenu = {
         { name: 'Chicken Curries & Specialties', itemIds: ['chicken-curry', 'chicken-bhuna', 'chicken-roast', 'karahi-chicken', 'chicken-korma'] },
         { name: 'Beef Curries & Specialties', itemIds: ['beef-curry', 'beef-bhuna', 'beef-kala-bhuna'] },
         { name: 'Mutton Curries & Specialties', itemIds: ['mutton-curry', 'mutton-bhuna'] },
-        { name: 'Vegetables & Sides', itemIds: ['mixed-vegetables', 'chinese-vegetables-with-shrimp', 'dal'] },
+        { name: 'Vegetables & Sides', itemIds: ['mixed-vegetables', 'dal'] },
         { name: 'Kebabs', itemIds: ['beef-tikka-kebab'] },
         { name: 'Snacks', itemIds: ['fuchka', 'piaju', 'puri', 'samusa'] },
         { name: 'Desserts', itemIds: ['firni', 'jarda'] },
