@@ -43,4 +43,9 @@ export const hasPublicCateringMenu = () => Boolean(cateringMenu.published);
 
 // The catering menu (separate from the restaurant menus), or null when it's
 // not published.
+// One dish (name, description, price, tags) by id, or null. The TV menu
+// boards read dishes only through this, so it's the one place to switch them
+// to Toast POS data later.
+export const getMenuItem = (id) => SHARED_ITEMS[id] ?? null;
+
 export const getCateringMenu = () => (hasPublicCateringMenu() ? resolveMenu(cateringMenu) : null);
