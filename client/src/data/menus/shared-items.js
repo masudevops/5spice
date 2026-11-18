@@ -269,16 +269,6 @@ export const SHARED_ITEMS = {
         available: true,
         image: null,
     },
-    'chinese-vegetables-with-shrimp': {
-        id: 'chinese-vegetables-with-shrimp',
-        name: 'Chinese Vegetables with Shrimp',
-        description: 'Stir-fried vegetables with shrimp.',
-        price: null,
-        dietary: [],
-        aliases: ['prawn', 'chingri'],
-        available: true,
-        image: null,
-    },
     'dal': {
         id: 'dal',
         name: 'Dal',

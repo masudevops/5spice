@@ -14,7 +14,7 @@ export const SAMPLE_PRICES = {
     'beef-bhuna': 15.99, 'mutton-bhuna': 18.99, 'chicken-curry': 13.99, 'chicken-bhuna': 14.99,
     'beef-curry': 14.99, 'mutton-curry': 17.99,
     // Kebabs, sides & snacks
-    'beef-tikka-kebab': 13.99, dal: 6.99, 'mixed-vegetables': 7.99, 'chinese-vegetables-with-shrimp': 12.99,
+    'beef-tikka-kebab': 13.99, dal: 6.99, 'mixed-vegetables': 7.99,
     fuchka: 7.99, piaju: 5.99, samusa: 4.99, puri: 4.99,
     // Breakfast
     'paratha-roti': 2.99, 'dim-bhaji': 4.99, 'aloo-bhaji': 4.99, 'dal-gosht': 9.99, halwa: 3.99,
