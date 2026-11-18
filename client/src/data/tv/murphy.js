@@ -72,7 +72,7 @@ export const murphyTvScreens = {
             {
                 title: 'Rice & Sides',
                 featured: 'bhuna-khichuri',
-                itemIds: ['plain-polao', 'dal', 'mixed-vegetables'],
+                itemIds: ['plain-polao', 'basmati-rice', 'dal', 'mixed-vegetables'],
             },
             {
                 title: 'Desserts & Drinks',
