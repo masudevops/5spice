@@ -1,9 +1,9 @@
 // Forgiving dish search. Each word typed must match the start of a word in
-// the dish name, description, or aliases ("bir" finds "Biryani", "lassi"
+// the dish name, description, or aliases ("bir" finds "Biriyani", "lassi"
 // doesn't find "classic").
 //
 // When a word matches nothing as typed, it may instead be off by a letter or
-// two from a word in a dish name or alias, so "biriyani" finds "Biryani",
+// two from a word in a dish name or alias, so "biryani" finds "Biriyani",
 // "kacchi" finds "Kachchi", and "phirni" finds "Firni" (but "biriyani"
 // doesn't find "Borhani"). Add other common spellings, like "tehri", to a
 // dish's aliases.

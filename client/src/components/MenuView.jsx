@@ -190,7 +190,7 @@ const MenuView = ({ menu, eyebrow, title, action = null }) => {
                                 type="search"
                                 value={query}
                                 onChange={(event) => setQuery(event.target.value)}
-                                placeholder="Search dishes, e.g. biryani"
+                                placeholder="Search dishes, e.g. biriyani"
                                 autoComplete="off"
                                 enterKeyHint="search"
                                 className="min-h-11 w-full border border-brand-gold-deep/30 bg-ink-800 py-2 pl-10 pr-10 text-base text-white placeholder:text-brand-cream/40 focus:border-brand-gold [&::-webkit-search-cancel-button]:hidden"

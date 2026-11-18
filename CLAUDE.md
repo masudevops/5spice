@@ -121,7 +121,8 @@ The site is in a **pre-launch, minimal phase**. Its job right now is to:
 - Menus: `/data/menus/<location-slug>.json`, with shared items in a shared file
 - Weekly deals: keep in a simple, non-developer-editable data file
 - `/data/README.md` explains in plain language how to add a location, edit a menu, update deals, and switch a location from hidden to live.
-- Menus are organized by course (Biryani & Rice Dishes, Chicken / Beef / Mutton Curries & Specialties, Vegetables & Sides, Kebabs, Desserts, Breakfast…), not by cuisine. A category can be split into headed groups (`groups`, e.g. Chicken, Beef, Mutton). Don't label individual dishes as Bangladeshi, Indian, or Pakistani (owners' decision, 2026-10-25).
+- Menus are organized by course (Biriyani & Rice Dishes, Chicken / Beef / Mutton Curries & Specialties, Vegetables & Sides, Kebabs, Desserts, Breakfast…), not by cuisine. A category can be split into headed groups (`groups`, e.g. Chicken, Beef, Mutton). Don't label individual dishes as Bangladeshi, Indian, or Pakistani (owners' decision, 2026-10-25).
+- Spell it **"Biriyani"** in all site and TV menu copy (owners, 2026-11-17). Dish ids keep the old spelling (e.g. `chicken-biryani`): they're internal keys, never shown.
 - Dish tags drive the menu page filters: `special: true` ("5Spice Special") and `dietary` (`vegetarian`, `spicy`). A filter only appears once some dish has its tag. Only add tags the owners confirm. `aliases` lists other spellings for search (e.g. `paratha` for Porota).
 
 ---
