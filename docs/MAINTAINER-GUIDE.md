@@ -64,13 +64,13 @@ hidden.
   `'kacchi-biryani'`.
 - **`murphy.js` / `plano.js`** (in `client/src/data/menus/`) list
   **categories** in display order, and which dish ids go in each.
-- Categories are organized **by course**, not by cuisine: Biryani & Rice
+- Categories are organized **by course**, not by cuisine: Biriyani & Rice
   Dishes, Chicken / Beef / Mutton Curries & Specialties, Vegetables & Sides,
   Kebabs, Desserts, Breakfast, Drinks.
 - A category can be split into smaller headed groups. Use `groups` instead of
   `itemIds`:
   ```js
-  { name: 'Biryani & Rice Dishes', groups: [
+  { name: 'Biriyani & Rice Dishes', groups: [
       { name: 'Chicken', itemIds: ['chicken-biryani', 'chicken-tehari'] },
       { name: 'Beef', itemIds: ['beef-tehari', 'beef-kachchi'] },
   ] },

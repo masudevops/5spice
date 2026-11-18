@@ -130,9 +130,9 @@ export const MARKET_DEPARTMENTS = [
 
 export const MENU_HIGHLIGHTS = [
     {
-        category: 'Biryani & Rice',
+        category: 'Biriyani & Rice',
         title: 'Kacchi, Tehari & Polao',
-        text: 'Slow-cooked biryani, kacchi, tehari, and polao with chicken, beef, or mutton.',
+        text: 'Slow-cooked biriyani, kacchi, tehari, and polao with chicken, beef, or mutton.',
     },
     {
         category: 'Curries & Specialties',
@@ -155,7 +155,7 @@ export const OFFERINGS = [
     {
         title: 'Authentic Bangladeshi Kitchen',
         shortTitle: 'Restaurant',
-        text: 'Biryani, kacchi, curries, and the family favorites you grew up with. Catering is available for your events.',
+        text: 'Biriyani, kacchi, curries, and the family favorites you grew up with. Catering is available for your events.',
     },
     {
         title: 'Serving the DFW Community',

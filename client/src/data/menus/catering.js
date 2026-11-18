@@ -14,7 +14,7 @@ export const cateringMenu = {
     halalStatement: 'Every dish on this menu is 100% zabiha halal.',
     categories: [
         {
-            name: 'Biryani & Rice Dishes',
+            name: 'Biriyani & Rice Dishes',
             groups: [
                 { name: 'Chicken', itemIds: ['chicken-biryani', 'morog-polao', 'shahi-chicken-biryani'] },
                 { name: 'Beef', itemIds: ['beef-tehari', 'beef-biryani', 'shahi-beef-biryani', 'beef-kachchi', 'beef-haji-biryani'] },
