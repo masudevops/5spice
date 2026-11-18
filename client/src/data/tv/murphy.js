@@ -13,10 +13,10 @@
 // The dish groupings below are a starting point for the owners to adjust.
 export const murphyTvScreens = {
     1: {
-        title: 'Biryani, Curries & Snacks',
+        title: 'Biriyani, Curries & Snacks',
         columns: [
             {
-                title: 'Biryani & Rice',
+                title: 'Biriyani & Rice',
                 featured: 'beef-kachchi',
                 itemIds: ['chicken-biryani', 'beef-tehari', 'morog-polao', 'shahi-chicken-biryani'],
             },
@@ -33,10 +33,10 @@ export const murphyTvScreens = {
         ],
     },
     2: {
-        title: 'Biryani, Curries & Kebabs',
+        title: 'Biriyani, Curries & Kebabs',
         columns: [
             {
-                title: 'Beef & Mutton Biryani',
+                title: 'Beef & Mutton Biriyani',
                 featured: 'mutton-kachchi',
                 itemIds: ['beef-biryani', 'shahi-beef-biryani', 'mutton-biryani', 'mutton-haji-biryani'],
             },

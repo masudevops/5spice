@@ -5,8 +5,8 @@ own page on the website:
 
 | TV | Address | Shows |
 |---|---|---|
-| TV 1 | https://5spicemarket.com/tv/murphy/1 | Biryani, Curries & Snacks |
-| TV 2 | https://5spicemarket.com/tv/murphy/2 | Biryani, Curries & Kebabs |
+| TV 1 | https://5spicemarket.com/tv/murphy/1 | Biriyani, Curries & Snacks |
+| TV 2 | https://5spicemarket.com/tv/murphy/2 | Biriyani, Curries & Kebabs |
 | TV 3 | https://5spicemarket.com/tv/murphy/3 | Breakfast, Sides & Sweets |
 
 More TVs can be added later (`/tv/murphy/4`, …) by adding a screen to
