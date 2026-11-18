@@ -11,6 +11,12 @@ const VIDEO_STAGGER_MS = 1500;
 
 const formatPrice = (price) => (price != null ? `$${price.toFixed(2)}` : null);
 
+// Sample prices fill in missing ones on previews (this computer, PR preview
+// links) so the layout can be judged with prices. Never on the live site,
+// unless asked for with ?samplePrices=1.
+const showSamplePrices = (searchParams) =>
+    searchParams.get('samplePrices') === '1' || !/(^|\.)5spicemarket\.com$/.test(window.location.hostname);
+
 // Price set right after the dish name (no dotted leader line, which draws the
 // eye to comparing prices). Kept on one line with the name's last word.
 const Price = ({ price, className }) => (price ? <span className={`ml-4 whitespace-nowrap font-sans font-bold text-brand-gold ${className}`}>{price}</span> : null);
@@ -44,7 +50,7 @@ const ItemList = ({ items }) => {
                 const price = formatPrice(item.price);
                 return (
                     <li key={item.id} className="border-b border-white/[0.07] py-[9px]">
-                        <p className="text-[34px] font-semibold leading-tight text-white">
+                        <p className="font-serif text-[34px] font-bold leading-[1.15] text-white">
                             {item.name}
                             <Price price={price} className="text-[34px]" />
                         </p>
@@ -84,9 +90,9 @@ const FeaturedDish = ({ item, media, logo, startDelay }) => {
 // screens are set up in src/data/tv/.
 const TvMenu = () => {
     const { slug, screen: screenNumber } = useParams();
-    // ?samplePrices=1 fills missing prices with sample ones (layout previews).
     const [searchParams] = useSearchParams();
-    const screen = getTvScreen(slug, screenNumber, { samplePrices: searchParams.get('samplePrices') === '1' });
+    const samplePrices = showSamplePrices(searchParams);
+    const screen = getTvScreen(slug, screenNumber, { samplePrices });
     const scale = useTvScale();
     useTvAutoUpdate();
     useWakeLock();
@@ -96,7 +102,6 @@ const TvMenu = () => {
     // Give the three featured cards the same height (the tallest one's), so
     // the columns line up whatever the dish name and description lengths.
     const mainRef = useRef(null);
-    const samplePrices = searchParams.get('samplePrices') === '1';
     useLayoutEffect(() => {
         const equalize = () => {
             const infos = [...(mainRef.current?.querySelectorAll('[data-feature-info]') ?? [])];

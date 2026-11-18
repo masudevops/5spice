@@ -37,10 +37,10 @@ TV size and on Fire TV browsers that report 960×540.
   be big enough to read from across the room.
 - Prices sit right after each dish name, and stay hidden until a dish has
   one, so boards can go up before prices are final.
-- **Previewing with sample prices:** add `?samplePrices=1` to a TV address
-  (e.g. `/tv/murphy/1?samplePrices=1`) to fill in made-up prices from
-  `client/src/data/tv/sample-prices.js`. They never show on the normal TV
-  addresses or the website. Delete that file once real prices are in.
+- **Sample prices:** previews (your computer, PR preview links) fill in
+  made-up prices from `client/src/data/tv/sample-prices.js` so the layout
+  can be judged with prices. The live site never shows them, unless you add
+  `?samplePrices=1` to a TV address to check the layout there. Delete that file once real prices are in.
 - Merging to `main` deploys. TVs notice the new version within about 5
   minutes and reload by themselves (they also reload daily at 4 AM).
 

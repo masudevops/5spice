@@ -1,7 +1,8 @@
 // SAMPLE PRICES — NOT REAL. For previewing the TV board layout only, until
-// the owners set prices. They show only when a TV address ends in
-// ?samplePrices=1 (e.g. /tv/murphy/1?samplePrices=1), never on the normal
-// TV addresses or the website. Real prices go in menus/shared-items.js.
+// the owners set prices. They show on previews only (this computer and PR
+// preview links), or on the live site when a TV address ends in
+// ?samplePrices=1. Never on the normal live TV addresses or the website.
+// Real prices go in menus/shared-items.js.
 // Delete this file once real prices are in.
 export const SAMPLE_PRICES = {
     // Biriyani & rice
