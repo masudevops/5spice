@@ -90,7 +90,7 @@ When deals are live, add entries like:
   offers catering.
 - `socialLinks`: optional location-specific pages, e.g. `facebook`.
 - `statusLabel`: short badge text (e.g. "Opening Soon", "Coming Early 2027").
-- `openingText`: longer line, e.g. "Opening Early 2027, In Sha Allah".
+- `openingText`: longer line, e.g. "Opening Early 2027".
 - `hours`: leave `[]` until hours are confirmed; the site shows `hoursNote`
   instead. Never put estimated hours here — they're published to Google.
 - The **first** location in `locations/index.js` is the site-wide default

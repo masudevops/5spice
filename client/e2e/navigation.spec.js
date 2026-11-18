@@ -13,7 +13,7 @@ test.describe('5 Spice Website E2E', () => {
         await expect(page.getByRole('heading', { name: 'Premium Halal Market' })).toBeVisible();
         await expect(page.getByRole('heading', { name: 'Authentic Bangladeshi Restaurant' })).toBeVisible();
         await expect(page.getByRole('heading', { name: 'Serving the DFW Community' })).toBeVisible();
-        await expect(page.getByText('Opening Early 2027, In Sha Allah')).toBeVisible();
+        await expect(page.getByText('Opening Early 2027')).toBeVisible();
         await expect(page.getByText('Follow our journey to opening day.')).toBeVisible();
         await expect(page.getByRole('link', { name: 'info@5spicemarket.com' })).toBeVisible();
         await expect(page.getByRole('link', { name: '5 Spice Market on Facebook' })).toBeVisible();

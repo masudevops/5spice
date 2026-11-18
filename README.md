@@ -7,7 +7,7 @@ dishes, plus a premium halal grocery market.
 | Location | Status |
 |---|---|
 | **5Spice Kitchen – Murphy**: 222 E FM 544, Suite 200, Murphy, TX 75094 | Catering available now; dine-in and take-out coming soon |
-| **5Spice Market & Kitchen – Plano**: 245 Shiloh Rd, Plano, TX 75074 | Opening Early 2027, In Sha Allah |
+| **5Spice Market & Kitchen – Plano**: 245 Shiloh Rd, Plano, TX 75074 | Opening Early 2027 |
 
 > **Updating content?** For the menu, menu photos, weekly deals, location
 > details, page copy, and prompts for Claude Code, see

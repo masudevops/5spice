@@ -34,7 +34,7 @@ const LaunchLanding = () => {
 
     useDocumentHead({
         title: '5Spice Market & Kitchen | Halal Grocery & Authentic Bangladeshi Cuisine in DFW',
-        description: 'Authentic halal Bangladeshi cuisine and catering from 5Spice Kitchen, opening soon in Murphy, TX. 5Spice Market & Kitchen, a premium halal grocery and restaurant, is coming to Plano in early 2027, In Sha Allah.',
+        description: 'Authentic halal Bangladeshi cuisine and catering from 5Spice Kitchen, opening soon in Murphy, TX. 5Spice Market & Kitchen, a premium halal grocery and restaurant, is coming to Plano in early 2027.',
     });
 
     return (
@@ -60,13 +60,6 @@ const LaunchLanding = () => {
                         <p className="mx-auto mt-5 max-w-2xl text-pretty text-base leading-7 text-white/70 sm:mt-6 sm:text-lg sm:leading-8">
                             Bringing premium halal meats, fresh seafood, everyday groceries, and authentic Bangladeshi cuisine with South Asian favorites together under one roof.
                         </p>
-                        {upcomingMarket && (
-                            <div className="mt-5 inline-flex flex-wrap items-center justify-center gap-x-2 gap-y-1 border border-brand-gold-deep/35 bg-ink-700/70 px-4 py-2.5 text-sm text-brand-gold sm:mt-6 sm:gap-x-3 sm:px-5 sm:py-3 sm:text-base">
-                                <CalendarDays size={18} className="shrink-0" aria-hidden="true" />
-                                <span className="font-semibold sm:tracking-wide">{upcomingMarket.openingText}</span>
-                                <span className="text-xs text-white/55 sm:text-sm">{upcomingMarket.address.city}, {upcomingMarket.address.state}</span>
-                            </div>
-                        )}
                         <div className="mt-6 flex flex-col gap-2.5 sm:mt-7 sm:flex-row sm:justify-center sm:gap-3">
                             <Link to="/market" className="bg-brand-green px-7 py-3.5 text-center text-sm font-bold uppercase tracking-[0.14em] text-ink-900 sm:py-4 sm:text-base sm:tracking-[0.16em] transition-colors hover:bg-brand-green-light">
                                 Explore the Market
@@ -75,6 +68,12 @@ const LaunchLanding = () => {
                                 Our Locations
                             </Link>
                         </div>
+                        {upcomingMarket && (
+                            <p className="mt-6 flex items-center justify-center gap-2 text-sm text-brand-gold/90">
+                                <CalendarDays size={16} className="shrink-0" aria-hidden="true" />
+                                {upcomingMarket.shortName} market · {upcomingMarket.openingText}
+                            </p>
+                        )}
                         {orderingLocations.map((location) => (
                             <p key={location.slug} className="mt-6 text-sm text-white/62">
                                 <Utensils size={16} className="mr-2 inline text-brand-green" aria-hidden="true" />

@@ -14,7 +14,7 @@ const Market = () => {
 
     useDocumentHead({
         title: 'Halal Grocery Market in Plano, TX | 5Spice Market & Kitchen',
-        description: 'Zabiha halal meat, fresh seafood, farm-fresh produce, and specialty South Asian groceries. 5Spice Market & Kitchen opens at 245 Shiloh Rd, Plano in early 2027, In Sha Allah.',
+        description: 'Zabiha halal meat, fresh seafood, farm-fresh produce, and specialty South Asian groceries. 5Spice Market & Kitchen opens at 245 Shiloh Rd, Plano in early 2027.',
     });
 
     return (

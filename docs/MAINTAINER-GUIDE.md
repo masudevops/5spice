@@ -217,7 +217,7 @@ Files: `client/src/data/locations/murphy.js`, `client/src/data/locations/plano.j
 |---|---|
 | `status` | `'open'` (operating, even if only catering), `'coming-soon'`, or `'hidden'` |
 | `statusLabel` | Short badge text, e.g. "Catering Available Now" |
-| `openingText` | Longer status line, e.g. "Opening Early 2027, In Sha Allah" |
+| `openingText` | Longer status line, e.g. "Opening Early 2027" |
 | `services` | `catering`, `dineIn`, `takeOut`: each `'open'` or `'coming-soon'` |
 | `hours` | Leave `[]` until confirmed; the site then shows `hoursNote` |
 | `phone`, `email`, `address` | Shown on location, Contact, Catering pages and in Google data |
@@ -261,7 +261,8 @@ block near the top of the file. Default social-share text is in
 `client/index.html`.
 
 **Brand rules for any copy:** always "5Spice" (one word). Lead with
-Bangladeshi identity. Keep "In Sha Allah" exactly as written. No invented
+Bangladeshi identity. Don't add "In Sha Allah" to site copy (owners,
+2026-11-17). No invented
 claims, prices, reviews, or hours. Plano is described in future tense until
 it opens.
 

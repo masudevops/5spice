@@ -18,7 +18,7 @@ const Sales = () => {
 
     useDocumentHead({
         title: 'Weekly Deals | 5Spice Market & Kitchen – Plano',
-        description: 'Weekly halal grocery deals from 5Spice Market & Kitchen in Plano, TX begin when the market opens in early 2027, In Sha Allah.',
+        description: 'Weekly halal grocery deals from 5Spice Market & Kitchen in Plano, TX begin when the market opens in early 2027.',
     });
 
     useEffect(() => {
