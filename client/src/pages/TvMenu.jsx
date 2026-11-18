@@ -53,12 +53,12 @@ const ItemList = ({ items }) => {
     );
 };
 
-const FeaturedDish = ({ item, media, startDelay }) => {
+const FeaturedDish = ({ item, media, logo, startDelay }) => {
     const price = formatPrice(item.price);
     return (
         <div className="mt-4 border border-brand-gold-deep/35 bg-ink-800">
             <div className="relative">
-                <TvMedia media={media} startDelay={startDelay} />
+                <TvMedia media={media} logo={logo} startDelay={startDelay} />
                 {item.special && (
                     <span className="absolute right-4 top-4 bg-brand-gold px-3 py-1.5 text-[15px] font-bold uppercase tracking-[0.15em] text-ink-900">
                         5Spice Special
@@ -89,6 +89,9 @@ const TvMenu = () => {
 
     useDocumentHead({ title: screen ? `${screen.title} | 5Spice TV Menu` : '5Spice TV Menu', noindex: true });
 
+    // The location's own logo (e.g. 5Spice Kitchen for Murphy), else the brand logo.
+    const logo = screen?.location.logo ?? { src: LOGOS.wide, width: LOGOS.wideWidth, height: LOGOS.wideHeight, alt: '5Spice Market & Kitchen' };
+
     return (
         <div className="fixed inset-0 flex cursor-none items-center justify-center overflow-hidden bg-ink-950">
             <div
@@ -96,7 +99,7 @@ const TvMenu = () => {
                 style={{ width: TV_WIDTH, height: TV_HEIGHT, transform: `scale(${scale})` }}
             >
                 <header className="grid h-[108px] shrink-0 grid-cols-[1fr_auto_1fr] items-center border-b border-brand-gold-deep/30 px-14">
-                    <img src={LOGOS.wide} alt="5Spice Market & Kitchen" width={LOGOS.wideWidth} height={LOGOS.wideHeight} className="h-[76px] w-auto" />
+                    <img src={logo.src} alt={logo.alt} width={logo.width} height={logo.height} className="h-[84px] w-auto" />
                     {screen && (
                         <div className="text-center">
                             <p className="text-[18px] font-semibold uppercase tracking-[0.3em] text-brand-gold">
@@ -120,7 +123,7 @@ const TvMenu = () => {
                                 <h2 className="flex items-center gap-4 font-serif text-[36px] font-semibold leading-tight text-brand-gold after:h-px after:flex-1 after:bg-brand-gold-deep/40">
                                     {column.title}
                                 </h2>
-                                {column.featured && <FeaturedDish {...column.featured} startDelay={index * VIDEO_STAGGER_MS} />}
+                                {column.featured && <FeaturedDish {...column.featured} logo={logo} startDelay={index * VIDEO_STAGGER_MS} />}
                                 <ItemList items={column.items} />
                             </section>
                         ))}

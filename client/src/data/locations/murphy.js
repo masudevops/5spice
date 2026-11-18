@@ -10,6 +10,10 @@ export const murphy = {
     displayName: '5Spice Kitchen',
     shortName: 'Murphy',
     type: 'kitchen-only',
+    // Location logo (official 5Spice Kitchen artwork), used on the in-store TV
+    // menu boards. brand-logo-kitchen-square.png is the original file; the
+    // .webp is the same artwork with the empty black border trimmed.
+    logo: { src: '/brand-logo-kitchen.webp', width: 1083, height: 406, alt: '5Spice Kitchen' },
     status: 'coming-soon',
     // Short badge text, and the longer line used in the location switcher.
     statusLabel: 'Opening Soon',

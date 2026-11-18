@@ -3,10 +3,15 @@
 In-store menu boards for the TVs at 5Spice Kitchen – Murphy. Each TV opens its
 own page on the website:
 
-| TV | Address |
-|---|---|
-| TV 1 | https://5spicemarket.com/tv/murphy/1 |
-| TV 2–6 | `/tv/murphy/2` … `/tv/murphy/6` (once set up) |
+| TV | Address | Shows |
+|---|---|---|
+| TV 1 | https://5spicemarket.com/tv/murphy/1 | Biryani, Curries & Snacks |
+| TV 2 | https://5spicemarket.com/tv/murphy/2 | Biryani, Curries & Kebabs |
+| TV 3 | https://5spicemarket.com/tv/murphy/3 | Breakfast, Sides & Sweets |
+
+More TVs can be added later (`/tv/murphy/4`, …) by adding a screen to
+`client/src/data/tv/murphy.js`. The header uses the location's own logo
+(5Spice Kitchen for Murphy, set in `client/src/data/locations/murphy.js`).
 
 These pages aren't linked from the website, aren't in the sitemap, and tell
 search engines not to list them (`noindex`, plus `Disallow: /tv/` in
@@ -34,6 +39,10 @@ TV size and on Fire TV browsers that report 960×540.
 ## Media
 
 Use real 5Spice footage and photos only. No stock or AI-generated media.
+
+Until real media arrives, each featured dish shows an animated placeholder
+GIF in the 5Spice colors (`tv-media/placeholder-gold.gif`, `-orange`,
+`-green`; no food shown). Replace them dish by dish in `media.js`.
 
 - **Video (recommended):** MP4, H.264, 1280×720, 3–5 seconds, no sound, about
   1–2 MB. Videos play muted, loop, and start one column at a time, so a TV

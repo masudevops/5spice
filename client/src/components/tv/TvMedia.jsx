@@ -1,18 +1,17 @@
 import { useEffect, useRef, useState } from 'react';
-import { LOGOS } from '../../config/site';
 
 // A video that hasn't started playing by then is treated as failed.
 const VIDEO_START_TIMEOUT_MS = 15000;
 
 // Branded stand-in for a dish without media (or whose media failed).
-const Placeholder = () => (
+const Placeholder = ({ logo }) => (
     <div className="absolute inset-0 flex flex-col items-center justify-center gap-6 bg-[radial-gradient(circle_at_50%_45%,rgb(var(--color-gold-deep)/0.18),transparent_62%)]">
         <div className="flex gap-3" aria-hidden="true">
             {['bg-brand-gold', 'bg-brand-green', 'bg-brand-gold', 'bg-brand-green', 'bg-brand-gold'].map((color, index) => (
                 <span key={index} className={`h-2.5 w-2.5 rounded-full ${color}`} />
             ))}
         </div>
-        <img src={LOGOS.square} alt="" className="h-36 w-36 object-contain opacity-60" />
+        {logo && <img src={logo.src} alt="" className="h-20 w-auto object-contain opacity-60" />}
     </div>
 );
 
@@ -20,7 +19,7 @@ const Placeholder = () => (
 // Video → fallback photo → placeholder, stepping down whenever a file fails
 // to load (or a video doesn't start playing in time). `startDelay` staggers
 // when videos begin downloading so a screen doesn't fetch all of them at once.
-const TvMedia = ({ media, startDelay = 0 }) => {
+const TvMedia = ({ media, logo, startDelay = 0 }) => {
     // Which source is showing: 'main', 'fallback', or 'placeholder'.
     const [stage, setStage] = useState(media?.src ? 'main' : 'placeholder');
     const [videoReady, setVideoReady] = useState(startDelay === 0);
@@ -48,7 +47,7 @@ const TvMedia = ({ media, startDelay = 0 }) => {
     // 2:1 frame: 16:9 footage fills it with a slight top and bottom crop.
     return (
         <div className="relative aspect-[2/1] overflow-hidden bg-ink-950">
-            <Placeholder />
+            <Placeholder logo={logo} />
             {stage === 'main' && isVideo && videoReady && (
                 <video
                     ref={videoRef}
