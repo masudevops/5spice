@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+# In-store TV menu boards
+Disallow: /tv/
 
 Sitemap: https://5spicemarket.com/sitemap.xml

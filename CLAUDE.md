@@ -105,7 +105,8 @@ The site is in a **pre-launch, minimal phase**. Its job right now is to:
 - Build command: `cd client && npm run build` → outputs `client/dist` (static files, deployed as-is).
 - Lint / typecheck / test commands: `cd client && npm run lint` (ESLint flat config, `eslint.config.js`). No typecheck script (plain JS). `cd client && npm test` is meant to run Playwright e2e specs in `client/e2e`, but it's currently broken: `@playwright/test` isn't installed and the specs are stale (see `TESTING.md`).
 - Key folders and what they contain:
-  - `client/src/pages/` — one component per route (Landing, Market, Kitchen, Sales, Catering, Pickup, About, Contact, Locations, LocationDetail, LocationMenu, NotFound).
+  - `client/src/pages/` — one component per route (Landing, Market, Kitchen, Sales, Catering, Pickup, About, Contact, Locations, LocationDetail, LocationMenu, CateringMenu, TvMenu, NotFound).
+  - TV menu boards: `/tv/:slug/:screen` (e.g. `/tv/murphy/1`) render outside the site layout, are unlisted and `noindex`. Screens in `client/src/data/tv/`, see `docs/TV-MENU-BOARDS.md`.
   - `client/src/components/` — Navbar, Footer, Layout, and the two landing variants (`ComingSoonLanding`, `LaunchLanding`) selected by `SITE_MODE`.
   - `client/src/config/site.js` — site-wide constants (contact info, social links, catering email, order platform labels, page copy lists, `CATERING_STATS`). Per-location facts live in `client/src/data/locations/`.
   - `client/src/hooks/` — small hooks (`useDocumentHead` for per-page title/description/JSON-LD, `useSelectedLocation`).

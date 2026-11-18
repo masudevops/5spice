@@ -64,6 +64,16 @@ card and page show `statusLabel` / `openingText` instead. Any location with
 `catering: 'open'` is listed on the Catering page. Catering requests go to
 `catering@5spicemarket.com` (set in `src/config/site.js` as `CATERING_EMAIL`).
 
+## Edit the in-store TV menu boards
+
+The TVs at Murphy show pages like `/tv/murphy/1` (one per TV).
+
+- Which dishes each TV shows: `tv/murphy.js`
+- A dish's video or photo: `tv/media.js`, with the file in `client/public/tv-media/`
+- Names, descriptions, and prices come from the menu (`menus/shared-items.js`), so the website and TVs always match.
+
+Media rules, Fire TV setup, and a test checklist: `docs/TV-MENU-BOARDS.md`.
+
 ## Update weekly deals
 
 Edit `client/public/weekly-deals.json` directly — it's fetched by the
