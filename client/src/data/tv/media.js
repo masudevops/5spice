@@ -23,11 +23,28 @@ export const TV_MEDIA = {
 // STOCK PHOTOS: temporary development assets, NOT photos of 5Spice's dishes.
 // They show only on previews (this computer, PR preview links, or a TV
 // address ending in ?preview=1), marked "Stock photo" on screen, and never
-// on the live TVs. Files in client/public/tv-media/stock/, one line each:
-//   'beef-kachchi': stock('kacchi.jpg'),  // source URL, license
-// Unsplash and Pexels photos are free to use with no credit required. Delete
-// an entry once the same key is in TV_MEDIA above.
+// on the live TVs. Files in client/public/tv-media/stock/ (1920×1080, the
+// food placed right of center, dark fill on the left under the text), one
+// line each with its source and license. Pexels License, Unsplash License,
+// and CC0 (WordPress Photo Directory) all allow free use with no credit
+// required; none of these photos are approved for production. To replace
+// one with your own photo or video, see docs/TV-MENU-BOARDS.md, then delete
+// its line here and its file.
 export const stock = (file) => ({ type: 'image', src: `/tv-media/stock/${file}`, stock: true });
 
 export const STOCK_MEDIA = {
+    // TV 4 (signature dishes)
+    'beef-kachchi': stock('kacchi-biriyani.jpg'), // pexels.com/photo/29260500, Ratul CR, Pexels License
+    'beef-kala-bhuna': stock('beef-kala-bhuna.jpg'), // unsplash.com/photos/7-TOCB28rms, Daily Slowdown, Unsplash License
+    fuchka: stock('fuchka.jpg'), // pexels.com/photo/34356404, Fahim Shizan, Pexels License
+    'special-chai': stock('royal-bengal-chai.jpg'), // wordpress.org/photos/photo/2566aeb20b, ritika000, CC0
+    // TV 5 (meal specials)
+    breakfast: stock('breakfast-paratha-chai.jpg'), // pexels.com/photo/39901231, jahratreza, Pexels License
+    lunch: stock('lunch-biriyani.jpg'), // pexels.com/photo/9609863, Prabal, Pexels License
+    dinner: stock('dinner-curry.jpg'), // unsplash.com/photos/eEWlcfydzQ4, Sanket Shah, Unsplash License
+    'mutton-kachchi': stock('mutton-kacchi.jpg'), // wordpress.org/photos/photo/816692d387, Shariful Islam, CC0
+    // TV 6 (catering and community)
+    'catering-trays': stock('catering-chafing-dishes.jpg'), // pexels.com/photo/18749077, micklatter, Pexels License
+    'catering-buffet': stock('catering-buffet.jpg'), // pexels.com/photo/12253094, stewphotography, Pexels License
+    community: stock('community-event-buffet.jpg'), // pexels.com/photo/39388375, sejio402, Pexels License
 };

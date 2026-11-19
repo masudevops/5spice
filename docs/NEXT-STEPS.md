@@ -92,7 +92,7 @@ screens following the final UX design. TVs 1–3 text menus (restaurant menu
 only, text grows to fit up to 1.5×), TV 4 signature dishes, TV 5 meal
 specials (sample content, previews only), TV 6 catering and community
 (website's approved wording). Stock photos are allowed as temporary
-development assets on previews only (owner, 2026-11-19); none sourced yet.
+development assets on previews only (owner, 2026-11-19); 11 in place.
 Don't deploy to production until approved.
 
 - [ ] **Test the redesign on the real TVs** (Dev/Owners) via the PR preview
@@ -101,10 +101,10 @@ Don't deploy to production until approved.
 - [ ] **Full screen that survives reloads** (Dev/Owners). Check whether Silk's
   own full-screen setting survives a page reload; if not, use a kiosk browser
   (e.g. Fully Kiosk, launch on boot).
-- [ ] **Stock photos for TVs 4–6** (Dev): 3–5 consistent, authentic
-  Bangladeshi dish photos for TV 4, plus TV 5 and 6 keys (list in
-  `docs/TV-MENU-BOARDS.md`), Unsplash/Pexels license, saved in
-  `client/public/tv-media/stock/`, previews only.
+- [ ] **Review the stock photos** (Owners): 11 temporary photos on TVs 4–6
+  (previews only; list, sources, and licenses in `docs/TV-MENU-BOARDS.md`).
+  Not for production without approval; replace with 5Spice's own photos and
+  videos. TV 4's Chicken Roast and Tehari slides are off until real photos.
 - [ ] **Approved restaurant menu** (Owners): smaller than the catering menu.
   Then finalize TVs 1–3 categories (the text grows automatically with fewer
   dishes). Today TV 3 leaves out Shahi Jarda at the smallest size; don't

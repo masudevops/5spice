@@ -29,15 +29,18 @@
 //                    guest total, config/site.js).
 //   'brand'          the 5Spice brand slide (logo, cuisine, halal).
 export const PROMO_CAMPAIGNS = {
-    // TV 4: signature dishes.
+    // TV 4: signature dishes. Chicken Roast and Tehari are switched off until
+    // 5Spice's own photos are in media.js (no accurate free stock photo of
+    // either was found); set `enabled: true` once they are.
     'signature-dishes': {
         enabled: true,
         slides: [
             { id: 'kacchi', template: 'dish-showcase', dishId: 'beef-kachchi', eyebrow: 'Our Signature', duration: 10 },
-            { id: 'chicken-roast', template: 'dish-showcase', dishId: 'chicken-roast', eyebrow: 'Our Signature', duration: 10 },
-            { id: 'tehari', template: 'dish-showcase', dishId: 'beef-tehari', eyebrow: 'Our Signature', duration: 10 },
             { id: 'kala-bhuna', template: 'dish-showcase', dishId: 'beef-kala-bhuna', eyebrow: 'Our Signature', duration: 10 },
             { id: 'fuchka', template: 'dish-showcase', dishId: 'fuchka', eyebrow: 'Our Signature', duration: 10 },
+            { id: 'chai', template: 'dish-showcase', dishId: 'special-chai', eyebrow: 'Our Signature', duration: 10 },
+            { id: 'chicken-roast', enabled: false, template: 'dish-showcase', dishId: 'chicken-roast', eyebrow: 'Our Signature', duration: 10 },
+            { id: 'tehari', enabled: false, template: 'dish-showcase', dishId: 'beef-tehari', eyebrow: 'Our Signature', duration: 10 },
         ],
     },
 

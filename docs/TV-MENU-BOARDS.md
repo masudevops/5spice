@@ -133,9 +133,31 @@ Each slide finds its photo or video by key (its `mediaKey`, else its dish id):
 3. Delete that key's line from `STOCK_MEDIA` and its file from
    `tv-media/stock/`. Once every stock photo is replaced, delete the folder.
 
-Keys today: TV 4 `beef-kachchi`, `chicken-roast`, `beef-tehari`,
-`beef-kala-bhuna`, `fuchka`; TV 5 `breakfast`, `lunch`, `dinner`,
-`mutton-kachchi`; TV 6 `catering-trays`, `catering-buffet`, `community`.
+**Stock photos in use (temporary, previews only, not approved for
+production):** files in `client/public/tv-media/stock/`, each 1920×1080 with
+the food right of center and a dark fill on the left under the text.
+
+| Key (slide) | File | Source | License |
+|---|---|---|---|
+| `beef-kachchi` (TV 4 Kacchi) | `kacchi-biriyani.jpg` | pexels.com/photo/29260500 (Ratul CR) | Pexels |
+| `beef-kala-bhuna` (TV 4) | `beef-kala-bhuna.jpg` | unsplash.com/photos/7-TOCB28rms (Daily Slowdown) | Unsplash |
+| `fuchka` (TV 4) | `fuchka.jpg` | pexels.com/photo/34356404 (Fahim Shizan) | Pexels |
+| `special-chai` (TV 4 Royal Bengal Chai) | `royal-bengal-chai.jpg` | wordpress.org/photos/photo/2566aeb20b (ritika000) | CC0 |
+| `breakfast` (TV 5) | `breakfast-paratha-chai.jpg` | pexels.com/photo/39901231 (jahratreza) | Pexels |
+| `lunch` (TV 5) | `lunch-biriyani.jpg` | pexels.com/photo/9609863 (Prabal) | Pexels |
+| `dinner` (TV 5) | `dinner-curry.jpg` | unsplash.com/photos/eEWlcfydzQ4 (Sanket Shah) | Unsplash |
+| `mutton-kachchi` (TV 5 offer) | `mutton-kacchi.jpg` | wordpress.org/photos/photo/816692d387 (Shariful Islam) | CC0 |
+| `catering-trays` (TV 6) | `catering-chafing-dishes.jpg` | pexels.com/photo/18749077 (micklatter) | Pexels |
+| `catering-buffet` (TV 6) | `catering-buffet.jpg` | pexels.com/photo/12253094 (stewphotography) | Pexels |
+| `community` (TV 6) | `community-event-buffet.jpg` | pexels.com/photo/39388375 (sejio402) | Pexels |
+
+The Pexels and Unsplash licenses and CC0 allow free commercial use with no
+credit required, but they don't cover how a photo is presented: never show a
+stock photo as if it were 5Spice's own dish, and check with the owners before
+any reaches a live TV. Photos with people in them (the chafing-dish line on
+TV 6) carry no model release. Chicken Roast and Tehari have no stock photo (no
+accurate free one was found), so their TV 4 slides are off (`enabled: false`)
+until 5Spice's own photos are in.
 
 Shoot or pick media as one campaign: same warm, natural light, similar color
 temperature, the dish on the right two thirds of the frame (the left third
