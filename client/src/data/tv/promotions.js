@@ -1,36 +1,120 @@
 // Promotional content for the marketing TVs (4–6), kept apart from the menu
 // and prices. Only add what the owners approve: never made-up offers,
-// discounts, or prices.
+// discounts, or prices. Prices on slides always come from the menu.
 //
 // A campaign is a set of slides that can be switched on or off and scheduled:
-//   enabled   false hides the whole campaign
+//   enabled   false switches the whole campaign off (a feature flag)
+//   sample    true = example content for reviewing the design: shows only on
+//             previews, marked "Sample" on screen, never on the live TVs
 //   schedule  optional, in Chicago time (see schedule.js), e.g.
 //             { startDate: '2026-12-01', endDate: '2026-12-31',
 //               days: ['sat', 'sun'], startTime: '07:00', endTime: '11:00' }
 //   slides    shown in order, then repeated
 // A slide has an id, a template, a duration in seconds, optionally its own
-// enabled/schedule, and the template's fields. A TV picks campaigns in
-// tv/murphy.js; with nothing live it shows a 5Spice brand slide.
+// enabled/schedule, and the template's fields. Its photo or video comes from
+// media.js by `mediaKey` (or `dishId`). A TV picks campaigns in tv/murphy.js.
 //
-// Templates (components/tv/templates/):
-//   'dish-showcase'   one dish or campaign full screen: its photo or video
-//                     under a dark overlay, a short label, and the name.
-//                     Fields: dishId (name from the menu) or title, eyebrow
-//                     (short label above the name), optional tagline (owner-
-//                     approved wording only), optional media (as below).
-//   'dish-spotlight'  a dish's photo or video beside its name, description,
-//                     and price, all taken from the menu.
-//                     Fields: dishId, eyebrow (small label above the name),
-//                     optional media ({ type: 'video' | 'gif' | 'image', src,
-//                     fallback }); without it, the dish's entry in media.js.
+// Templates (components/tv/templates/), all full screen with the photo or
+// video behind a dark overlay, the logo, and the halal note:
+//   'dish-showcase'  one dish or story. Fields: dishId (name from the menu)
+//                    or title, eyebrow (short label above), tagline.
+//   'special'        breakfast / lunch / dinner / limited-time offer.
+//                    Fields: badge, headline (else the dish's name), dishId,
+//                    tagline, dishIds (up to 3 dishes listed with their menu
+//                    prices), details, showEndDate (adds "Through <the
+//                    campaign's endDate>").
+//   'catering'       catering call to action with the catering email and web
+//                    address from config/site.js. Fields: eyebrow, headline,
+//                    subhead, points, showGuestCount (the confirmed catering
+//                    guest total, config/site.js).
+//   'brand'          the 5Spice brand slide (logo, cuisine, halal).
 export const PROMO_CAMPAIGNS = {
-    // Signature dishes for TV 4 (media from media.js, placeholders for now).
+    // TV 4: signature dishes.
     'signature-dishes': {
         enabled: true,
         slides: [
             { id: 'kacchi', template: 'dish-showcase', dishId: 'beef-kachchi', eyebrow: 'Our Signature', duration: 10 },
             { id: 'chicken-roast', template: 'dish-showcase', dishId: 'chicken-roast', eyebrow: 'Our Signature', duration: 10 },
+            { id: 'tehari', template: 'dish-showcase', dishId: 'beef-tehari', eyebrow: 'Our Signature', duration: 10 },
+            { id: 'kala-bhuna', template: 'dish-showcase', dishId: 'beef-kala-bhuna', eyebrow: 'Our Signature', duration: 10 },
             { id: 'fuchka', template: 'dish-showcase', dishId: 'fuchka', eyebrow: 'Our Signature', duration: 10 },
         ],
+    },
+
+    // TV 5: meal specials. SAMPLE content for the design review (the times,
+    // dishes, and wording are examples, not owner-approved): replace with
+    // the owners' specials and remove `sample` to put a campaign live.
+    breakfast: {
+        enabled: true,
+        sample: true,
+        schedule: { startTime: '07:00', endTime: '11:00' },
+        slides: [
+            { id: 'breakfast', template: 'special', mediaKey: 'breakfast', badge: 'Breakfast', headline: 'Breakfast Favorites', tagline: 'A warm Bangladeshi start to the day.', dishIds: ['paratha-roti', 'dim-bhaji', 'dal-gosht'], duration: 12 },
+        ],
+    },
+    lunch: {
+        enabled: true,
+        sample: true,
+        schedule: { startTime: '11:00', endTime: '15:00' },
+        slides: [
+            { id: 'lunch', template: 'special', mediaKey: 'lunch', badge: "Today's Special", headline: 'Lunch Favorites', tagline: 'Fresh. Flavorful. Authentic.', dishIds: ['beef-tehari', 'chicken-biryani', 'morog-polao'], duration: 12 },
+        ],
+    },
+    dinner: {
+        enabled: true,
+        sample: true,
+        schedule: { startTime: '17:00', endTime: '21:00' },
+        slides: [
+            { id: 'dinner', template: 'special', mediaKey: 'dinner', badge: 'Dinner', headline: 'Dinner Favorites', tagline: 'Slow-cooked curries, made the traditional way.', dishIds: ['chicken-roast', 'beef-kala-bhuna', 'mutton-bhuna'], duration: 12 },
+        ],
+    },
+    'special-offers': {
+        enabled: true,
+        sample: true,
+        schedule: { startDate: '2026-11-01', endDate: '2026-12-31' },
+        slides: [
+            { id: 'mutton-kachchi', template: 'special', dishId: 'mutton-kachchi', badge: 'Limited Time', tagline: 'Tender mutton and fragrant rice, slow-cooked together.', showEndDate: true, duration: 10 },
+        ],
+    },
+    // Switched off: shows how a seasonal campaign waits for its flag.
+    seasonal: {
+        enabled: false,
+        sample: true,
+        schedule: { startDate: '2026-12-01', endDate: '2027-01-31' },
+        slides: [
+            { id: 'winter-chai', template: 'special', dishId: 'special-chai', badge: 'Winter Favorite', showEndDate: true, duration: 10 },
+        ],
+    },
+
+    // TV 6: catering and community. Wording from the website's Catering page.
+    catering: {
+        enabled: true,
+        slides: [
+            {
+                id: 'catering-occasions', template: 'catering', mediaKey: 'catering-trays', duration: 12,
+                eyebrow: 'Catering', headline: 'Made for Every Occasion',
+                points: ['Weddings & family celebrations', 'Corporate events & office lunches', 'Community gatherings'],
+                showGuestCount: true,
+            },
+            {
+                id: 'catering-trays', template: 'catering', mediaKey: 'catering-buffet', duration: 12,
+                eyebrow: 'Catering', headline: "Let's Plan Your Next Event",
+                points: ['Family trays & party platters', 'Large event catering', 'Customized menus & packages'],
+            },
+        ],
+    },
+    community: {
+        enabled: true,
+        slides: [
+            {
+                id: 'community', template: 'dish-showcase', mediaKey: 'community', duration: 10,
+                eyebrow: 'Our Community', title: 'Proudly Serving Our Community',
+                tagline: 'Family gatherings, community celebrations, and events across Murphy, Plano, and North Texas.',
+            },
+        ],
+    },
+    brand: {
+        enabled: true,
+        slides: [{ id: 'brand', template: 'brand', duration: 8 }],
     },
 };

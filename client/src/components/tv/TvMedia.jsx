@@ -7,24 +7,16 @@ const VIDEO_START_TIMEOUT_MS = 15000;
 const VIDEO_STALL_TIMEOUT_MS = 15000;
 const STALL_CHECK_MS = 5000;
 
-// Branded stand-in for a dish without media (or whose media failed).
-const Placeholder = ({ logo }) => (
-    <div className="absolute inset-0 flex flex-col items-center justify-center gap-6 bg-[radial-gradient(circle_at_50%_45%,rgb(var(--color-gold-deep)/0.18),transparent_62%)]">
-        <div className="flex gap-3" aria-hidden="true">
-            {['bg-brand-gold', 'bg-brand-green', 'bg-brand-gold', 'bg-brand-green', 'bg-brand-gold'].map((color, index) => (
-                <span key={index} className={`h-2.5 w-2.5 rounded-full ${color}`} />
-            ))}
-        </div>
-        {logo && <img src={logo.src} alt="" className="h-20 w-auto object-contain opacity-60 mix-blend-lighten" />}
-    </div>
-);
+// Plain dark background for a slide without media (or whose media failed):
+// the slide's text carries it, with no stand-in artwork.
+const Placeholder = () => <div className="absolute inset-0 bg-ink-850" />;
 
 // A dish's video, GIF, or photo, filling its frame (2:1 by default; pass
 // `frameClassName` for another shape, e.g. 'aspect-video').
-// Video → fallback photo → placeholder, stepping down whenever a file fails
+// Video → fallback photo → plain background, stepping down whenever a file fails
 // to load (or a video doesn't start playing in time). `startDelay` staggers
 // when videos begin downloading so a screen doesn't fetch all of them at once.
-const TvMedia = ({ media, logo, startDelay = 0, frameClassName = 'aspect-[2/1]' }) => {
+const TvMedia = ({ media, startDelay = 0, frameClassName = 'aspect-[2/1]' }) => {
     // Which source is showing: 'main', 'fallback', or 'placeholder'.
     const [stage, setStage] = useState(media?.src ? 'main' : 'placeholder');
     const [videoReady, setVideoReady] = useState(startDelay === 0);
@@ -71,7 +63,7 @@ const TvMedia = ({ media, logo, startDelay = 0, frameClassName = 'aspect-[2/1]' 
     // In the 2:1 frame, 16:9 footage fills it with a slight top and bottom crop.
     return (
         <div className={`relative overflow-hidden bg-ink-950 ${frameClassName}`}>
-            <Placeholder logo={logo} />
+            <Placeholder />
             {stage === 'main' && isVideo && videoReady && (
                 <video
                     ref={videoRef}

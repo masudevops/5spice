@@ -9,8 +9,8 @@ website:
 | TV 2 | https://5spicemarket.com/tv/murphy/2 | Menu | Curries, Kebabs & Sides |
 | TV 3 | https://5spicemarket.com/tv/murphy/3 | Menu | Breakfast, Snacks, Sweets & Drinks |
 | TV 4 | https://5spicemarket.com/tv/murphy/4 | Promo | Signature dishes (photos, videos) |
-| TV 5 | `/tv/murphy/5` (to build) | Promo | Breakfast, lunch, dinner specials and offers |
-| TV 6 | `/tv/murphy/6` (to build) | Promo | Catering, community events, branding |
+| TV 5 | https://5spicemarket.com/tv/murphy/5 | Promo | Breakfast, lunch, dinner specials and offers |
+| TV 6 | https://5spicemarket.com/tv/murphy/6 | Promo | Catering, community, branding |
 
 These pages aren't linked from the website, aren't in the sitemap, and tell
 search engines not to list them (`noindex`, plus `Disallow: /tv/` in
@@ -26,10 +26,11 @@ location's own (5Spice Kitchen for Murphy, `client/src/data/locations/murphy.js`
 | To change | Edit |
 |---|---|
 | What each TV shows (type, title, sections, campaigns) | `client/src/data/tv/murphy.js` |
+| Which dishes are on the restaurant menu (TVs 1–3) | `client/src/data/menus/murphy.js` (catering: `catering.js`, never on TVs 1–3) |
 | Dish names, descriptions, prices | `client/src/data/menus/shared-items.js` (same data as the website menu) |
 | Which menu dishes show a description | `murphyDescribedDishes` in `client/src/data/tv/murphy.js` |
 | Promotions: slides, on/off, schedules | `client/src/data/tv/promotions.js` |
-| Dish photos and videos | `client/src/data/tv/media.js` (+ the file in `client/public/tv-media/`) |
+| Photos and videos (yours, and temporary stock photos) | `client/src/data/tv/media.js` (+ the file in `client/public/tv-media/`) |
 
 Merging to `main` deploys. TVs notice the new version within about 5 minutes
 and reload by themselves (they also reload daily at 4 AM). On a promo TV the
@@ -46,9 +47,16 @@ be large.
   Murphy menu (`{ category: 'Biriyani & Rice Dishes', group: 'Chicken' }`), so
   a dish added to the menu appears on its TV automatically. A section can
   instead list dishes (`{ title, itemIds: [...] }`).
-- Anything that doesn't fit is left out whole (never cut in half). If a dish
-  goes missing after adding one, move a section to the other column or to
-  another TV.
+- **Restaurant menu only.** Menu TVs read the restaurant menu
+  (`client/src/data/menus/murphy.js`), never the catering menu
+  (`catering.js`), so catering-only dishes can't appear on them, even when
+  listed by `itemIds`.
+- **Text size adapts.** Each board starts with its text up to 1.5× the base
+  sizes below and steps down only until everything fits, never below the
+  base. A TV with fewer dishes gets bigger text and more space, not more
+  crowding. Anything that still doesn't fit at the base size is left out
+  whole (never cut in half): move a section to the other column or another
+  TV rather than making the text smaller.
 - Prices line up on the right of each column and stay hidden until a dish
   has one.
 - **Sample prices:** previews (your computer, PR preview links) fill in
@@ -57,8 +65,9 @@ be large.
   `?preview=1` to a TV address to check the layout there. Delete that file
   once real prices are in.
 
-**Readability:** sized for 6–10 ft. Dish names 46px (about 0.8 in tall on a
-55" TV), prices 42px gold, section headings 44px, descriptions 28px. Text is
+**Readability:** base (smallest) sizes are dish names 46px (about 0.8 in tall
+on a 55" TV), prices 42px gold, section headings 44px, descriptions 28px; a
+shorter menu gets up to 1.5× that (names about 1.2 in) for 10–15 ft. Text is
 white, gold, or cream at 86%, all at least 8:1 contrast on the dark
 background.
 
@@ -74,34 +83,74 @@ A slideshow of **slides**, grouped into **campaigns**.
   so every TV has its own content. Live slides play in order, each for its
   `duration` in seconds, then repeat. Schedules are re-checked every 30
   seconds.
-- With nothing live, the TV shows a 5Spice brand slide (logo, tagline, 100%
-  Zabiha Halal), never a blank screen.
-- **Templates** set how a slide looks. Today: `dish-showcase` (TV 4: the
-  dish's photo or video full screen under a dark overlay, a short label and
-  the name, no price) and `dish-spotlight` (a dish's
-  photo or video beside its name, description, and price, all from the menu).
-  More (specials, catering, events) get added in
-  `client/src/components/tv/templates/` and registered in its `index.js`.
+- With none of its campaigns live, a TV plays its `fallback` campaigns
+  (TV 5 falls back to the signature dishes outside every meal window), and
+  with nothing live at all a 5Spice brand slide, never a blank screen.
+- Slides crossfade (1.2 s). No other animation.
+- **Templates** (`client/src/components/tv/templates/`) all share one frame
+  (`PromoLayout`): the photo or video fills the screen, a dark overlay on the
+  left keeps text readable on any image, the Kitchen logo top left and
+  "100% Zabiha Halal" bottom left.
+  - `dish-showcase` (TV 4, TV 6 community): a label and a dish's name (or a
+    title), optional tagline. No price.
+  - `special` (TV 5): a gold badge (Breakfast, Today's Special, Limited
+    Time…), headline, up to three dishes with their menu prices, and
+    optionally "Through <end date>" from the campaign's schedule.
+  - `catering` (TV 6): headline, check-marked points, the catering email and
+    web address, and the confirmed guest count from `config/site.js`.
+  - `brand`: the brand slide.
 - Only owner-approved content: never made-up promotions, discounts, or prices.
   Prices on slides come from the menu.
+- **Sample content:** a campaign with `sample: true` is an example for
+  reviewing the design. It shows only on previews, tagged "Sample content" on
+  screen, never on the live TVs. TV 5's breakfast, lunch, dinner, offer, and
+  seasonal campaigns are samples today: replace their wording, dishes, and
+  times with the owners' and remove `sample` to put them live. TV 6 uses the
+  website's approved catering wording, so it is live content.
+- **Checking schedules:** add `?at=2026-11-19T08:00` to a preview address to
+  see what a promo TV shows at that time.
 
 ## Media
 
-Use real 5Spice footage and photos only. No stock or AI-generated media.
+Media lives in `client/src/data/tv/media.js`, apart from the slide layouts.
+Each slide finds its photo or video by key (its `mediaKey`, else its dish id):
 
-Until real media arrives, TV 4's dishes show animated placeholder GIFs in the
-5Spice colors (`tv-media/placeholder-gold.gif`, `-orange`, `-green`; no food
-shown). Replace them dish by dish in `media.js`.
+- `TV_MEDIA`: 5Spice's own photos and videos. Shown everywhere, live TVs
+  included.
+- `STOCK_MEDIA`: stock photos (Unsplash or Pexels license) used as
+  **temporary development assets** so the design can be judged with food.
+  Shown only on previews, tagged "Stock photo" on screen, never on the live
+  TVs, and never presented as 5Spice's dishes. Files in
+  `client/public/tv-media/stock/`.
+- No entry: a plain dark background behind the text.
 
-- **Video (recommended):** MP4, H.264, 1280×720, 3–5 seconds, no sound, about
-  1–2 MB. Plays muted and looping.
-- **Photo:** JPG or WebP, 1280 px wide. Also used as a video's fallback.
+**Replacing a stock photo with your own photo or video:**
+
+1. Put the file in `client/public/tv-media/` with a new name, e.g.
+   `kacchi.mp4` and a still `kacchi.jpg` (see sizes below).
+2. In `media.js`, add a line to `TV_MEDIA` under the same key:
+   `'beef-kachchi': { type: 'video', src: '/tv-media/kacchi.mp4', fallback: '/tv-media/kacchi.jpg' },`
+3. Delete that key's line from `STOCK_MEDIA` and its file from
+   `tv-media/stock/`. Once every stock photo is replaced, delete the folder.
+
+Keys today: TV 4 `beef-kachchi`, `chicken-roast`, `beef-tehari`,
+`beef-kala-bhuna`, `fuchka`; TV 5 `breakfast`, `lunch`, `dinner`,
+`mutton-kachchi`; TV 6 `catering-trays`, `catering-buffet`, `community`.
+
+Shoot or pick media as one campaign: same warm, natural light, similar color
+temperature, the dish on the right two thirds of the frame (the left third
+sits under the text).
+
+- **Video (recommended):** MP4, H.264, 1920×1080, 5–10 seconds, no sound,
+  about 3–5 MB. Plays muted and looping, full screen.
+- **Photo:** JPG or WebP, 1920×1080 (landscape), about 300–500 KB. Also used
+  as a video's fallback.
 - **GIF:** works, but an MP4 of the same clip is usually 3–5× smaller and
   smoother. Prefer MP4.
 
 If a video fails to load (or doesn't start within 15 seconds, or freezes for
-15 seconds while playing), the TV shows
-the fallback photo; if that fails too, a 5Spice placeholder.
+15 seconds while playing), the TV shows the fallback photo; if that fails
+too, the plain dark background.
 
 **When you replace a file, give it a new name** (`kacchi-2.mp4`) and update
 `media.js`. TVs cache media for up to a day, so reusing a name can keep the old
@@ -110,9 +159,9 @@ clip showing.
 Converting a raw clip (needs [ffmpeg](https://ffmpeg.org)):
 
 ```sh
-# 5-second, 720p, silent MP4 that starts playing quickly
-ffmpeg -i raw.mov -t 5 -an -vf "scale=1280:-2,fps=30" -c:v libx264 -profile:v high \
-  -pix_fmt yuv420p -crf 26 -maxrate 1.8M -bufsize 3.6M -movflags +faststart kacchi.mp4
+# 8-second, 1080p, silent MP4 that starts playing quickly
+ffmpeg -i raw.mov -t 8 -an -vf "scale=1920:-2,fps=30" -c:v libx264 -profile:v high \
+  -pix_fmt yuv420p -crf 24 -maxrate 4M -bufsize 8M -movflags +faststart kacchi.mp4
 
 # Fallback photo from the clip's first second
 ffmpeg -ss 1 -i kacchi.mp4 -frames:v 1 -q:v 3 kacchi.jpg
@@ -143,7 +192,7 @@ which shrinks the board, and the blacks looked gray-blue (TV picture mode).
 
 - [ ] The right screen shows for that TV, filling the screen with no address
       bar or mouse pointer.
-- [ ] From where guests order (6–10 ft), dish names, prices, and descriptions
+- [ ] From where guests order (10–15 ft), dish names, prices, and descriptions
       are readable.
 - [ ] Blacks look black, not gray or blue.
 - [ ] Promo TV: slides change, videos play smoothly and silently.
@@ -160,5 +209,7 @@ Menu TVs read dishes through `getMenuItem()` and the menu structure through
 `getMenuByLocationSlug()` in `client/src/data/menus/index.js`. To take names
 and prices from Toast, those are the places to change (Toast API keys must stay
 on a server, so it would read from a small server job or a file that job
-writes, never call Toast from the browser). Promotions and media stay
+writes, never call Toast from the browser). The restaurant
+menu (`murphy.js`) and the catering menu (`catering.js`) are kept apart, so each
+can map to its own Toast menu and prices. Promotions and media stay
 team-managed in `promotions.js` and `media.js`.

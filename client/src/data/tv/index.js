@@ -1,6 +1,6 @@
 import { getLocationBySlug } from '../locations/index.js';
 import { getMenuByLocationSlug, getMenuItem } from '../menus/index.js';
-import { TV_MEDIA } from './media.js';
+import { STOCK_MEDIA, TV_MEDIA } from './media.js';
 import { murphyDescribedDishes, murphyTvScreens } from './murphy.js';
 import { PROMO_CAMPAIGNS } from './promotions.js';
 import { SAMPLE_PRICES } from './sample-prices.js';
@@ -10,12 +10,13 @@ const TV_BY_LOCATION = {
 };
 
 // A TV screen ready to render, or null if it isn't set up. Always has
-// { location, type, title }, plus by type (see tv/murphy.js):
+// { location, type, title, preview }, plus by type (see tv/murphy.js):
 //   menu      columns: [[{ title, items }]]
-//   promo     campaigns: [{ enabled, schedule, slides: [{ ..., dish, media }] }]
-// A promo slide without its own `media` uses the dish's entry in media.js.
+//   promo     campaigns, fallback: [{ enabled, schedule, slides: [{ ..., dish, dishes, media }] }]
 // Unknown dish ids are skipped so a typo can't break a board. `preview`
-// (layout previews only) fills missing prices with SAMPLE_PRICES.
+// (layout previews only) fills missing prices with SAMPLE_PRICES, uses
+// STOCK_MEDIA photos where 5Spice has none yet, and includes `sample`
+// campaigns. The live TVs get none of these.
 export const getTvScreen = (locationSlug, screenNumber, { preview = false } = {}) => {
     const location = getLocationBySlug(locationSlug);
     const tv = TV_BY_LOCATION[locationSlug];
@@ -32,12 +33,14 @@ export const getTvScreen = (locationSlug, screenNumber, { preview = false } = {}
         .map(dish)
         .filter(Boolean)
         .map((item) => ({ ...item, showDescription: described.has(item.id) }));
-    const base = { location, type: screen.type, title: screen.title };
+    const base = { location, type: screen.type, title: screen.title, preview };
 
     if (screen.type === 'menu') {
+        // Restaurant menu only: catering-only dishes never reach a menu TV.
         const menu = getMenuByLocationSlug(locationSlug);
+        const onMenu = new Set(menu?.categories.flatMap((category) => category.items.map((item) => item.id)));
         const sectionIds = (section) => {
-            if (section.itemIds) return section.itemIds;
+            if (section.itemIds) return section.itemIds.filter((id) => onMenu.has(id));
             const category = menu?.categories.find((entry) => entry.name === section.category);
             const source = section.group ? category?.groups.find((group) => group.name === section.group) : category;
             return source?.items.map((item) => item.id) ?? [];
@@ -52,20 +55,27 @@ export const getTvScreen = (locationSlug, screenNumber, { preview = false } = {}
     }
 
     if (screen.type === 'promo') {
-        return {
-            ...base,
-            campaigns: screen.campaigns
-                .map((id) => PROMO_CAMPAIGNS[id])
-                .filter(Boolean)
-                .map((campaign) => ({
-                    ...campaign,
-                    slides: campaign.slides.map((slide) => ({
-                        ...slide,
-                        dish: slide.dishId ? dish(slide.dishId) : null,
-                        media: slide.media ?? TV_MEDIA[slide.dishId] ?? null,
-                    })),
-                })),
+        const media = (slide) => {
+            const key = slide.mediaKey ?? slide.dishId;
+            return slide.media ?? TV_MEDIA[key] ?? (preview ? STOCK_MEDIA[key] : null) ?? null;
         };
+        const campaigns = (ids = []) => ids
+            .map((id) => PROMO_CAMPAIGNS[id])
+            .filter((campaign) => campaign && (preview || !campaign.sample))
+            .map((campaign) => ({
+                ...campaign,
+                slides: campaign.slides
+                    .filter((slide) => preview || !slide.sample)
+                    .map((slide) => ({
+                        ...slide,
+                        sample: Boolean(campaign.sample || slide.sample),
+                        dish: slide.dishId ? dish(slide.dishId) : null,
+                        dishes: slide.dishIds ? dishes(slide.dishIds) : [],
+                        endDate: slide.schedule?.endDate ?? campaign.schedule?.endDate ?? null,
+                        media: media(slide),
+                    })),
+            }));
+        return { ...base, campaigns: campaigns(screen.campaigns), fallback: campaigns(screen.fallback) };
     }
 
     return null;

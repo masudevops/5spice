@@ -15,9 +15,13 @@
 //
 //   'promo'     Marketing slides (photos, videos, specials).
 //               campaigns: campaign ids from promotions.js, played in order.
+//               fallback: optional campaign ids played when none of
+//               `campaigns` is live (e.g. outside every meal window).
+//               With nothing live at all, a 5Spice brand slide shows.
 //
 // Dish names, descriptions, and prices come from menus/shared-items.js.
-// Prices stay hidden until a dish has one.
+// Prices stay hidden until a dish has one. Menu TVs list only dishes on the
+// restaurant menu (menus/murphy.js), never catering-only ones (catering.js).
 // Dishes that show their description on menu boards: ones whose name alone
 // may not tell guests what they are. The rest stay name-only so the text can
 // be large.
@@ -75,5 +79,16 @@ export const murphyTvScreens = {
         type: 'promo',
         title: 'Signature Dishes',
         campaigns: ['signature-dishes'],
+    },
+    5: {
+        type: 'promo',
+        title: 'Meal Specials',
+        campaigns: ['breakfast', 'lunch', 'dinner', 'special-offers', 'seasonal'],
+        fallback: ['signature-dishes'],
+    },
+    6: {
+        type: 'promo',
+        title: 'Catering & Community',
+        campaigns: ['catering', 'community', 'brand'],
     },
 };

@@ -160,7 +160,7 @@
 
   /* TV promo slides fading in (src/components/tv/PromoBoard.jsx). */
   .tv-fade {
-    animation: tvFade 0.7s ease-out backwards;
+    animation: tvFade 1.2s ease-in-out backwards;
   }
 
   @keyframes tvFade {

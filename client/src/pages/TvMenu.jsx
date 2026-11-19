@@ -7,8 +7,8 @@ import { getTvScreen } from '../data/tv';
 import { useDocumentHead } from '../hooks/useDocumentHead';
 import { TV_HEIGHT, TV_WIDTH, useFullscreenOnPress, useTvAutoUpdate, useTvScale, useWakeLock } from '../hooks/useTvDisplay';
 
-// Previews (this computer, PR preview links) fill in sample prices so the
-// layout can be judged with prices. Never on the live site,
+// Previews (this computer, PR preview links) fill in sample prices, stock
+// photos, and sample promotions so the design can be judged. Never on the live site,
 // unless asked for with ?preview=1 (or the older ?samplePrices=1).
 const isPreview = (searchParams) =>
     searchParams.get('preview') === '1'
@@ -21,7 +21,11 @@ const isPreview = (searchParams) =>
 const TvMenu = () => {
     const { slug, screen: screenNumber } = useParams();
     const [searchParams] = useSearchParams();
-    const screen = getTvScreen(slug, screenNumber, { preview: isPreview(searchParams) });
+    const preview = isPreview(searchParams);
+    const screen = getTvScreen(slug, screenNumber, { preview });
+    // Previews can pretend it's another time (?at=2026-11-19T08:00, the
+    // TV's local time) to check promo schedules.
+    const at = preview ? searchParams.get('at') : null;
     const scale = useTvScale();
     useTvAutoUpdate();
     useWakeLock();
@@ -39,7 +43,7 @@ const TvMenu = () => {
                 style={{ width: TV_WIDTH, height: TV_HEIGHT, transform: `scale(${scale})` }}
             >
                 {screen?.type === 'promo' ? (
-                    <PromoBoard screen={screen} logo={logo} />
+                    <PromoBoard screen={screen} logo={logo} at={at} />
                 ) : (
                     <MenuFrame screen={screen} logo={logo}>
                         {screen?.type === 'menu' && <ListMenuBoard screen={screen} />}

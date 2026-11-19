@@ -86,32 +86,37 @@ Six TVs. TVs 1–3 are text-only menu boards; TVs 4–6 are promo slideshows.
 How it works, editing, media rules, Fire TV setup, and the test checklist:
 `docs/TV-MENU-BOARDS.md`.
 
-Status (2026-11-19): live = old three-column design on TVs 1–3. The redesign
-following the final UX mockup (text-only TVs 1–3 with right-aligned prices;
-TV 4 full-screen `dish-showcase` slides; campaigns with on/off and
-Chicago-time schedules) is on branch `feature/tv-six-screen-layout` awaiting
-approval on the real TVs. Rollout order: TV 1 and TV 4 first, then TVs 2, 3,
-5, 6 after approval. Don't deploy to production until approved.
-Media stays as branded placeholders until 5Spice's own photos and videos
-arrive (owner decision 2026-11-19: no stand-in web photos).
+Status (2026-11-19): live = old three-column design on TVs 1–3. On branch
+`feature/tv-six-screen-layout` (draft PR #30), awaiting review: all six
+screens following the final UX design. TVs 1–3 text menus (restaurant menu
+only, text grows to fit up to 1.5×), TV 4 signature dishes, TV 5 meal
+specials (sample content, previews only), TV 6 catering and community
+(website's approved wording). Stock photos are allowed as temporary
+development assets on previews only (owner, 2026-11-19); none sourced yet.
+Don't deploy to production until approved.
 
 - [ ] **Test the redesign on the real TVs** (Dev/Owners) via the PR preview
   link: full screen (Silk toolbar was showing in the 2026-11-17 photos), TV
-  picture mode (blacks looked gray-blue), readability at 6–10 ft.
+  picture mode (blacks looked gray-blue), readability at 10–15 ft.
 - [ ] **Full screen that survives reloads** (Dev/Owners). Check whether Silk's
   own full-screen setting survives a page reload; if not, use a kiosk browser
   (e.g. Fully Kiosk, launch on boot).
-- [ ] **After approval: TVs 2 and 3** (Dev/Owners). Rebalance categories
-  (the mockup suggests Mutton Specialties on TV 2 and Rice, Pulao & Sides on
-  TV 3; owners to confirm). Today TV 3 leaves out Shahi Jarda (one dish too
-  many with right-aligned prices); fix by moving categories, not smaller text.
-- [ ] **After approval: TVs 5 and 6** (Dev). New templates (specials,
-  catering/events, branding) and campaigns. Content from the owners only.
+- [ ] **Stock photos for TVs 4–6** (Dev): 3–5 consistent, authentic
+  Bangladeshi dish photos for TV 4, plus TV 5 and 6 keys (list in
+  `docs/TV-MENU-BOARDS.md`), Unsplash/Pexels license, saved in
+  `client/public/tv-media/stock/`, previews only.
+- [ ] **Approved restaurant menu** (Owners): smaller than the catering menu.
+  Then finalize TVs 1–3 categories (the text grows automatically with fewer
+  dishes). Today TV 3 leaves out Shahi Jarda at the smallest size; don't
+  shrink text, wait for the final menu.
+- [ ] **TV 5 specials** (Owners): real breakfast/lunch/dinner times, dishes,
+  and wording, any offers; then remove `sample` from those campaigns.
+- [ ] **TV 6** (Owners): confirm wording; send event/community photos.
 - [ ] **Real dish media** (Owners) for TV 4 (and 5–6): MP4 preferred
-  (3–5 s, 720p, about 1–2 MB), GIF works. Files in `client/public/tv-media/`,
-  one line each in `media.js`, new file name for every replacement. Delete the
-  `placeholder-*.gif` files once unused. Move to Azure Blob Storage only if
-  the library grows a lot.
+  (1920×1080, 5–10 s, about 3–5 MB) or 1920×1080 photos. Files in `client/public/tv-media/`,
+  one line each in `TV_MEDIA` in `media.js` (replacing its stock photo), new
+  file name for every replacement. Move to Azure Blob Storage only if the
+  library grows a lot.
 - [ ] **Prices** (Owners) in `client/src/data/menus/shared-items.js` (shows on
   the website and TVs). Then delete `client/src/data/tv/sample-prices.js`.
 - [ ] **Confirm TV assignments** (Owners): which categories on TVs 1–3, and

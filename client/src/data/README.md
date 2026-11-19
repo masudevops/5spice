@@ -71,7 +71,8 @@ text-only menus; TVs 4–6 are promo slideshows.
 
 - What each TV shows (menu sections or promo campaigns): `tv/murphy.js`
 - Promotions (slides, on/off, schedules in Chicago time): `tv/promotions.js`
-- Dish photos and videos: `tv/media.js`, with the file in `client/public/tv-media/`
+- Photos and videos: `tv/media.js` (`TV_MEDIA` for 5Spice's own, `STOCK_MEDIA` for temporary stock photos shown on previews only), with the file in `client/public/tv-media/`
+- TVs 1–3 list only the restaurant menu (`menus/murphy.js`), never catering-only dishes (`menus/catering.js`).
 - Names, descriptions, and prices come from the menu (`menus/shared-items.js`), so the website and TVs always match.
 
 Details, media rules, Fire TV setup, and a test checklist: `docs/TV-MENU-BOARDS.md`.

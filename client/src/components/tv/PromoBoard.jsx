@@ -7,37 +7,78 @@ import { TEMPLATES } from './templates';
 const DEFAULT_SLIDE_SECONDS = 8;
 // How often to re-check schedules (campaigns starting or ending).
 const SCHEDULE_CHECK_MS = 30 * 1000;
+// How long the outgoing slide stays under the incoming one (matches .tv-fade).
+const CROSSFADE_MS = 1200;
+
+const liveSlides = (campaigns, now) => campaigns
+    .filter((campaign) => isLive(campaign, now))
+    .flatMap((campaign) => campaign.slides)
+    .filter((slide) => isLive(slide, now) && TEMPLATES[slide.template] && (slide.dishId ? slide.dish : true));
+
+// On previews, says when a slide is example content or uses a stock photo,
+// so neither is mistaken for the real thing. Never on the live TVs.
+const PreviewTag = ({ slide }) => {
+    const labels = [slide.sample && 'Sample content', slide.media?.stock && 'Stock photo'].filter(Boolean);
+    if (!labels.length) return null;
+    return (
+        <p className="absolute bottom-8 right-10 bg-ink-900/80 px-4 py-1.5 text-[20px] font-semibold uppercase tracking-[0.14em] text-brand-cream/80">
+            {labels.join(' · ')} · preview only
+        </p>
+    );
+};
+
+const Slide = ({ slide, logo, screen }) => {
+    const Template = TEMPLATES[slide.template];
+    return (
+        <>
+            <Template slide={slide} logo={logo} location={screen.location} />
+            {screen.preview && <PreviewTag slide={slide} />}
+        </>
+    );
+};
 
 // Marketing TV: plays the live slides of the screen's campaigns in order,
-// each for its `duration`, then repeats. Falls back to a brand slide when
-// nothing is live.
-const PromoBoard = ({ screen, logo }) => {
-    const [now, setNow] = useState(chicagoNow);
+// each for its `duration`, then repeats, crossfading between slides. With
+// none live it plays the screen's `fallback` campaigns, and with nothing at
+// all a brand slide. `at` (previews only, e.g. '2026-11-19T08:00') pretends
+// it's another time, to check schedules.
+const PromoBoard = ({ screen, logo, at }) => {
+    const clock = () => chicagoNow(at ? new Date(at) : undefined);
+    const [now, setNow] = useState(clock);
     const [index, setIndex] = useState(0);
+    const [outgoing, setOutgoing] = useState(null);
 
     useEffect(() => {
-        const timer = setInterval(() => setNow(chicagoNow()), SCHEDULE_CHECK_MS);
+        const timer = setInterval(() => setNow(clock()), SCHEDULE_CHECK_MS);
         return () => clearInterval(timer);
-    }, []);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [at]);
 
-    const slides = screen.campaigns
-        .filter((campaign) => isLive(campaign, now))
-        .flatMap((campaign) => campaign.slides)
-        .filter((slide) => isLive(slide, now) && TEMPLATES[slide.template] && (slide.dishId ? slide.dish : true));
+    const primary = liveSlides(screen.campaigns, now);
+    const slides = primary.length ? primary : liveSlides(screen.fallback, now);
     const position = slides.length ? index % slides.length : 0;
     const slide = slides[position];
     const seconds = slide?.duration ?? DEFAULT_SLIDE_SECONDS;
+    const key = slide ? `${slide.id}-${index}` : 'none';
 
     useEffect(() => {
         if (slides.length < 2) return undefined;
         const timer = setTimeout(() => {
             window.dispatchEvent(new Event(SLIDE_CHANGE_EVENT));
+            setOutgoing({ key, slide });
             setIndex(position + 1);
         }, seconds * 1000);
         return () => clearTimeout(timer);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [position, seconds, slides.length]);
 
-    // Warm the browser cache with the next slide's photo or GIF.
+    useEffect(() => {
+        if (!outgoing) return undefined;
+        const timer = setTimeout(() => setOutgoing(null), CROSSFADE_MS);
+        return () => clearTimeout(timer);
+    }, [outgoing]);
+
+    // Warm the browser cache with the next slide's photo.
     const next = slides[(position + 1) % (slides.length || 1)];
     useEffect(() => {
         const src = next?.media?.type !== 'video' ? next?.media?.src : null;
@@ -45,10 +86,16 @@ const PromoBoard = ({ screen, logo }) => {
     }, [next?.media?.src, next?.media?.type]);
 
     if (!slide) return <BrandSlide logo={logo} location={screen.location} />;
-    const Template = TEMPLATES[slide.template];
     return (
-        <div key={`${slide.id}-${index}`} className="tv-fade h-full">
-            <Template slide={slide} logo={logo} location={screen.location} />
+        <div className="relative h-full">
+            {outgoing && (
+                <div key={outgoing.key} className="absolute inset-0">
+                    <Slide slide={outgoing.slide} logo={logo} screen={screen} />
+                </div>
+            )}
+            <div key={key} className="tv-fade absolute inset-0">
+                <Slide slide={slide} logo={logo} screen={screen} />
+            </div>
         </div>
     );
 };
