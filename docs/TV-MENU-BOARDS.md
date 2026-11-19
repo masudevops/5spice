@@ -88,13 +88,6 @@ Until real media arrives, TV 4's dishes show animated placeholder GIFs in the
 5Spice colors (`tv-media/placeholder-gold.gif`, `-orange`, `-green`; no food
 shown). Replace them dish by dish in `media.js`.
 
-**Preview photos (testing only):** previews (your computer, PR preview links,
-or a TV address ending in `?preview=1`) show free stand-in food photos instead
-(`tv-media/preview/`, `PREVIEW_MEDIA` in `media.js`): public domain or CC0
-photos from Wikimedia Commons that need no credit. They are not 5Spice's
-dishes, so the live TVs never show them. Delete them once 5Spice's own photos
-are in.
-
 - **Video (recommended):** MP4, H.264, 1280×720, 3–5 seconds, no sound, about
   1–2 MB. Plays muted and looping.
 - **Photo:** JPG or WebP, 1280 px wide. Also used as a video's fallback.

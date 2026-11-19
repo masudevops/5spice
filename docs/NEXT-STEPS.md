@@ -102,9 +102,8 @@ awaiting approval on the real TVs. Don't deploy to production until approved.
 - [ ] **Real dish media** (Owners) for TV 4 (and 5–6): MP4 preferred
   (3–5 s, 720p, about 1–2 MB), GIF works. Files in `client/public/tv-media/`,
   one line each in `media.js`, new file name for every replacement. Delete the
-  `placeholder-*.gif` files once unused, and the stand-in preview photos in
-  `client/public/tv-media/preview/` (Wikimedia Commons, public domain/CC0,
-  previews only). Move to Azure Blob Storage only if the library grows a lot.
+  `placeholder-*.gif` files once unused. Move to Azure Blob Storage only if
+  the library grows a lot.
 - [ ] **Prices** (Owners) in `client/src/data/menus/shared-items.js` (shows on
   the website and TVs). Then delete `client/src/data/tv/sample-prices.js`.
 - [ ] **Confirm TV assignments** (Owners): which categories on TVs 1–3, and

@@ -1,6 +1,6 @@
 import { getLocationBySlug } from '../locations/index.js';
 import { getMenuByLocationSlug, getMenuItem } from '../menus/index.js';
-import { PREVIEW_MEDIA, TV_MEDIA } from './media.js';
+import { TV_MEDIA } from './media.js';
 import { murphyDescribedDishes, murphyTvScreens } from './murphy.js';
 import { PROMO_CAMPAIGNS } from './promotions.js';
 import { SAMPLE_PRICES } from './sample-prices.js';
@@ -15,8 +15,7 @@ const TV_BY_LOCATION = {
 //   promo     campaigns: [{ enabled, schedule, slides: [{ ..., dish, media }] }]
 // A promo slide without its own `media` uses the dish's entry in media.js.
 // Unknown dish ids are skipped so a typo can't break a board. `preview`
-// (layout previews only) fills missing prices with SAMPLE_PRICES and uses
-// PREVIEW_MEDIA photos where a dish has one.
+// (layout previews only) fills missing prices with SAMPLE_PRICES.
 export const getTvScreen = (locationSlug, screenNumber, { preview = false } = {}) => {
     const location = getLocationBySlug(locationSlug);
     const tv = TV_BY_LOCATION[locationSlug];
@@ -63,7 +62,7 @@ export const getTvScreen = (locationSlug, screenNumber, { preview = false } = {}
                     slides: campaign.slides.map((slide) => ({
                         ...slide,
                         dish: slide.dishId ? dish(slide.dishId) : null,
-                        media: slide.media ?? (preview && PREVIEW_MEDIA[slide.dishId]) ?? TV_MEDIA[slide.dishId] ?? null,
+                        media: slide.media ?? TV_MEDIA[slide.dishId] ?? null,
                     })),
                 })),
         };

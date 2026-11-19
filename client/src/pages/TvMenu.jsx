@@ -7,8 +7,8 @@ import { getTvScreen } from '../data/tv';
 import { useDocumentHead } from '../hooks/useDocumentHead';
 import { TV_HEIGHT, TV_WIDTH, useFullscreenOnPress, useTvAutoUpdate, useTvScale, useWakeLock } from '../hooks/useTvDisplay';
 
-// Previews (this computer, PR preview links) fill in sample prices and free
-// stand-in food photos so the layout can be judged. Never on the live site,
+// Previews (this computer, PR preview links) fill in sample prices so the
+// layout can be judged with prices. Never on the live site,
 // unless asked for with ?preview=1 (or the older ?samplePrices=1).
 const isPreview = (searchParams) =>
     searchParams.get('preview') === '1'
