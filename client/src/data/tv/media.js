@@ -18,6 +18,8 @@
 //   'beef-kachchi': { type: 'video', src: '/tv-media/kacchi.mp4', fallback: '/tv-media/kacchi.jpg' },
 //   'catering-trays': { type: 'image', src: '/tv-media/catering-trays.webp' },
 export const TV_MEDIA = {
+    'chicken-roast': { type: 'image', src: '/tv-media/chicken-roast.jpg' },
+    'beef-tehari': { type: 'image', src: '/tv-media/beef-tehari.jpg' },
 };
 
 // STOCK PHOTOS: temporary development assets, NOT photos of 5Spice's dishes.

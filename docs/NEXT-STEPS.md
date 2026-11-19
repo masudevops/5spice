@@ -104,7 +104,7 @@ Don't deploy to production until approved.
 - [ ] **Review the stock photos** (Owners): 11 temporary photos on TVs 4–6
   (previews only; list, sources, and licenses in `docs/TV-MENU-BOARDS.md`).
   Not for production without approval; replace with 5Spice's own photos and
-  videos. TV 4's Chicken Roast and Tehari slides are off until real photos.
+  videos. Chicken Roast and Tehari already use 5Spice's own photos.
 - [ ] **Approved restaurant menu** (Owners): smaller than the catering menu.
   Then finalize TVs 1–3 categories (the text grows automatically with fewer
   dishes). Today TV 3 leaves out Shahi Jarda at the smallest size; don't

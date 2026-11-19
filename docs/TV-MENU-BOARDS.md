@@ -155,9 +155,13 @@ The Pexels and Unsplash licenses and CC0 allow free commercial use with no
 credit required, but they don't cover how a photo is presented: never show a
 stock photo as if it were 5Spice's own dish, and check with the owners before
 any reaches a live TV. Photos with people in them (the chafing-dish line on
-TV 6) carry no model release. Chicken Roast and Tehari have no stock photo (no
-accurate free one was found), so their TV 4 slides are off (`enabled: false`)
-until 5Spice's own photos are in.
+TV 6) carry no model release.
+
+**5Spice's own photos in use** (`TV_MEDIA`, shown everywhere including live
+TVs): `chicken-roast` → `tv-media/chicken-roast.jpg`, `beef-tehari` →
+`tv-media/beef-tehari.jpg` (restaurant photos, 2026-11-19, prepared at
+1920×1080). Phone photos work: shoot in landscape, close up, in soft
+daylight, without flash or glare.
 
 Shoot or pick media as one campaign: same warm, natural light, similar color
 temperature, the dish on the right two thirds of the frame (the left third
