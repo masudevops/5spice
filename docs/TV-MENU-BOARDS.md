@@ -32,7 +32,9 @@ location's own (5Spice Kitchen for Murphy, `client/src/data/locations/murphy.js`
 | Dish photos and videos | `client/src/data/tv/media.js` (+ the file in `client/public/tv-media/`) |
 
 Merging to `main` deploys. TVs notice the new version within about 5 minutes
-and reload by themselves (they also reload daily at 4 AM).
+and reload by themselves (they also reload daily at 4 AM). On a promo TV the
+reload waits for the next slide change, so it never cuts a video off
+(at most 2 minutes).
 
 ## Menu TVs (1–3)
 
@@ -47,7 +49,8 @@ be large.
 - Anything that doesn't fit is left out whole (never cut in half). If a dish
   goes missing after adding one, move a section to the other column or to
   another TV.
-- Prices sit right after each dish name and stay hidden until a dish has one.
+- Prices line up on the right of each column and stay hidden until a dish
+  has one.
 - **Sample prices:** previews (your computer, PR preview links) fill in
   made-up prices from `client/src/data/tv/sample-prices.js` so the layout can
   be judged with prices. The live site never shows them, unless you add
@@ -73,7 +76,9 @@ A slideshow of **slides**, grouped into **campaigns**.
   seconds.
 - With nothing live, the TV shows a 5Spice brand slide (logo, tagline, 100%
   Zabiha Halal), never a blank screen.
-- **Templates** set how a slide looks. Today: `dish-spotlight` (a dish's
+- **Templates** set how a slide looks. Today: `dish-showcase` (TV 4: the
+  dish's photo or video full screen under a dark overlay, a short label and
+  the name, no price) and `dish-spotlight` (a dish's
   photo or video beside its name, description, and price, all from the menu).
   More (specials, catering, events) get added in
   `client/src/components/tv/templates/` and registered in its `index.js`.
@@ -94,7 +99,8 @@ shown). Replace them dish by dish in `media.js`.
 - **GIF:** works, but an MP4 of the same clip is usually 3–5× smaller and
   smoother. Prefer MP4.
 
-If a video fails to load (or doesn't start within 15 seconds), the TV shows
+If a video fails to load (or doesn't start within 15 seconds, or freezes for
+15 seconds while playing), the TV shows
 the fallback photo; if that fails too, a 5Spice placeholder.
 
 **When you replace a file, give it a new name** (`kacchi-2.mp4`) and update

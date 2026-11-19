@@ -13,6 +13,11 @@
 // tv/murphy.js; with nothing live it shows a 5Spice brand slide.
 //
 // Templates (components/tv/templates/):
+//   'dish-showcase'   one dish or campaign full screen: its photo or video
+//                     under a dark overlay, a short label, and the name.
+//                     Fields: dishId (name from the menu) or title, eyebrow
+//                     (short label above the name), optional tagline (owner-
+//                     approved wording only), optional media (as below).
 //   'dish-spotlight'  a dish's photo or video beside its name, description,
 //                     and price, all taken from the menu.
 //                     Fields: dishId, eyebrow (small label above the name),
@@ -23,9 +28,9 @@ export const PROMO_CAMPAIGNS = {
     'signature-dishes': {
         enabled: true,
         slides: [
-            { id: 'kacchi', template: 'dish-spotlight', dishId: 'beef-kachchi', eyebrow: 'Biriyani & Rice', duration: 10 },
-            { id: 'chicken-roast', template: 'dish-spotlight', dishId: 'chicken-roast', eyebrow: 'Curries & Specialties', duration: 10 },
-            { id: 'fuchka', template: 'dish-spotlight', dishId: 'fuchka', eyebrow: 'Snacks', duration: 10 },
+            { id: 'kacchi', template: 'dish-showcase', dishId: 'beef-kachchi', eyebrow: 'Our Signature', duration: 10 },
+            { id: 'chicken-roast', template: 'dish-showcase', dishId: 'chicken-roast', eyebrow: 'Our Signature', duration: 10 },
+            { id: 'fuchka', template: 'dish-showcase', dishId: 'fuchka', eyebrow: 'Our Signature', duration: 10 },
         ],
     },
 };

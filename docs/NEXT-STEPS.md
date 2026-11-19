@@ -86,10 +86,14 @@ Six TVs. TVs 1–3 are text-only menu boards; TVs 4–6 are promo slideshows.
 How it works, editing, media rules, Fire TV setup, and the test checklist:
 `docs/TV-MENU-BOARDS.md`.
 
-Status (2026-11-18): live = old three-column design on TVs 1–3. The redesign
-(text-only TVs 1–3, promo TV 4 with `dish-spotlight` template, campaigns with
-on/off and Chicago-time schedules) is on branch `feature/tv-six-screen-layout`
-awaiting approval on the real TVs. Don't deploy to production until approved.
+Status (2026-11-19): live = old three-column design on TVs 1–3. The redesign
+following the final UX mockup (text-only TVs 1–3 with right-aligned prices;
+TV 4 full-screen `dish-showcase` slides; campaigns with on/off and
+Chicago-time schedules) is on branch `feature/tv-six-screen-layout` awaiting
+approval on the real TVs. Rollout order: TV 1 and TV 4 first, then TVs 2, 3,
+5, 6 after approval. Don't deploy to production until approved.
+Media stays as branded placeholders until 5Spice's own photos and videos
+arrive (owner decision 2026-11-19: no stand-in web photos).
 
 - [ ] **Test the redesign on the real TVs** (Dev/Owners) via the PR preview
   link: full screen (Silk toolbar was showing in the 2026-11-17 photos), TV
@@ -97,6 +101,10 @@ awaiting approval on the real TVs. Don't deploy to production until approved.
 - [ ] **Full screen that survives reloads** (Dev/Owners). Check whether Silk's
   own full-screen setting survives a page reload; if not, use a kiosk browser
   (e.g. Fully Kiosk, launch on boot).
+- [ ] **After approval: TVs 2 and 3** (Dev/Owners). Rebalance categories
+  (the mockup suggests Mutton Specialties on TV 2 and Rice, Pulao & Sides on
+  TV 3; owners to confirm). Today TV 3 leaves out Shahi Jarda (one dish too
+  many with right-aligned prices); fix by moving categories, not smaller text.
 - [ ] **After approval: TVs 5 and 6** (Dev). New templates (specials,
   catering/events, branding) and campaigns. Content from the owners only.
 - [ ] **Real dish media** (Owners) for TV 4 (and 5–6): MP4 preferred

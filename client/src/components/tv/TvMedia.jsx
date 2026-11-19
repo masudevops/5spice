@@ -2,6 +2,10 @@ import { useEffect, useRef, useState } from 'react';
 
 // A video that hasn't started playing by then is treated as failed.
 const VIDEO_START_TIMEOUT_MS = 15000;
+// A playing video whose picture hasn't moved for this long is treated as
+// frozen (e.g. a decoder hiccup on a long-running TV stick).
+const VIDEO_STALL_TIMEOUT_MS = 15000;
+const STALL_CHECK_MS = 5000;
 
 // Branded stand-in for a dish without media (or whose media failed).
 const Placeholder = ({ logo }) => (
@@ -42,6 +46,25 @@ const TvMedia = ({ media, logo, startDelay = 0, frameClassName = 'aspect-[2/1]' 
         const timer = setTimeout(() => { if (video?.paused) fail(); }, VIDEO_START_TIMEOUT_MS);
         video?.play().catch(() => { /* autoplay blocked or failed: the timeout steps down */ });
         return () => clearTimeout(timer);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isVideo, stage, videoReady]);
+
+    // Step down to the fallback photo if a playing video freezes.
+    useEffect(() => {
+        if (!isVideo || stage !== 'main' || !videoReady) return undefined;
+        let lastTime = -1;
+        let stuckSince = Date.now();
+        const timer = setInterval(() => {
+            const video = videoRef.current;
+            if (!video || video.paused) return;
+            if (video.currentTime !== lastTime) {
+                lastTime = video.currentTime;
+                stuckSince = Date.now();
+            } else if (Date.now() - stuckSince > VIDEO_STALL_TIMEOUT_MS) {
+                fail();
+            }
+        }, STALL_CHECK_MS);
+        return () => clearInterval(timer);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isVideo, stage, videoReady]);
 

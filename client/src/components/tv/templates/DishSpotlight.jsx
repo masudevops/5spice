@@ -15,7 +15,7 @@ const DishSpotlight = ({ slide, logo, location }) => {
                     {eyebrow && <p className="text-[30px] font-semibold uppercase tracking-[0.22em] text-brand-gold">{eyebrow}</p>}
                     <h1 className="mt-5 font-serif text-[84px] font-bold leading-[1.05] text-white">{dish.name}</h1>
                     {dish.description && <p className="mt-6 text-[38px] leading-snug text-brand-cream/86">{dish.description}</p>}
-                    {dish.price != null && <p className="mt-8"><Price price={dish.price} className="!ml-0 text-[64px]" /></p>}
+                    {dish.price != null && <p className="mt-8"><Price price={dish.price} className="text-[64px]" /></p>}
                 </div>
                 {location.halal && (
                     <p className="flex items-center gap-3 text-[28px] font-semibold text-brand-cream/92">

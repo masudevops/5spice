@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { chicagoNow, isLive } from '../../data/tv/schedule';
+import { SLIDE_CHANGE_EVENT } from '../../hooks/useTvDisplay';
 import BrandSlide from './templates/BrandSlide';
 import { TEMPLATES } from './templates';
 
@@ -29,7 +30,10 @@ const PromoBoard = ({ screen, logo }) => {
 
     useEffect(() => {
         if (slides.length < 2) return undefined;
-        const timer = setTimeout(() => setIndex(position + 1), seconds * 1000);
+        const timer = setTimeout(() => {
+            window.dispatchEvent(new Event(SLIDE_CHANGE_EVENT));
+            setIndex(position + 1);
+        }, seconds * 1000);
         return () => clearTimeout(timer);
     }, [position, seconds, slides.length]);
 

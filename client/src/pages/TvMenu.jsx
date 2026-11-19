@@ -35,7 +35,7 @@ const TvMenu = () => {
     return (
         <div className="fixed inset-0 flex cursor-none items-center justify-center overflow-hidden bg-ink-950">
             <div
-                className="flex shrink-0 flex-col bg-ink-900 font-sans text-brand-cream bg-[radial-gradient(circle_at_50%_0%,rgb(var(--color-gold-deep)/0.12),transparent_40%),linear-gradient(135deg,rgb(var(--color-ink-900))_0%,rgb(var(--color-ink-750))_56%,rgb(var(--color-ink-900))_100%)]"
+                className="flex shrink-0 flex-col bg-ink-900 font-sans text-brand-cream"
                 style={{ width: TV_WIDTH, height: TV_HEIGHT, transform: `scale(${scale})` }}
             >
                 {screen?.type === 'promo' ? (

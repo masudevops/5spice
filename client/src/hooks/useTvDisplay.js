@@ -36,6 +36,25 @@ const reloadWith = (key, value) => {
     window.location.replace(`${window.location.pathname}?${params}`);
 };
 
+// Promo boards announce each slide change (PromoBoard), so a reload can wait
+// for one instead of cutting a video off mid-play. It never waits longer than
+// MAX_RELOAD_WAIT_MS (e.g. a single looping video).
+export const SLIDE_CHANGE_EVENT = 'tv:slidechange';
+const MAX_RELOAD_WAIT_MS = 2 * 60 * 1000;
+const videoPlaying = () => [...document.querySelectorAll('video')].some((video) => !video.paused && !video.ended);
+let reloadPending = false;
+const reloadWhenIdle = (key, value) => {
+    if (reloadPending) return;
+    if (!videoPlaying()) {
+        reloadWith(key, value);
+        return;
+    }
+    reloadPending = true;
+    const go = () => reloadWith(key, value);
+    window.addEventListener(SLIDE_CHANGE_EVENT, go, { once: true });
+    setTimeout(go, MAX_RELOAD_WAIT_MS);
+};
+
 // Reloads the board when a new site version is deployed (checked every few
 // minutes) and once a day. Network errors are ignored: the board keeps
 // showing what it has and tries again on the next check.
@@ -51,7 +70,7 @@ export const useTvAutoUpdate = () => {
                 // Skip if we already reloaded for this version and still got the
                 // old one (a cache in the way), so the board can't reload in a loop.
                 const alreadyTried = new URLSearchParams(window.location.search).get('v') === latest;
-                if (latest && running && latest !== running && !alreadyTried) reloadWith('v', latest);
+                if (latest && running && latest !== running && !alreadyTried) reloadWhenIdle('v', latest);
             } catch { /* offline: try again later */ }
         };
         const interval = setInterval(checkForUpdate, UPDATE_CHECK_MS);
@@ -59,7 +78,7 @@ export const useTvAutoUpdate = () => {
         const next = new Date();
         next.setHours(DAILY_RELOAD_HOUR, 0, 0, 0);
         if (next <= new Date()) next.setDate(next.getDate() + 1);
-        const daily = setTimeout(() => reloadWith('r', Date.now()), next - new Date());
+        const daily = setTimeout(() => reloadWhenIdle('r', Date.now()), next - new Date());
 
         return () => {
             clearInterval(interval);

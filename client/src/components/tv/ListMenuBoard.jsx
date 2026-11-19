@@ -29,21 +29,21 @@ const MenuColumn = ({ sections }) => {
     }, [sections]);
 
     return (
-        <div ref={columnRef} className="relative flex min-h-0 flex-col overflow-hidden">
+        <div ref={columnRef} className="relative flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden">
             {sections.flatMap((section, index) => [
                 <h2
                     key={`heading-${section.title}`}
                     data-heading
-                    className={`flex items-center gap-5 pb-2 font-serif text-[44px] font-semibold leading-tight text-brand-gold after:h-px after:flex-1 after:bg-brand-gold-deep/45 ${index > 0 ? 'mt-6' : ''}`}
+                    className={`flex items-center gap-5 pb-2 font-serif text-[44px] font-semibold leading-tight text-brand-gold after:h-px after:flex-1 after:bg-brand-gold-deep/45 ${index > 0 ? 'mt-5' : ''}`}
                 >
                     {section.title}
                 </h2>,
                 ...section.items.map((item) => (
-                    <div key={item.id} className="py-[7px]">
-                        <p className="font-serif text-[46px] font-bold leading-[1.1] text-white">
-                            {item.name}
+                    <div key={item.id} className="py-[6px]">
+                        <div className="flex items-baseline justify-between gap-8">
+                            <p className="font-serif text-[46px] font-bold leading-[1.1] text-white">{item.name}</p>
                             <Price price={item.price} className="text-[42px]" />
-                        </p>
+                        </div>
                         {item.showDescription && item.description && (
                             <p className="mt-1 text-[28px] leading-snug text-brand-cream/86">{item.description}</p>
                         )}
@@ -54,11 +54,14 @@ const MenuColumn = ({ sections }) => {
     );
 };
 
-// Text-only menu board: two columns of large type, no media, so it reads
-// from 6–10 feet away.
+// Text-only menu board: two columns of large type with prices lined up on
+// the right, no media, so it reads from 6–10 feet away.
 const ListMenuBoard = ({ screen }) => (
-    <main className="grid min-h-0 flex-1 grid-cols-2 gap-20 px-16 pb-5 pt-7">
-        {screen.columns.map((sections, index) => <MenuColumn key={index} sections={sections} />)}
+    <main className="flex min-h-0 flex-1 gap-16 px-16 pb-5 pt-6">
+        {screen.columns.map((sections, index) => [
+            index > 0 && <span key={`rule-${index}`} className="w-px shrink-0 bg-brand-gold-deep/30" aria-hidden="true" />,
+            <MenuColumn key={index} sections={sections} />,
+        ])}
     </main>
 );
 
