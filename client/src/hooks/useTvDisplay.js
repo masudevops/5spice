@@ -86,3 +86,22 @@ export const useWakeLock = () => {
         };
     }, []);
 };
+
+// Fire TV's Silk browser shows its address bar until it goes full screen. A
+// web page may only ask for full screen after a button press, so any remote
+// press (or click) does it. A kiosk browser, or Silk's own full-screen
+// button, needs no press.
+export const useFullscreenOnPress = () => {
+    useEffect(() => {
+        const enter = () => {
+            if (document.fullscreenElement) return;
+            document.documentElement.requestFullscreen?.().catch(() => { /* not allowed */ });
+        };
+        window.addEventListener('keydown', enter);
+        window.addEventListener('click', enter);
+        return () => {
+            window.removeEventListener('keydown', enter);
+            window.removeEventListener('click', enter);
+        };
+    }, []);
+};

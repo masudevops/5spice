@@ -11,15 +11,16 @@ const Placeholder = ({ logo }) => (
                 <span key={index} className={`h-2.5 w-2.5 rounded-full ${color}`} />
             ))}
         </div>
-        {logo && <img src={logo.src} alt="" className="h-20 w-auto object-contain opacity-60" />}
+        {logo && <img src={logo.src} alt="" className="h-20 w-auto object-contain opacity-60 mix-blend-lighten" />}
     </div>
 );
 
-// The featured dish's video, GIF, or photo, filling its 16:9 frame.
+// A dish's video, GIF, or photo, filling its frame (2:1 by default; pass
+// `frameClassName` for another shape, e.g. 'aspect-video').
 // Video → fallback photo → placeholder, stepping down whenever a file fails
 // to load (or a video doesn't start playing in time). `startDelay` staggers
 // when videos begin downloading so a screen doesn't fetch all of them at once.
-const TvMedia = ({ media, logo, startDelay = 0 }) => {
+const TvMedia = ({ media, logo, startDelay = 0, frameClassName = 'aspect-[2/1]' }) => {
     // Which source is showing: 'main', 'fallback', or 'placeholder'.
     const [stage, setStage] = useState(media?.src ? 'main' : 'placeholder');
     const [videoReady, setVideoReady] = useState(startDelay === 0);
@@ -44,9 +45,9 @@ const TvMedia = ({ media, logo, startDelay = 0 }) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isVideo, stage, videoReady]);
 
-    // 2:1 frame: 16:9 footage fills it with a slight top and bottom crop.
+    // In the 2:1 frame, 16:9 footage fills it with a slight top and bottom crop.
     return (
-        <div className="relative aspect-[2/1] overflow-hidden bg-ink-950">
+        <div className={`relative overflow-hidden bg-ink-950 ${frameClassName}`}>
             <Placeholder logo={logo} />
             {stage === 'main' && isVideo && videoReady && (
                 <video

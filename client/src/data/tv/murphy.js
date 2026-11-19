@@ -1,19 +1,26 @@
-// TV menu boards at 5Spice Kitchen — Murphy, one entry per TV.
+// TV screens at 5Spice Kitchen — Murphy, one entry per TV.
 // TV 1 is at /tv/murphy/1, TV 2 at /tv/murphy/2, and so on. To add a TV, add
 // the next number here.
 //
-// Each screen has a title and three columns. Each column has:
-//   title      heading shown above the column
-//   featured   dish id shown large, with its photo or video (see media.js)
-//   mediaId    optional: use this media entry instead of the dish's own
-//   itemIds    dishes listed below it (4 fit)
+// Each screen has a `type`:
 //
-// Dish ids, names, descriptions, and prices come from menus/shared-items.js.
+//   'menu'      Text-only menu board (large type, two columns).
+//               columns: two lists of sections. A section is either
+//                 { category: 'Biriyani & Rice Dishes', group: 'Chicken' }
+//               which lists that part of the Murphy menu (menus/murphy.js),
+//               so new dishes appear automatically, or
+//                 { title: 'Our Favorites', itemIds: ['beef-kachchi', ...] }
+//               Optional `title` renames a section. Dishes that don't fit
+//               are left out whole (never cut in half).
+//
+//   'promo'     Marketing slides (photos, videos, specials).
+//               campaigns: campaign ids from promotions.js, played in order.
+//
+// Dish names, descriptions, and prices come from menus/shared-items.js.
 // Prices stay hidden until a dish has one.
-// The dish groupings below are a starting point for the owners to adjust.
-// Featured dishes always show their description. Listed dishes show one only
-// if they're here: dishes whose name alone may not tell guests what they are.
-// Keeping the rest name-only leaves room for large, readable text.
+// Dishes that show their description on menu boards: ones whose name alone
+// may not tell guests what they are. The rest stay name-only so the text can
+// be large.
 export const murphyDescribedDishes = [
     'beef-tehari', 'morog-polao', 'mutton-haji-biryani', 'bhuna-khichuri', 'plain-polao',
     'beef-kala-bhuna', 'dal', 'fuchka', 'piaju', 'puri',
@@ -22,63 +29,51 @@ export const murphyDescribedDishes = [
 
 export const murphyTvScreens = {
     1: {
-        title: 'Biriyani, Curries & Snacks',
+        type: 'menu',
+        title: 'Biriyani & Rice',
         columns: [
-            {
-                title: 'Biriyani & Rice',
-                featured: 'beef-kachchi',
-                itemIds: ['chicken-biryani', 'beef-tehari', 'morog-polao', 'shahi-chicken-biryani'],
-            },
-            {
-                title: 'Curries & Specialties',
-                featured: 'chicken-roast',
-                itemIds: ['beef-kala-bhuna', 'chicken-korma', 'karahi-chicken', 'beef-bhuna'],
-            },
-            {
-                title: 'Snacks & Drinks',
-                featured: 'fuchka',
-                itemIds: ['piaju', 'samusa', 'special-chai', 'mango-lassi'],
-            },
+            [
+                { category: 'Biriyani & Rice Dishes', group: 'Chicken' },
+                { category: 'Biriyani & Rice Dishes', group: 'Beef' },
+            ],
+            [
+                { category: 'Biriyani & Rice Dishes', group: 'Mutton' },
+                { category: 'Biriyani & Rice Dishes', group: 'Other Rice Dishes', title: 'Rice' },
+            ],
         ],
     },
     2: {
-        title: 'Biriyani, Curries & Kebabs',
+        type: 'menu',
+        title: 'Curries, Kebabs & Sides',
         columns: [
-            {
-                title: 'Beef & Mutton Biriyani',
-                featured: 'mutton-kachchi',
-                itemIds: ['beef-biryani', 'shahi-beef-biryani', 'mutton-biryani', 'mutton-haji-biryani'],
-            },
-            {
-                title: 'Home-Style Curries',
-                featured: 'mutton-bhuna',
-                itemIds: ['chicken-curry', 'chicken-bhuna', 'beef-curry', 'mutton-curry'],
-            },
-            {
-                title: 'Kebabs & Snacks',
-                featured: 'beef-tikka-kebab',
-                itemIds: ['puri', 'samusa', 'piaju', 'fuchka'],
-            },
+            [
+                { category: 'Chicken Curries & Specialties', title: 'Chicken' },
+                { category: 'Beef Curries & Specialties', title: 'Beef' },
+            ],
+            [
+                { category: 'Mutton Curries & Specialties', title: 'Mutton' },
+                { category: 'Kebabs' },
+                { category: 'Vegetables & Sides' },
+            ],
         ],
     },
     3: {
-        title: 'Breakfast, Sides & Sweets',
+        type: 'menu',
+        title: 'Breakfast, Snacks, Sweets & Drinks',
         columns: [
-            {
-                title: 'Breakfast',
-                featured: 'paratha-roti',
-                itemIds: ['dim-bhaji', 'aloo-bhaji', 'dal-gosht', 'halwa'],
-            },
-            {
-                title: 'Rice & Sides',
-                featured: 'bhuna-khichuri',
-                itemIds: ['plain-polao', 'basmati-rice', 'dal', 'mixed-vegetables'],
-            },
-            {
-                title: 'Desserts & Drinks',
-                featured: 'firni',
-                itemIds: ['jarda', 'borhani', 'mango-lassi', 'special-chai'],
-            },
+            [
+                { category: 'Breakfast' },
+                { category: 'Desserts' },
+            ],
+            [
+                { category: 'Snacks' },
+                { category: 'Drinks' },
+            ],
         ],
+    },
+    4: {
+        type: 'promo',
+        title: 'Signature Dishes',
+        campaigns: ['signature-dishes'],
     },
 };

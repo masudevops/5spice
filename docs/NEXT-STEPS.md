@@ -1,7 +1,7 @@
 # 5Spice website: next steps
 
 Tracking list for upcoming website work. Tick items off as they ship, and add
-new ones at the bottom of the right section. Most recent update: 2026-11-17.
+new ones at the bottom of the right section. Most recent update: 2026-11-18.
 
 **Who:** *Owners* = business decision or information needed. *Marketing* =
 Branding & Marketing team. *Dev* = code change (can be done with Claude Code).
@@ -80,44 +80,41 @@ These block accurate content. Nothing on the site is invented in the meantime.
   titles and descriptions look right when links are shared on Facebook and
   WhatsApp.
 
-## 3a. In-store TV menu boards (Murphy)
+## 3a. In-store TV screens (Murphy)
 
-Live since 2026-11-17 at `/tv/murphy/1`, `/2`, `/3` (unlisted, `noindex`).
-How it works, media rules, Fire TV setup, and the test checklist:
-`docs/TV-MENU-BOARDS.md`. Screens: `client/src/data/tv/murphy.js`; media:
-`client/src/data/tv/media.js`; dishes and prices come from the website menu.
+Six TVs. TVs 1–3 are text-only menu boards; TVs 4–6 are promo slideshows.
+How it works, editing, media rules, Fire TV setup, and the test checklist:
+`docs/TV-MENU-BOARDS.md`.
 
-- [ ] **Test on the real TVs** (Dev/Owners). Fire TV stick + kiosk browser
-  (launch on boot, kiosk mode, keep screen on), TV overscan off, picture mode
-  Standard. Run the checklist in `docs/TV-MENU-BOARDS.md` (power cut, Wi-Fi
-  drop, overnight run, update within 5 minutes).
-- [ ] **Viewing distance** (Owners). Measure from where guests order to the
-  TVs. Text is sized for about 8–12 ft; farther means larger text and fewer
-  dishes per screen.
-- [ ] **Real dish media** (Owners). GIF or, better, MP4 (3–5 s, 720p, about
-  1–2 MB; MP4 is 3–5× smaller than GIF). Files go in
-  `client/public/tv-media/`, one line each in `media.js`. New file name for
-  every replacement. Delete the `placeholder-*.gif` files once unused. If the
-  library grows a lot, move media to Azure Blob Storage (full URLs in
-  `media.js`, no other changes).
-- [ ] **Prices** (Owners). Real prices go in
-  `client/src/data/menus/shared-items.js` (shows on the website and TVs).
-  Until then the live TVs hide prices; previews (local, PR links) show sample
-  prices from `client/src/data/tv/sample-prices.js`. Delete that file once
-  real prices are in.
-- [ ] **Confirm what each TV shows** (Owners). TVs 2–3 groupings, featured
-  dishes, and which listed dishes keep a description (`murphyDescribedDishes`)
-  were a starting point.
-- [ ] **5Spice Special badge** (Owners). "5Spice Special" was taken out of the
-  Tehari and Chai names (2026-11-17). If they should still be highlighted, add
-  `special: true` to both dishes (badge + menu filter).
-- [ ] **Biriyani and search** (Owners/Marketing, optional). Site copy uses
-  "Biriyani" (owners, 2026-11-17). Optionally keep "biryani" in hidden page
-  descriptions for Google.
-- [ ] **Later:** QR code to the Catering page in the TV footer; Toast POS sync
-  for names and prices through `getMenuItem()` in
-  `client/src/data/menus/index.js` (server-side job, keys never in the
-  browser), media stays team-managed.
+Status (2026-11-18): live = old three-column design on TVs 1–3. The redesign
+(text-only TVs 1–3, promo TV 4 with `dish-spotlight` template, campaigns with
+on/off and Chicago-time schedules) is on branch `feature/tv-six-screen-layout`
+awaiting approval on the real TVs. Don't deploy to production until approved.
+
+- [ ] **Test the redesign on the real TVs** (Dev/Owners) via the PR preview
+  link: full screen (Silk toolbar was showing in the 2026-11-17 photos), TV
+  picture mode (blacks looked gray-blue), readability at 6–10 ft.
+- [ ] **Full screen that survives reloads** (Dev/Owners). Check whether Silk's
+  own full-screen setting survives a page reload; if not, use a kiosk browser
+  (e.g. Fully Kiosk, launch on boot).
+- [ ] **After approval: TVs 5 and 6** (Dev). New templates (specials,
+  catering/events, branding) and campaigns. Content from the owners only.
+- [ ] **Real dish media** (Owners) for TV 4 (and 5–6): MP4 preferred
+  (3–5 s, 720p, about 1–2 MB), GIF works. Files in `client/public/tv-media/`,
+  one line each in `media.js`, new file name for every replacement. Delete the
+  `placeholder-*.gif` files once unused. Move to Azure Blob Storage only if
+  the library grows a lot.
+- [ ] **Prices** (Owners) in `client/src/data/menus/shared-items.js` (shows on
+  the website and TVs). Then delete `client/src/data/tv/sample-prices.js`.
+- [ ] **Confirm TV assignments** (Owners): which categories on TVs 1–3, and
+  which dishes keep a description (`murphyDescribedDishes`).
+- [ ] **5Spice Special badge** (Owners). Removed from the Tehari and Chai names
+  (2026-11-17). Add `special: true` to both if they should still be marked.
+- [ ] **Biriyani and search** (Owners/Marketing, optional). Optionally keep
+  "biryani" in hidden page descriptions for Google.
+- [ ] **Later:** QR code to the Catering page; Toast POS sync for names and
+  prices (`getMenuItem()` / `getMenuByLocationSlug()`, server-side job), with
+  promotions and media staying team-managed.
 
 ## 4. Housekeeping
 
