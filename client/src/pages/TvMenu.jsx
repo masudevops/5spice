@@ -7,11 +7,13 @@ import { getTvScreen } from '../data/tv';
 import { useDocumentHead } from '../hooks/useDocumentHead';
 import { TV_HEIGHT, TV_WIDTH, useFullscreenOnPress, useTvAutoUpdate, useTvScale, useWakeLock } from '../hooks/useTvDisplay';
 
-// Sample prices fill in missing ones on previews (this computer, PR preview
-// links) so the layout can be judged with prices. Never on the live site,
-// unless asked for with ?samplePrices=1.
-const showSamplePrices = (searchParams) =>
-    searchParams.get('samplePrices') === '1' || !/(^|\.)5spicemarket\.com$/.test(window.location.hostname);
+// Previews (this computer, PR preview links) fill in sample prices and free
+// stand-in food photos so the layout can be judged. Never on the live site,
+// unless asked for with ?preview=1 (or the older ?samplePrices=1).
+const isPreview = (searchParams) =>
+    searchParams.get('preview') === '1'
+    || searchParams.get('samplePrices') === '1'
+    || !/(^|\.)5spicemarket\.com$/.test(window.location.hostname);
 
 // In-store TV screen at /tv/:slug/:screen (e.g. /tv/murphy/1), drawn on a
 // 1920×1080 canvas: a text-only menu board or a promo slideshow, as set up
@@ -19,7 +21,7 @@ const showSamplePrices = (searchParams) =>
 const TvMenu = () => {
     const { slug, screen: screenNumber } = useParams();
     const [searchParams] = useSearchParams();
-    const screen = getTvScreen(slug, screenNumber, { samplePrices: showSamplePrices(searchParams) });
+    const screen = getTvScreen(slug, screenNumber, { preview: isPreview(searchParams) });
     const scale = useTvScale();
     useTvAutoUpdate();
     useWakeLock();

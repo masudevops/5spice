@@ -26,6 +26,26 @@ const placeholder = (color) => ({ type: 'gif', src: `/tv-media/placeholder-${col
 
 export const TV_MEDIA = {
     'beef-kachchi': placeholder('gold'),
-    'chicken-roast': placeholder('orange'),
-    fuchka: placeholder('green'),
+    'chicken-korma': placeholder('orange'),
+    samusa: placeholder('green'),
+    firni: placeholder('gold'),
+};
+
+// PREVIEW ONLY: free photos (public domain / CC0, no credit required) from
+// Wikimedia Commons, so the layout can be judged with real food on the TVs.
+// They are NOT 5Spice's dishes, so they show only on previews (this computer,
+// PR preview links, or a TV address ending in ?preview=1), never on the live
+// TVs. Delete them once 5Spice's own photos are in TV_MEDIA.
+// Sources (commons.wikimedia.org/wiki/File:…):
+//   kacchi-biriyani.jpg  Hyderabadi_Kachay_Gosht_Ki_Biryani.JPG (CC0)
+//   chicken-korma.jpg    Chicken_Korma.JPG (CC0)
+//   samusa.jpg           Samosa_fried.JPG (public domain)
+//   firni.jpg            Firni.JPG (CC0)
+const previewPhoto = (file) => ({ type: 'image', src: `/tv-media/preview/${file}` });
+
+export const PREVIEW_MEDIA = {
+    'beef-kachchi': previewPhoto('kacchi-biriyani.jpg'),
+    'chicken-korma': previewPhoto('chicken-korma.jpg'),
+    samusa: previewPhoto('samusa.jpg'),
+    firni: previewPhoto('firni.jpg'),
 };

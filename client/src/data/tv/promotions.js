@@ -24,8 +24,9 @@ export const PROMO_CAMPAIGNS = {
         enabled: true,
         slides: [
             { id: 'kacchi', template: 'dish-spotlight', dishId: 'beef-kachchi', eyebrow: 'Biriyani & Rice', duration: 10 },
-            { id: 'chicken-roast', template: 'dish-spotlight', dishId: 'chicken-roast', eyebrow: 'Curries & Specialties', duration: 10 },
-            { id: 'fuchka', template: 'dish-spotlight', dishId: 'fuchka', eyebrow: 'Snacks', duration: 10 },
+            { id: 'chicken-korma', template: 'dish-spotlight', dishId: 'chicken-korma', eyebrow: 'Curries & Specialties', duration: 10 },
+            { id: 'samusa', template: 'dish-spotlight', dishId: 'samusa', eyebrow: 'Snacks', duration: 10 },
+            { id: 'firni', template: 'dish-spotlight', dishId: 'firni', eyebrow: 'Desserts', duration: 10 },
         ],
     },
 };

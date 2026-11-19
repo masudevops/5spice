@@ -51,8 +51,8 @@ be large.
 - **Sample prices:** previews (your computer, PR preview links) fill in
   made-up prices from `client/src/data/tv/sample-prices.js` so the layout can
   be judged with prices. The live site never shows them, unless you add
-  `?samplePrices=1` to a TV address to check the layout there. Delete that
-  file once real prices are in.
+  `?preview=1` to a TV address to check the layout there. Delete that file
+  once real prices are in.
 
 **Readability:** sized for 6–10 ft. Dish names 46px (about 0.8 in tall on a
 55" TV), prices 42px gold, section headings 44px, descriptions 28px. Text is
@@ -87,6 +87,13 @@ Use real 5Spice footage and photos only. No stock or AI-generated media.
 Until real media arrives, TV 4's dishes show animated placeholder GIFs in the
 5Spice colors (`tv-media/placeholder-gold.gif`, `-orange`, `-green`; no food
 shown). Replace them dish by dish in `media.js`.
+
+**Preview photos (testing only):** previews (your computer, PR preview links,
+or a TV address ending in `?preview=1`) show free stand-in food photos instead
+(`tv-media/preview/`, `PREVIEW_MEDIA` in `media.js`): public domain or CC0
+photos from Wikimedia Commons that need no credit. They are not 5Spice's
+dishes, so the live TVs never show them. Delete them once 5Spice's own photos
+are in.
 
 - **Video (recommended):** MP4, H.264, 1280×720, 3–5 seconds, no sound, about
   1–2 MB. Plays muted and looping.

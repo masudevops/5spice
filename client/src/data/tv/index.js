@@ -1,6 +1,6 @@
 import { getLocationBySlug } from '../locations/index.js';
 import { getMenuByLocationSlug, getMenuItem } from '../menus/index.js';
-import { TV_MEDIA } from './media.js';
+import { PREVIEW_MEDIA, TV_MEDIA } from './media.js';
 import { murphyDescribedDishes, murphyTvScreens } from './murphy.js';
 import { PROMO_CAMPAIGNS } from './promotions.js';
 import { SAMPLE_PRICES } from './sample-prices.js';
@@ -14,9 +14,10 @@ const TV_BY_LOCATION = {
 //   menu      columns: [[{ title, items }]]
 //   promo     campaigns: [{ enabled, schedule, slides: [{ ..., dish, media }] }]
 // A promo slide without its own `media` uses the dish's entry in media.js.
-// Unknown dish ids are skipped so a typo can't break a board. `samplePrices`
-// fills missing prices with SAMPLE_PRICES (layout previews only).
-export const getTvScreen = (locationSlug, screenNumber, { samplePrices = false } = {}) => {
+// Unknown dish ids are skipped so a typo can't break a board. `preview`
+// (layout previews only) fills missing prices with SAMPLE_PRICES and uses
+// PREVIEW_MEDIA photos where a dish has one.
+export const getTvScreen = (locationSlug, screenNumber, { preview = false } = {}) => {
     const location = getLocationBySlug(locationSlug);
     const tv = TV_BY_LOCATION[locationSlug];
     const screen = tv?.screens[screenNumber];
@@ -26,7 +27,7 @@ export const getTvScreen = (locationSlug, screenNumber, { samplePrices = false }
     const dish = (id) => {
         const item = getMenuItem(id);
         if (!item) return null;
-        return samplePrices && item.price == null ? { ...item, price: SAMPLE_PRICES[id] ?? null } : item;
+        return preview && item.price == null ? { ...item, price: SAMPLE_PRICES[id] ?? null } : item;
     };
     const dishes = (ids) => ids
         .map(dish)
@@ -62,7 +63,7 @@ export const getTvScreen = (locationSlug, screenNumber, { samplePrices = false }
                     slides: campaign.slides.map((slide) => ({
                         ...slide,
                         dish: slide.dishId ? dish(slide.dishId) : null,
-                        media: slide.media ?? TV_MEDIA[slide.dishId] ?? null,
+                        media: slide.media ?? (preview && PREVIEW_MEDIA[slide.dishId]) ?? TV_MEDIA[slide.dishId] ?? null,
                     })),
                 })),
         };
