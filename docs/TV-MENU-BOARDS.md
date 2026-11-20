@@ -92,7 +92,9 @@ A slideshow of **slides**, grouped into **campaigns**.
   Switching a meal off (`enabled: false`) removes it everywhere, including
   the summary.
 - With none of its campaigns live, a TV plays its `fallback` campaigns
-  (TV 5 falls back to the signature dishes outside every meal window), and
+  (TV 5: `menu-highlights`, Breakfast / Biriyani & Rice / Curries with dishes
+  and prices straight from the menu, no specials or hours claimed; that's
+  what the live TV 5 shows until the owners' specials replace the samples), and
   with nothing live at all a 5Spice brand slide, never a blank screen.
 - Slides crossfade (1.2 s). No other animation.
 - **Templates** (`client/src/components/tv/templates/`) all share one frame

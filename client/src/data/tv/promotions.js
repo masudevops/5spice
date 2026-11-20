@@ -93,6 +93,16 @@ export const PROMO_CAMPAIGNS = {
             { id: 'todays-specials', template: 'meals-summary', meals: ['breakfast', 'lunch', 'dinner'], duration: 10 },
         ],
     },
+    // TV 5 on the live TVs until real specials are in: dishes and prices
+    // straight from the menu, no specials, offers, or hours claimed.
+    'menu-highlights': {
+        enabled: true,
+        slides: [
+            { id: 'menu-breakfast', template: 'special', mediaKey: 'breakfast', badge: 'From Our Menu', headline: 'Breakfast', dishIds: ['paratha-roti', 'dim-bhaji', 'dal-gosht'], duration: 12 },
+            { id: 'menu-biriyani', template: 'special', mediaKey: 'lunch', badge: 'From Our Menu', headline: 'Biriyani & Rice', dishIds: ['chicken-biryani', 'morog-polao', 'beef-tehari'], duration: 12 },
+            { id: 'menu-curries', template: 'special', mediaKey: 'dinner', badge: 'From Our Menu', headline: 'Curries', dishIds: ['chicken-roast', 'beef-kala-bhuna', 'mutton-bhuna'], duration: 12 },
+        ],
+    },
     'special-offers': {
         enabled: true,
         sample: true,
