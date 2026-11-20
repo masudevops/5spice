@@ -48,4 +48,15 @@ export const hasPublicCateringMenu = () => Boolean(cateringMenu.published);
 // to Toast POS data later.
 export const getMenuItem = (id) => SHARED_ITEMS[id] ?? null;
 
-export const getCateringMenu = () => (hasPublicCateringMenu() ? resolveMenu(cateringMenu) : null);
+// Restaurant prices never show on the catering menu: catering is priced by
+// quote (catering-specific prices can be added here later).
+const withoutPrices = (menu) => ({
+    ...menu,
+    categories: menu.categories.map((category) => ({
+        ...category,
+        groups: category.groups.map((group) => ({ ...group, items: group.items.map((item) => ({ ...item, price: null })) })),
+        items: category.items.map((item) => ({ ...item, price: null })),
+    })),
+});
+
+export const getCateringMenu = () => (hasPublicCateringMenu() ? withoutPrices(resolveMenu(cateringMenu)) : null);

@@ -59,11 +59,9 @@ be large.
   TV rather than making the text smaller.
 - Prices line up on the right of each column and stay hidden until a dish
   has one.
-- **Sample prices:** previews (your computer, PR preview links) fill in
-  made-up prices from `client/src/data/tv/sample-prices.js` so the layout can
-  be judged with prices. The live site never shows them, unless you add
-  `?preview=1` to a TV address to check the layout there. Delete that file
-  once real prices are in.
+- Prices come from the menu (`client/src/data/menus/shared-items.js`, owner-
+  confirmed 2026-11-19), the same as the website's Murphy menu. A dish with
+  no price shows none. The catering menu never shows these prices.
 
 **Readability:** base (smallest) sizes are dish names 46px (about 0.8 in tall
 on a 55" TV), prices 42px gold, section headings 44px, descriptions 28px; a

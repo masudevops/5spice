@@ -87,8 +87,7 @@ How it works, editing, media rules, Fire TV setup, and the test checklist:
 `docs/TV-MENU-BOARDS.md`.
 
 Status (2026-11-19): **live** (PR #30): all six screens. TVs 1–3 text menus
-(restaurant menu only, text grows to fit up to 1.5×, prices hidden until real
-ones), TV 4 signature dishes, TV 5 meal specials (sample content shows on
+(restaurant menu only, text grows to fit up to 1.5×, owner-confirmed prices), TV 4 signature dishes, TV 5 meal specials (sample content shows on
 previews only; the live TV 5 plays the signature dishes until real specials
 are in), TV 6 catering and community. Photos: 5Spice's own Chicken Roast and
 Tehari, the rest temporary stock photos, shown live by the owner's decision.
@@ -116,8 +115,9 @@ Tehari, the rest temporary stock photos, shown live by the owner's decision.
   one line each in `TV_MEDIA` in `media.js` (replacing its stock photo), new
   file name for every replacement. Move to Azure Blob Storage only if the
   library grows a lot.
-- [ ] **Prices** (Owners) in `client/src/data/menus/shared-items.js` (shows on
-  the website and TVs). Then delete `client/src/data/tv/sample-prices.js`.
+- [x] **Prices** (Owners, 2026-11-19): Murphy restaurant prices set in
+  `client/src/data/menus/shared-items.js` (TVs and website menu; not on the
+  catering menu). New dishes need a price there.
 - [ ] **Confirm TV assignments** (Owners): which categories on TVs 1–3, and
   which dishes keep a description (`murphyDescribedDishes`).
 - [ ] **5Spice Special badge** (Owners). Removed from the Tehari and Chai names
