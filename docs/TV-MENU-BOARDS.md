@@ -83,6 +83,15 @@ A slideshow of **slides**, grouped into **campaigns**.
   so every TV has its own content. Live slides play in order, each for its
   `duration` in seconds, then repeat. Schedules are re-checked every 30
   seconds.
+- **Meal specials (TV 5) show all day.** Each meal campaign has
+  `servingHours` (when the meal is served, e.g. `{ startTime: '11:00',
+  endTime: '15:00' }`), separate from when its slides show, so a lunch guest
+  still learns about dinner. The loop puts the meal being served first (full
+  `duration`, "Now serving · until 3 PM"), then a "Today's Specials" slide
+  with every meal and its hours, then meals still to come today ("Today ·
+  5–9 PM", 8 s), meals served tomorrow ("Tomorrow · 7–11 AM"), and offers.
+  Switching a meal off (`enabled: false`) removes it everywhere, including
+  the summary.
 - With none of its campaigns live, a TV plays its `fallback` campaigns
   (TV 5 falls back to the signature dishes outside every meal window), and
   with nothing live at all a 5Spice brand slide, never a blank screen.
@@ -93,9 +102,11 @@ A slideshow of **slides**, grouped into **campaigns**.
   "100% Zabiha Halal" bottom left.
   - `dish-showcase` (TV 4, TV 6 community): a label and a dish's name (or a
     title), optional tagline. No price.
-  - `special` (TV 5): a gold badge (Breakfast, Today's Special, Limited
-    Time…), headline, up to three dishes with their menu prices, and
-    optionally "Through <end date>" from the campaign's schedule.
+  - `special` (TV 5): a gold badge (Lunch Special, Limited Time…), the
+    serving status for a meal, headline, up to three dishes with their menu
+    prices, and optionally "Through <end date>" from the campaign's schedule.
+  - `meals-summary` (TV 5): "Today's Specials", every meal side by side
+    with its hours and dishes, the one being served highlighted.
   - `catering` (TV 6): headline, check-marked points, the catering email and
     web address, and the confirmed guest count from `config/site.js`.
   - `brand`: the brand slide.
@@ -103,9 +114,10 @@ A slideshow of **slides**, grouped into **campaigns**.
   Prices on slides come from the menu.
 - **Sample content:** a campaign with `sample: true` is an example for
   reviewing the design. It shows only on previews, tagged "Sample content" on
-  screen, never on the live TVs. TV 5's breakfast, lunch, dinner, offer, and
-  seasonal campaigns are samples today: replace their wording, dishes, and
-  times with the owners' and remove `sample` to put them live. TV 6 uses the
+  screen, never on the live TVs. TV 5's breakfast, lunch, dinner, Today's
+  Specials, offer, and seasonal campaigns are samples today: replace their
+  wording, dishes, and serving hours with the owners' and remove `sample` to
+  put them live. TV 6 uses the
   website's approved catering wording, so it is live content.
 - **Checking schedules:** add `?at=2026-11-19T08:00` to a preview address to
   see what a promo TV shows at that time.

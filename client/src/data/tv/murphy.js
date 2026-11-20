@@ -83,7 +83,7 @@ export const murphyTvScreens = {
     5: {
         type: 'promo',
         title: 'Meal Specials',
-        campaigns: ['breakfast', 'lunch', 'dinner', 'special-offers', 'seasonal'],
+        campaigns: ['breakfast', 'lunch', 'dinner', 'todays-specials', 'special-offers', 'seasonal'],
         fallback: ['signature-dishes'],
     },
     6: {

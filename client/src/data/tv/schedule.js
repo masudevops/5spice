@@ -37,3 +37,42 @@ export const isScheduled = (schedule, now = chicagoNow()) => {
 
 // A campaign or slide shows when it isn't switched off and its schedule allows.
 export const isLive = (entry, now) => entry.enabled !== false && isScheduled(entry.schedule, now);
+
+// Meal serving hours, separate from when slides show: a meal's slides can
+// play all day while saying whether it's being served right now.
+//   hours: { startTime: '11:00', endTime: '15:00', days: optional }
+const WEEK = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
+
+const clock = (time) => {
+    const [hour, minute] = time.split(':').map(Number);
+    return { text: `${hour % 12 || 12}${minute ? `:${String(minute).padStart(2, '0')}` : ''}`, meridiem: hour < 12 ? 'AM' : 'PM' };
+};
+
+// '11:00'–'15:00' → '11 AM–3 PM'; '17:00'–'21:00' → '5–9 PM'.
+export const formatHours = ({ startTime, endTime }) => {
+    const start = clock(startTime);
+    const end = clock(endTime);
+    return start.meridiem === end.meridiem
+        ? `${start.text}–${end.text} ${end.meridiem}`
+        : `${start.text} ${start.meridiem}–${end.text} ${end.meridiem}`;
+};
+
+// 'now' (being served), 'later' (later today), 'tomorrow', or 'other'.
+export const servingStatus = (hours, now = chicagoNow()) => {
+    if (isScheduled(hours, now)) return 'now';
+    const servedOn = (day) => !hours.days || hours.days.includes(day);
+    if (servedOn(now.day) && now.time < hours.startTime) return 'later';
+    return servedOn(WEEK[(WEEK.indexOf(now.day) + 1) % 7]) ? 'tomorrow' : 'other';
+};
+
+// The line a slide shows, e.g. 'Now serving · until 3 PM', 'Today · 5–9 PM'.
+export const servingLabel = (hours, now = chicagoNow()) => {
+    const range = formatHours(hours);
+    const end = clock(hours.endTime);
+    return {
+        now: `Now serving · until ${end.text} ${end.meridiem}`,
+        later: `Today · ${range}`,
+        tomorrow: `Tomorrow · ${range}`,
+        other: `Served ${range}`,
+    }[servingStatus(hours, now)];
+};

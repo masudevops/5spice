@@ -59,6 +59,22 @@ export const getTvScreen = (locationSlug, screenNumber, { preview = false } = {}
             const key = slide.mediaKey ?? slide.dishId;
             return slide.media ?? TV_MEDIA[key] ?? (preview ? STOCK_MEDIA[key] : null) ?? null;
         };
+        // Meals for a 'meals-summary' slide: each meal campaign's label, hours,
+        // headline, and dishes (from its first slide).
+        const meals = (ids) => ids
+            .map((id) => PROMO_CAMPAIGNS[id])
+            .filter((campaign) => campaign?.servingHours && (preview || !campaign.sample))
+            .map((campaign) => {
+                const first = campaign.slides[0] ?? {};
+                return {
+                    label: campaign.label,
+                    enabled: campaign.enabled,
+                    schedule: campaign.schedule,
+                    servingHours: campaign.servingHours,
+                    headline: first.headline ?? (first.dishId ? dish(first.dishId)?.name : null),
+                    dishes: dishes(first.dishIds ?? []).slice(0, 3),
+                };
+            });
         const campaigns = (ids = []) => ids
             .map((id) => PROMO_CAMPAIGNS[id])
             .filter((campaign) => campaign && (preview || !campaign.sample))
@@ -68,6 +84,8 @@ export const getTvScreen = (locationSlug, screenNumber, { preview = false } = {}
                     .filter((slide) => preview || !slide.sample)
                     .map((slide) => ({
                         ...slide,
+                        servingHours: slide.servingHours ?? campaign.servingHours ?? null,
+                        meals: slide.meals ? meals(slide.meals) : [],
                         sample: Boolean(campaign.sample || slide.sample),
                         dish: slide.dishId ? dish(slide.dishId) : null,
                         dishes: slide.dishIds ? dishes(slide.dishIds) : [],

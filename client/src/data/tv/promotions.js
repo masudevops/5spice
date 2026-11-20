@@ -23,6 +23,11 @@
 //                    tagline, dishIds (up to 3 dishes listed with their menu
 //                    prices), details, showEndDate (adds "Through <the
 //                    campaign's endDate>").
+//                    With `servingHours` on its campaign, adds "Now serving"
+//                    or the hours; it plays for `duration` while served and
+//                    `offHoursDuration` (default 8 s) otherwise.
+//   'meals-summary'  "Today's Specials": the meal campaigns in `meals` side by
+//                    side with their hours and dishes, the served one marked.
 //   'catering'       catering call to action with the catering email and web
 //                    address from config/site.js. Fields: eyebrow, headline,
 //                    subhead, points, showGuestCount (the confirmed catering
@@ -43,31 +48,49 @@ export const PROMO_CAMPAIGNS = {
         ],
     },
 
-    // TV 5: meal specials. SAMPLE content for the design review (the times,
-    // dishes, and wording are examples, not owner-approved): replace with
-    // the owners' specials and remove `sample` to put a campaign live.
+    // TV 5: meal specials. Every meal shows all day so guests learn about all
+    // of them: the one being served leads (first, longer, "Now serving"),
+    // the others follow labeled with their hours ("Today · 5–9 PM").
+    // `servingHours` (Chicago time) is when the meal is served, not when its
+    // slides show; `label` names it on the "Today's Specials" slide.
+    // SAMPLE content for the design review (the hours, dishes, and wording
+    // are examples, not owner-approved): replace with the owners' specials
+    // and remove `sample` to put a campaign live.
     breakfast: {
         enabled: true,
         sample: true,
-        schedule: { startTime: '07:00', endTime: '11:00' },
+        label: 'Breakfast',
+        servingHours: { startTime: '07:00', endTime: '11:00' },
         slides: [
-            { id: 'breakfast', template: 'special', mediaKey: 'breakfast', badge: 'Breakfast', headline: 'Breakfast Favorites', tagline: 'A warm Bangladeshi start to the day.', dishIds: ['paratha-roti', 'dim-bhaji', 'dal-gosht'], duration: 12 },
+            { id: 'breakfast', template: 'special', mediaKey: 'breakfast', badge: 'Breakfast Special', headline: 'Breakfast Favorites', tagline: 'A warm Bangladeshi start to the day.', dishIds: ['paratha-roti', 'dim-bhaji', 'dal-gosht'], duration: 15 },
         ],
     },
     lunch: {
         enabled: true,
         sample: true,
-        schedule: { startTime: '11:00', endTime: '15:00' },
+        label: 'Lunch',
+        servingHours: { startTime: '11:00', endTime: '15:00' },
         slides: [
-            { id: 'lunch', template: 'special', mediaKey: 'lunch', badge: "Today's Special", headline: 'Lunch Favorites', tagline: 'Fresh. Flavorful. Authentic.', dishIds: ['beef-tehari', 'chicken-biryani', 'morog-polao'], duration: 12 },
+            { id: 'lunch', template: 'special', mediaKey: 'lunch', badge: 'Lunch Special', headline: 'Lunch Favorites', tagline: 'Fresh. Flavorful. Authentic.', dishIds: ['beef-tehari', 'chicken-biryani', 'morog-polao'], duration: 15 },
         ],
     },
     dinner: {
         enabled: true,
         sample: true,
-        schedule: { startTime: '17:00', endTime: '21:00' },
+        label: 'Dinner',
+        servingHours: { startTime: '17:00', endTime: '21:00' },
         slides: [
-            { id: 'dinner', template: 'special', mediaKey: 'dinner', badge: 'Dinner', headline: 'Dinner Favorites', tagline: 'Slow-cooked curries, made the traditional way.', dishIds: ['chicken-roast', 'beef-kala-bhuna', 'mutton-bhuna'], duration: 12 },
+            { id: 'dinner', template: 'special', mediaKey: 'dinner', badge: 'Dinner Special', headline: 'Dinner Favorites', tagline: 'Slow-cooked curries, made the traditional way.', dishIds: ['chicken-roast', 'beef-kala-bhuna', 'mutton-bhuna'], duration: 15 },
+        ],
+    },
+    // One slide with every meal side by side and its hours, the one being
+    // served highlighted. `meals` lists meal campaigns; switched-off ones
+    // are left out.
+    'todays-specials': {
+        enabled: true,
+        sample: true,
+        slides: [
+            { id: 'todays-specials', template: 'meals-summary', meals: ['breakfast', 'lunch', 'dinner'], duration: 10 },
         ],
     },
     'special-offers': {

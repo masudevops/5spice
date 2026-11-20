@@ -109,8 +109,9 @@ Don't deploy to production until approved.
   Then finalize TVs 1–3 categories (the text grows automatically with fewer
   dishes). Today TV 3 leaves out Shahi Jarda at the smallest size; don't
   shrink text, wait for the final menu.
-- [ ] **TV 5 specials** (Owners): real breakfast/lunch/dinner times, dishes,
-  and wording, any offers; then remove `sample` from those campaigns.
+- [ ] **TV 5 specials** (Owners): real breakfast/lunch/dinner serving hours
+  (`servingHours`), dishes, and wording, any offers; then remove `sample`
+  from those campaigns and `todays-specials`.
 - [ ] **TV 6** (Owners): confirm wording; send event/community photos.
 - [ ] **Real dish media** (Owners) for TV 4 (and 5–6): MP4 preferred
   (1920×1080, 5–10 s, about 3–5 MB) or 1920×1080 photos. Files in `client/public/tv-media/`,

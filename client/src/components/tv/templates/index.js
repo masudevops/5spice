@@ -1,6 +1,7 @@
 import BrandSlide from './BrandSlide';
 import Catering from './Catering';
 import DishShowcase from './DishShowcase';
+import MealsSummary from './MealsSummary';
 import Special from './Special';
 
 // Promo slide templates by name (the `template` field in promotions.js).
@@ -9,6 +10,7 @@ import Special from './Special';
 export const TEMPLATES = {
     'dish-showcase': DishShowcase,
     special: Special,
+    'meals-summary': MealsSummary,
     catering: Catering,
     brand: BrandSlide,
 };
