@@ -98,7 +98,7 @@ export const PROMO_CAMPAIGNS = {
         sample: true,
         schedule: { startDate: '2026-11-01', endDate: '2026-12-31' },
         slides: [
-            { id: 'mutton-kachchi', template: 'special', dishId: 'mutton-kachchi', badge: 'Limited Time', tagline: 'Tender mutton and fragrant rice, slow-cooked together.', showEndDate: true, duration: 10 },
+            { id: 'mutton-kachchi', template: 'special', dishId: 'mutton-kachchi', badge: 'Limited Time', tagline: 'Tender mutton and fragrant rice, slow-cooked together.', duration: 10 },
         ],
     },
     // Switched off: shows how a seasonal campaign waits for its flag.
@@ -107,7 +107,7 @@ export const PROMO_CAMPAIGNS = {
         sample: true,
         schedule: { startDate: '2026-12-01', endDate: '2027-01-31' },
         slides: [
-            { id: 'winter-chai', template: 'special', dishId: 'special-chai', badge: 'Winter Favorite', showEndDate: true, duration: 10 },
+            { id: 'winter-chai', template: 'special', dishId: 'special-chai', badge: 'Winter Favorite', duration: 10 },
         ],
     },
 

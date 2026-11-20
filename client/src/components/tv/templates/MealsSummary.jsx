@@ -1,6 +1,6 @@
 import { formatHours, isLive, servingStatus } from '../../../data/tv/schedule';
 
-const WHEN = { later: 'Later today', tomorrow: 'Tomorrow', other: '' };
+const WHEN = { later: 'Later today', tomorrow: '', other: '' };
 
 // Promo template 'meals-summary' ("Today's Specials"): every meal side by
 // side with its hours and dishes, so guests learn about all of them at any

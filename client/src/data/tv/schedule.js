@@ -65,14 +65,15 @@ export const servingStatus = (hours, now = chicagoNow()) => {
     return servedOn(WEEK[(WEEK.indexOf(now.day) + 1) % 7]) ? 'tomorrow' : 'other';
 };
 
-// The line a slide shows, e.g. 'Now serving · until 3 PM', 'Today · 5–9 PM'.
+// The line a slide shows: 'Now serving · until 3 PM', 'Today · 5–9 PM' (later
+// today), or just the hours once today's serving is over: 'Served 7–11 AM'.
 export const servingLabel = (hours, now = chicagoNow()) => {
     const range = formatHours(hours);
     const end = clock(hours.endTime);
     return {
         now: `Now serving · until ${end.text} ${end.meridiem}`,
         later: `Today · ${range}`,
-        tomorrow: `Tomorrow · ${range}`,
+        tomorrow: `Served ${range}`,
         other: `Served ${range}`,
     }[servingStatus(hours, now)];
 };

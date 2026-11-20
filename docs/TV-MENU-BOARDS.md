@@ -89,7 +89,8 @@ A slideshow of **slides**, grouped into **campaigns**.
   still learns about dinner. The loop puts the meal being served first (full
   `duration`, "Now serving · until 3 PM"), then a "Today's Specials" slide
   with every meal and its hours, then meals still to come today ("Today ·
-  5–9 PM", 8 s), meals served tomorrow ("Tomorrow · 7–11 AM"), and offers.
+  5–9 PM", 8 s), meals already over for today (just their hours, "Served
+  7–11 AM"), and offers.
   Switching a meal off (`enabled: false`) removes it everywhere, including
   the summary.
 - With none of its campaigns live, a TV plays its `fallback` campaigns
@@ -104,7 +105,8 @@ A slideshow of **slides**, grouped into **campaigns**.
     title), optional tagline. No price.
   - `special` (TV 5): a gold badge (Lunch Special, Limited Time…), the
     serving status for a meal, headline, up to three dishes with their menu
-    prices, and optionally "Through <end date>" from the campaign's schedule.
+    prices, and optionally (`showEndDate: true`, off today) "Through <end
+    date>" from the campaign's schedule.
   - `meals-summary` (TV 5): "Today's Specials", every meal side by side
     with its hours and dishes, the one being served highlighted.
   - `catering` (TV 6): headline, check-marked points, the catering email and
