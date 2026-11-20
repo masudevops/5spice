@@ -53,12 +53,10 @@ export const PROMO_CAMPAIGNS = {
     // the others follow labeled with their hours ("Today · 5–9 PM").
     // `servingHours` (Chicago time) is when the meal is served, not when its
     // slides show; `label` names it on the "Today's Specials" slide.
-    // SAMPLE content for the design review (the hours, dishes, and wording
-    // are examples, not owner-approved): replace with the owners' specials
-    // and remove `sample` to put a campaign live.
+    // Hours, dishes, and wording approved by the owner for the live TVs
+    // (2026-11-19). Change them here when the menu or hours change.
     breakfast: {
         enabled: true,
-        sample: true,
         label: 'Breakfast',
         servingHours: { startTime: '07:00', endTime: '11:00' },
         slides: [
@@ -67,7 +65,6 @@ export const PROMO_CAMPAIGNS = {
     },
     lunch: {
         enabled: true,
-        sample: true,
         label: 'Lunch',
         servingHours: { startTime: '11:00', endTime: '15:00' },
         slides: [
@@ -76,7 +73,6 @@ export const PROMO_CAMPAIGNS = {
     },
     dinner: {
         enabled: true,
-        sample: true,
         label: 'Dinner',
         servingHours: { startTime: '17:00', endTime: '21:00' },
         slides: [
@@ -88,7 +84,6 @@ export const PROMO_CAMPAIGNS = {
     // are left out.
     'todays-specials': {
         enabled: true,
-        sample: true,
         slides: [
             { id: 'todays-specials', template: 'meals-summary', meals: ['breakfast', 'lunch', 'dinner'], duration: 10 },
         ],
@@ -105,7 +100,6 @@ export const PROMO_CAMPAIGNS = {
     },
     'special-offers': {
         enabled: true,
-        sample: true,
         schedule: { startDate: '2026-11-01', endDate: '2026-12-31' },
         slides: [
             { id: 'mutton-kachchi', template: 'special', dishId: 'mutton-kachchi', badge: 'Limited Time', tagline: 'Tender mutton and fragrant rice, slow-cooked together.', duration: 10 },
