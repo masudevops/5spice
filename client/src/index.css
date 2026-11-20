@@ -158,7 +158,22 @@
     }
   }
 
+  /* TV promo slides fading in (src/components/tv/PromoBoard.jsx). */
+  .tv-fade {
+    animation: tvFade 1.2s ease-in-out backwards;
+  }
+
+  @keyframes tvFade {
+    from {
+      opacity: 0;
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
+    .tv-fade {
+      animation: none;
+    }
+
     .animate-fade-in-up {
       animation: none;
       opacity: 1;

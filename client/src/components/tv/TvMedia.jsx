@@ -2,24 +2,21 @@ import { useEffect, useRef, useState } from 'react';
 
 // A video that hasn't started playing by then is treated as failed.
 const VIDEO_START_TIMEOUT_MS = 15000;
+// A playing video whose picture hasn't moved for this long is treated as
+// frozen (e.g. a decoder hiccup on a long-running TV stick).
+const VIDEO_STALL_TIMEOUT_MS = 15000;
+const STALL_CHECK_MS = 5000;
 
-// Branded stand-in for a dish without media (or whose media failed).
-const Placeholder = ({ logo }) => (
-    <div className="absolute inset-0 flex flex-col items-center justify-center gap-6 bg-[radial-gradient(circle_at_50%_45%,rgb(var(--color-gold-deep)/0.18),transparent_62%)]">
-        <div className="flex gap-3" aria-hidden="true">
-            {['bg-brand-gold', 'bg-brand-green', 'bg-brand-gold', 'bg-brand-green', 'bg-brand-gold'].map((color, index) => (
-                <span key={index} className={`h-2.5 w-2.5 rounded-full ${color}`} />
-            ))}
-        </div>
-        {logo && <img src={logo.src} alt="" className="h-20 w-auto object-contain opacity-60" />}
-    </div>
-);
+// Plain dark background for a slide without media (or whose media failed):
+// the slide's text carries it, with no stand-in artwork.
+const Placeholder = () => <div className="absolute inset-0 bg-ink-850" />;
 
-// The featured dish's video, GIF, or photo, filling its 16:9 frame.
-// Video → fallback photo → placeholder, stepping down whenever a file fails
+// A dish's video, GIF, or photo, filling its frame (2:1 by default; pass
+// `frameClassName` for another shape, e.g. 'aspect-video').
+// Video → fallback photo → plain background, stepping down whenever a file fails
 // to load (or a video doesn't start playing in time). `startDelay` staggers
 // when videos begin downloading so a screen doesn't fetch all of them at once.
-const TvMedia = ({ media, logo, startDelay = 0 }) => {
+const TvMedia = ({ media, startDelay = 0, frameClassName = 'aspect-[2/1]' }) => {
     // Which source is showing: 'main', 'fallback', or 'placeholder'.
     const [stage, setStage] = useState(media?.src ? 'main' : 'placeholder');
     const [videoReady, setVideoReady] = useState(startDelay === 0);
@@ -44,10 +41,29 @@ const TvMedia = ({ media, logo, startDelay = 0 }) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isVideo, stage, videoReady]);
 
-    // 2:1 frame: 16:9 footage fills it with a slight top and bottom crop.
+    // Step down to the fallback photo if a playing video freezes.
+    useEffect(() => {
+        if (!isVideo || stage !== 'main' || !videoReady) return undefined;
+        let lastTime = -1;
+        let stuckSince = Date.now();
+        const timer = setInterval(() => {
+            const video = videoRef.current;
+            if (!video || video.paused) return;
+            if (video.currentTime !== lastTime) {
+                lastTime = video.currentTime;
+                stuckSince = Date.now();
+            } else if (Date.now() - stuckSince > VIDEO_STALL_TIMEOUT_MS) {
+                fail();
+            }
+        }, STALL_CHECK_MS);
+        return () => clearInterval(timer);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isVideo, stage, videoReady]);
+
+    // In the 2:1 frame, 16:9 footage fills it with a slight top and bottom crop.
     return (
-        <div className="relative aspect-[2/1] overflow-hidden bg-ink-950">
-            <Placeholder logo={logo} />
+        <div className={`relative overflow-hidden bg-ink-950 ${frameClassName}`}>
+            <Placeholder />
             {stage === 'main' && isVideo && videoReady && (
                 <video
                     ref={videoRef}

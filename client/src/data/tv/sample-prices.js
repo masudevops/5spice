@@ -8,7 +8,7 @@ export const SAMPLE_PRICES = {
     // Biriyani & rice
     'beef-kachchi': 18.99, 'mutton-kachchi': 19.99, 'chicken-biryani': 14.99, 'shahi-chicken-biryani': 16.99,
     'beef-tehari': 15.99, 'morog-polao': 15.99, 'beef-biryani': 15.99, 'shahi-beef-biryani': 17.99,
-    'mutton-biryani': 17.99, 'mutton-haji-biryani': 18.99, 'bhuna-khichuri': 11.99, 'plain-polao': 6.99,
+    'mutton-biryani': 17.99, 'mutton-haji-biryani': 18.99, 'beef-haji-biryani': 17.99, 'shahi-mutton-biryani': 19.99, 'bhuna-khichuri': 11.99, 'plain-polao': 6.99,
     // Curries & specialties
     'chicken-roast': 16.99, 'beef-kala-bhuna': 17.99, 'chicken-korma': 14.99, 'karahi-chicken': 15.99,
     'beef-bhuna': 15.99, 'mutton-bhuna': 18.99, 'chicken-curry': 13.99, 'chicken-bhuna': 14.99,
