@@ -86,14 +86,12 @@ Six TVs. TVs 1–3 are text-only menu boards; TVs 4–6 are promo slideshows.
 How it works, editing, media rules, Fire TV setup, and the test checklist:
 `docs/TV-MENU-BOARDS.md`.
 
-Status (2026-11-19): live = old three-column design on TVs 1–3. On branch
-`feature/tv-six-screen-layout` (draft PR #30), awaiting review: all six
-screens following the final UX design. TVs 1–3 text menus (restaurant menu
-only, text grows to fit up to 1.5×), TV 4 signature dishes, TV 5 meal
-specials (sample content, previews only), TV 6 catering and community
-(website's approved wording). Stock photos are allowed as temporary
-development assets on previews only (owner, 2026-11-19); 11 in place.
-Don't deploy to production until approved.
+Status (2026-11-19): **live** (PR #30): all six screens. TVs 1–3 text menus
+(restaurant menu only, text grows to fit up to 1.5×, prices hidden until real
+ones), TV 4 signature dishes, TV 5 meal specials (sample content shows on
+previews only; the live TV 5 plays the signature dishes until real specials
+are in), TV 6 catering and community. Photos: 5Spice's own Chicken Roast and
+Tehari, the rest temporary stock photos, shown live by the owner's decision.
 
 - [ ] **Test the redesign on the real TVs** (Dev/Owners) via the PR preview
   link: full screen (Silk toolbar was showing in the 2026-11-17 photos), TV
@@ -101,10 +99,10 @@ Don't deploy to production until approved.
 - [ ] **Full screen that survives reloads** (Dev/Owners). Check whether Silk's
   own full-screen setting survives a page reload; if not, use a kiosk browser
   (e.g. Fully Kiosk, launch on boot).
-- [ ] **Review the stock photos** (Owners): 11 temporary photos on TVs 4–6
-  (previews only; list, sources, and licenses in `docs/TV-MENU-BOARDS.md`).
-  Not for production without approval; replace with 5Spice's own photos and
-  videos. Chicken Roast and Tehari already use 5Spice's own photos.
+- [ ] **Replace the stock photos** (Owners): 11 temporary stock photos on
+  TVs 4–6, live (list, sources, and licenses in `docs/TV-MENU-BOARDS.md`).
+  Send 5Spice's own photos/videos, TV 4 dishes first (Kacchi, Kala Bhuna,
+  Fuchka, Chai). Chicken Roast and Tehari already use 5Spice's own.
 - [ ] **Approved restaurant menu** (Owners): smaller than the catering menu.
   Then finalize TVs 1–3 categories (the text grows automatically with fewer
   dishes). Today TV 3 leaves out Shahi Jarda at the smallest size; don't

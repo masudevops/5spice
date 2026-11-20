@@ -14,9 +14,9 @@ const TV_BY_LOCATION = {
 //   menu      columns: [[{ title, items }]]
 //   promo     campaigns, fallback: [{ enabled, schedule, slides: [{ ..., dish, dishes, media }] }]
 // Unknown dish ids are skipped so a typo can't break a board. `preview`
-// (layout previews only) fills missing prices with SAMPLE_PRICES, uses
-// STOCK_MEDIA photos where 5Spice has none yet, and includes `sample`
-// campaigns. The live TVs get none of these.
+// (layout previews only) fills missing prices with SAMPLE_PRICES and
+// includes `sample` campaigns; the live TVs get neither. STOCK_MEDIA photos
+// show everywhere until 5Spice's own replace them.
 export const getTvScreen = (locationSlug, screenNumber, { preview = false } = {}) => {
     const location = getLocationBySlug(locationSlug);
     const tv = TV_BY_LOCATION[locationSlug];
@@ -57,7 +57,7 @@ export const getTvScreen = (locationSlug, screenNumber, { preview = false } = {}
     if (screen.type === 'promo') {
         const media = (slide) => {
             const key = slide.mediaKey ?? slide.dishId;
-            return slide.media ?? TV_MEDIA[key] ?? (preview ? STOCK_MEDIA[key] : null) ?? null;
+            return slide.media ?? TV_MEDIA[key] ?? STOCK_MEDIA[key] ?? null;
         };
         // Meals for a 'meals-summary' slide: each meal campaign's label, hours,
         // headline, and dishes (from its first slide).

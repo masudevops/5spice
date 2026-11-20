@@ -131,10 +131,9 @@ Each slide finds its photo or video by key (its `mediaKey`, else its dish id):
 
 - `TV_MEDIA`: 5Spice's own photos and videos. Shown everywhere, live TVs
   included.
-- `STOCK_MEDIA`: stock photos (Unsplash or Pexels license) used as
-  **temporary development assets** so the design can be judged with food.
-  Shown only on previews, tagged "Stock photo" on screen, never on the live
-  TVs, and never presented as 5Spice's dishes. Files in
+- `STOCK_MEDIA`: temporary stock photos (Pexels, Unsplash, CC0) until
+  5Spice's own replace them. Shown on the live TVs too (owner's decision,
+  2026-11-19); previews tag them "Stock photo". Files in
   `client/public/tv-media/stock/`.
 - No entry: a plain dark background behind the text.
 
@@ -147,8 +146,7 @@ Each slide finds its photo or video by key (its `mediaKey`, else its dish id):
 3. Delete that key's line from `STOCK_MEDIA` and its file from
    `tv-media/stock/`. Once every stock photo is replaced, delete the folder.
 
-**Stock photos in use (temporary, previews only, not approved for
-production):** files in `client/public/tv-media/stock/`, each 1920×1080 with
+**Stock photos in use (temporary, on the live TVs until replaced):** files in `client/public/tv-media/stock/`, each 1920×1080 with
 the food right of center and a dark fill on the left under the text.
 
 | Key (slide) | File | Source | License |
@@ -166,9 +164,9 @@ the food right of center and a dark fill on the left under the text.
 | `community` (TV 6) | `community-event-buffet.jpg` | pexels.com/photo/39388375 (sejio402) | Pexels |
 
 The Pexels and Unsplash licenses and CC0 allow free commercial use with no
-credit required, but they don't cover how a photo is presented: never show a
-stock photo as if it were 5Spice's own dish, and check with the owners before
-any reaches a live TV. Photos with people in them (the chafing-dish line on
+credit required. They aren't 5Spice's dishes, so replace them with your own
+photos as soon as you can (most important for the dish slides on TV 4).
+Photos with people in them (the chafing-dish line on
 TV 6) carry no model release.
 
 **5Spice's own photos in use** (`TV_MEDIA`, shown everywhere including live

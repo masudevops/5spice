@@ -22,14 +22,14 @@ export const TV_MEDIA = {
     'beef-tehari': { type: 'image', src: '/tv-media/beef-tehari.jpg' },
 };
 
-// STOCK PHOTOS: temporary development assets, NOT photos of 5Spice's dishes.
-// They show only on previews (this computer, PR preview links, or a TV
-// address ending in ?preview=1), marked "Stock photo" on screen, and never
-// on the live TVs. Files in client/public/tv-media/stock/ (1920×1080, the
+// STOCK PHOTOS: temporary, NOT photos of 5Spice's dishes. They show on the
+// live TVs too (owner's decision, 2026-11-19) until 5Spice's own photos
+// replace them; previews tag them "Stock photo". A key in TV_MEDIA above
+// always wins. Files in client/public/tv-media/stock/ (1920×1080, the
 // food placed right of center, dark fill on the left under the text), one
 // line each with its source and license. Pexels License, Unsplash License,
 // and CC0 (WordPress Photo Directory) all allow free use with no credit
-// required; none of these photos are approved for production. To replace
+// required. To replace
 // one with your own photo or video, see docs/TV-MENU-BOARDS.md, then delete
 // its line here and its file.
 export const stock = (file) => ({ type: 'image', src: `/tv-media/stock/${file}`, stock: true });
