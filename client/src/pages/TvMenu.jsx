@@ -14,6 +14,10 @@ const isPreview = (searchParams) =>
     searchParams.get('preview') === '1'
     || !/(^|\.)5spicemarket\.com$/.test(window.location.hostname);
 
+// Screen backgrounds (the `background` setting in src/data/tv/), as color
+// tokens from index.css.
+const BACKGROUNDS = { charcoal: '--color-ink-900', black: '--color-ink-black' };
+
 // In-store TV screen at /tv/:slug/:screen (e.g. /tv/murphy/1), drawn on a
 // 1920×1080 canvas: a text-only menu board or a promo slideshow, as set up
 // in src/data/tv/. Not linked anywhere and kept out of search engines.
@@ -25,6 +29,8 @@ const TvMenu = () => {
     // Previews can pretend it's another time (?at=2026-11-19T08:00, the
     // TV's local time) to check promo schedules.
     const at = preview ? searchParams.get('at') : null;
+    // ?bg=black or ?bg=charcoal tries a background without changing the setting.
+    const background = BACKGROUNDS[searchParams.get('bg')] ?? BACKGROUNDS[screen?.background] ?? BACKGROUNDS.charcoal;
     const scale = useTvScale();
     useTvAutoUpdate();
     useWakeLock();
@@ -36,9 +42,9 @@ const TvMenu = () => {
     const logo = screen?.location.logo ?? { src: LOGOS.wide, width: LOGOS.wideWidth, height: LOGOS.wideHeight, alt: '5Spice Market & Kitchen' };
 
     return (
-        <div className="fixed inset-0 flex cursor-none items-center justify-center overflow-hidden bg-ink-950">
+        <div className="tv-bg fixed inset-0 flex cursor-none items-center justify-center overflow-hidden" style={{ '--tv-bg': `var(${background})` }}>
             <div
-                className="flex shrink-0 flex-col bg-ink-900 font-sans text-brand-cream"
+                className="tv-bg flex shrink-0 flex-col font-sans text-brand-cream"
                 style={{ width: TV_WIDTH, height: TV_HEIGHT, transform: `scale(${scale})` }}
             >
                 {screen?.type === 'promo' ? (

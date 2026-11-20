@@ -9,7 +9,7 @@ const STALL_CHECK_MS = 5000;
 
 // Plain dark background for a slide without media (or whose media failed):
 // the slide's text carries it, with no stand-in artwork.
-const Placeholder = () => <div className="absolute inset-0 bg-ink-850" />;
+const Placeholder = () => <div className="tv-bg absolute inset-0" />;
 
 // A dish's video, GIF, or photo, filling its frame (2:1 by default; pass
 // `frameClassName` for another shape, e.g. 'aspect-video').
@@ -62,7 +62,7 @@ const TvMedia = ({ media, startDelay = 0, frameClassName = 'aspect-[2/1]' }) => 
 
     // In the 2:1 frame, 16:9 footage fills it with a slight top and bottom crop.
     return (
-        <div className={`relative overflow-hidden bg-ink-950 ${frameClassName}`}>
+        <div className={`tv-bg relative overflow-hidden ${frameClassName}`}>
             <Placeholder />
             {stage === 'main' && isVideo && videoReady && (
                 <video

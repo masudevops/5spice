@@ -28,6 +28,7 @@ location's own (5Spice Kitchen for Murphy, `client/src/data/locations/murphy.js`
 | What each TV shows (type, title, sections, campaigns) | `client/src/data/tv/murphy.js` |
 | Which dishes are on the restaurant menu (TVs 1–3) | `client/src/data/menus/murphy.js` (catering: `catering.js`, never on TVs 1–3) |
 | Dish names, descriptions, prices | `client/src/data/menus/shared-items.js` (same data as the website menu) |
+| Background: near-black or pure black, for every TV or one TV | `background` in `murphyTvSettings` (or on one screen) in `client/src/data/tv/murphy.js` |
 | Which menu dishes show a description | `murphyDescribedDishes` in `client/src/data/tv/murphy.js` |
 | Promotions: slides, on/off, schedules | `client/src/data/tv/promotions.js` |
 | Photos and videos (yours, and temporary stock photos) | `client/src/data/tv/media.js` (+ the file in `client/public/tv-media/`) |
@@ -36,6 +37,15 @@ Merging to `main` deploys. TVs notice the new version within about 5 minutes
 and reload by themselves (they also reload daily at 4 AM). On a promo TV the
 reload waits for the next slide change, so it never cuts a video off
 (at most 2 minutes).
+
+**Background setting:** `'charcoal'` (near-black #0E0E0E, the default) or
+`'black'` (pure black #000000). Set it for all TVs in `murphyTvSettings`, or
+on one screen with its own `background`. Try one without changing anything
+by adding `?bg=black` (or `?bg=charcoal`) to a TV address. Switching back is
+the same one-word change. The TV logo file
+(`brand-logo-kitchen-transparent.webp`, the official artwork with its
+near-black surround made transparent, colors unchanged) shows no box on
+either background.
 
 ## Menu TVs (1–3)
 
