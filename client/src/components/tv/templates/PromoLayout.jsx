@@ -9,7 +9,7 @@ const PromoLayout = ({ media, logo, location, children }) => (
         <div className="absolute inset-0">
             <TvMedia media={media} frameClassName="h-full" />
         </div>
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgb(var(--color-ink-900)/0.95)_0%,rgb(var(--color-ink-900)/0.85)_40%,rgb(var(--color-ink-900)/0.35)_62%,rgb(var(--color-ink-900)/0)_78%)]" aria-hidden="true" />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgb(var(--tv-bg)/0.95)_0%,rgb(var(--tv-bg)/0.85)_40%,rgb(var(--tv-bg)/0.35)_62%,rgb(var(--tv-bg)/0)_78%)]" aria-hidden="true" />
         <div className="relative flex h-full w-[1060px] flex-col px-16 pb-14 pt-12">
             <img src={logo.src} alt={logo.alt} width={logo.width} height={logo.height} className="mix-blend-lighten h-[88px] w-auto self-start" />
             <div className="my-auto">{children}</div>

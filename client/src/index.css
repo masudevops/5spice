@@ -70,6 +70,7 @@
     --color-parchment: 248 245 239;  /* #F8F5EF  default body text */
 
     /* Dark backgrounds, darkest to lightest */
+    --color-ink-black: 0 0 0;        /* #000000  pure black, TV screens' 'black' background setting */
     --color-ink-950: 11 11 11;       /* #0B0B0B */
     --color-ink-900: 14 14 14;       /* #0E0E0E  page background */
     --color-ink-850: 16 16 16;       /* #101010 */
@@ -156,6 +157,12 @@
       opacity: 1;
       transform: translateY(0);
     }
+  }
+
+  /* TV screen background (src/pages/TvMenu.jsx sets --tv-bg from the
+     screen's `background` setting). Use it as rgb(var(--tv-bg)). */
+  .tv-bg {
+    background-color: rgb(var(--tv-bg));
   }
 
   /* TV promo slides fading in (src/components/tv/PromoBoard.jsx). */

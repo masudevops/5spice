@@ -1,15 +1,15 @@
 import { getLocationBySlug } from '../locations/index.js';
 import { getMenuByLocationSlug, getMenuItem } from '../menus/index.js';
 import { STOCK_MEDIA, TV_MEDIA } from './media.js';
-import { murphyDescribedDishes, murphyTvScreens } from './murphy.js';
+import { murphyDescribedDishes, murphyTvScreens, murphyTvSettings } from './murphy.js';
 import { PROMO_CAMPAIGNS } from './promotions.js';
 
 const TV_BY_LOCATION = {
-    murphy: { screens: murphyTvScreens, describedDishes: murphyDescribedDishes },
+    murphy: { screens: murphyTvScreens, describedDishes: murphyDescribedDishes, settings: murphyTvSettings },
 };
 
 // A TV screen ready to render, or null if it isn't set up. Always has
-// { location, type, title, preview }, plus by type (see tv/murphy.js):
+// { location, type, title, preview, background }, plus by type (see tv/murphy.js):
 //   menu      columns: [[{ title, items }]]
 //   promo     campaigns, fallback: [{ enabled, schedule, slides: [{ ..., dish, dishes, media }] }]
 // Unknown dish ids are skipped so a typo can't break a board. `preview`
@@ -27,7 +27,8 @@ export const getTvScreen = (locationSlug, screenNumber, { preview = false } = {}
         .map(dish)
         .filter(Boolean)
         .map((item) => ({ ...item, showDescription: described.has(item.id) }));
-    const base = { location, type: screen.type, title: screen.title, preview };
+    const background = screen.background ?? tv.settings?.background ?? 'charcoal';
+    const base = { location, type: screen.type, title: screen.title, preview, background };
 
     if (screen.type === 'menu') {
         // Restaurant menu only: catering-only dishes never reach a menu TV.

@@ -31,6 +31,15 @@ export const murphyDescribedDishes = [
     'dim-bhaji', 'aloo-bhaji', 'dal-gosht', 'jarda', 'borhani', 'special-chai',
 ];
 
+// Settings for every Murphy TV; a screen can override them with its own
+// field of the same name.
+//   background  'charcoal' (near-black #0E0E0E, the default) or 'black'
+//               (pure black #000000). Try one without changing anything by
+//               adding ?bg=black or ?bg=charcoal to a TV address.
+export const murphyTvSettings = {
+    background: 'charcoal',
+};
+
 export const murphyTvScreens = {
     1: {
         type: 'menu',

@@ -9,7 +9,7 @@ const MealsSummary = ({ slide, logo, location, now }) => {
     const meals = slide.meals.filter((meal) => isLive(meal, now));
     if (!meals.length) return null;
     return (
-        <div className="flex h-full flex-col bg-ink-900 px-16 pb-14 pt-12">
+        <div className="tv-bg flex h-full flex-col px-16 pb-14 pt-12">
             <img src={logo.src} alt={logo.alt} width={logo.width} height={logo.height} className="mix-blend-lighten h-[88px] w-auto self-start" />
             <div className="my-auto">
                 <p className="font-serif text-[52px] italic text-brand-gold">{slide.eyebrow ?? 'Every Day'}</p>
