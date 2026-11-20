@@ -7,12 +7,11 @@ import { getTvScreen } from '../data/tv';
 import { useDocumentHead } from '../hooks/useDocumentHead';
 import { TV_HEIGHT, TV_WIDTH, useFullscreenOnPress, useTvAutoUpdate, useTvScale, useWakeLock } from '../hooks/useTvDisplay';
 
-// Previews (this computer, PR preview links) fill in sample prices, stock
-// photos, and sample promotions so the design can be judged. Never on the live site,
-// unless asked for with ?preview=1 (or the older ?samplePrices=1).
+// Previews (this computer, PR preview links) also play sample promotions
+// (marked on screen) so the design can be judged. Never on the live site,
+// unless asked for with ?preview=1.
 const isPreview = (searchParams) =>
     searchParams.get('preview') === '1'
-    || searchParams.get('samplePrices') === '1'
     || !/(^|\.)5spicemarket\.com$/.test(window.location.hostname);
 
 // In-store TV screen at /tv/:slug/:screen (e.g. /tv/murphy/1), drawn on a

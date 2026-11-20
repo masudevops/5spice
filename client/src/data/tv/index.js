@@ -3,7 +3,6 @@ import { getMenuByLocationSlug, getMenuItem } from '../menus/index.js';
 import { STOCK_MEDIA, TV_MEDIA } from './media.js';
 import { murphyDescribedDishes, murphyTvScreens } from './murphy.js';
 import { PROMO_CAMPAIGNS } from './promotions.js';
-import { SAMPLE_PRICES } from './sample-prices.js';
 
 const TV_BY_LOCATION = {
     murphy: { screens: murphyTvScreens, describedDishes: murphyDescribedDishes },
@@ -14,9 +13,8 @@ const TV_BY_LOCATION = {
 //   menu      columns: [[{ title, items }]]
 //   promo     campaigns, fallback: [{ enabled, schedule, slides: [{ ..., dish, dishes, media }] }]
 // Unknown dish ids are skipped so a typo can't break a board. `preview`
-// (layout previews only) fills missing prices with SAMPLE_PRICES and
-// includes `sample` campaigns; the live TVs get neither. STOCK_MEDIA photos
-// show everywhere until 5Spice's own replace them.
+// (layout previews only) includes `sample` campaigns; the live TVs don't.
+// STOCK_MEDIA photos show everywhere until 5Spice's own replace them.
 export const getTvScreen = (locationSlug, screenNumber, { preview = false } = {}) => {
     const location = getLocationBySlug(locationSlug);
     const tv = TV_BY_LOCATION[locationSlug];
@@ -24,11 +22,7 @@ export const getTvScreen = (locationSlug, screenNumber, { preview = false } = {}
     if (!location || !screen) return null;
 
     const described = new Set(tv.describedDishes);
-    const dish = (id) => {
-        const item = getMenuItem(id);
-        if (!item) return null;
-        return preview && item.price == null ? { ...item, price: SAMPLE_PRICES[id] ?? null } : item;
-    };
+    const dish = (id) => getMenuItem(id);
     const dishes = (ids) => ids
         .map(dish)
         .filter(Boolean)
