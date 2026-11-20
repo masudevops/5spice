@@ -93,8 +93,8 @@ A slideshow of **slides**, grouped into **campaigns**.
   the summary.
 - With none of its campaigns live, a TV plays its `fallback` campaigns
   (TV 5: `menu-highlights`, Breakfast / Biriyani & Rice / Curries with dishes
-  and prices straight from the menu, no specials or hours claimed; that's
-  what the live TV 5 shows until the owners' specials replace the samples), and
+  and prices straight from the menu, no specials or hours claimed; it plays
+  only if every meal campaign is switched off), and
   with nothing live at all a 5Spice brand slide, never a blank screen.
 - Slides crossfade (1.2 s). No other animation.
 - **Templates** (`client/src/components/tv/templates/`) all share one frame
@@ -115,12 +115,11 @@ A slideshow of **slides**, grouped into **campaigns**.
 - Only owner-approved content: never made-up promotions, discounts, or prices.
   Prices on slides come from the menu.
 - **Sample content:** a campaign with `sample: true` is an example for
-  reviewing the design. It shows only on previews, tagged "Sample content" on
-  screen, never on the live TVs. TV 5's breakfast, lunch, dinner, Today's
-  Specials, offer, and seasonal campaigns are samples today: replace their
-  wording, dishes, and serving hours with the owners' and remove `sample` to
-  put them live. TV 6 uses the
-  website's approved catering wording, so it is live content.
+  reviewing a design. It shows only on previews, tagged "Sample content" on
+  screen, never on the live TVs. Today only the switched-off seasonal example
+  is a sample. TV 5's breakfast, lunch, dinner, Today's Specials, and
+  Limited Time offer are live (owner-approved 2026-11-19); the offer ends on
+  its `endDate` (2026-12-31).
 - **Checking schedules:** add `?at=2026-11-19T08:00` to a preview address to
   see what a promo TV shows at that time.
 

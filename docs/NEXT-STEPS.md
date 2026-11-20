@@ -87,9 +87,9 @@ How it works, editing, media rules, Fire TV setup, and the test checklist:
 `docs/TV-MENU-BOARDS.md`.
 
 Status (2026-11-19): **live** (PR #30): all six screens. TVs 1–3 text menus
-(restaurant menu only, text grows to fit up to 1.5×, owner-confirmed prices), TV 4 signature dishes, TV 5 meal specials (sample content shows on
-previews only; the live TV 5 plays menu highlights, dishes and prices from
-the menu, until real specials are in), TV 6 catering and community. Photos: 5Spice's own Chicken Roast and
+(restaurant menu only, text grows to fit up to 1.5×, owner-confirmed prices), TV 4 signature dishes, TV 5 meal specials (breakfast 7–11 AM, lunch
+11 AM–3 PM, dinner 5–9 PM, Today's Specials, Limited Time Mutton Kachchi
+until 2026-12-31; owner-approved 2026-11-19), TV 6 catering and community. Photos: 5Spice's own Chicken Roast and
 Tehari, the rest temporary stock photos, shown live by the owner's decision.
 
 - [ ] **Test the redesign on the real TVs** (Dev/Owners) via the PR preview
@@ -106,9 +106,9 @@ Tehari, the rest temporary stock photos, shown live by the owner's decision.
   Then finalize TVs 1–3 categories (the text grows automatically with fewer
   dishes). Today TV 3 leaves out Shahi Jarda at the smallest size; don't
   shrink text, wait for the final menu.
-- [ ] **TV 5 specials** (Owners): real breakfast/lunch/dinner serving hours
-  (`servingHours`), dishes, and wording, any offers; then remove `sample`
-  from those campaigns and `todays-specials`.
+- [x] **TV 5 specials** (Owners, 2026-11-19): the preview version is live.
+  Update `servingHours`, dishes, and wording in `promotions.js` whenever the
+  real hours or specials change (the Mutton Kachchi offer ends 2026-12-31).
 - [ ] **TV 6** (Owners): confirm wording; send event/community photos.
 - [ ] **Real dish media** (Owners) for TV 4 (and 5–6): MP4 preferred
   (1920×1080, 5–10 s, about 3–5 MB) or 1920×1080 photos. Files in `client/public/tv-media/`,
