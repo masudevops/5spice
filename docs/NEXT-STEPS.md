@@ -88,8 +88,8 @@ How it works, editing, media rules, Fire TV setup, and the test checklist:
 
 Status (2026-11-19): **live** (PR #30): all six screens. TVs 1–3 text menus
 (restaurant menu only, text grows to fit up to 1.5×, owner-confirmed prices), TV 4 signature dishes, TV 5 meal specials (sample content shows on
-previews only; the live TV 5 plays the signature dishes until real specials
-are in), TV 6 catering and community. Photos: 5Spice's own Chicken Roast and
+previews only; the live TV 5 plays menu highlights, dishes and prices from
+the menu, until real specials are in), TV 6 catering and community. Photos: 5Spice's own Chicken Roast and
 Tehari, the rest temporary stock photos, shown live by the owner's decision.
 
 - [ ] **Test the redesign on the real TVs** (Dev/Owners) via the PR preview

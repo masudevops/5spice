@@ -84,7 +84,9 @@ export const murphyTvScreens = {
         type: 'promo',
         title: 'Meal Specials',
         campaigns: ['breakfast', 'lunch', 'dinner', 'todays-specials', 'special-offers', 'seasonal'],
-        fallback: ['signature-dishes'],
+        // Plays when no special is live (on the live TVs: until the owners'
+        // specials replace the samples).
+        fallback: ['menu-highlights'],
     },
     6: {
         type: 'promo',
